@@ -86,7 +86,6 @@ class Create {
         $this->admin_ajax_load();
         apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
         $this->IMPORT = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->import_table WHERE type = %s", 'flip'), ARRAY_A);
-        ;
     }
 
     /**

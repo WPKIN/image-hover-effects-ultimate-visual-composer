@@ -56,11 +56,6 @@ trait Public_Helper {
         return ucwords($data);
     }
 
-    public function str_replace_first($from, $to, $content) {
-        $from = '/' . preg_quote($from, '/') . '/';
-        return preg_replace($from, $to, $content, 1);
-    }
-
     public function shortcode_render($styleid, $user) {
         if (!empty((int) $styleid) && !empty($user)):
             $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
