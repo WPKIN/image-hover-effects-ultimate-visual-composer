@@ -215,6 +215,7 @@ class Public_Render {
         wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . '/Assets/Frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('shortcode-addons-jquery', OXI_FLIP_BOX_URL . '/Assets/Frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
+
     /**
      * front end loader css and js
      *
@@ -226,7 +227,6 @@ class Public_Render {
         wp_enqueue_style('flip-box-addons-style', OXI_FLIP_BOX_URL . '/Assets/Frontend/css/old-style.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . '/Assets/Frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('shortcode-addons-jquery', OXI_FLIP_BOX_URL . '/Assets/Frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        
     }
 
     /**
@@ -325,6 +325,13 @@ class Public_Render {
         foreach ($data as $value) {
             wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
         }
+    }
+
+    public function font_familly($data = '') {
+        wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
+        $data = str_replace('+', ' ', $data);
+        $data = explode(':', $data);
+        return '"' . $data[0] . '"';
     }
 
     public function admin_name_validation($data) {

@@ -111,7 +111,7 @@ trait Admin_helper {
 
         $GETPage = sanitize_text_field($_GET['page']);
         if (count($response) == 1):
-            foreach ($response['Tabs'] as $key => $value) {
+            foreach ($response['Flip Box'] as $key => $value) {
                 $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
                 $menu .= '<li ' . $active . '><a href="' . $this->admin_url_convert($value['homepage']) . '">' . $this->name_converter($value['name']) . '</a></li>';
             }

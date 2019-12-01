@@ -60,7 +60,7 @@ class Style2 extends Public_Render {
                 $bt = '<a ' . $this->url_render('sa_flip_boxes_button_link', $value) . '">';
                 $bc = '</a>';
             }
-            echo '<div class="oxi-flip-box-col-style-2 ' . $this->column_render('sa-flip-boxes-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '" >
+            echo '<div class="oxi-flip-box-col ' . $this->column_render('sa-flip-boxes-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '" >
                         <div class="oxi-addons-flip-box-style-2">' . $bt . '
                             <div class="oxi-addons-flip-boxes-body"  ' . $this->animation_render('sa-flip-boxes-animation', $style) . '>
                                 <div class="oxi-addons-flip-boxes-body-data">
@@ -89,7 +89,7 @@ class Style2 extends Public_Render {
                                         </div>
                                     </div>
                                 </div>
-                            </div>'.$bc.'
+                            </div>' . $bc . '
                         </div>';
 
             if ($admin == 'admin') :
@@ -115,103 +115,105 @@ class Style2 extends Public_Render {
         <div class="oxilab-flip-box-wrapper">
             <?php
             foreach ($listdata as $value) {
-                $filesdata = explode("{#}|{#}", $value['files']);
-                ?>
-                <div class="<?php echo $styledata[43]; ?> oxilab-flip-box-padding-<?php echo $styleid; ?>"
-                     sa-data-animation="<?php echo $styledata[55]; ?>"
-                     sa-data-animation-offset="100%"
-                     sa-data-animation-delay="0ms"
-                     sa-data-animation-duration=" <?php echo ($styledata[57] * 1000); ?>ms"
-                     >
-                    <div class="oxilab-flip-box-body-<?php echo $styleid; ?> oxilab-flip-box-body-<?php echo $styleid; ?>-<?php echo $value['id']; ?>">
-                        <?php
-                        if ($filesdata[9] == '' && $filesdata[11] != '') {
-                            echo '<a href="' . $filesdata[11] . '" target="' . $styledata[53] . '">';
-                            $fileslinkend = '</a>';
-                        } else {
-                            $fileslinkend = '';
-                        }
-                        ?>
-                        <div class="oxilab-flip-box-body-absulote">
-                            <div class="<?php echo $styledata[1]; ?>">
-                                <div class="oxilab-flip-box-style-data <?php echo $styledata[3]; ?>">
-                                    <div class="oxilab-flip-box-style">
-                                        <div class="oxilab-flip-box-front">
-                                            <div class="oxilab-flip-box-<?php echo $styleid; ?>">
-                                                <div class="oxilab-flip-box-<?php echo $styleid; ?>-data">                                            
-                                                    <div class="oxilab-icon">
-                                                        <div class="oxilab-icon-data">
-                                                            <?php echo $this->font_awesome_render($filesdata[3]) ?>
+                if (!empty($value['files'])):
+                    $filesdata = explode("{#}|{#}", $value['files']);
+                    ?>
+                    <div class="<?php echo $styledata[43]; ?> oxilab-flip-box-padding-<?php echo $styleid; ?>"
+                         sa-data-animation="<?php echo $styledata[55]; ?>"
+                         sa-data-animation-offset="100%"
+                         sa-data-animation-delay="0ms"
+                         sa-data-animation-duration=" <?php echo ($styledata[57] * 1000); ?>ms"
+                         >
+                        <div class="oxilab-flip-box-body-<?php echo $styleid; ?> oxilab-flip-box-body-<?php echo $styleid; ?>-<?php echo $value['id']; ?>">
+                            <?php
+                            if ($filesdata[9] == '' && $filesdata[11] != '') {
+                                echo '<a href="' . $filesdata[11] . '" target="' . $styledata[53] . '">';
+                                $fileslinkend = '</a>';
+                            } else {
+                                $fileslinkend = '';
+                            }
+                            ?>
+                            <div class="oxilab-flip-box-body-absulote">
+                                <div class="<?php echo $styledata[1]; ?>">
+                                    <div class="oxilab-flip-box-style-data <?php echo $styledata[3]; ?>">
+                                        <div class="oxilab-flip-box-style">
+                                            <div class="oxilab-flip-box-front">
+                                                <div class="oxilab-flip-box-<?php echo $styleid; ?>">
+                                                    <div class="oxilab-flip-box-<?php echo $styleid; ?>-data">                                            
+                                                        <div class="oxilab-icon">
+                                                            <div class="oxilab-icon-data">
+                                                                <?php echo $this->font_awesome_render($filesdata[3]) ?>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="oxilab-heading">
-                                                        <?php echo $this->text_render($filesdata[1]); ?>
-                                                    </div>
-                                                    <div class="oxilab-info">
-                                                        <?php echo $this->text_render($filesdata[15]); ?>
+                                                        <div class="oxilab-heading">
+                                                            <?php echo $this->text_render($filesdata[1]); ?>
+                                                        </div>
+                                                        <div class="oxilab-info">
+                                                            <?php echo $this->text_render($filesdata[15]); ?>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="oxilab-flip-box-back">
-                                            <div class="oxilab-flip-box-back-<?php echo $styleid; ?>">
-                                                <div class="oxilab-flip-box-back-<?php echo $styleid; ?>-data">
-                                                    <div class="oxilab-heading">
-                                                        <?php echo $this->text_render($filesdata[17]); ?>
-                                                    </div>
-                                                    <div class="oxilab-info">
-                                                        <?php echo $this->text_render($filesdata[7]); ?>
-                                                    </div>
-                                                    <?php
-                                                    if ($filesdata[9] != '') {
-                                                        echo '<a href="' . $filesdata[11] . '" target="' . $styledata[53] . '">';
-                                                        echo '<div class="oxilab-button">
+                                            <div class="oxilab-flip-box-back">
+                                                <div class="oxilab-flip-box-back-<?php echo $styleid; ?>">
+                                                    <div class="oxilab-flip-box-back-<?php echo $styleid; ?>-data">
+                                                        <div class="oxilab-heading">
+                                                            <?php echo $this->text_render($filesdata[17]); ?>
+                                                        </div>
+                                                        <div class="oxilab-info">
+                                                            <?php echo $this->text_render($filesdata[7]); ?>
+                                                        </div>
+                                                        <?php
+                                                        if ($filesdata[9] != '') {
+                                                            echo '<a href="' . $filesdata[11] . '" target="' . $styledata[53] . '">';
+                                                            echo '<div class="oxilab-button">
                                                                     <div class="oxilab-button-data">
                                                                     ' . $this->text_render($filesdata[9]) . '
                                                                     </div>
                                                                 </div>';
-                                                        echo '</a>';
-                                                    }
-                                                    ?>
+                                                            echo '</a>';
+                                                        }
+                                                        ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <?php echo $fileslinkend; ?>
                         </div>
-                        <?php echo $fileslinkend; ?>
-                    </div>
-                    <style>
-            <?php
-            if ($filesdata[5] == '') {
-                echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-' . $styleid . '{
+                        <style>
+                <?php
+                if ($filesdata[5] == '') {
+                    echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-' . $styleid . '{
 background-color: ' . $styledata[5] . ';}';
-            } else {
-                echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-' . $styleid . '{
+                } else {
+                    echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-' . $styleid . '{
 background: linear-gradient(' . $styledata[5] . ', ' . $styledata[5] . '), url("' . $filesdata[5] . '");
 -moz-background-size: 100% 100%;
 -o-background-size: 100% 100%;
 background-size: 100% 100%;
 }';
-            }
-            ?>
-            <?php
-            if ($filesdata[13] == '') {
-                echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-back-' . $styleid . '{
+                }
+                ?>
+                <?php
+                if ($filesdata[13] == '') {
+                    echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-back-' . $styleid . '{
 background-color: ' . $styledata[15] . ';}';
-            } else {
-                echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-back-' . $styleid . '{
+                } else {
+                    echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-back-' . $styleid . '{
 background: linear-gradient(' . $styledata[15] . ', ' . $styledata[15] . '), url("' . $filesdata[13] . '");
 -moz-background-size: 100% 100%;
 -o-background-size: 100% 100%;
 background-size: 100% 100%;
 }';
-            }
-            ?>     
-                    </style>
-                </div>
-                <?php
+                }
+                ?>     
+                        </style>
+                    </div>
+                    <?php
+                endif;
             }
             ?>
             <style>
@@ -303,7 +305,7 @@ background-size: 100% 100%;
                     color: <?php echo $styledata[13]; ?>;
                     text-align: <?php echo $styledata[91]; ?>;            
                     font-size: <?php echo $styledata[83]; ?>px;
-                    font-family: <?php echo $this->font_familly_validation($styledata[85]); ?>;
+                    font-family: <?php echo $this->font_familly($styledata[85]); ?>;
                     font-weight: <?php echo $styledata[89]; ?>;
                     font-style:<?php echo $styledata[87]; ?>;
                     padding: <?php echo $styledata[93]; ?>px <?php echo $styledata[99]; ?>px <?php echo $styledata[95]; ?>px <?php echo $styledata[97]; ?>px;  
@@ -314,7 +316,7 @@ background-size: 100% 100%;
                     color:  <?php echo $styledata[29]; ?>;
                     text-align: <?php echo $styledata[171]; ?>;            
                     font-size: <?php echo $styledata[163]; ?>px;
-                    font-family: <?php echo $this->font_familly_validation($styledata[165]); ?>;
+                    font-family: <?php echo $this->font_familly($styledata[165]); ?>;
                     font-weight: <?php echo $styledata[169]; ?>;
                     font-style:<?php echo $styledata[167]; ?>;
                     padding: <?php echo $styledata[173]; ?>px <?php echo $styledata[179]; ?>px <?php echo $styledata[175]; ?>px <?php echo $styledata[177]; ?>px; 
@@ -360,7 +362,7 @@ background-size: 100% 100%;
                     color:  <?php echo $styledata[31]; ?>;
                     text-align: <?php echo $styledata[189]; ?>;            
                     font-size: <?php echo $styledata[181]; ?>px;          
-                    font-family: <?php echo $this->font_familly_validation($styledata[183]); ?>;
+                    font-family: <?php echo $this->font_familly($styledata[183]); ?>;
                     font-weight: <?php echo $styledata[187]; ?>;
                     font-style:<?php echo $styledata[185]; ?>;
                     padding:<?php echo $styledata[191]; ?>px <?php echo $styledata[197]; ?>px <?php echo $styledata[193]; ?>px <?php echo $styledata[195]; ?>px;
@@ -387,7 +389,7 @@ background-size: 100% 100%;
                     color: <?php echo $styledata[21]; ?>;
                     background-color:  <?php echo $styledata[23]; ?>; 
                     font-size: <?php echo $styledata[125]; ?>px;
-                    font-family: <?php echo oxilab_flip_box_font_familly_charecter($styledata[127]); ?>;
+                    font-family: <?php echo $this->font_familly($styledata[127]); ?>;
                     font-weight: <?php echo $styledata[131]; ?>;
                     font-style:<?php echo $styledata[129]; ?>;
                     padding: <?php echo $styledata[133]; ?>px <?php echo $styledata[135]; ?>px;  

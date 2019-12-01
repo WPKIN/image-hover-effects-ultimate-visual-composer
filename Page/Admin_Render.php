@@ -12,12 +12,12 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  *
  * @author biplo
  */
-use SHORTCODE_ADDONS\Core\Admin\Controls as Controls;
+use OXI_FLIP_BOX_PLUGINS\Classes\Controls as Controls;
 
 class Admin_Render {
 
     use \OXI_FLIP_BOX_PLUGINS\Helper\CSS_JS_Loader;
-    use \SHORTCODE_ADDONS\Support\Sanitization;
+    use \OXI_FLIP_BOX_PLUGINS\Helper\Sanitization;
 
     /**
      * Current Elements Name

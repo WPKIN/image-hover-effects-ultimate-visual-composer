@@ -2,6 +2,17 @@
 
 namespace OXI_FLIP_BOX_PLUGINS\Public_Render;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+/**
+ * Description of Style_1
+ * Content of Shortcode Addons Plugins
+ *
+ * @author $biplob018
+ */
+
 /**
  * Description of Create
  *
@@ -11,208 +22,285 @@ use OXI_FLIP_BOX_PLUGINS\Page\Public_Render;
 
 class Style8 extends Public_Render {
 
-    public function inline_public_jquery() {
+    public function default_render($style, $child, $admin) {
         $styledata = $this->style;
-        $styleid = $this->ID;
-        $oxi_fixed_header = get_option('oxi_addons_fixed_header_size');
-        if (empty($styledata[47])) {
-            $initialopen = ':first';
-        } else if ($styledata[47] == 'none') {
-            $initialopen = '';
-        } else {
-            $initialopen = $styledata[47];
-        }
-        if (empty($styledata[49])) {
-            $animationin = 'slideDown';
-            $animationout = 'slideUp';
-        } else if ($styledata[49] == 'slide') {
-            $animationin = 'slideDown';
-            $animationout = 'slideUp';
-        } else if ($styledata[49] == 'show') {
-            $animationin = 'show';
-            $animationout = 'hide';
-        } else {
-            $animationin = 'fadeIn';
-            $animationout = 'fadeOut';
-        }
-        $this->JQUERY .= '$(".ctu-ulimate-style-' . $styleid . ' .vc-tabs-li' . $initialopen . '").addClass("active");
-                        $(".ctu-ultimate-style-heading-' . $styleid . '' . $initialopen . '").addClass("active");
-                        $(".ctu-ulitate-style-' . $styleid . '-tabs' . $initialopen . '").' . $animationin . '();
-                        $(".ctu-ulimate-style-' . $styleid . ' .vc-tabs-li").click(function () {
-                            if ($(this).hasClass("active")) {
-                                return false;
-                            } else {
-                                $(".ctu-ulimate-style-' . $styleid . ' .vc-tabs-li").removeClass("active");
-                                $(this).toggleClass("active");
-                                $(".ctu-ulitate-style-' . $styleid . '-tabs").' . $animationout . '("slow");
-                                var activeTab = $(this).attr("ref");
-                                $(activeTab).' . $animationin . '("slow");
-                            }
-                        });
-                        $(".ctu-ultimate-style-heading-' . $styleid . '").click(function () {
-                            if ($(this).hasClass("active")) {
-                                return false;
-                            } else {
-                                $(".ctu-ultimate-style-heading-' . $styleid . '").removeClass("active");
-                                $(this).toggleClass("active");
-                                $(".ctu-ulitate-style-' . $styleid . '-tabs").' . $animationout . '("slow");
-                                var activeTab = $(this).attr("ref");
-                                $(activeTab).' . $animationin . '("slow");
-                                var headerheight = ' . $oxi_fixed_header . ';
-                                $("html, body").animate({
-                                    scrollTop: $(".ctu-ultimate-wrapper-' . $styleid . '").offset().top - headerheight
-                                }, 2000);
-                            }
-                        });';
-    }
+        foreach ($child as $key => $val) {
+            $value = json_decode(stripslashes($val['rawdata']), true);
 
-    public function inline_public_css() {
-        $styledata = $this->style;
-        $styleid = $this->ID;
-
-        $this->CSS .= '.ctu-ultimate-wrapper-' . $styleid . '{
-                    width: 100%;
-                    float: left;
-                }
-                .ctu-ulimate-style-' . $styleid . '{
-                    margin: 0 0 0 0;
-                    width: 100%;
-                    float: left;
-                    list-style: none;            
-                    display: -webkit-box;
-                    display: -ms-flexbox;
-                    display: -o-flexbox;
-                    display: -moz-flexbox;
-                    display: flex;
-                    text-align: center;
-                    -webkit-box-pack: ' . $styledata[17] . ';
-                    -ms-flex-pack: ' . $styledata[17] . ';
-                    -o-flex-pack: ' . $styledata[17] . ';
-                    -moz-flex-pack: ' . $styledata[17] . ';
-                    justify-content: ' . $styledata[17] . ';
-                    margin-bottom: 0;
-                }
-                .ctu-ulimate-style-' . $styleid . ' .vc-tabs-li{
-                    width: ' . $styledata[15] . 'px;
-                    float: left;
-                    z-index: 2;
-                    position: relative;
-                    bottom: -1px;
-                    list-style: none;
-                    cursor: pointer;
-                    margin-bottom: 0;
-                    border-top: 1px solid;
-                    border-right: 1px solid;
-                    border-bottom: 1px solid;
-                    border-color: ' . $styledata[43] . ';
-                    padding: ' . $styledata[19] . 'px 10px;
-                    text-align: center;
-                    color: ' . $styledata[3] . ';
-                    background-color:  ' . $styledata[5] . ';
-                    font-size: ' . $styledata[1] . 'px;
-                    font-family:    ' . $this->font_familly($styledata[11]) . ';
-                    font-weight: ' . $styledata[13] . ';
-                    line-height: 130%;
-                }
-                .ctu-ulimate-style-' . $styleid . ' .vc-tabs-li:first-child{
-                    border-left: 1px solid ' . $styledata[43] . ';
-                }
-                .ctu-ulimate-style-' . $styleid . ' .vc-tabs-li.active{
-                    color: ' . $styledata[7] . ';
-                    background-color:  ' . $styledata[9] . ';
-                    border-bottom-color: ' . $styledata[9] . ';
-                }
-                .ctu-ultimate-style-' . $styleid . '-content{
-                    width: 100%;
-                    float: left;
-                }
-                .ctu-ultimate-style-heading-' . $styleid . '{
-                    width: 100%;
-                    cursor: pointer;
-                    display: none;
-                    line-height: 100%;
-                    color: ' . $styledata[3] . ';
-                    background-color: ' . $styledata[5] . ';
-                    font-size: ' . $styledata[1] . 'px;
-                    padding: ' . $styledata[19] . 'px 10px;
-                    font-weight: ' . $styledata[15] . ';
-                    font-family:  ' . $this->font_familly($styledata[11]) . ';
-                }
-                .ctu-ultimate-style-heading-' . $styleid . '.active{
-                    color: ' . $styledata[7] . ';
-                    background-color: ' . $styledata[9] . ';
-                    border-bottom: 1px solid ' . $styledata[43] . ';
-                }
-                .ctu-ulitate-style-' . $styleid . '-tabs{
-                    display: none;
-                    border: 1px solid ' . $styledata[43] . ';           
-                    background-color:' . $styledata[25] . ';           
-                    padding: ' . $styledata[27] . 'px ' . $styledata[29] . 'px ' . $styledata[31] . 'px ' . $styledata[33] . 'px ;
-
-
-                }
-                .ctu-ulitate-style-' . $styleid . '-tabs p{
-                    font-size: ' . $styledata[21] . 'px;
-                    color: ' . $styledata[23] . ';
-                    font-weight: ' . $styledata[39] . ';
-                    line-height: ' . $styledata[35] . ';
-                    font-family:  ' . $this->font_familly($styledata[37]) . ';
-                    text-align: ' . $styledata[41] . ';
-                }
-                @media only screen and (max-width: 900px) {
-                    .ctu-ultimate-wrapper-' . $styleid . '{
-                        display: block;
-                    }
-                    .ctu-ultimate-style-' . $styleid . '-content{
-                        width: 100%;
-                        margin-bottom: 10px;
-                        border: 1px solid ' . $styledata[43] . ';
-                    }
-                    .ctu-ulimate-style-' . $styleid . ' {
-                        display: none;
-                    }
-                    .ctu-ultimate-style-heading-' . $styleid . '{
-                        display: block;
-                    }
-                    .ctu-ulitate-style-' . $styleid . '-tabs{
-                        border:none;
-                    }
-                }
-                ' . $styledata[45] . '';
-    }
-
-    public function default_render() {
-        $styledata = $this->style;
-        $styleid = $this->ID;
-        echo '<div class="ctu-ultimate-wrapper-' . $styleid . '">
-             <div class="ctu-ulimate-style-' . $styleid . '">';
-        $linkopening = '';
-        if (!empty($styledata[51]) || $styledata[51] != 'new-tab') {
-            $linkopening = ", '_self'";
-        }
-        foreach ($this->child as $value) {
-            $titlefiles = explode('{}{}{}', $value['title']);
-            if (!empty($titlefiles[1]) && $this->user != 'admin') {
-                $this->JQUERY .= '$(".vc-tabs-li-' . $styleid . '-id-' . $value['id'] . '").click(function() {window.open("' . $titlefiles[1] . '" ' . $linkopening . ');});';
+            $fronticon = $backicon = $startlink = $endlink = '';
+            if ($value['sa_flip_boxes_icon'] != '') {
+                $fronticon .= '<div class="oxi-addons-flip-box-front-icon">
+                    ' . $this->font_awesome_render($value['sa_flip_boxes_icon']) . '
+                    </div>';
             }
-            echo '<div class="vc-tabs-li vc-tabs-li-' . $styleid . '-id-' . $value['id'] . '" ref="#ctu-ulitate-style-' . $styleid . '-id-' . $value['id'] . '">
-                                ' . $this->special_charecter($titlefiles[0]) . ' 
+            if ($value['sa_flip_back_boxes_icon'] != '') {
+                $backicon .= '<div class="oxi-addons-flip-box-back-icon">
+                            ' . $this->font_awesome_render($value['sa_flip_back_boxes_icon']) . '
+                        </div>';
+            }
+
+            if ($this->url_render('sa_flip_boxes_body_link', $value) != '') {
+                $startlink .= '<a ' . $this->url_render('sa_flip_boxes_body_link', $value) . '>';
+                $endlink = '</a>';
+            }
+            echo '<div class="oxi-flip-box-col-style-8 ' . $this->column_render('sa-flip-boxes-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '">
+                        <div class="oxi-addons-flip-box-style-8">' . $startlink . '
+                            <div class="oxi-addons-flip-boxes-body"  ' . $this->animation_render('sa-flip-boxes-animation', $style) . '>
+                                <div class="oxi-addons-flip-boxes-body-data">
+                                    <div class="oxi-addons-flip-box-flip ' . $styledata['sa-ac-flip_boxes_flip_direction'] . '">
+                                        <div class="oxi-addons-flip-box-flip-data ' . $styledata['sa-ac-flip_boxes_flip_effects'] . '">
+                                            <div class="oxi-addons-flip-box-style">
+                                                <div class="oxi-addons-flip-box-front">
+                                                    <div class="oxi-addons-flip-box-front-section-box">
+                                                        <div class="oxi-addons-flip-box-front-section">                                             
+                                                            ' . $fronticon . '
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                                <div class="oxi-addons-flip-box-back">
+                                                    <div class="oxi-addons-flip-box-back-section-box">
+                                                        <div class="oxi-addons-flip-box-back-section">
+                                                            ' . $backicon . '
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>' . $endlink . '
+                        </div>';
+            if ($admin == 'admin') :
+                echo '  <div class="oxi-addons-admin-absulote">
+                                <div class="oxi-addons-admin-absulate-edit">
+                                    <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $val['id'] . '">Edit</button>
+                                </div>
+                                <div class="oxi-addons-admin-absulate-delete">
+                                <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $val['id'] . '">Delete</button>
+                                </div>
                             </div>';
+            endif;
+            echo ' </div>';
         }
-        echo '</div>';
-        foreach ($this->child as $value) {
-            $titlefiles = explode('{}{}{}', $value['title']);
-            echo ' <div class="ctu-ultimate-style-' . $styleid . '-content">
-                        <div class="ctu-ultimate-style-heading-' . $styleid . ' vc-tabs-li-' . $styleid . '-id-' . $value['id'] . '" ref="#ctu-ulitate-style-' . $styleid . '-id-' . $value['id'] . '"> 
-                            ' . $this->special_charecter($titlefiles[0]) . '
+    }
+
+    public function old_render() {
+        $styleid = $this->oxiid;
+        $styledata = explode('|', $this->dbdata['css']);
+        $listdata = $this->child;
+        ?>
+        <div class="oxilab-flip-box-wrapper">
+            <?php
+            foreach ($listdata as $value) {
+                if (!empty($value['files'])):
+
+
+                    $filesdata = explode("{#}|{#}", $value['files']);
+                    ?>
+                    <div class="<?php echo $styledata[43]; ?> oxilab-flip-box-padding-<?php echo $styleid; ?> "
+                         sa-data-animation="<?php echo $styledata[55]; ?>"
+                         sa-data-animation-offset="100%"
+                         sa-data-animation-delay="0ms"
+                         sa-data-animation-duration=" <?php echo ($styledata[57] * 1000); ?>ms"
+                         >
+                        <div class="oxilab-flip-box-body-<?php echo $styleid; ?> oxilab-flip-box-body-<?php echo $styleid; ?>-<?php echo $value['id']; ?>">
+                            <?php
+                            if ($filesdata[3] != '') {
+                                echo '<a href="' . $filesdata[3] . '" target="' . $styledata[53] . '">';
+                                $fileslinkend = '</a>';
+                            } else {
+                                $fileslinkend = '';
+                            }
+                            ?>
+                            <div class="oxilab-flip-box-body-absulote">
+                                <div class="<?php echo $styledata[1]; ?>">
+                                    <div class="oxilab-flip-box-style-data <?php echo $styledata[3]; ?>">
+                                        <div class="oxilab-flip-box-style">
+                                            <div class="oxilab-flip-box-front">
+                                                <div class="oxilab-flip-box-<?php echo $styleid; ?>">
+                                                    <div class="oxilab-flip-box-<?php echo $styleid; ?>-data">                                            
+                                                        <div class="oxilab-icon">
+                                                            <div class="oxilab-icon-data">
+                                                                <?php echo $this->font_awesome_render($filesdata[7]) ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="oxilab-flip-box-back">
+                                                <div class="oxilab-flip-box-back-<?php echo $styleid; ?>">
+                                                    <div class="oxilab-flip-box-back-<?php echo $styleid; ?>-data">
+                                                        <div class="oxilab-icon">
+                                                            <div class="oxilab-icon-data">
+                                                                <?php echo $this->font_awesome_render($filesdata[9]) ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php echo $fileslinkend; ?>
+
                         </div>
-                        <div class="ctu-ulitate-style-' . $styleid . '-tabs ' . ($this->user == 'admin' ? 'oxilab-ab-id' : '') . '" id="ctu-ulitate-style-' . $styleid . '-id-' . $value['id'] . '">
-                            ' . $this->special_charecter($value['files']) . '
-                            ' . $this->admin_edit_panel($value['id']) . '
-                        </div>
-                    </div> ';
-        }
-        echo '</div>';
+
+                        <style>
+                <?php
+                if ($filesdata[1] != '') {
+                    echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-' . $styleid . '{
+background: linear-gradient(' . $styledata[5] . ', ' . $styledata[5] . '), url("' . $filesdata[1] . '");
+-moz-background-size: 100% 100%;
+-o-background-size: 100% 100%;
+background-size: 100% 100%;
+}';
+                }
+                ?>
+                <?php
+                if ($filesdata[5] != '') {
+                    echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-back-' . $styleid . '{
+background: linear-gradient(' . $styledata[9] . ', ' . $styledata[9] . '), url("' . $filesdata[5] . '");
+-moz-background-size: 100% 100%;
+-o-background-size: 100% 100%;
+background-size: 100% 100%;
+}';
+                }
+                ?>
+                        </style>
+                    </div>
+                    <?php
+                endif;
+            }
+            ?>
+
+            <style>
+                .oxilab-flip-box-padding-<?php echo $styleid; ?>{
+                    padding: <?php echo $styledata[49]; ?>px <?php echo $styledata[51]; ?>px;
+                    -webkit-transition:  opacity <?php echo $styledata[57]; ?>s linear;
+                    -moz-transition:  opacity <?php echo $styledata[57]; ?>s linear;
+                    -ms-transition:  opacity <?php echo $styledata[57]; ?>s linear;
+                    -o-transition:  opacity <?php echo $styledata[57]; ?>s linear;
+                    transition:  opacity <?php echo $styledata[57]; ?>s linear;
+                    -webkit-animation-duration: <?php echo $styledata[57]; ?>s;
+                    -moz-animation-duration: <?php echo $styledata[57]; ?>s;
+                    -ms-animation-duration: <?php echo $styledata[57]; ?>s;
+                    -o-animation-duration: <?php echo $styledata[57]; ?>s;
+                    animation-duration: <?php echo $styledata[57]; ?>s;
+                }
+                .oxilab-flip-box-body-<?php echo $styleid; ?>{
+                    max-width: <?php echo $styledata[45]; ?>px;
+                    width: 100%;
+                    margin: 0 auto;
+                    position: relative;   
+                }
+                .oxilab-flip-box-body-<?php echo $styleid; ?>:after {
+                    padding-bottom: <?php echo $styledata[47] / $styledata[45] * 100; ?>%;
+                    content: "";
+                    display: block;
+                }
+                .oxilab-flip-box-<?php echo $styleid; ?>{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    border-color: <?php echo $styledata[7]; ?>;
+                    background-color: <?php echo $styledata[5]; ?>;
+                    border-width: <?php echo $styledata[69]; ?>px;
+                    border-style:<?php echo $styledata[71]; ?>; 
+                    display: block;
+                    -webkit-border-radius: <?php echo $styledata[93]; ?>px;
+                    -moz-border-radius: <?php echo $styledata[93]; ?>px;
+                    -ms-border-radius: <?php echo $styledata[93]; ?>px;
+                    -o-border-radius: <?php echo $styledata[93]; ?>px;
+                    border-radius: <?php echo $styledata[93]; ?>px;
+                    overflow: hidden;
+                    -webkit-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+                    -moz-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+                    -ms-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+                    -o-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+                    box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+
+                }
+                .oxilab-flip-box-<?php echo $styleid; ?>-data{           
+                    position: absolute;
+                    left: 0%;
+                    top: 50%;            
+                    padding: 10px 10px;
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    -moz-transform: translateY(-50%);
+                    -o-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    right: 0;
+                }
+                .oxilab-flip-box-<?php echo $styleid; ?>-data .oxilab-icon{
+                    display: block;
+                    text-align: center; 
+                    padding: <?php echo $styledata[81]; ?>px <?php echo $styledata[83]; ?>px;  
+                }
+                .oxilab-flip-box-<?php echo $styleid; ?>-data .oxilab-icon-data{
+                    display: inline-block;  
+                }
+                .oxilab-flip-box-<?php echo $styleid; ?>-data .oxilab-icon-data .oxi-icons{            
+                    line-height: <?php echo $styledata[79]; ?>px;
+                    font-size: <?php echo $styledata[77]; ?>px;
+                    color: <?php echo $styledata[13]; ?>;
+                }
+                .oxilab-flip-box-back-<?php echo $styleid; ?>{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    border-color: <?php echo $styledata[11]; ?>;
+                    background-color: <?php echo $styledata[9]; ?>;
+                    border-width: <?php echo $styledata[73]; ?>px;
+                    border-style:<?php echo $styledata[75]; ?>; 
+                    display: block;
+                    -webkit-border-radius: <?php echo $styledata[93]; ?>px;
+                    -moz-border-radius: <?php echo $styledata[93]; ?>px;
+                    -ms-border-radius: <?php echo $styledata[93]; ?>px;
+                    -o-border-radius: <?php echo $styledata[93]; ?>px;
+                    border-radius: <?php echo $styledata[93]; ?>px;
+                    overflow: hidden;
+                    -webkit-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+                    -moz-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+                    -ms-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+                    -o-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+                    box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+
+                }
+                .oxilab-flip-box-back-<?php echo $styleid; ?>-data{           
+                    position: absolute;
+                    left: 0%;
+                    right: 0;
+                    top: 50%;            
+                    padding: 10px 10px;
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    -moz-transform: translateY(-50%);
+                    -o-transform: translateY(-50%);
+                    transform: translateY(-50%);           
+                }
+                .oxilab-flip-box-back-<?php echo $styleid; ?> .oxilab-icon{
+                    display: block;
+                    text-align: center; 
+                    padding: <?php echo $styledata[89]; ?>px <?php echo $styledata[91]; ?>px;
+                }
+                .oxilab-flip-box-back-<?php echo $styleid; ?> .oxilab-icon-data{
+                    display: inline-block;  
+                }
+                .oxilab-flip-box-back-<?php echo $styleid; ?> .oxilab-icon-data .oxi-icons{            
+                    line-height: <?php echo $styledata[87]; ?>px;
+                    font-size: <?php echo $styledata[85]; ?>px;
+                    color: <?php echo $styledata[15]; ?>;
+                }     
+                <?php echo $styledata[95]; ?>
+            </style>
+        </div>
+        <?php
     }
 
 }
