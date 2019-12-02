@@ -8,737 +8,1049 @@ namespace OXI_FLIP_BOX_PLUGINS\Admin;
  * @author biplo
  */
 use OXI_FLIP_BOX_PLUGINS\Page\Admin_Render;
+use OXI_FLIP_BOX_PLUGINS\Classes\Controls as Controls;
 
 class Style21 extends Admin_Render {
 
-    public function clild() {
-        $title = sanitize_text_field(htmlentities($_POST['ctu-title']));
-        $title .= '{}{}{}';
-        $title .= $this->admin_special_charecter($_POST['ctu-link']);
-        $details = sanitize_text_field(htmlentities($_POST['ctu-details']));
-        $css = '';
-        return ['title' => $title, 'files' => $details, 'css' => $css];
+    public function register_controls() {
+
+        $this->start_section_header(
+                'shortcode-addons-start-tabs', [
+            'options' => [
+                'general-settings' => esc_html__('General Settings', SHORTCODE_ADDOONS),
+                'front' => esc_html__('Front', SHORTCODE_ADDOONS),
+                'backend' => esc_html__('Backend', SHORTCODE_ADDOONS),
+            ]
+                ]
+        );
+        $this->start_section_tabs(
+                'shortcode-addons-start-tabs', [
+            'condition' => [
+                'shortcode-addons-start-tabs' => 'general-settings'
+            ]
+                ]
+        );
+
+
+        $this->start_section_devider();
+        $this->start_controls_section(
+                'shortcode-addons', [
+            'label' => esc_html__('General Settings', SHORTCODE_ADDOONS),
+            'showing' => TRUE,
+                ]
+        );
+        $this->add_group_control(
+                'sa-flip-boxes-col', $this->style, [
+            'type' => Controls::COLUMN,
+            'loader' => TRUE,
+            'selector' => [
+                '{{WRAPPER}} .oxi-flip-box-col-21' => '',
+            ]
+                ]
+        );
+        $this->add_control(
+                'sa-ac-flip_boxes_flip_direction', $this->style, [
+            'label' => __('Flip Direction', SHORTCODE_ADDOONS),
+            'type' => Controls::SELECT,
+            'loader' => TRUE,
+            'separator' => TRUE,
+            'default' => 'oxi-addons-flip-box-flip-top-to-bottom',
+            'options' => [
+                'oxi-addons-flip-box-flip-top-to-bottom' => __('Top To Bottom', SHORTCODE_ADDOONS),
+                'oxi-addons-flip-box-flip-bottom-to-top' => __('Bottom To Top', SHORTCODE_ADDOONS),
+                'oxi-addons-flip-box-flip-left-to-right' => __('Left To Right', SHORTCODE_ADDOONS),
+                'oxi-addons-flip-box-flip-right-to-left' => __('Right To Left', SHORTCODE_ADDOONS),
+            ],
+                ]
+        );
+        $this->add_control(
+                'sa-ac-flip_boxes_flip_effects', $this->style, [
+            'label' => __('Flip Effects', SHORTCODE_ADDOONS),
+            'type' => Controls::SELECT,
+            'loader' => TRUE,
+            'default' => 'easing_easeInOutExpo',
+            'options' => [
+                'easing_easeInOutExpo' => __('EaseOutBack', SHORTCODE_ADDOONS),
+                'easing_easeInOutCirc' => __('EaseInOutExpo', SHORTCODE_ADDOONS),
+                'easing_easeOutBack' => __('EaseInOutCirc', SHORTCODE_ADDOONS),
+            ],
+                ]
+        );
+        $this->add_control(
+                'sa-flip-boxes-flip_time', $this->style, [
+            'label' => __('Flipping Time', SHORTCODE_ADDOONS),
+            'type' => Controls::SLIDER,
+            'default' => [
+                'unit' => 'px',
+                'size' => 0.5,
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0.1,
+                    'max' => 10,
+                    'step' => 0.1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 *' => 'transition: all {{SIZE}}s ease-in-out !important;',
+            ],
+                ]
+        );
+        $this->add_group_control(
+                'sa-flip-boxes-animation', $this->style, [
+            'type' => Controls::ANIMATION,
+            'separator' => TRUE,
+            'selector' => [
+                '{{WRAPPER}} .oxi-flip-box-col-21' => '',
+            ]
+                ]
+        );
+
+        $this->end_controls_section();
+
+        $this->end_section_devider();
+        $this->start_section_devider();
+
+        $this->start_controls_section(
+                'shortcode-addons', [
+            'label' => esc_html__('General Style', SHORTCODE_ADDOONS),
+            'showing' => TRUE,
+                ]
+        );
+        $this->add_responsive_control(
+                'sa-flip-boxes-width', $this->style, [
+            'label' => __('Width', SHORTCODE_ADDOONS),
+            'type' => Controls::SLIDER,
+            'default' => [
+                'unit' => 'px',
+                'size' => 280,
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 1500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 200,
+                    'step' => 0.1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21' => 'max-width:{{SIZE}}{{UNIT}};',
+            ],
+                ]
+        );
+        $this->add_responsive_control(
+                'sa-flip-boxes-height', $this->style, [
+            'label' => __('Height', SHORTCODE_ADDOONS),
+            'type' => Controls::SLIDER,
+            'default' => [
+                'unit' => 'px',
+                'size' => 300,
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 1500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 200,
+                    'step' => 0.1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-boxes-body:after' => 'padding-bottom:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21' => 'height:{{SIZE}}{{UNIT}};',
+            ],
+                ]
+        );
+
+        $this->add_responsive_control(
+                'sa-flip-boxes-border-radius', $this->style, [
+            'label' => __('Border Radius', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-section-box' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-section' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-section-box' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-section' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+                ]
+        );
+
+        $this->add_responsive_control(
+                'sa-flip-boxes-margin', $this->style, [
+            'label' => __('Margin', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+                ]
+        );
+
+        $this->start_controls_tabs(
+                'shortcode-addons-start-tabs', [
+            'options' => [
+                'normal' => esc_html__('Normal', SHORTCODE_ADDOONS),
+                'hover' => esc_html__('Hover', SHORTCODE_ADDOONS),
+            ]
+                ]
+        );
+
+        $this->start_controls_tab();
+        $this->add_group_control(
+                'sa-flip-boxes-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-section-box' => '',
+            ]
+                ]
+        );
+        $this->end_controls_tab();
+        $this->start_controls_tab();
+        $this->add_group_control(
+                'sa-flip-boxes-hover-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-section-box' => '',
+            ]
+                ]
+        );
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+
+
+
+        $this->end_controls_section();
+
+        $this->end_section_devider();
+
+
+        $this->end_section_tabs();
+        $this->start_section_tabs(
+                'shortcode-addons-start-tabs', [
+            'condition' => [
+                'shortcode-addons-start-tabs' => 'front'
+            ]
+                ]
+        );
+        $this->start_section_devider();
+        $this->start_controls_section(
+                'shortcode-addons', [
+            'label' => esc_html__('Content Settings', SHORTCODE_ADDOONS),
+            'showing' => TRUE,
+                ]
+        );
+        $this->add_group_control(
+                'sa-flip-box-front-border', $this->style, [
+            'type' => Controls::BORDER,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-section' => '',
+            ]
+                ]
+        );
+
+        $this->add_responsive_control(
+                'sa-ib-content-font-box-padding', $this->style, [
+            'label' => __('Padding', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ]
+                ]
+        );
+        $this->end_controls_section();
+        $this->start_controls_section(
+                'shortcode-addons', [
+            'label' => esc_html__('Icon Settings', SHORTCODE_ADDOONS),
+            'showing' => FALSE,
+                ]
+        );
+        $this->add_control(
+                'sa-flip-box-backend-button_alignment', $this->style, [
+            'label' => __('Alignment', SHORTCODE_ADDOONS),
+            'type' => Controls::CHOOSE,
+            'operator' => Controls::OPERATOR_ICON,
+            'default' => 'center',
+            'options' => [
+                'flex-start' => [
+                    'title' => __('Left', SHORTCODE_ADDOONS),
+                    'icon' => 'fas fa-align-left',
+                ],
+                'center' => [
+                    'title' => __('Center', SHORTCODE_ADDOONS),
+                    'icon' => 'fas fa-align-center',
+                ],
+                'flex-end' => [
+                    'title' => __('Right', SHORTCODE_ADDOONS),
+                    'icon' => 'fas fa-align-right',
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-image-icon' => 'justify-content: {{VALUE}};'
+            ],
+                ]
+        );
+        $this->add_responsive_control(
+                'sa-flip-boxex-front-icon-width', $this->style, [
+            'label' => __('Width', SHORTCODE_ADDOONS),
+            'type' => Controls::SLIDER,
+            'default' => [
+                'unit' => 'px',
+                'size' => 60,
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 1000,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 200,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-image-icon .oxi-icons' => 'width:{{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
+            ],
+                ]
+        );
+        $this->add_responsive_control(
+                'sa-flip-boxex-front-icon-size', $this->style, [
+            'label' => __('Icon Size', SHORTCODE_ADDOONS),
+            'type' => Controls::SLIDER,
+            'default' => [
+                'unit' => 'px',
+                'size' => 36,
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 1000,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 200,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-image-icon .oxi-icons' => 'font-size:{{SIZE}}{{UNIT}};',
+            ],
+                ]
+        );
+
+        $this->add_group_control(
+                'sa-flip-boxex-front-icon-background', $this->style, [
+            'type' => Controls::BACKGROUND,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-image-icon .oxi-icons' => '',
+            ]
+                ]
+        );
+        $this->add_control(
+                'sa-flip-boxex-front-icon-color', $this->style, [
+            'label' => __('Color', SHORTCODE_ADDOONS),
+            'type' => Controls::COLOR,
+            'default' => '#ffffff',
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-image-icon .oxi-icons' => 'color: {{VALUE}};',
+            ]
+                ]
+        );
+        $this->add_group_control(
+                'sa-flip-box-front-icon-border', $this->style, [
+            'type' => Controls::BORDER,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-image-icon .oxi-icons' => '',
+            ]
+                ]
+        );
+
+        $this->add_responsive_control(
+                'sa-flip-boxes-front-icon-border-radius', $this->style, [
+            'label' => __('Border Radius', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-image-icon .oxi-icons' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ]
+                ]
+        );
+        $this->add_responsive_control(
+                'sa-flip-boxes-front-icon-margin', $this->style, [
+            'label' => __('Margin', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-image-icon' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ]
+                ]
+        );
+
+        $this->end_controls_section();
+        $this->end_section_devider();
+        $this->start_section_devider();
+        $this->start_controls_section(
+                'shortcode-addons', [
+            'label' => esc_html__('Heading Settings', SHORTCODE_ADDOONS),
+            'showing' => TRUE,
+                ]
+        );
+
+        $this->add_control(
+                'sa-image-box-heading-color', $this->style, [
+            'label' => __('Color', SHORTCODE_ADDOONS),
+            'type' => Controls::COLOR,
+            'default' => '#ffffff',
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-heading-data' => 'color: {{VALUE}};',
+            ]
+                ]
+        );
+        $this->add_group_control(
+                'sa-image-box-heading-typho', $this->style, [
+            'type' => Controls::TYPOGRAPHY,
+            'include' => Controls::ALIGNNORMAL,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-heading-data' => '',
+            ]
+                ]
+        );
+        $this->add_group_control(
+                'sa-image-box-heading-shadow', $this->style, [
+            'type' => Controls::TEXTSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-heading-data' => '',
+            ]
+                ]
+        );
+        $this->add_responsive_control(
+                'sa-image-box-heading-padding', $this->style, [
+            'label' => __('Padding', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-front-heading-data' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ]
+                ]
+        );
+        $this->end_controls_section();
+
+        $this->end_section_devider();
+
+        $this->end_section_tabs();
+
+
+        $this->start_section_tabs(
+                'shortcode-addons-start-tabs', [
+            'condition' => [
+                'shortcode-addons-start-tabs' => 'backend'
+            ]
+                ]
+        );
+        $this->start_section_devider();
+        $this->start_controls_section(
+                'shortcode-addons', [
+            'label' => esc_html__('Content Settings', SHORTCODE_ADDOONS),
+            'showing' => TRUE,
+                ]
+        );
+
+        $this->add_group_control(
+                'sa-flip-boxex-back-background', $this->style, [
+            'type' => Controls::BACKGROUND,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-section' => '',
+            ]
+                ]
+        );
+        $this->add_group_control(
+                'sa-flip-box-back-border', $this->style, [
+            'type' => Controls::BORDER,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-section' => '',
+            ]
+                ]
+        );
+
+        $this->add_responsive_control(
+                'sa-flip-boxes-back-padding', $this->style, [
+            'label' => __('Padding', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ]
+                ]
+        );
+        $this->end_controls_section();
+        $this->start_controls_section(
+                'shortcode-addons', [
+            'label' => esc_html__('Short Description', SHORTCODE_ADDOONS),
+            'showing' => TRUE,
+                ]
+        );
+
+        $this->add_control(
+                'sa-image-box-short-description-color', $this->style, [
+            'label' => __('Color', SHORTCODE_ADDOONS),
+            'type' => Controls::COLOR,
+            'default' => '#ffffff',
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-info' => 'color: {{VALUE}};',
+            ]
+                ]
+        );
+        $this->add_group_control(
+                'sa-image-box-short-description-typho', $this->style, [
+            'type' => Controls::TYPOGRAPHY,
+            'include' => Controls::ALIGNNORMAL,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-info' => '',
+            ]
+                ]
+        );
+        $this->add_group_control(
+                'sa-image-box-short-description-tx-shadow', $this->style, [
+            'type' => Controls::TEXTSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-info' => '',
+            ]
+                ]
+        );
+        $this->add_responsive_control(
+                'sa-image-box-short-description-padding', $this->style, [
+            'label' => __('Padding', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-info' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ]
+                ]
+        );
+        $this->end_controls_section();
+        $this->end_section_devider();
+        $this->start_section_devider();
+        $this->start_controls_section(
+                'shortcode-addons', [
+            'label' => esc_html__('Button Typography', SHORTCODE_ADDOONS),
+            'showing' => TRUE,
+                ]
+        );
+
+        $this->add_group_control(
+                'sa-flip-box-backend-button-typho', $this->style, [
+            'type' => Controls::TYPOGRAPHY,
+            'include' => Controls::ALIGNNORMAL,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button' => '',
+            ]
+                ]
+        );
+
+        $this->add_group_control(
+                'sa-flip-box-backend-button-shadow', $this->style, [
+            'type' => Controls::TEXTSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => '',
+            ]
+                ]
+        );
+
+        $this->add_responsive_control(
+                'sa-flip-box-backend-button-padding', $this->style, [
+            'label' => __('Padding', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ]
+                ]
+        );
+        $this->add_responsive_control(
+                'sa-flip-box-backend-button-margin', $this->style, [
+            'label' => __('Margin', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ]
+                ]
+        );
+        $this->add_control(
+                'sa-flip-boxes-backend-button-separetor', $this->style, [
+            'label' => __('', SHORTCODE_ADDOONS),
+            'type' => Controls::SEPARATOR,
+            Controls::SEPARATOR => TRUE
+                ]
+        );
+        $this->start_controls_tabs(
+                'shortcode-addons-start-tabs', [
+            'options' => [
+                'normal' => esc_html__('Normal', SHORTCODE_ADDOONS),
+                'hover' => esc_html__('Hover', SHORTCODE_ADDOONS),
+            ]
+                ]
+        );
+        $this->start_controls_tab();
+        $this->add_control(
+                'sa-flip-boxes-backend-button-bg', $this->style, [
+            'label' => __('Background', SHORTCODE_ADDOONS),
+            'type' => Controls::COLOR,
+            'oparetor' => 'RGB',
+            'default' => 'rgba(255, 255, 255, 1)',
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'background: {{VALUE}};',
+            ]
+                ]
+        );
+        $this->add_control(
+                'sa-flip-boxes-backend-button-color', $this->style, [
+            'label' => __('Color', SHORTCODE_ADDOONS),
+            'type' => Controls::COLOR,
+            'default' => '#e68a00',
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'color: {{VALUE}};',
+            ]
+                ]
+        );
+        $this->add_group_control(
+                'sa-flip-box-back-button-border', $this->style, [
+            'type' => Controls::BORDER,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => '',
+            ]
+                ]
+        );
+        $this->add_responsive_control(
+                'sa-flip-box-backend-button-border-radius', $this->style, [
+            'label' => __('Border Radius', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ]
+                ]
+        );
+
+
+
+        $this->end_controls_tab();
+        $this->start_controls_tab();
+        $this->add_control(
+                'sa-flip-boxes-backend-hover-button-bg', $this->style, [
+            'label' => __('Background', SHORTCODE_ADDOONS),
+            'type' => Controls::COLOR,
+            'oparetor' => 'RGB',
+            'default' => 'rgba(135, 91, 11, 1)',
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => 'background: {{VALUE}};',
+            ]
+                ]
+        );
+        $this->add_control(
+                'sa-flip-boxes-backend-hover-button-color', $this->style, [
+            'label' => __('Color', SHORTCODE_ADDOONS),
+            'type' => Controls::COLOR,
+            'default' => '#ffffff',
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => 'color: {{VALUE}};',
+            ]
+                ]
+        );
+        $this->add_group_control(
+                'sa-flip-box-back-button-hover-border', $this->style, [
+            'type' => Controls::BORDER,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => '',
+            ]
+                ]
+        );
+        $this->add_responsive_control(
+                'sa-flip-box-backend-button-hover-border-radius', $this->style, [
+            'label' => __('Border Radius', SHORTCODE_ADDOONS),
+            'type' => Controls::DIMENSIONS,
+            'default' => [
+                'unit' => 'px',
+                'size' => '',
+            ],
+            'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => .1,
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ]
+                ]
+        );
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+        $this->end_controls_section();
+        $this->end_section_devider();
+        $this->end_section_tabs();
     }
 
-    public function style() {
-        $data = 'heading-font-size |' . sanitize_text_field($_POST['heading-font-size']) . '|'
-                . ' heading-font-color |' . sanitize_hex_color($_POST['heading-font-color']) . '|'
-                . ' heading-font-active-color |' . sanitize_hex_color($_POST['heading-font-active-color']) . '|'
-                . ' heading-border-size |' . sanitize_text_field($_POST['heading-border-size']) . '|'
-                . ' heading-border-color |' . sanitize_hex_color($_POST['heading-border-color']) . '|'
-                . ' heading-border-active-color |' . sanitize_hex_color($_POST['heading-border-active-color']) . '|'
-                . ' heading-font-familly |' . sanitize_text_field($_POST['heading-font-familly']) . '|'
-                . ' heading-font-weight |' . sanitize_text_field($_POST['heading-font-weight']) . '|'
-                . ' heading-text-align |' . sanitize_text_field($_POST['heading-text-align']) . '|'
-                . 'heading-width |' . sanitize_text_field($_POST['heading-width']) . '|'
-                . ' heading-padding |' . sanitize_text_field($_POST['heading-padding']) . '|'
-                . ' content-font-size |' . sanitize_text_field($_POST['content-font-size']) . '|'
-                . ' content-font-color |' . sanitize_hex_color($_POST['content-font-color']) . '|'
-                . ' content-background-color |' . sanitize_text_field($_POST['content-background-color']) . '|'
-                . ' content-padding-top |' . sanitize_text_field($_POST['content-padding-top']) . '|'
-                . ' content-padding-right |' . sanitize_text_field($_POST['content-padding-right']) . '|'
-                . ' content-padding-bottom |' . sanitize_text_field($_POST['content-padding-bottom']) . '|'
-                . ' content-padding-left |' . sanitize_text_field($_POST['content-padding-left']) . '|'
-                . 'content-line-height |' . sanitize_text_field($_POST['content-line-height']) . '|'
-                . ' content-font-familly |' . sanitize_text_field($_POST['content-font-familly']) . '|'
-                . ' content-font-weight |' . sanitize_text_field($_POST['content-font-weight']) . '|'
-                . ' content-font-align |' . sanitize_text_field($_POST['content-font-align']) . '|'
-                . ' content-border-radius |' . sanitize_text_field($_POST['content-border-radius']) . '|'
-                . 'content-box-shadow-Blur |' . sanitize_text_field($_POST['content-box-shadow-Blur']) . '| '
-                . ' content-box-shadow-color |' . sanitize_text_field($_POST['content-box-shadow-color']) . '|'
-                . ' content-box-shadow-Horizontal |' . sanitize_text_field($_POST['content-box-shadow-Horizontal']) . '|'
-                . ' content-box-shadow-Vertical |' . sanitize_text_field($_POST['content-box-shadow-Vertical']) . '|'
-                . ' content-box-shadow-Spread |' . sanitize_text_field($_POST['content-box-shadow-Spread']) . '|'
-                . ' heading-font-style |' . sanitize_text_field($_POST['heading-font-style']) . '|'
-                . ' custom-css |' . sanitize_text_field($_POST['custom-css']) . '|'
-                . ' oxi-tabs-opening |' . sanitize_text_field($_POST['oxi-tabs-opening']) . '|'
-                . ' oxi-tabs-animation |' . sanitize_text_field($_POST['oxi-tabs-animation']) . '|'
-                . ' tabs-link-options |' . sanitize_text_field($_POST['tabs-link-options']) . '|';
-        return $data;
+    public function modal_opener() {
+        $this->add_substitute_control('', [], [
+            'type' => Controls::MODALOPENER,
+            'title' => __('Add New Flip Boxes', OXI_FLIP_BOX_TEXTDOMAIN),
+            'sub-title' => __('Open Flip Boxes Form', OXI_FLIP_BOX_TEXTDOMAIN),
+            'showing' => TRUE,
+        ]);
     }
 
-    public function admin_field($styledata) {
-        if ($this->css == '') {
-            $this->css = '|#ffffff||fas fa-address-book';
-        }
-        $styleid = $this->styleid;
-        if (empty($styledata[61])) {
-            $styledata[61] = ':eq(1)';
-        }
-        if (empty($styledata[63])) {
-            $styledata[63] = 'slide';
-        }
-        if (empty($styledata[65])) {
-            $styledata[65] = '';
-        }
-        ?>
-        <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-4">
-            <div class="oxi-addons-col-6">
-                <div class="oxi-addons-content-div">
-                    <div class="oxi-head">
-                        Initial Opening
-                    </div>
-                     <div class="form-group row form-group-sm">
-                        <label for="oxi-tabs-opening" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Set Which tabs You want to Open Initial" >Initial Opening </label>
-                        <div class="col-sm-6">
-                            <select class="form-control" id="oxi-tabs-opening" name="oxi-tabs-opening">
-                                <option value=":eq(0)"     <?php
-                                if ($styledata[61] == ':eq(0)') {
-                                    echo 'selected';
-                                };
-                                ?>>First</option>
-                                <option value=":eq(1)"     <?php
-                                if ($styledata[61] == ':eq(1)') {
-                                    echo 'selected';
-                                };
-                                ?>>2nd</option>
-                                <option value=":eq(2)"     <?php
-                                if ($styledata[61] == ':eq(2)') {
-                                    echo 'selected';
-                                };
-                                ?>>3rd</option>
-                                <option value=":eq(3)"     <?php
-                                if ($styledata[61] == ':eq(3)') {
-                                    echo 'selected';
-                                };
-                                ?>>4th</option>
-                                <option value=":eq(4)"     <?php
-                                if ($styledata[61] == ':eq(4)') {
-                                    echo 'selected';
-                                };
-                                ?>>5th</option>
-                                <option value=":eq(5)"     <?php
-                                if ($styledata[61] == ':eq(5)') {
-                                    echo 'selected';
-                                };
-                                ?>>6th</option>
-                                <option value=":eq(6)"     <?php
-                                if ($styledata[61] == ':eq(6)') {
-                                    echo 'selected';
-                                };
-                                ?>>7th</option>
-                                <option value=":eq(7)"     <?php
-                                if ($styledata[61] == ':eq(7)') {
-                                    echo 'selected';
-                                };
-                                ?>>8th</option>
-                                <option value=":eq(8)"     <?php
-                                if ($styledata[61] == ':eq(8)') {
-                                    echo 'selected';
-                                };
-                                ?>>9th</option>
-                                <option value=":eq(9)" <?php
-                                if ($styledata[61] == ':eq(9)') {
-                                    echo 'selected';
-                                };
-                                ?>>10th</option>
-                                <option value=":eq(109)"    <?php
-                                if ($styledata[61] == ':eq(109)') {
-                                    echo 'selected';
-                                };
-                                ?>>None</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="oxi-tabs-animation" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Set Tabs Changing Animation" >Tabbing Animation </label>
-                        <div class="col-sm-6">
-                            <select class="form-control" id="oxi-tabs-opening" name="oxi-tabs-animation">
-                                <option value="show"<?php
-                                if ($styledata[63] == 'show') {
-                                    echo 'selected';
-                                };
-                                ?>>No Animation</option>
-                                <option value="fade"<?php
-                                if ($styledata[63] == 'fade') {
-                                    echo 'selected';
-                                };
-                                ?>>Fade</option>
-                                <option value="slide"     <?php
-                                if ($styledata[63] == 'slide') {
-                                    echo 'selected';
-                                };
-                                ?>>Slide</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="oxi-tabs-link" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Set Tabs Link Opening" >Link Opening</label>
-                        <div class="col-sm-6">
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-primary  <?php
-                                if ($styledata[65] == 'new-tab') {
-                                    echo 'active';
-                                };
-                                ?>" >
-                                    <input type="radio" <?php
-                                    if ($styledata[65] == 'new-tab') {
-                                        echo 'checked';
-                                    };
-                                    ?> name="tabs-link-options" id="link-options1" value="new-tab"> New Tab
-                                </label>
-                                <label class="btn btn-primary <?php
-                                if ($styledata[65] != 'new-tab') {
-                                    echo 'active';
-                                };
-                                ?>">
-                                    <input type="radio" <?php
-                                    if ($styledata[65] != 'new-tab') {
-                                        echo 'checked';
-                                    };
-                                    ?> name="tabs-link-options" id="link-options2"> Same Tab
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+    public function modal_form_data() {
+        echo '<div class="modal-header">                    
+                    <h4 class="modal-title">Flip Boxes Form</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="oxi-addons-content-div">
-                    <div class="oxi-head">
-                        Font Settings
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-font-size" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Customize Title Font Size, Based on Pixel">Font Size </label>
-                        <div class="col-sm-6">
-                            <input class="form-control" type="number" value="<?php echo $styledata[1]; ?>" id="heading-font-size" name="heading-font-size">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-font-color" class="col-sm-6 control-label" data-toggle="tooltip" data-placement="top" title="Set Your Title Font Color, Based on Color">Color</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control oxilab-vendor-color" id="heading-font-color" name="heading-font-color" value="<?php echo$styledata[3]; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-font-active-color" class="col-sm-6 control-label"  data-toggle="tooltip" data-placement="top" title="Customize Your Active Title Font Color, Based on Color">Color Active</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control oxilab-vendor-color" id="heading-font-active-color" name="heading-font-active-color" value="<?php echo $styledata[5]; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-border-size" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Customize Your Title Box Bottom Border Size, Based on pixel">Border Size </label>
-                        <div class="col-sm-6">
-                            <input class="form-control" type="number" value="<?php echo $styledata[7]; ?>" id="heading-border-size" name="heading-border-size">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-border-color" class="col-sm-6 control-label"  data-toggle="tooltip" data-placement="top" title="Customize Border Color of of Title Bottom, Based on Color">Border</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control oxilab-vendor-color" id="heading-border-color" name="heading-border-color" value="<?php echo$styledata[9]; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-border-active-color" class="col-sm-6 control-label"  data-toggle="tooltip" data-placement="top" title="Customize Active Border Color On Active Title Bottom Border, Based on Color">Active Border</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control oxilab-vendor-color" id="heading-border-active-color" name="heading-border-active-color" value="<?php echo $styledata[11]; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-font-familly" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="Choose Your Title Preferred font, Based on Google Font"> Font Family </label>
-                        <div class="col-sm-6">
-                            <input class="oxi-admin-font" type="text" name="heading-font-familly" id="heading-font-familly" value="<?php echo $styledata[13]; ?>">
-                        </div>
-                    </div>
+                <div class="modal-body">';
+        $this->start_controls_tabs(
+                'shortcode-addons-start-tabs', [
+            'options' => [
+                'frontend' => esc_html__('Frontend Data', OXI_FLIP_BOX_TEXTDOMAIN),
+                'backend' => esc_html__('Backend Box', OXI_FLIP_BOX_TEXTDOMAIN),
+            ]
+                ]
+        );
 
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-font-style" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Customize Your Heading Font Style"> Font Style</label>
-                        <div class="col-sm-6">
-                            <select class="form-control" id="heading-font-style" name="heading-font-style">
-                                <option <?php
-                                if ($styledata[57] == 'normal') {
-                                    echo 'selected';
-                                }
-                                ?> value="normal">Normal</option>
-                                <option <?php
-                                if ($styledata[57] == 'italic') {
-                                    echo 'selected';
-                                }
-                                ?> value="italic">Italic</option>
-                                <option <?php
-                                if ($styledata[57] == 'oblique') {
-                                    echo 'selected';
-                                }
-                                ?> value="oblique">Oblique</option>
-                                <option <?php
-                                if ($styledata[57] == 'initial') {
-                                    echo 'selected';
-                                }
-                                ?> value="initial">Initial</option>
-                                <option <?php
-                                if ($styledata[57] == 'inherit') {
-                                    echo 'selected';
-                                }
-                                ?> value="inherit">Inherit</option>
-                            </select>
-                        </div>
-                    </div> 
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-font-weight" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="Customize Your Title Font Weight, Based on CSS Weight" >Font Weight  </label>
-                        <div class="col-sm-6">
-                            <select class="form-control" id="heading-font-weight" name="heading-font-weight">
-                                <option value="100"     <?php
-                                if ($styledata[15] == '100') {
-                                    echo 'selected';
-                                };
-                                ?>>100</option>
-                                <option value="200"     <?php
-                                if ($styledata[15] == '200') {
-                                    echo 'selected';
-                                };
-                                ?>>200</option>
-                                <option value="300"     <?php
-                                if ($styledata[15] == '300') {
-                                    echo 'selected';
-                                };
-                                ?>>300</option>
-                                <option value="400"     <?php
-                                if ($styledata[15] == '400') {
-                                    echo 'selected';
-                                };
-                                ?>>400</option>
-                                <option value="500"     <?php
-                                if ($styledata[15] == '500') {
-                                    echo 'selected';
-                                };
-                                ?>>500</option>
-                                <option value="600"     <?php
-                                if ($styledata[15] == '600') {
-                                    echo 'selected';
-                                };
-                                ?>>600</option>
-                                <option value="700"     <?php
-                                if ($styledata[15] == '700') {
-                                    echo 'selected';
-                                };
-                                ?>>700</option>
-                                <option value="800"     <?php
-                                if ($styledata[15] == '800') {
-                                    echo 'selected';
-                                };
-                                ?>>800</option>
-                                <option value="900"     <?php
-                                if ($styledata[15] == '900') {
-                                    echo 'selected';
-                                };
-                                ?>>900</option>
-                                <option value="normal" <?php
-                                if ($styledata[15] == 'normal') {
-                                    echo 'selected';
-                                };
-                                ?>>Normal</option>
-                                <option value="bold"    <?php
-                                if ($styledata[15] == 'bold') {
-                                    echo 'selected';
-                                };
-                                ?>>Bold</option>
-                                <option value="lighter" <?php
-                                if ($styledata[15] == 'lighter') {
-                                    echo 'selected';
-                                };
-                                ?>>Lighter</option>
-                                <option value="initial"   <?php
-                                if ($styledata[15] == 'initial') {
-                                    echo 'selected';
-                                };
-                                ?>>Initial</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>                                            
-            </div>
-            <div class="oxi-addons-col-6">
-                <div class="oxi-addons-content-div">
-                    <div class="oxi-head">
-                        Body Settings
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-text-align" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="Set Your Title Position">Heading Align  </label>
-                        <div class="col-sm-6">
-                            <select class="form-control" id="heading-text-align" name="heading-text-align">
-                                <option value="flex-start"     <?php
-                                if ($styledata[17] == 'flex-start') {
-                                    echo 'selected';
-                                };
-                                ?>>Left</option>
-                                <option value="center"     <?php
-                                if ($styledata[17] == 'center') {
-                                    echo 'selected';
-                                };
-                                ?>>Center</option>
-                                <option value="flex-end"     <?php
-                                if ($styledata[17] == 'flex-end') {
-                                    echo 'selected';
-                                };
-                                ?>>Right</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-width" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="Set Your Title Background Width, Based on Pixel">Width </label>
-                        <div class="col-sm-6">
-                            <input class="form-control" type="number" value="<?php echo $styledata[19]; ?>" id="heading-width" name="heading-width">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="heading-padding" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="Use Padding to generate space around Title, Based on Pixel">Padding </label>
-                        <div class="col-sm-6">
-                            <input class="form-control" type="number" value="<?php echo $styledata[21]; ?>" id="heading-padding" name="heading-padding">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-3">
-            <div class="oxi-addons-col-6">
-                <div class="oxi-addons-content-div">
-                    <div class="oxi-head">
-                        Font Settings
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-font-size" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="Customize Your Content Font Size, Based on Pixel">Font Size </label>
-                        <div class="col-sm-6">
-                            <input class="form-control" type="number" value="<?php echo $styledata[23]; ?>" id="content-font-size" name="content-font-size">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-font-color" class="col-sm-6 control-label"  data-toggle="tooltip" data-placement="top" title="Set Custom Content Font Color, Based on Color">Color </label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control oxilab-vendor-color" id="content-font-color" name="content-font-color" value="<?php echo $styledata[25]; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-line-height" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="Customize Your Content Font Line Height, Based on Point">Line Height </label>
-                        <div class="col-sm-6">
-                            <input class="form-control" type="number" step="0.1" value="<?php echo $styledata[37]; ?>" id="content-line-height" name="content-line-height">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-font-familly" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="Choose Your Content Font, Based on Google Font"> Font Family </label>
-                        <div class="col-sm-6">
-                            <input class="oxi-admin-font" value="<?php echo $styledata[39]; ?>" type="text" name="content-font-familly" id="content-font-familly">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-font-weight" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Customize Content Font Weight, Based on CSS Weight">Font Weight  </label>
-                        <div class="col-sm-6">
-                            <select class="form-control" id="content-font-weight" name="content-font-weight">
-                                <option value="100" <?php
-                                if ($styledata[41] == '100') {
-                                    echo 'selected';
-                                };
-                                ?>>100</option>
-                                <option value="200" <?php
-                                if ($styledata[41] == '200') {
-                                    echo 'selected';
-                                };
-                                ?>>200</option>
-                                <option value="300" <?php
-                                if ($styledata[41] == '300') {
-                                    echo 'selected';
-                                };
-                                ?>>300</option>
-                                <option value="400" <?php
-                                if ($styledata[41] == '400') {
-                                    echo 'selected';
-                                };
-                                ?>>400</option>
-                                <option value="500" <?php
-                                if ($styledata[41] == '500') {
-                                    echo 'selected';
-                                };
-                                ?>>500</option>
-                                <option value="600" <?php
-                                if ($styledata[41] == '600') {
-                                    echo 'selected';
-                                };
-                                ?>>600</option>
-                                <option value="700" <?php
-                                if ($styledata[41] == '700') {
-                                    echo 'selected';
-                                };
-                                ?>>700</option>
-                                <option value="800" <?php
-                                if ($styledata[41] == '800') {
-                                    echo 'selected';
-                                };
-                                ?>>800</option>
-                                <option value="900" <?php
-                                if ($styledata[41] == '900') {
-                                    echo 'selected';
-                                };
-                                ?>>900</option>
-                                <option value="normal" <?php
-                                if ($styledata[41] == 'normal') {
-                                    echo 'selected';
-                                };
-                                ?>>Normal</option>
-                                <option value="bold" <?php
-                                if ($styledata[41] == 'bold') {
-                                    echo 'selected';
-                                };
-                                ?>>Bold</option>
-                                <option value="lighter" <?php
-                                if ($styledata[41] == 'lighter') {
-                                    echo 'selected';
-                                };
-                                ?>>Lighter</option>
-                                <option value="initial" <?php
-                                if ($styledata[41] == 'initial') {
-                                    echo 'selected';
-                                };
-                                ?>>Initial</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="oxi-addons-col-6">
-                <div class="oxi-addons-content-div">
-                    <div class="oxi-head">
-                        Body Settings
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-background-color" class="col-sm-6 control-label"  data-toggle="tooltip" data-placement="top" title=" Set Custom Background Color of Tabs Background Color">Background Color </label>
-                        <div class="col-sm-6">
-                            <input type="text" data-format="rgb" data-opacity="true"  class="form-control oxilab-vendor-color" id="content-background-color" name="content-background-color" value="<?php echo $styledata[27]; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-padding-top" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title=" Use Padding to Generate Space Around Content as Top, Bottom. Based on Pixel">Padding Top Bottom</label>
-                        <div class="col-sm-3">
-                            <input class="form-control" type="number" value="<?php echo $styledata[29]; ?>" id="content-padding-top" name="content-padding-top">
-                        </div>                                                    
-                        <div class="col-sm-3">
-                            <input class="form-control" type="number" value="<?php echo $styledata[33]; ?>" id="content-padding-bottom" name="content-padding-bottom">
-                        </div>                                                    
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-padding-top" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title=" Use Padding to Generate Space Around Content as Left, Right. Based on Pixel">Padding Left Right</label>
-                        <div class="col-sm-3">
-                            <input class="form-control" type="number" value="<?php echo $styledata[35]; ?>" id="content-padding-left" name="content-padding-left">
-                        </div>
-                        <div class="col-sm-3">
-                            <input class="form-control" type="number" value="<?php echo $styledata[31]; ?>" id="content-padding-right" name="content-padding-right">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-font-align" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="Set Content Text Position, Based on left or center or Right">Text Align  </label>
-                        <div class="col-sm-6">
-                            <select class="form-control" id="content-font-align" name="content-font-align">
-                                <option value="left" <?php
-                                if ($styledata[43] == 'left') {
-                                    echo 'selected';
-                                };
-                                ?>>Left</option>
-                                <option value="center" <?php
-                                if ($styledata[43] == 'center') {
-                                    echo 'selected';
-                                };
-                                ?>>Center</option>
-                                <option value="right" <?php
-                                if ($styledata[43] == 'right') {
-                                    echo 'selected';
-                                };
-                                ?>>Right</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-border-radius" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="Add Rounded Corner on Tabs, Based on Pixel">Border Radius </label>
-                        <div class="col-sm-6">
-                            <input class="form-control" type="number" value="<?php echo $styledata[45]; ?>" id="content-border-radius" name="content-border-radius">
-                        </div>
-                    </div>
-                </div>
-                <div class="oxi-addons-content-div">
-                    <div class="oxi-head">
-                        Box Shadow                                                
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-box-shadow-Horizontal" class="col-sm-6 col-form-label" data-toggle="tooltip" class="tooltipLink" data-original-title="Attach Shadow Length to Tabs, Based on Pixel">Box Shadow  Length</label>
-                        <div class="col-sm-3">
-                            <input class="form-control" type="number" value="<?php echo $styledata[51]; ?>" id="content-box-shadow-Horizontal" name="content-box-shadow-Horizontal">
-                        </div>
-                        <div class="col-sm-3">
-                            <input class="form-control" type="number" value="<?php echo $styledata[53]; ?>" id="content-box-shadow-Vertical" name="content-box-shadow-Vertical">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-box-shadow-Blur" class="col-sm-6 col-form-label" data-toggle="tooltip" class="tooltipLink" data-original-title="Attach Shadow Size to Tabs, Based on Pixel">Box Shadow Radius</label>
-                        <div class="col-sm-3">
-                            <input class="form-control" type="number" value="<?php echo $styledata[47]; ?>" id="content-box-shadow-Blur" name="content-box-shadow-Blur">
-                        </div>
-                        <div class="col-sm-3">
-                            <input class="form-control" type="number" value="<?php echo $styledata[55]; ?>" id="content-box-shadow-Spread" name="content-box-shadow-Spread">
-                        </div>
-                    </div>
-                    <div class="form-group row form-group-sm">
-                        <label for="content-box-shadow-color" class="col-sm-6 control-label"  data-toggle="tooltip" data-placement="top" title="Add custom color to Box Shadow">Box Shadow Color </label>
-                        <div class="col-sm-6 ">
-                            <input type="text" data-format="rgb" data-opacity="true" class="form-control oxilab-vendor-color" id="content-box-shadow-color" name="content-box-shadow-color" value="<?php echo $styledata[49]; ?>">
-                        </div>
-                    </div> 
-                </div>
-            </div>
-        </div>
-        <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-2">
-            <div class="col-xs-12">
-                <div class="form-group">
-                    <label for="custom-css">Custom CSS:</label>
-                    <textarea class="form-control" rows="4" id="custom-css" name="custom-css"><?php echo $styledata[59]; ?></textarea>
-                    <small class="form-text text-muted">Add Your Custom CSS Unless make it blank.</small>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            jQuery(document).ready(function () {
-                jQuery("#heading-font-size").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?> .vc-tabs-li{ font-size:" + jQuery('#heading-font-size').val() + "px;} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#heading-font-color").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?> .vc-tabs-li{ color:" + jQuery('#heading-font-color').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#heading-font-active-color").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?> .vc-tabs-li.active{ color:" + jQuery('#heading-font-active-color').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#heading-border-size").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?>  { border-bottom:" + jQuery('#heading-border-size').val() + "px solid;} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?> .vc-tabs-li.active .ctu-absolute{ bottom: -" + jQuery('#heading-border-size').val() + "px;} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?> .vc-tabs-li.active .ctu-absolute{ height: " + jQuery('#heading-border-size').val() + "px;} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#heading-border-color").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?>  { border-bottom-color:" + jQuery('#heading-border-color').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#heading-border-active-color").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?> .vc-tabs-li.active .ctu-absolute{ background-color:" + jQuery('#heading-border-active-color').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery('#heading-font-familly').change(function () {
-                    var font = jQuery(this).val().replace(/\+/g, ' ');
-                    font = font.split(':');
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?> .vc-tabs-li{ font-family:" + font[0] + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#heading-font-style").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?> .vc-tabs-li{ font-style: " + jQuery('#heading-font-style').val() + ";}</style>").appendTo(" .ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#heading-font-weight").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?> .vc-tabs-li{ font-weight:" + jQuery('#heading-font-weight').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#heading-text-align").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?>{ justify-content: " + jQuery('#heading-text-align').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#heading-width").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulimate-style-<?php echo $styleid; ?> .vc-tabs-li{ max-width: " + jQuery('#heading-width').val() + "px;} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#heading-padding").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ultimate-wrapper-<?php echo $styleid; ?> .vc-tabs-li{ padding: " + jQuery('#heading-padding').val() + "px 10px;} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#content-font-size").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulitate-style-<?php echo $styleid; ?>-tabs p{ font-size:" + jQuery('#content-font-size').val() + "px;} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#content-font-color").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulitate-style-<?php echo $styleid; ?>-tabs p{ color:" + jQuery('#content-font-color').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#content-background-color").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data   .ctu-ultimate-wrapper-<?php echo $styleid; ?>{ background-color:" + jQuery('#content-background-color').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#content-padding-top").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulitate-style-<?php echo $styleid; ?>-tabs{padding: " + jQuery("#content-padding-top").val() + "px " + jQuery("#content-padding-right").val() + "px " + jQuery("#content-padding-bottom").val() + "px " + jQuery("#content-padding-left").val() + "px;} </style>").appendTo("#oxi-addons-preview-data");
-                });
-                jQuery("#content-padding-bottom").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulitate-style-<?php echo $styleid; ?>-tabs{padding: " + jQuery("#content-padding-top").val() + "px " + jQuery("#content-padding-right").val() + "px " + jQuery("#content-padding-bottom").val() + "px " + jQuery("#content-padding-left").val() + "px;} </style>").appendTo("#oxi-addons-preview-data");
-                });
-                jQuery("#content-padding-right").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulitate-style-<?php echo $styleid; ?>-tabs{padding: " + jQuery("#content-padding-top").val() + "px " + jQuery("#content-padding-right").val() + "px " + jQuery("#content-padding-bottom").val() + "px " + jQuery("#content-padding-left").val() + "px;} </style>").appendTo("#oxi-addons-preview-data");
-                });
-                jQuery("#content-padding-left").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulitate-style-<?php echo $styleid; ?>-tabs{padding: " + jQuery("#content-padding-top").val() + "px " + jQuery("#content-padding-right").val() + "px " + jQuery("#content-padding-bottom").val() + "px " + jQuery("#content-padding-left").val() + "px;} </style>").appendTo("#oxi-addons-preview-data");
-                });
-                jQuery("#content-line-height").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulitate-style-<?php echo $styleid; ?>-tabs p{ line-height:" + jQuery('#content-line-height').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery('#content-font-familly').change(function () {
-                    var font = jQuery(this).val().replace(/\+/g, ' ');
-                    font = font.split(':');
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulitate-style-<?php echo $styleid; ?>-tabs p{ font-family:" + font[0] + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#content-font-weight").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulitate-style-<?php echo $styleid; ?>-tabs p{ font-weight:" + jQuery('#content-font-weight').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#content-font-align").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ulitate-style-<?php echo $styleid; ?>-tabs p{ text-align:" + jQuery('#content-font-align').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#content-border-radius").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data  .ctu-ultimate-wrapper-<?php echo $styleid; ?>{ border-radius:" + jQuery('#content-border-radius').val() + "px;} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                });
-                jQuery("#content-box-shadow-Blur").on("change", function () {
-                    var idvalue = jQuery('#content-box-shadow-Horizontal').val() + 'px ' + jQuery('#content-box-shadow-Vertical').val() + 'px ' + jQuery('#content-box-shadow-Blur').val() + 'px ' + jQuery('#content-box-shadow-Spread').val() + 'px ' + jQuery('#content-box-shadow-color').val();
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data     .ctu-ultimate-wrapper-<?php echo $styleid; ?>{box-shadow :" + idvalue + ";} </style>").appendTo(" .ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data   @media only screen and (max-width: 900px) {.ctu-ulitate-style-<?php echo $styleid; ?>-tabs {box-shadow :" + idvalue + ";}} </style>").appendTo(" .ctu-ultimate-wrapper-<?php echo $styleid; ?>");
+        $this->start_controls_tab();
+        $this->add_control(
+                'sa_flip_boxes_heading', $this->style, [
+            'label' => __('Title', OXI_FLIP_BOX_TEXTDOMAIN),
+            'type' => Controls::TEXT,
+            'default' => 'Heading',
+            'placeholder' => 'Heading',
+                ]
+        );
+        $this->add_control(
+                'sa_flip_boxes_icon', $this->style, [
+            'label' => __('Icon', OXI_FLIP_BOX_TEXTDOMAIN),
+            'type' => Controls::ICON,
+            'default' => 'fab fa-facebook',
+                ]
+        );
+        $this->add_group_control(
+                'sa_flip_boxes_media', $this->style, [
+            'label' => __('URL', OXI_FLIP_BOX_TEXTDOMAIN),
+            'type' => Controls::MEDIA,
+            'default' => [
+                'type' => 'media-library',
+                'link' => '#',
+            ]
+                ]
+        );
+        $this->add_control(
+                'sa_flip_boxes_overlay_color', $this->style, [
+            'label' => __('Overlay Background', SHORTCODE_ADDOONS),
+            'type' => Controls::GRADIENT,
+            'default' => 'rgba(255, 255, 255, 0)',
+                ]
+        );
+        $this->end_controls_tab();
+        $this->start_controls_tab();
+        $this->add_control(
+                'sa_flip_boxes_description', $this->style, [
+            'label' => __('Short Description', OXI_FLIP_BOX_TEXTDOMAIN),
+            'type' => Controls::TEXTAREA,
+            'default' => 'Lorem ipsum dolor sit amet, consectetur tempor incididunt ut labore et dolore magna aliqua dapibus tellus blandit quis. Cras tempor non mi et vestibulum.',
+                ]
+        );
 
-                });
-                jQuery("#content-box-shadow-Horizontal").on("change", function () {
-                    var idvalue = jQuery('#content-box-shadow-Horizontal').val() + 'px ' + jQuery('#content-box-shadow-Vertical').val() + 'px ' + jQuery('#content-box-shadow-Blur').val() + 'px ' + jQuery('#content-box-shadow-Spread').val() + 'px ' + jQuery('#content-box-shadow-color').val();
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data     .ctu-ultimate-wrapper-<?php echo $styleid; ?> {box-shadow :" + idvalue + ";} </style>").appendTo(" .ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data   @media only screen and (max-width: 900px) {.ctu-ulitate-style-<?php echo $styleid; ?>-tabs {box-shadow :" + idvalue + ";}} </style>").appendTo(" .ctu-ultimate-wrapper-<?php echo $styleid; ?>");
+        $this->add_control(
+                'sa_flip_boxes_button_text', $this->style, [
+            'label' => __('Button Text', OXI_FLIP_BOX_TEXTDOMAIN),
+            'type' => Controls::TEXT,
+            'default' => 'Learn More',
+                ]
+        );
 
-                });
-                jQuery("#content-box-shadow-Vertical").on("change", function () {
-                    var idvalue = jQuery('#content-box-shadow-Horizontal').val() + 'px ' + jQuery('#content-box-shadow-Vertical').val() + 'px ' + jQuery('#content-box-shadow-Blur').val() + 'px ' + jQuery('#content-box-shadow-Spread').val() + 'px ' + jQuery('#content-box-shadow-color').val();
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data   .ctu-ultimate-wrapper-<?php echo $styleid; ?> {box-shadow :" + idvalue + ";} </style>").appendTo(" .ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data   @media only screen and (max-width: 900px) {.ctu-ulitate-style-<?php echo $styleid; ?>-tabs {box-shadow :" + idvalue + ";}} </style>").appendTo(" .ctu-ultimate-wrapper-<?php echo $styleid; ?>");
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+        $this->add_group_control(
+                'sa_flip_boxes_button_link', $this->style, [
+            'label' => __('URL', OXI_FLIP_BOX_TEXTDOMAIN),
+            'type' => Controls::URL,
+            'separator' => TRUE,
+            'default' => '',
+            'placeholder' => 'https://www.yoururl.com',
+                ]
+        );
 
-                });
-                jQuery("#content-box-shadow-Spread").on("change", function () {
-                    var idvalue = jQuery('#content-box-shadow-Horizontal').val() + 'px ' + jQuery('#content-box-shadow-Vertical').val() + 'px ' + jQuery('#content-box-shadow-Blur').val() + 'px ' + jQuery('#content-box-shadow-Spread').val() + 'px ' + jQuery('#content-box-shadow-color').val();
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data    .ctu-ultimate-wrapper-<?php echo $styleid; ?>{box-shadow :" + idvalue + ";} </style>").appendTo(" .ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data   @media only screen and (max-width: 900px) {.ctu-ulitate-style-<?php echo $styleid; ?>-tabs {box-shadow :" + idvalue + ";}} </style>").appendTo(" .ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-
-                });
-                jQuery("#content-box-shadow-color").on("change", function () {
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data     .ctu-ultimate-wrapper-<?php echo $styleid; ?>{box-shadow:" + jQuery('#content-box-shadow-Horizontal').val() + "px " + jQuery('#content-box-shadow-Vertical').val() + "px " + jQuery('#content-box-shadow-Blur').val() + "px " + jQuery('#content-box-shadow-Spread').val() + "px " + jQuery('#content-box-shadow-color').val() + ";} </style>").appendTo(".ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-                    jQuery("<style type='text/css'>#oxi-addons-preview-data   @media only screen and (max-width: 900px) {.ctu-ulitate-style-<?php echo $styleid; ?>-tabs {box-shadow :" + idvalue + ";}} </style>").appendTo(" .ctu-ultimate-wrapper-<?php echo $styleid; ?>");
-
-                });
-
-            });
-        </script>
-
-        <?php
+        echo '</div>';
     }
 
-    public function admin_child_field() {
-        ?>
-        <div class="form-group col-sm-12">
-            <label for="ctu-title"  data-toggle="tooltip" data-placement="top">Title</label>
-            <input type="text "class="form-control" id="cau-title" name="ctu-title" value="<?php echo $this->title; ?>">
-            <small class="form-text text-muted">Add or Modify Your Tabs Title.</small>
-        </div>
-        <div class="form-group col-sm-12">
-            <label for="ctu-link"  data-toggle="tooltip" data-placement="top">Link</label>
-            <input type="text "class="form-control" id="ctu-link" name="ctu-link" value="<?php echo $this->link; ?>">
-            <small class="form-text text-muted">As you want to add link. Unless make it blank. Link will works only at site not edit page</small>
-        </div>
-        <div class="form-group col-sm-12">
-            <label for="ctu-details">Details:</label>
-            <?php
-            wp_editor($this->admin_special_charecter($this->files), 'ctu-details', $settings = array(
-                'textarea_name' => 'ctu-details',
-                'wpautop' => false,
-                'force_br_newlines' => true,
-                'force_p_newlines' => false)
-            );
-            ?>
-            <small class="form-text text-muted">Add or Modify Your Content.</small>
-        </div>
-        <?php
-    }
-
-    public function admin_child_rearrange() {
-        echo ' <ul class="list-group col-sm-12" id="oxi-addons-drag-drop">';
-        foreach ($this->child as $value) {
-            $titlefiles = explode('{}{}{}', $value['title']);
-            echo '<li class="list-group-item" id ="' . $value['id'] . '">' . $titlefiles[0] . '</li>';
-        }
-        echo '</ul>';
+    /**
+     * Template Parent Item Data Rearrange
+     *
+     * @since 2.0.0
+     */
+    public function Rearrange() {
+        return '<li class="list-group-item" id="{{id}}">{{sa_flip_boxes_heading}}</li>';
     }
 
 }

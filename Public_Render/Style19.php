@@ -59,7 +59,7 @@ class Style19 extends Public_Render {
                                             <div class="oxi-addons-flip-box-style">
                                                 <div class="oxi-addons-flip-box-front">
                                                     <div class="oxi-addons-flip-box-front-section-box">
-                                                        <div class="oxi-addons-flip-box-front-section">
+                                                        <div class="oxi-addons-flip-box-front-section oxi-addons-flip-box-front-section-' . $val['id'] . '">
                                                             ' . $image . '
                                                         </div>  
                                                     </div>
@@ -94,7 +94,7 @@ class Style19 extends Public_Render {
             endif;
             echo ' </div>';
 
-            $this->inline_css .= '.' . $this->WRAPPER . ' .oxi-addons-flip-box-style-19 .oxi-addons-flip-box-front-section-' . $key . ':before{
+            $this->inline_css .= '.' . $this->WRAPPER . ' .oxi-addons-flip-box-style-19 .oxi-addons-flip-box-front-section-' . $val['id'] . ':before{
                         background: ' . $value['sa_flip_boxes_overlay_color'] . ';
                     }';
         }
