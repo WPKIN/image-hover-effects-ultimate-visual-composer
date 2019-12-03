@@ -169,8 +169,7 @@ class Style12 extends Admin_Render {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-12' => 'height:{{SIZE}}{{UNIT}};',
-                '{{WRAPPER}} .oxi-addons-flip-box-style-12 .oxi-addons-flip-boxes-body:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
+                 '{{WRAPPER}} .oxi-addons-flip-box-style-12 .oxi-addons-flip-boxes-body:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
             ],
                 ]
         );

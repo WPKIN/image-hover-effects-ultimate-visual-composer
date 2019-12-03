@@ -53,7 +53,14 @@ class Admin_Ajax {
         endif;
     }
 
-    public function create_tabs($data = '', $styleid = '', $itemid = '') {
+    public function array_replace($arr = [], $search = '', $replace = '') {
+        array_walk($arr, function (&$v) use ($search, $replace) {
+            $v = str_replace($search, $replace, $v);
+        });
+        return $arr;
+    }
+
+    public function create_flip($data = '', $styleid = '', $itemid = '') {
         if (!empty($styleid)):
             $styleid = (int) $styleid;
             $newdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
@@ -67,16 +74,21 @@ class Admin_Ajax {
                 echo admin_url("admin.php?page=oxi-flip-box-ultimate-new&styleid=$redirect_id");
             endif;
         else:
-            parse_str($data, $params);
-            $newname = $params['addons-style-name'];
-            $DATA = json_decode(stripcslashes($params['oxistyledata']), true);
-            $style = $DATA['style'];
-            $child = $DATA['child'];
-            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, type, style_name, css) VALUES ( %s, %s, %s, %s)", array($newname, 'flip', $style['style_name'], $style['css'])));
+            $params = json_decode(stripslashes($data), true);
+            $newname = $params['name'];
+            $rawdata = $params['style'];
+            $style = $rawdata['style'];
+            $child = $rawdata['child'];
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, type, style_name, rawdata) VALUES ( %s, %s, %s, %s)", array($newname, 'flip', $style['style_name'], $style['rawdata'])));
             $redirect_id = $this->wpdb->insert_id;
             if ($redirect_id > 0):
+                $raw = json_decode(stripslashes($style['rawdata']), true);
+                $raw['oxi-addons-flip-elements-id'] = $redirect_id;
+                $cls = '\OXI_FLIP_BOX_PLUGINS\Admin\\' . ucfirst($style['style_name']) . '';
+                $CLASS = new $cls('admin');
+                $f = $CLASS->template_css_render($raw);
                 foreach ($child as $value) {
-                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, files, css) VALUES (%d, %s, %s, %s)", array($redirect_id, $value['files'], $value['css'])));
+                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, type, rawdata) VALUES (%d, %s, %s)", array($redirect_id, 'flip', $value['rawdata'])));
                 }
                 echo admin_url("admin.php?page=oxi-flip-box-ultimate-new&styleid=$redirect_id");
             endif;
@@ -97,12 +109,27 @@ class Admin_Ajax {
     public function shortcode_export($data = '', $styleid = '', $itemid = '') {
         $styleid = (int) $styleid;
         if ($styleid):
-            $style = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
-            $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
-            $newdata = [
-                ['plugin' => 'flipbox'],
-                ['style' => $style, 'child' => $child]
+            $st = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
+            $c = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
+            $style = [
+                'id' => $st['id'],
+                'type' => ucfirst($st['type']),
+                'name' => $st['name'],
+                'style_name' => $st['style_name'],
+                'rawdata' => json_encode($this->array_replace(json_decode(stripslashes($st['rawdata']), true), '"', '&quot;')),
+                'stylesheet' => htmlentities($st['stylesheet']),
+                'font_family' => $st['font_family'],
             ];
+            $child = [];
+            foreach ($c as $value) {
+                $child[] = [
+                    'id' => $value['id'],
+                    'styleid' => $value['styleid'],
+                    'rawdata' => json_encode($this->array_replace(json_decode(stripslashes($value['rawdata']), true), '"', '&quot;')),
+                    'stylesheet' => htmlentities($value['stylesheet'])
+                ];
+            }
+            $newdata = ['plugin' => 'flipbox', 'style' => $style, 'child' => $child];
             echo json_encode($newdata);
         else:
             echo 'Silence is Golden';
@@ -158,9 +185,9 @@ class Admin_Ajax {
         $settings = json_decode(stripslashes($rawdata), true);
         $StyleName = sanitize_text_field($settings['oxi-addons-flip-elements-template']);
         $stylesheet = '';
-        $cls = '\OXI_FLIP_BOX_PLUGINS\Admin\\' . $StyleName . '';
         if ((int) $styleid):
             $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET rawdata = %s, stylesheet = %s WHERE id = %d", $rawdata, $stylesheet, $styleid));
+            $cls = '\OXI_FLIP_BOX_PLUGINS\Admin\\' . $StyleName . '';
             $CLASS = new $cls('admin');
             echo $CLASS->template_css_render($settings);
         endif;

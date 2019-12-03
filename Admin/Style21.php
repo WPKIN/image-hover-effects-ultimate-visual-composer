@@ -17,9 +17,9 @@ class Style21 extends Admin_Render {
         $this->start_section_header(
                 'shortcode-addons-start-tabs', [
             'options' => [
-                'general-settings' => esc_html__('General Settings', SHORTCODE_ADDOONS),
-                'front' => esc_html__('Front', SHORTCODE_ADDOONS),
-                'backend' => esc_html__('Backend', SHORTCODE_ADDOONS),
+                'general-settings' => esc_html__('General Settings', OXI_FLIP_BOX_TEXTDOMAIN),
+                'front' => esc_html__('Front', OXI_FLIP_BOX_TEXTDOMAIN),
+                'backend' => esc_html__('Backend', OXI_FLIP_BOX_TEXTDOMAIN),
             ]
                 ]
         );
@@ -35,7 +35,7 @@ class Style21 extends Admin_Render {
         $this->start_section_devider();
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('General Settings', SHORTCODE_ADDOONS),
+            'label' => esc_html__('General Settings', OXI_FLIP_BOX_TEXTDOMAIN),
             'showing' => TRUE,
                 ]
         );
@@ -50,35 +50,35 @@ class Style21 extends Admin_Render {
         );
         $this->add_control(
                 'sa-ac-flip_boxes_flip_direction', $this->style, [
-            'label' => __('Flip Direction', SHORTCODE_ADDOONS),
+            'label' => __('Flip Direction', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'loader' => TRUE,
             'separator' => TRUE,
             'default' => 'oxi-addons-flip-box-flip-top-to-bottom',
             'options' => [
-                'oxi-addons-flip-box-flip-top-to-bottom' => __('Top To Bottom', SHORTCODE_ADDOONS),
-                'oxi-addons-flip-box-flip-bottom-to-top' => __('Bottom To Top', SHORTCODE_ADDOONS),
-                'oxi-addons-flip-box-flip-left-to-right' => __('Left To Right', SHORTCODE_ADDOONS),
-                'oxi-addons-flip-box-flip-right-to-left' => __('Right To Left', SHORTCODE_ADDOONS),
+                'oxi-addons-flip-box-flip-top-to-bottom' => __('Top To Bottom', OXI_FLIP_BOX_TEXTDOMAIN),
+                'oxi-addons-flip-box-flip-bottom-to-top' => __('Bottom To Top', OXI_FLIP_BOX_TEXTDOMAIN),
+                'oxi-addons-flip-box-flip-left-to-right' => __('Left To Right', OXI_FLIP_BOX_TEXTDOMAIN),
+                'oxi-addons-flip-box-flip-right-to-left' => __('Right To Left', OXI_FLIP_BOX_TEXTDOMAIN),
             ],
                 ]
         );
         $this->add_control(
                 'sa-ac-flip_boxes_flip_effects', $this->style, [
-            'label' => __('Flip Effects', SHORTCODE_ADDOONS),
+            'label' => __('Flip Effects', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::SELECT,
             'loader' => TRUE,
             'default' => 'easing_easeInOutExpo',
             'options' => [
-                'easing_easeInOutExpo' => __('EaseOutBack', SHORTCODE_ADDOONS),
-                'easing_easeInOutCirc' => __('EaseInOutExpo', SHORTCODE_ADDOONS),
-                'easing_easeOutBack' => __('EaseInOutCirc', SHORTCODE_ADDOONS),
+                'easing_easeInOutExpo' => __('EaseOutBack', OXI_FLIP_BOX_TEXTDOMAIN),
+                'easing_easeInOutCirc' => __('EaseInOutExpo', OXI_FLIP_BOX_TEXTDOMAIN),
+                'easing_easeOutBack' => __('EaseInOutCirc', OXI_FLIP_BOX_TEXTDOMAIN),
             ],
                 ]
         );
         $this->add_control(
                 'sa-flip-boxes-flip_time', $this->style, [
-            'label' => __('Flipping Time', SHORTCODE_ADDOONS),
+            'label' => __('Flipping Time', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -113,13 +113,13 @@ class Style21 extends Admin_Render {
 
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('General Style', SHORTCODE_ADDOONS),
+            'label' => esc_html__('General Style', OXI_FLIP_BOX_TEXTDOMAIN),
             'showing' => TRUE,
                 ]
         );
         $this->add_responsive_control(
                 'sa-flip-boxes-width', $this->style, [
-            'label' => __('Width', SHORTCODE_ADDOONS),
+            'label' => __('Width', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -149,7 +149,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_responsive_control(
                 'sa-flip-boxes-height', $this->style, [
-            'label' => __('Height', SHORTCODE_ADDOONS),
+            'label' => __('Height', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -173,15 +173,14 @@ class Style21 extends Admin_Render {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-21 .oxi-addons-flip-boxes-body:after' => 'padding-bottom:{{SIZE}}{{UNIT}};',
-                '{{WRAPPER}} .oxi-addons-flip-box-style-21' => 'height:{{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .oxi-addons-flip-box-style-21' => 'height:{{SIZE}}{{UNIT}};',
             ],
                 ]
         );
 
         $this->add_responsive_control(
                 'sa-flip-boxes-border-radius', $this->style, [
-            'label' => __('Border Radius', SHORTCODE_ADDOONS),
+            'label' => __('Border Radius', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -215,7 +214,7 @@ class Style21 extends Admin_Render {
 
         $this->add_responsive_control(
                 'sa-flip-boxes-margin', $this->style, [
-            'label' => __('Margin', SHORTCODE_ADDOONS),
+            'label' => __('Margin', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -247,8 +246,8 @@ class Style21 extends Admin_Render {
         $this->start_controls_tabs(
                 'shortcode-addons-start-tabs', [
             'options' => [
-                'normal' => esc_html__('Normal', SHORTCODE_ADDOONS),
-                'hover' => esc_html__('Hover', SHORTCODE_ADDOONS),
+                'normal' => esc_html__('Normal', OXI_FLIP_BOX_TEXTDOMAIN),
+                'hover' => esc_html__('Hover', OXI_FLIP_BOX_TEXTDOMAIN),
             ]
                 ]
         );
@@ -293,7 +292,7 @@ class Style21 extends Admin_Render {
         $this->start_section_devider();
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Content Settings', SHORTCODE_ADDOONS),
+            'label' => esc_html__('Content Settings', OXI_FLIP_BOX_TEXTDOMAIN),
             'showing' => TRUE,
                 ]
         );
@@ -308,7 +307,7 @@ class Style21 extends Admin_Render {
 
         $this->add_responsive_control(
                 'sa-ib-content-font-box-padding', $this->style, [
-            'label' => __('Padding', SHORTCODE_ADDOONS),
+            'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -339,27 +338,27 @@ class Style21 extends Admin_Render {
         $this->end_controls_section();
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Icon Settings', SHORTCODE_ADDOONS),
+            'label' => esc_html__('Icon Settings', OXI_FLIP_BOX_TEXTDOMAIN),
             'showing' => FALSE,
                 ]
         );
         $this->add_control(
                 'sa-flip-box-backend-button_alignment', $this->style, [
-            'label' => __('Alignment', SHORTCODE_ADDOONS),
+            'label' => __('Alignment', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::CHOOSE,
             'operator' => Controls::OPERATOR_ICON,
             'default' => 'center',
             'options' => [
                 'flex-start' => [
-                    'title' => __('Left', SHORTCODE_ADDOONS),
+                    'title' => __('Left', OXI_FLIP_BOX_TEXTDOMAIN),
                     'icon' => 'fas fa-align-left',
                 ],
                 'center' => [
-                    'title' => __('Center', SHORTCODE_ADDOONS),
+                    'title' => __('Center', OXI_FLIP_BOX_TEXTDOMAIN),
                     'icon' => 'fas fa-align-center',
                 ],
                 'flex-end' => [
-                    'title' => __('Right', SHORTCODE_ADDOONS),
+                    'title' => __('Right', OXI_FLIP_BOX_TEXTDOMAIN),
                     'icon' => 'fas fa-align-right',
                 ],
             ],
@@ -370,7 +369,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_responsive_control(
                 'sa-flip-boxex-front-icon-width', $this->style, [
-            'label' => __('Width', SHORTCODE_ADDOONS),
+            'label' => __('Width', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -400,7 +399,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_responsive_control(
                 'sa-flip-boxex-front-icon-size', $this->style, [
-            'label' => __('Icon Size', SHORTCODE_ADDOONS),
+            'label' => __('Icon Size', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
@@ -439,7 +438,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_control(
                 'sa-flip-boxex-front-icon-color', $this->style, [
-            'label' => __('Color', SHORTCODE_ADDOONS),
+            'label' => __('Color', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -458,7 +457,7 @@ class Style21 extends Admin_Render {
 
         $this->add_responsive_control(
                 'sa-flip-boxes-front-icon-border-radius', $this->style, [
-            'label' => __('Border Radius', SHORTCODE_ADDOONS),
+            'label' => __('Border Radius', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -488,7 +487,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_responsive_control(
                 'sa-flip-boxes-front-icon-margin', $this->style, [
-            'label' => __('Margin', SHORTCODE_ADDOONS),
+            'label' => __('Margin', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -522,14 +521,14 @@ class Style21 extends Admin_Render {
         $this->start_section_devider();
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Heading Settings', SHORTCODE_ADDOONS),
+            'label' => esc_html__('Heading Settings', OXI_FLIP_BOX_TEXTDOMAIN),
             'showing' => TRUE,
                 ]
         );
 
         $this->add_control(
                 'sa-image-box-heading-color', $this->style, [
-            'label' => __('Color', SHORTCODE_ADDOONS),
+            'label' => __('Color', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -556,7 +555,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_responsive_control(
                 'sa-image-box-heading-padding', $this->style, [
-            'label' => __('Padding', SHORTCODE_ADDOONS),
+            'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -601,7 +600,7 @@ class Style21 extends Admin_Render {
         $this->start_section_devider();
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Content Settings', SHORTCODE_ADDOONS),
+            'label' => esc_html__('Content Settings', OXI_FLIP_BOX_TEXTDOMAIN),
             'showing' => TRUE,
                 ]
         );
@@ -625,7 +624,7 @@ class Style21 extends Admin_Render {
 
         $this->add_responsive_control(
                 'sa-flip-boxes-back-padding', $this->style, [
-            'label' => __('Padding', SHORTCODE_ADDOONS),
+            'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -656,14 +655,14 @@ class Style21 extends Admin_Render {
         $this->end_controls_section();
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Short Description', SHORTCODE_ADDOONS),
+            'label' => esc_html__('Short Description', OXI_FLIP_BOX_TEXTDOMAIN),
             'showing' => TRUE,
                 ]
         );
 
         $this->add_control(
                 'sa-image-box-short-description-color', $this->style, [
-            'label' => __('Color', SHORTCODE_ADDOONS),
+            'label' => __('Color', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -690,7 +689,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_responsive_control(
                 'sa-image-box-short-description-padding', $this->style, [
-            'label' => __('Padding', SHORTCODE_ADDOONS),
+            'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -723,7 +722,7 @@ class Style21 extends Admin_Render {
         $this->start_section_devider();
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Button Typography', SHORTCODE_ADDOONS),
+            'label' => esc_html__('Button Typography', OXI_FLIP_BOX_TEXTDOMAIN),
             'showing' => TRUE,
                 ]
         );
@@ -750,7 +749,7 @@ class Style21 extends Admin_Render {
 
         $this->add_responsive_control(
                 'sa-flip-box-backend-button-padding', $this->style, [
-            'label' => __('Padding', SHORTCODE_ADDOONS),
+            'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -780,7 +779,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_responsive_control(
                 'sa-flip-box-backend-button-margin', $this->style, [
-            'label' => __('Margin', SHORTCODE_ADDOONS),
+            'label' => __('Margin', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -810,7 +809,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_control(
                 'sa-flip-boxes-backend-button-separetor', $this->style, [
-            'label' => __('', SHORTCODE_ADDOONS),
+            'label' => __('', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::SEPARATOR,
             Controls::SEPARATOR => TRUE
                 ]
@@ -818,15 +817,15 @@ class Style21 extends Admin_Render {
         $this->start_controls_tabs(
                 'shortcode-addons-start-tabs', [
             'options' => [
-                'normal' => esc_html__('Normal', SHORTCODE_ADDOONS),
-                'hover' => esc_html__('Hover', SHORTCODE_ADDOONS),
+                'normal' => esc_html__('Normal', OXI_FLIP_BOX_TEXTDOMAIN),
+                'hover' => esc_html__('Hover', OXI_FLIP_BOX_TEXTDOMAIN),
             ]
                 ]
         );
         $this->start_controls_tab();
         $this->add_control(
                 'sa-flip-boxes-backend-button-bg', $this->style, [
-            'label' => __('Background', SHORTCODE_ADDOONS),
+            'label' => __('Background', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
             'default' => 'rgba(255, 255, 255, 1)',
@@ -837,7 +836,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_control(
                 'sa-flip-boxes-backend-button-color', $this->style, [
-            'label' => __('Color', SHORTCODE_ADDOONS),
+            'label' => __('Color', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#e68a00',
             'selector' => [
@@ -855,7 +854,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_responsive_control(
                 'sa-flip-box-backend-button-border-radius', $this->style, [
-            'label' => __('Border Radius', SHORTCODE_ADDOONS),
+            'label' => __('Border Radius', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -890,7 +889,7 @@ class Style21 extends Admin_Render {
         $this->start_controls_tab();
         $this->add_control(
                 'sa-flip-boxes-backend-hover-button-bg', $this->style, [
-            'label' => __('Background', SHORTCODE_ADDOONS),
+            'label' => __('Background', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
             'default' => 'rgba(135, 91, 11, 1)',
@@ -901,7 +900,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_control(
                 'sa-flip-boxes-backend-hover-button-color', $this->style, [
-            'label' => __('Color', SHORTCODE_ADDOONS),
+            'label' => __('Color', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'default' => '#ffffff',
             'selector' => [
@@ -919,7 +918,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_responsive_control(
                 'sa-flip-box-backend-button-hover-border-radius', $this->style, [
-            'label' => __('Border Radius', SHORTCODE_ADDOONS),
+            'label' => __('Border Radius', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
@@ -1006,7 +1005,7 @@ class Style21 extends Admin_Render {
         );
         $this->add_control(
                 'sa_flip_boxes_overlay_color', $this->style, [
-            'label' => __('Overlay Background', SHORTCODE_ADDOONS),
+            'label' => __('Overlay Background', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::GRADIENT,
             'default' => 'rgba(255, 255, 255, 0)',
                 ]

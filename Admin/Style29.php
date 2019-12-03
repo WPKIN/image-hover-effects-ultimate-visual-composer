@@ -10,7 +10,7 @@ namespace OXI_FLIP_BOX_PLUGINS\Admin;
 use OXI_FLIP_BOX_PLUGINS\Page\Admin_Render;
 use OXI_FLIP_BOX_PLUGINS\Classes\Controls as Controls;
 
-class Style18 extends Admin_Render {
+class Style29 extends Admin_Render {
 
      public function register_controls() {
 
@@ -44,11 +44,11 @@ class Style18 extends Admin_Render {
             'type' => Controls::COLUMN,
             'loader' => TRUE,
             'selector' => [
-                '{{WRAPPER}} .oxi-flip-box-col-style-18' => '',
+                '{{WRAPPER}} .oxi-flip-box-col-style-29' => '',
             ]
                 ]
         );
-     
+        
         $this->add_control(
                 'sa-ac-flip_boxes_flip_direction', $this->style, [
             'label' => __('Flip Direction', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -93,7 +93,7 @@ class Style18 extends Admin_Render {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 *' => 'transition: all {{SIZE}}s ease-in-out !important;',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 *' => 'transition: all {{SIZE}}s ease-in-out !important;',
             ],
                 ]
         );
@@ -102,7 +102,7 @@ class Style18 extends Admin_Render {
             'type' => Controls::ANIMATION,
             'separator' => TRUE,
             'selector' => [
-                '{{WRAPPER}} .oxi-flip-box-col-style-18' => '',
+                '{{WRAPPER}} .oxi-flip-box-col-style-29' => '',
             ]
                 ]
         );
@@ -136,10 +136,15 @@ class Style18 extends Admin_Render {
                     'min' => 0,
                     'max' => 100,
                     'step' => 1,
-                ]
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 200,
+                    'step' => 0.1,
+                ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18' => 'max-width:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29' => 'max-width:{{SIZE}}{{UNIT}};',
             ],
                 ]
         );
@@ -149,7 +154,7 @@ class Style18 extends Admin_Render {
             'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
-                'size' => 320,
+                'size' => 300,
             ],
             'range' => [
                 'px' => [
@@ -162,9 +167,14 @@ class Style18 extends Admin_Render {
                     'max' => 100,
                     'step' => 1,
                 ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 200,
+                    'step' => 0.1,
+                ],
             ],
             'selector' => [
-                  '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-boxes-body:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-boxes-body:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
             ],
                 ]
         );
@@ -187,13 +197,18 @@ class Style18 extends Admin_Render {
                     'min' => 0,
                     'max' => 100,
                     'step' => 1,
-                ]
+                ],
+                'em' => [
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 0.1,
+                ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-front-style-1' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-front-section' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-style-1' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-section' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-style-1' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-section' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-style-1' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-section' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
                 ]
         );
@@ -219,12 +234,12 @@ class Style18 extends Admin_Render {
                 ],
                 'em' => [
                     'min' => 0,
-                    'max' => 200,
-                    'step' => .1,
+                    'max' => 100,
+                    'step' => 0.1,
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-flip-box-col-style-29' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
                 ]
         );
@@ -243,7 +258,7 @@ class Style18 extends Admin_Render {
                 'sa-flip-boxes-boxshadow', $this->style, [
             'type' => Controls::BOXSHADOW,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-front-section' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-section' => '',
             ]
                 ]
         );
@@ -253,7 +268,7 @@ class Style18 extends Admin_Render {
                 'sa-flip-boxes-hover-boxshadow', $this->style, [
             'type' => Controls::BOXSHADOW,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-section' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-section' => '',
             ]
                 ]
         );
@@ -287,7 +302,7 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-front-background', $this->style, [
             'type' => Controls::BACKGROUND,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-front-section' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-section' => '',
             ]
                 ]
         );
@@ -296,19 +311,25 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-front-border', $this->style, [
             'type' => Controls::BORDER,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-front-section' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-section' => '',
             ]
                 ]
         );
 
-        
+        $this->end_controls_section();
+        $this->start_controls_section(
+                'shortcode-addons', [
+            'label' => esc_html__('Image Settings', OXI_FLIP_BOX_TEXTDOMAIN),
+            'showing' => TRUE,
+                ]
+        );
         $this->add_responsive_control(
-                'sa-ib-content-font-box-margin', $this->style, [
-            'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
-            'type' => Controls::DIMENSIONS,
+                'sa-flip-boxes-front-icon-width', $this->style, [
+            'label' => __('Height', OXI_FLIP_BOX_TEXTDOMAIN),
+            'type' => Controls::SLIDER,
             'default' => [
                 'unit' => 'px',
-                'size' => '',
+                'size' => 430,
             ],
             'range' => [
                 'px' => [
@@ -323,54 +344,12 @@ class Style18 extends Admin_Render {
                 ],
                 'em' => [
                     'min' => 0,
-                    'max' => 10,
-                    'step' => .1,
-                ],
-            ],
-            'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-front-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-            ]
-                ]
-        );
-        $this->end_controls_section();
-        $this->start_controls_section(
-                'shortcode-addons', [
-            'label' => esc_html__('Image Settings', OXI_FLIP_BOX_TEXTDOMAIN),
-            'showing' => TRUE,
-                ]
-        );
-        $this->add_responsive_control(
-                'sa-flip-boxes-front-image-height', $this->style, [
-            'label' => __('Height', OXI_FLIP_BOX_TEXTDOMAIN),
-            'type' => Controls::SLIDER,
-            'default' => [
-                'unit' => 'px',
-                'size' => 265,
-            ],
-            'range' => [
-                'px' => [
-                    'min' => 0,
-                    'max' => 2000,
-                    'step' => 1,
-                ],
-                '%' => [
-                    'min' => 0,
-                    'max' => 200,
-                    'step' => .1,
-                ],
-                'em' => [
-                    'min' => 0,
-                    'max' => 200,
-                    'step' => .1,
-                ],
-                'rem' => [
-                    'min' => 1,
                     'max' => 200,
                     'step' => 0.1,
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-front-img::after' => 'padding-bottom:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-img::after' => 'padding-bottom:{{SIZE}}{{UNIT}};',
              ],
                 ]
         );
@@ -390,9 +369,9 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-front-heading-color', $this->style, [
             'label' => __('Color', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
-            'default' => '#787878',
+            'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-front-headding' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-headding' => 'color: {{VALUE}};',
             ]
                 ]
         );
@@ -401,7 +380,7 @@ class Style18 extends Admin_Render {
             'type' => Controls::TYPOGRAPHY,
             'include' => Controls::ALIGNNORMAL,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-front-headding' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-headding' => '',
             ]
                 ]
         );
@@ -409,7 +388,7 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-front-heading-shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-front-headding' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-headding' => '',
             ]
                 ]
         );
@@ -419,27 +398,27 @@ class Style18 extends Admin_Render {
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
-                'size' => 0,
+                'size' => '',
             ],
             'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
                 '%' => [
                     'min' => 0,
-                    'max' => 50,
-                    'step' => .1,
-                ],
-                'px' => [
-                    'min' => -200,
-                    'max' => 200,
+                    'max' => 100,
                     'step' => 1,
                 ],
                 'em' => [
                     'min' => 0,
-                    'max' => 10,
-                    'step' => .1,
+                    'max' => 200,
+                    'step' => 0.1,
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-front-headding' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-headding' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ]
                 ]
         );
@@ -469,7 +448,7 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-back-background', $this->style, [
             'type' => Controls::BACKGROUND,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-section' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-section' => '',
             ]
                 ]
         );
@@ -478,7 +457,7 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-back-border', $this->style, [
             'type' => Controls::BORDER,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-section' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-section' => '',
             ]
                 ]
         );
@@ -489,7 +468,7 @@ class Style18 extends Admin_Render {
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
-                'size' => 0,
+                'size' => '',
             ],
             'range' => [
                 'px' => [
@@ -502,15 +481,14 @@ class Style18 extends Admin_Render {
                     'max' => 100,
                     'step' => 1,
                 ],
-                
                 'em' => [
                     'min' => 0,
-                    'max' => 100,
-                    'step' => .1,
+                    'max' => 200,
+                    'step' => 0.1,
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-section' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ]
                 ]
         );
@@ -527,9 +505,9 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-back-heading-color', $this->style, [
             'label' => __('Color', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
-            'default' => '#787878',
+            'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-headding' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-headding' => 'color: {{VALUE}};',
             ]
                 ]
         );
@@ -538,7 +516,7 @@ class Style18 extends Admin_Render {
             'type' => Controls::TYPOGRAPHY,
             'include' => Controls::ALIGNNORMAL,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-headding' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-headding' => '',
             ]
                 ]
         );
@@ -546,7 +524,7 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-back-heading-tx-shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-headding' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-headding' => '',
             ]
                 ]
         );
@@ -556,27 +534,27 @@ class Style18 extends Admin_Render {
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
-                'size' => 0,
+                'size' => '',
             ],
             'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
                 '%' => [
                     'min' => 0,
-                    'max' => 50,
-                    'step' => .1,
-                ],
-                'px' => [
-                    'min' => -200,
-                    'max' => 200,
+                    'max' => 100,
                     'step' => 1,
                 ],
                 'em' => [
                     'min' => 0,
-                    'max' => 10,
-                    'step' => .1,
+                    'max' => 200,
+                    'step' => 0.1,
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-headding' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-headding' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ]
                 ]
         );
@@ -593,9 +571,9 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-back-short-description-color', $this->style, [
             'label' => __('Color', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
-            'default' => '#787878',
+            'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-info' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-info' => 'color: {{VALUE}};',
             ]
                 ]
         );
@@ -604,7 +582,7 @@ class Style18 extends Admin_Render {
             'type' => Controls::TYPOGRAPHY,
             'include' => Controls::ALIGNNORMAL,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-info' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-info' => '',
             ]
                 ]
         );
@@ -612,7 +590,7 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-back-short-description-tx-shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-info' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-info' => '',
             ]
                 ]
         );
@@ -622,27 +600,27 @@ class Style18 extends Admin_Render {
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
-                'size' => 0,
+                'size' => '',
             ],
             'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
                 '%' => [
                     'min' => 0,
-                    'max' => 50,
-                    'step' => .1,
-                ],
-                'px' => [
-                    'min' => -200,
-                    'max' => 200,
+                    'max' => 100,
                     'step' => 1,
                 ],
                 'em' => [
                     'min' => 0,
-                    'max' => 10,
-                    'step' => .1,
+                    'max' => 200,
+                    'step' => 0.1,
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-info' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-info' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ]
                 ]
         );
@@ -659,10 +637,8 @@ class Style18 extends Admin_Render {
         $this->add_group_control(
                 'sa-flip-box-backend-button-typho', $this->style, [
             'type' => Controls::TYPOGRAPHY,
-            'include' => Controls::ALIGNNORMAL,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => '',
-                 '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => '',
             ]
                 ]
         );
@@ -671,8 +647,33 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-backend-button-shadow', $this->style, [
             'type' => Controls::TEXTSHADOW,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => '',
             ]
+                ]
+        );
+        $this->add_control(
+                'sa-flip-box-backend-button_alignment', $this->style, [
+            'label' => __('Alignment', OXI_FLIP_BOX_TEXTDOMAIN),
+            'type' => Controls::CHOOSE,
+            'operator' => Controls::OPERATOR_ICON,
+            'default' => 'center',
+            'options' => [
+                'left' => [
+                    'title' => __('Left', OXI_FLIP_BOX_TEXTDOMAIN),
+                    'icon' => 'fas fa-align-left',
+                ],
+                'center' => [
+                    'title' => __('Center', OXI_FLIP_BOX_TEXTDOMAIN),
+                    'icon' => 'fas fa-align-center',
+                ],
+                'right' => [
+                    'title' => __('Right', OXI_FLIP_BOX_TEXTDOMAIN),
+                    'icon' => 'fas fa-align-right',
+                ],
+            ],
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button' => 'text-align: {{VALUE}};'
+            ],
                 ]
         );
 
@@ -682,27 +683,27 @@ class Style18 extends Admin_Render {
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
-                'size' => 0,
+                'size' => '',
             ],
             'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
                 '%' => [
                     'min' => 0,
-                    'max' => 50,
-                    'step' => .1,
-                ],
-                'px' => [
-                    'min' => -200,
-                    'max' => 200,
+                    'max' => 100,
                     'step' => 1,
                 ],
                 'em' => [
                     'min' => 0,
-                    'max' => 10,
-                    'step' => .1,
+                    'max' => 100,
+                    'step' => 0.1,
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ]
                 ]
         );
@@ -712,27 +713,27 @@ class Style18 extends Admin_Render {
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
-                'size' => 0,
+                'size' => '',
             ],
             'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
                 '%' => [
                     'min' => 0,
-                    'max' => 50,
-                    'step' => .1,
-                ],
-                'px' => [
-                    'min' => -200,
-                    'max' => 200,
+                    'max' => 100,
                     'step' => 1,
                 ],
                 'em' => [
                     'min' => 0,
-                    'max' => 10,
-                    'step' => .1,
+                    'max' => 100,
+                    'step' => 0.1,
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button' => 'padding:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ]
                 ]
         );
@@ -757,9 +758,9 @@ class Style18 extends Admin_Render {
             'label' => __('Background', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
-            'default' => '#787878',
+            'default' => 'rgba(255, 255, 255, 1)',
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'background: {{VALUE}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'background: {{VALUE}};',
             ]
                 ]
         );
@@ -767,9 +768,9 @@ class Style18 extends Admin_Render {
                 'sa-flip-boxes-backend-button-color', $this->style, [
             'label' => __('Color', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
-            'default' => '#787878',
+            'default' => '#8f0707',
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'color: {{VALUE}};',
             ]
                 ]
         );
@@ -777,7 +778,7 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-back-button-border', $this->style, [
             'type' => Controls::BORDER,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => '',
             ]
                 ]
         );
@@ -787,27 +788,27 @@ class Style18 extends Admin_Render {
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
-                'size' => 0,
+                'size' => '',
             ],
             'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
                 '%' => [
                     'min' => 0,
-                    'max' => 50,
-                    'step' => .1,
-                ],
-                'px' => [
-                    'min' => -200,
-                    'max' => 200,
+                    'max' => 100,
                     'step' => 1,
                 ],
                 'em' => [
                     'min' => 0,
-                    'max' => 10,
-                    'step' => .1,
+                    'max' => 100,
+                    'step' => 0.1,
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ]
                 ]
         );
@@ -821,9 +822,9 @@ class Style18 extends Admin_Render {
             'label' => __('Background', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
             'oparetor' => 'RGB',
-            'default' => '#787878',
+            'default' => 'rgba(97, 10, 5, 1)',
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => 'background: {{VALUE}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => 'background: {{VALUE}};',
             ]
                 ]
         );
@@ -831,9 +832,9 @@ class Style18 extends Admin_Render {
                 'sa-flip-boxes-backend-hover-button-color', $this->style, [
             'label' => __('Color', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::COLOR,
-            'default' => '#787878',
+            'default' => '#ffffff',
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => 'color: {{VALUE}};',
             ]
                 ]
         );
@@ -841,7 +842,7 @@ class Style18 extends Admin_Render {
                 'sa-flip-box-back-button-hover-border', $this->style, [
             'type' => Controls::BORDER,
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => '',
             ]
                 ]
         );
@@ -851,36 +852,32 @@ class Style18 extends Admin_Render {
             'type' => Controls::DIMENSIONS,
             'default' => [
                 'unit' => 'px',
-                'size' => 0,
+                'size' => '',
             ],
             'range' => [
+                'px' => [
+                    'min' => 0,
+                    'max' => 500,
+                    'step' => 1,
+                ],
                 '%' => [
                     'min' => 0,
-                    'max' => 50,
-                    'step' => .1,
-                ],
-                'px' => [
-                    'min' => -200,
-                    'max' => 200,
+                    'max' => 100,
                     'step' => 1,
                 ],
                 'em' => [
                     'min' => 0,
-                    'max' => 10,
-                    'step' => .1,
+                    'max' => 100,
+                    'step' => 0.1,
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-18 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data:hover' => 'border-radius:{{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ]
                 ]
         );
 
-
         $this->end_controls_tab();
-
-
-
         $this->end_controls_tabs();
         $this->end_controls_section();
         $this->end_section_devider();
@@ -920,7 +917,7 @@ class Style18 extends Admin_Render {
             'placeholder' => 'Heading',
                 ]
         );
-        $this->add_group_control(
+         $this->add_group_control(
                 'sa_flip_boxes_media', $this->style, [
             'label' => __('URL', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::MEDIA,
@@ -930,6 +927,7 @@ class Style18 extends Admin_Render {
             ]
                 ]
         );
+       
         $this->end_controls_tab();
         $this->start_controls_tab();
          $this->add_control(

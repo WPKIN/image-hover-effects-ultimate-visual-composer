@@ -168,7 +168,6 @@ class Style3 extends Admin_Render {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-3' => 'height:{{SIZE}}{{UNIT}};',
                 '{{WRAPPER}} .oxi-addons-flip-box-style-3 .oxi-addons-flip-boxes-body:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
             ],
                 ]
@@ -833,7 +832,6 @@ class Style3 extends Admin_Render {
 
         echo '</div>';
     }
-
 
     /**
      * Template Parent Item Data Rearrange

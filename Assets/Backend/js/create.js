@@ -2,7 +2,7 @@ jQuery.noConflict();
 (function ($) {
     var styleid = '';
     var childid = '';
-    function Oxi_Tabs_Admin_Create(functionname, rawdata, styleid, childid, callback) {
+    function Oxi_Flip_Admin_Create(functionname, rawdata, styleid, childid, callback) {
         if (functionname !== "") {
             $.ajax({
                 url: oxi_flip_box_editor.ajaxurl,
@@ -24,19 +24,25 @@ jQuery.noConflict();
     jQuery(".oxi-addons-addons-template-create").on("click", function (e) {
         e.preventDefault();
         $('#addons-style-name').val('');
-        $('#oxistyledata').val($('#' + $(this).attr('addons-data')).val())
+        $('#oxistyledata').val($(this).attr('addons-data'));
         jQuery("#oxi-addons-style-create-modal").modal("show");
     });
 
     jQuery("#oxi-addons-style-modal-form").submit(function (e) {
         e.preventDefault();
-        var rawdata = $(this).serialize();
-        var functionname = "create_tabs";
+        $a = $('#oxistyledata').val() + "-" + $("input[name='flip-box-layouts']:checked").val();
+        var data = {
+            name: $('#addons-style-name').val(),
+            style: JSON.parse($('#' + $a).val()),
+        }
+        
+        var rawdata = JSON.stringify(data);
+        var functionname = "create_flip";
         $('.modal-footer').prepend('<span class="spinner sa-spinner-open-left"></span>');
-        Oxi_Tabs_Admin_Create(functionname, rawdata, styleid, childid, function (callback) {
+        Oxi_Flip_Admin_Create(functionname, rawdata, styleid, childid, function (callback) {
             console.log(callback);
             setTimeout(function () {
-                document.location.href = callback;
+                 document.location.href = callback;
             }, 1000);
         });
     });
@@ -47,7 +53,7 @@ jQuery.noConflict();
         var rawdata = $This.serialize();
         var functionname = "shortcode_deactive";
         $(this).append('<span class="spinner sa-spinner-open"></span>');
-        Oxi_Tabs_Admin_Create(functionname, rawdata, styleid, childid, function (callback) {
+        Oxi_Flip_Admin_Create(functionname, rawdata, styleid, childid, function (callback) {
             console.log(callback);
             setTimeout(function () {
                 if (callback === "done") {

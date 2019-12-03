@@ -168,7 +168,6 @@ class Style4 extends Admin_Render {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-4' => 'height:{{SIZE}}{{UNIT}};',
                 '{{WRAPPER}} .oxi-addons-flip-box-style-4 .oxi-addons-flip-boxes-body:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
             ],
                 ]
@@ -298,7 +297,7 @@ class Style4 extends Admin_Render {
             ]
                 ]
         );
-       
+
         $this->add_group_control(
                 'sa-flip-box-front-border', $this->style, [
             'type' => Controls::BORDER,
@@ -308,7 +307,7 @@ class Style4 extends Admin_Render {
                 ]
         );
 
-        
+
         $this->add_responsive_control(
                 'sa-ib-content-font-box-margin', $this->style, [
             'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -373,7 +372,7 @@ class Style4 extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-addons-flip-box-style-4 .oxi-addons-flip-box-front-icon .oxi-icons' => 'width:{{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
-             ],
+            ],
                 ]
         );
         $this->add_control(
@@ -522,7 +521,7 @@ class Style4 extends Admin_Render {
             ]
                 ]
         );
-        
+
         $this->add_responsive_control(
                 'sa-flip-box-front-heading-padding', $this->style, [
             'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -588,7 +587,7 @@ class Style4 extends Admin_Render {
             ]
                 ]
         );
-        
+
         $this->add_responsive_control(
                 'sa-flip-box-front-info-padding', $this->style, [
             'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -648,7 +647,7 @@ class Style4 extends Admin_Render {
             ]
                 ]
         );
-        
+
         $this->add_group_control(
                 'sa-flip-box-back-border', $this->style, [
             'type' => Controls::BORDER,
@@ -677,7 +676,6 @@ class Style4 extends Admin_Render {
                     'max' => 100,
                     'step' => 1,
                 ],
-                
                 'em' => [
                     'min' => 0,
                     'max' => 100,
@@ -689,7 +687,7 @@ class Style4 extends Admin_Render {
             ]
                 ]
         );
-      
+
         $this->end_controls_section();
         $this->start_controls_section(
                 'shortcode-addons', [
@@ -725,7 +723,7 @@ class Style4 extends Admin_Render {
             ]
                 ]
         );
-        
+
         $this->add_responsive_control(
                 'sa-flip-box-back-heading-padding', $this->style, [
             'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -791,7 +789,7 @@ class Style4 extends Admin_Render {
             ]
                 ]
         );
-        
+
         $this->add_responsive_control(
                 'sa-flip-box-back-short-description-padding', $this->style, [
             'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -850,7 +848,7 @@ class Style4 extends Admin_Render {
             ]
                 ]
         );
-       
+
 
         $this->add_responsive_control(
                 'sa-flip-box-backend-button-padding', $this->style, [
