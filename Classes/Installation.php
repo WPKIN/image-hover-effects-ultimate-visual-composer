@@ -42,7 +42,7 @@ class Installation {
     public function Tabs_Menu() {
         $response = !empty(get_transient(self::ADMINMENU)) ? get_transient(self::ADMINMENU) : [];
         if (!array_key_exists('Flip Box', $response)):
-             $response['Flip Box']['Flip Box'] = [
+            $response['Flip Box']['Flip Box'] = [
                 'name' => 'Flip Box',
                 'homepage' => 'oxi-flip-box-ultimate'
             ];
@@ -69,6 +69,8 @@ class Installation {
     public function Tabs_Menu_Deactive() {
         delete_transient(self::ADMINMENU);
     }
+    
+    
 
     public function Tabs_Datatase() {
         global $wpdb;
@@ -81,7 +83,9 @@ class Installation {
                 name varchar(50) NOT NULL,
                 type varchar(50) NOT NULL,
                 style_name varchar(40) NOT NULL,
-                css text,
+                rawdata longtext,
+                stylesheet longtext,
+                font_family text,
 		PRIMARY KEY  (id)
 	) $charset_collate;";
 
@@ -89,14 +93,14 @@ class Installation {
 		id mediumint(5) NOT NULL AUTO_INCREMENT,
                 styleid mediumint(6) NOT NULL,
                 type varchar(50),
-                files text,
-                css text,
+                rawdata text,
+                stylesheet text,
 		PRIMARY KEY  (id)
 	) $charset_collate;";
         $sql3 = "CREATE TABLE $table_import (
 		id mediumint(5) NOT NULL AUTO_INCREMENT,
-                type varchar(50) NOT NULL,
-                name varchar(30) NOT NULL,                
+                type varchar(100) NOT NULL,
+                name varchar(50) NOT NULL,                
 		PRIMARY KEY  (id),
                 UNIQUE unique_index (type, name)
 	) $charset_collate;";
