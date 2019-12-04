@@ -64,12 +64,17 @@ class Admin_Ajax {
         if (!empty($styleid)):
             $styleid = (int) $styleid;
             $newdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
-            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, type, style_name, css) VALUES ( %s, %s, %s, %s)", array($data, 'flip', $newdata['style_name'], $newdata['css'])));
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, type, style_name, rawdata) VALUES ( %s, %s, %s, %s)", array($data, 'flip', $newdata['style_name'], $newdata['rawdata'])));
             $redirect_id = $this->wpdb->insert_id;
             if ($redirect_id > 0):
+                $raw = json_decode(stripslashes($newdata['rawdata']), true);
+                $raw['oxi-addons-flip-elements-id'] = $redirect_id;
+                $cls = '\OXI_FLIP_BOX_PLUGINS\Admin\\' . ucfirst($newdata['style_name']) . '';
+                $CLASS = new $cls('admin');
+                $f = $CLASS->template_css_render($raw);
                 $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
                 foreach ($child as $value) {
-                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, files, css) VALUES (%d, %s, %s)", array($redirect_id, $value['files'], $value['css'])));
+                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, type, rawdata) VALUES (%d, %s, %s)", array($redirect_id, 'flip', $value['rawdata'])));
                 }
                 echo admin_url("admin.php?page=oxi-flip-box-ultimate-new&styleid=$redirect_id");
             endif;

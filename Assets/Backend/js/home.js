@@ -48,7 +48,7 @@ jQuery.noConflict();
         e.preventDefault();
         var rawdata = $('#addons-style-name').val();
         var styleid = $('#oxistyleid').val();
-        var functionname = "create_tabs";
+        var functionname = "create_flip";
         $('.modal-footer').prepend('<span class="spinner sa-spinner-open-left"></span>');
         Oxi_Flip_Admin_Home(functionname, rawdata, styleid, childid, function (callback) {
             console.log(callback);
