@@ -163,7 +163,7 @@ trait Admin_helper {
             $first_key = 'manage_options';
         }
         add_menu_page('Flip Box', 'Flip Box', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Flip Box', 'Content Tabs', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
+        add_submenu_page('oxi-flip-box-ultimate', 'Flip Box', 'Flip Box Ultimate', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
         add_submenu_page('oxi-flip-box-ultimate', 'Create New', 'Create New', $first_key, 'oxi-flip-box-ultimate-new', [$this, 'Flip_Create']);
         add_submenu_page('oxi-flip-box-ultimate', 'Import Templates', 'Import Templates', $first_key, 'oxi-flip-box-ultimate-import', [$this, 'Flip_Import']);
         add_submenu_page('oxi-flip-box-ultimate', 'Oxilab Addons', 'Oxilab Addons', $first_key, 'oxi-flip-box-ultimate-addons', [$this, 'Flip_Addons']);
