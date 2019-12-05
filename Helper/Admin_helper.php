@@ -96,7 +96,7 @@ trait Admin_helper {
             ];
             set_transient(self::ADMINMENU, $response, 10 * DAY_IN_SECONDS);
         endif;
-        $bgimage = OXI_FLIP_BOX_URL . 'Assets/Image/sa-logo.png';
+        $bgimage = OXI_FLIP_BOX_URL . 'image/sa-logo.png';
         $sub = '';
 
         $menu = '<div class="oxi-addons-wrapper">
@@ -143,7 +143,7 @@ trait Admin_helper {
                                ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://www.oxilab.org/downloads/flipbox-image-overlay/">Upgrade</a></li>' : '') . '
                                <li class="saadmin-doc"><a target="_black" href="https://www.oxilab.org/docs/flipbox-image-overlay/getting-started/installing-for-the-first-time/">Docs</a></li>
                                <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">Support</a></li>
-                               <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-tabs-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
+                               <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-flip-box-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
                             </ul>
                         </nav>
                     </div>

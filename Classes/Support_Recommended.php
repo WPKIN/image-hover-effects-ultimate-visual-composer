@@ -43,9 +43,9 @@ class Support_Recommended {
         endif;
         if (!empty($plugin)):
             if ($plugin == 'sb-image-hover-effects'):
-                $massage = '<p>Thank you for using <strong>Elementor Page Builder</strong>. We suggest you to use our <a href="https://wordpress.org/support/plugin/vc-tabs#new-post">Elementor Addons</a> - Premuim Elementor Addons comes with 100+ Elements and Elementor Template Library. Header Footer Builder and Menu Builder also Included with this Mega Addons</p>';
+                $massage = '<p>Thank you for using <strong>Elementor Page Builder</strong>. We suggest you to use our <a href="https://wordpress.org/plugins/sb-image-hover-effects/">Elementor Addons</a> - Premuim Elementor Addons comes with 100+ Elements and Elementor Template Library. Header Footer Builder and Menu Builder also Included with this Mega Addons</p>';
             else:
-                $massage = '<p>Thank you for using my Responsive Tabs with Accordions.  We suggest you to use our <a href="https://wordpress.org/support/plugin/vc-tabs#new-post">Shortcode Addons</a>, The most Easiest Shortcode Builder with 70+ Elements. Create your wonderful website with most Flexible, Creative and Mordern Elements .</p>';
+                $massage = '<p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay.  We suggest you to use our <a href="https://wordpress.org/plugins/shortcode-addons/">Shortcode Addons</a>, The most Easiest Shortcode Builder with 70+ Elements. Create your wonderful website with most Flexible, Creative and Mordern Elements .</p>';
             endif;
             $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
             echo '<div class="oxi-addons-admin-notifications" style=" width: auto;">
@@ -57,7 +57,7 @@ class Support_Recommended {
                         <div class="oxi-addons-admin-notifications-holder">
                             <div class="oxi-addons-admin-notifications-alert">
                                 ' . $massage . '
-                                <p>' . sprintf('<a href="%s" class="button button-large button-primary">%s</a>', $install_url, __('Install Now', OXI_FLIP_BOX_TEXTDOMAIN)) . ' &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-tabs-admin-recommended-dismiss">No, Thanks</a></p>
+                                <p>' . sprintf('<a href="%s" class="button button-large button-primary">%s</a>', $install_url, __('Install Now', OXI_FLIP_BOX_TEXTDOMAIN)) . ' &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-flip-admin-recommended-dismiss">No, Thanks</a></p>
                             </div>                     
                         </div>
                         <p></p>
@@ -71,7 +71,7 @@ class Support_Recommended {
      */
     public function admin_enqueue_scripts() {
         wp_enqueue_script("jquery");
-        wp_enqueue_style('oxilab_tabs-admin-notice-css', OXI_FLIP_BOX_URL . '/Assets/Backend/css/notice.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('oxilab_flip-admin-notice-css', OXI_FLIP_BOX_URL . '/Assets/Backend/css/notice.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         $this->dismiss_button_scripts();
     }
 
@@ -80,8 +80,8 @@ class Support_Recommended {
      * @return void
      */
     public function dismiss_button_scripts() {
-        wp_enqueue_script('oxi_tabs-admin-recommended', OXI_FLIP_BOX_URL . '/Assets/Backend/js/admin-recommended.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_localize_script('oxi_tabs-admin-recommended', 'oxi_tabs_admin_recommended', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_tabs_admin_recommended')));
+        wp_enqueue_script('oxi_flip-admin-recommended', OXI_FLIP_BOX_URL . '/Assets/Backend/js/admin-recommended.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_localize_script('oxi_tabs-admin-recommended', 'oxi_flip_admin_recommended', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_flip_admin_recommended')));
     }
 
     /**
@@ -89,9 +89,9 @@ class Support_Recommended {
      * @return void
      */
     public function notice_dissmiss() {
-        if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_tabs_admin_recommended')):
+        if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_flip_admin_recommended')):
             $data = 'done';
-            update_option('responsive_tabs_with_accordions_recommended', $data);
+            update_option('oxilab_flip_box_recommended', $data);
             echo 'done';
         else:
             return;

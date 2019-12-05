@@ -2,15 +2,14 @@
 jQuery.noConflict();
 (function ($) {
     "use strict";
-    $(document).on("click", ".shortcode-addons-support-reviews", function (e) {
+    $(document).on("click", ".oxi-flip-support-reviews", function (e) {
         e.preventDefault();
-        alert("ok");
         $.ajax({
-            url: shortcode_addons_admin_notice.ajaxurl,
+            url: oxilab_flip_notice_dissmiss.ajaxurl,
             type: 'post',
             data: {
-                action: 'shortcode_addons_notice_dissmiss',
-                _wpnonce: shortcode_addons_admin_notice.nonce,
+                action: 'oxilab_flip_notice_dissmiss',
+                _wpnonce: oxilab_flip_notice_dissmiss.nonce,
                 notice: $(this).attr('sup-data'),
             },
             success: function (response) {
