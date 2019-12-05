@@ -44,13 +44,13 @@ class Style1 extends Public_Render {
                     </div>';
             }
             if ($value['sa_flip_boxes_button_text'] != '') {
-                $button = ' <a ' . $this->url_render('sa_flip_boxes_button_link', $value) . '">
-                                <div class="oxi-addons-flip-box-back-button">
+                $button = '<div class="oxi-addons-flip-box-back-button">
+                                <a ' . $this->url_render('sa_flip_boxes_button_link', $value) . '">
                                     <div class="oxi-addons-flip-box-back-button-data">
                                         ' . $this->text_render($value['sa_flip_boxes_button_text']) . '  
                                     </div>
-                                </div>
-                            </a>';
+                                </a>
+                                </div> ';
             } elseif ($this->url_render('sa_flip_boxes_button_link', $value) != '') {
                 $bt = '<a ' . $this->url_render('sa_flip_boxes_button_link', $value) . '">';
                 $bc = '</a>';

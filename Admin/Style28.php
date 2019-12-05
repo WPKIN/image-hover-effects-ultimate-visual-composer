@@ -92,7 +92,7 @@ class Style28 extends Admin_Render {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-28 *' => 'transition: all {{SIZE}}s ease-in-out !important;',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-28 *' => 'transition: all {{SIZE}}s;',
             ],
                 ]
         );
@@ -243,38 +243,6 @@ class Style28 extends Admin_Render {
                 ]
         );
 
-        $this->start_controls_tabs(
-                'shortcode-addons-start-tabs', [
-            'options' => [
-                'normal' => esc_html__('Normal', OXI_FLIP_BOX_TEXTDOMAIN),
-                'hover' => esc_html__('Hover', OXI_FLIP_BOX_TEXTDOMAIN),
-            ]
-                ]
-        );
-
-        $this->start_controls_tab();
-        $this->add_group_control(
-                'sa-flip-boxes-boxshadow', $this->style, [
-            'type' => Controls::BOXSHADOW,
-            'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-28 .oxi-addons-flip-box-front-section' => '',
-            ]
-                ]
-        );
-        $this->end_controls_tab();
-        $this->start_controls_tab();
-        $this->add_group_control(
-                'sa-flip-boxes-hover-boxshadow', $this->style, [
-            'type' => Controls::BOXSHADOW,
-            'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-28 .oxi-addons-flip-box-back-section' => '',
-            ]
-                ]
-        );
-        $this->end_controls_tab();
-        $this->end_controls_tabs();
-
-
 
         $this->end_controls_section();
 
@@ -314,7 +282,14 @@ class Style28 extends Admin_Render {
             ]
                 ]
         );
-
+        $this->add_group_control(
+                'sa-flip-boxes-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-28 .oxi-addons-flip-box-front-section' => '',
+            ]
+                ]
+        );
         
         $this->add_responsive_control(
                 'sa-ib-content-font-box-margin', $this->style, [
@@ -603,7 +578,14 @@ class Style28 extends Admin_Render {
             ]
                 ]
         );
-
+        $this->add_group_control(
+                'sa-flip-boxes-hover-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-28 .oxi-addons-flip-box-back-section' => '',
+            ]
+                ]
+        );
         $this->add_responsive_control(
                 'sa-flip-boxes-back-padding', $this->style, [
             'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),

@@ -12,7 +12,7 @@ use OXI_FLIP_BOX_PLUGINS\Classes\Controls as Controls;
 
 class Style29 extends Admin_Render {
 
-     public function register_controls() {
+    public function register_controls() {
 
         $this->start_section_header(
                 'shortcode-addons-start-tabs', [
@@ -48,7 +48,7 @@ class Style29 extends Admin_Render {
             ]
                 ]
         );
-        
+
         $this->add_control(
                 'sa-ac-flip_boxes_flip_direction', $this->style, [
             'label' => __('Flip Direction', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -93,7 +93,7 @@ class Style29 extends Admin_Render {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-29 *' => 'transition: all {{SIZE}}s ease-in-out !important;',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 *' => 'transition: all {{SIZE}}s;',
             ],
                 ]
         );
@@ -243,40 +243,6 @@ class Style29 extends Admin_Render {
             ],
                 ]
         );
-
-        $this->start_controls_tabs(
-                'shortcode-addons-start-tabs', [
-            'options' => [
-                'normal' => esc_html__('Normal', OXI_FLIP_BOX_TEXTDOMAIN),
-                'hover' => esc_html__('Hover', OXI_FLIP_BOX_TEXTDOMAIN),
-            ]
-                ]
-        );
-
-        $this->start_controls_tab();
-        $this->add_group_control(
-                'sa-flip-boxes-boxshadow', $this->style, [
-            'type' => Controls::BOXSHADOW,
-            'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-section' => '',
-            ]
-                ]
-        );
-        $this->end_controls_tab();
-        $this->start_controls_tab();
-        $this->add_group_control(
-                'sa-flip-boxes-hover-boxshadow', $this->style, [
-            'type' => Controls::BOXSHADOW,
-            'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-section' => '',
-            ]
-                ]
-        );
-        $this->end_controls_tab();
-        $this->end_controls_tabs();
-
-
-
         $this->end_controls_section();
 
         $this->end_section_devider();
@@ -306,7 +272,7 @@ class Style29 extends Admin_Render {
             ]
                 ]
         );
-       
+
         $this->add_group_control(
                 'sa-flip-box-front-border', $this->style, [
             'type' => Controls::BORDER,
@@ -315,7 +281,14 @@ class Style29 extends Admin_Render {
             ]
                 ]
         );
-
+        $this->add_group_control(
+                'sa-flip-boxes-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-section' => '',
+            ]
+                ]
+        );
         $this->end_controls_section();
         $this->start_controls_section(
                 'shortcode-addons', [
@@ -350,10 +323,10 @@ class Style29 extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-front-img::after' => 'padding-bottom:{{SIZE}}{{UNIT}};',
-             ],
+            ],
                 ]
         );
-        
+
 
         $this->end_controls_section();
         $this->end_section_devider();
@@ -423,7 +396,7 @@ class Style29 extends Admin_Render {
                 ]
         );
         $this->end_controls_section();
-        
+
         $this->end_section_devider();
 
         $this->end_section_tabs();
@@ -452,7 +425,7 @@ class Style29 extends Admin_Render {
             ]
                 ]
         );
-        
+
         $this->add_group_control(
                 'sa-flip-box-back-border', $this->style, [
             'type' => Controls::BORDER,
@@ -461,7 +434,14 @@ class Style29 extends Admin_Render {
             ]
                 ]
         );
-
+        $this->add_group_control(
+                'sa-flip-boxes-hover-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-29 .oxi-addons-flip-box-back-section' => '',
+            ]
+                ]
+        );
         $this->add_responsive_control(
                 'sa-flip-boxes-back-padding', $this->style, [
             'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -492,7 +472,7 @@ class Style29 extends Admin_Render {
             ]
                 ]
         );
-      
+
         $this->end_controls_section();
         $this->start_controls_section(
                 'shortcode-addons', [
@@ -559,7 +539,7 @@ class Style29 extends Admin_Render {
                 ]
         );
         $this->end_controls_section();
-        
+
         $this->start_controls_section(
                 'shortcode-addons', [
             'label' => esc_html__('Short Description', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -917,7 +897,7 @@ class Style29 extends Admin_Render {
             'placeholder' => 'Heading',
                 ]
         );
-         $this->add_group_control(
+        $this->add_group_control(
                 'sa_flip_boxes_media', $this->style, [
             'label' => __('URL', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::MEDIA,
@@ -927,10 +907,10 @@ class Style29 extends Admin_Render {
             ]
                 ]
         );
-       
+
         $this->end_controls_tab();
         $this->start_controls_tab();
-         $this->add_control(
+        $this->add_control(
                 'sa_flip_back_boxes_heading', $this->style, [
             'label' => __('Title', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::TEXT,
@@ -968,6 +948,7 @@ class Style29 extends Admin_Render {
 
         echo '</div>';
     }
+
     /**
      * Template Parent Item Data Rearrange
      *

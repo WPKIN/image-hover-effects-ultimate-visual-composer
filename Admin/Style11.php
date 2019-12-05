@@ -92,7 +92,7 @@ class Style11 extends Admin_Render {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-11 *' => 'transition: all {{SIZE}}s ease-in-out !important;',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-11 *' => 'transition: all {{SIZE}}s;',
             ],
                 ]
         );
@@ -238,38 +238,6 @@ class Style11 extends Admin_Render {
                 ]
         );
 
-        $this->start_controls_tabs(
-                'shortcode-addons-start-tabs', [
-            'options' => [
-                'normal' => esc_html__('Normal', OXI_FLIP_BOX_TEXTDOMAIN),
-                'hover' => esc_html__('Hover', OXI_FLIP_BOX_TEXTDOMAIN),
-            ]
-                ]
-        );
-
-        $this->start_controls_tab();
-        $this->add_group_control(
-                'sa-flip-boxes-boxshadow', $this->style, [
-            'type' => Controls::BOXSHADOW,
-            'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-11 .oxi-addons-flip-box-front-section' => '',
-            ]
-                ]
-        );
-        $this->end_controls_tab();
-        $this->start_controls_tab();
-        $this->add_group_control(
-                'sa-flip-boxes-hover-boxshadow', $this->style, [
-            'type' => Controls::BOXSHADOW,
-            'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-11 .oxi-addons-flip-box-back-section' => '',
-            ]
-                ]
-        );
-        $this->end_controls_tab();
-        $this->end_controls_tabs();
-
-
 
         $this->end_controls_section();
 
@@ -341,6 +309,14 @@ class Style11 extends Admin_Render {
             ]
                 ]
         );
+        $this->add_group_control(
+                'sa-flip-boxes-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-11 .oxi-addons-flip-box-front-section' => '',
+            ]
+                ]
+        );
         $this->end_controls_section();
         $this->start_controls_section(
                 'shortcode-addons', [
@@ -378,7 +354,7 @@ class Style11 extends Admin_Render {
             ],
                 ]
         );
-        $this->add_control(
+        $this->add_responsive_control(
                 'sa-flip-boxex-front-icon-size', $this->style, [
             'label' => __('Icon Size', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::SLIDER,
@@ -390,6 +366,16 @@ class Style11 extends Admin_Render {
                 'px' => [
                     'min' => 1,
                     'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 1,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 1,
+                    'max' => 20,
                     'step' => 1,
                 ],
             ],
@@ -624,7 +610,14 @@ class Style11 extends Admin_Render {
             ]
                 ]
         );
-
+        $this->add_group_control(
+                'sa-flip-boxes-hover-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-11 .oxi-addons-flip-box-back-section' => '',
+            ]
+                ]
+        );
         $this->end_controls_section();
         $this->start_controls_section(
                 'shortcode-addons', [
@@ -728,7 +721,7 @@ class Style11 extends Admin_Render {
             ],
                 ]
         );
-        $this->add_control(
+        $this->add_responsive_control(
                 'sa-flip-boxex-back-icon-size', $this->style, [
             'label' => __('Icon Size', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::SLIDER,
@@ -740,6 +733,16 @@ class Style11 extends Admin_Render {
                 'px' => [
                     'min' => 1,
                     'max' => 500,
+                    'step' => 1,
+                ],
+                '%' => [
+                    'min' => 1,
+                    'max' => 100,
+                    'step' => 1,
+                ],
+                'em' => [
+                    'min' => 1,
+                    'max' => 20,
                     'step' => 1,
                 ],
             ],

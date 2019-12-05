@@ -56,7 +56,7 @@ class Style20 extends Public_Render {
                 $bt = '<a ' . $this->url_render('sa_flip_boxes_button_link', $value) . '">';
                 $bc = '</a>';
             }
-            echo '  <div class="oxi-flip-box-col-style-18 ' . $this->column_render('sa-flip-boxes-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '">
+            echo '  <div class="oxi-flip-box-col-style-20 ' . $this->column_render('sa-flip-boxes-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '">
                         <div class="oxi-addons-flip-box-style-20">
                             ' . $bt . '
                             <div class="oxi-addons-flip-boxes-body"  ' . $this->animation_render('sa-flip-boxes-animation', $style) . '>

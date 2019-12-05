@@ -92,7 +92,7 @@ class Style1 extends Admin_Render {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-1 *' => 'transition: all {{SIZE}}s ease-in-out !important;',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-1 *' => 'transition: all {{SIZE}}s;',
             ],
                 ]
         );

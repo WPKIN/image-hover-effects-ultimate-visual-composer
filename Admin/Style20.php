@@ -12,7 +12,7 @@ use OXI_FLIP_BOX_PLUGINS\Classes\Controls as Controls;
 
 class Style20 extends Admin_Render {
 
-     public function register_controls() {
+    public function register_controls() {
 
         $this->start_section_header(
                 'shortcode-addons-start-tabs', [
@@ -48,7 +48,7 @@ class Style20 extends Admin_Render {
             ]
                 ]
         );
-     
+
         $this->add_control(
                 'sa-ac-flip_boxes_flip_direction', $this->style, [
             'label' => __('Flip Direction', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -93,7 +93,7 @@ class Style20 extends Admin_Render {
                 ],
             ],
             'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-20 *' => 'transition: all {{SIZE}}s ease-in-out !important;',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-20 *' => 'transition: all {{SIZE}}s;',
             ],
                 ]
         );
@@ -164,7 +164,7 @@ class Style20 extends Admin_Render {
                 ],
             ],
             'selector' => [
-                 '{{WRAPPER}} .oxi-addons-flip-box-style-20 .oxi-addons-flip-boxes-body:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-20 .oxi-addons-flip-boxes-body:after ' => 'padding-bottom:{{SIZE}}{{UNIT}};',
             ],
                 ]
         );
@@ -229,36 +229,7 @@ class Style20 extends Admin_Render {
                 ]
         );
 
-        $this->start_controls_tabs(
-                'shortcode-addons-start-tabs', [
-            'options' => [
-                'normal' => esc_html__('Normal', OXI_FLIP_BOX_TEXTDOMAIN),
-                'hover' => esc_html__('Hover', OXI_FLIP_BOX_TEXTDOMAIN),
-            ]
-                ]
-        );
 
-        $this->start_controls_tab();
-        $this->add_group_control(
-                'sa-flip-boxes-boxshadow', $this->style, [
-            'type' => Controls::BOXSHADOW,
-            'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-20 .oxi-addons-flip-box-front-section' => '',
-            ]
-                ]
-        );
-        $this->end_controls_tab();
-        $this->start_controls_tab();
-        $this->add_group_control(
-                'sa-flip-boxes-hover-boxshadow', $this->style, [
-            'type' => Controls::BOXSHADOW,
-            'selector' => [
-                '{{WRAPPER}} .oxi-addons-flip-box-style-20 .oxi-addons-flip-box-back-section' => '',
-            ]
-                ]
-        );
-        $this->end_controls_tab();
-        $this->end_controls_tabs();
 
 
 
@@ -291,7 +262,7 @@ class Style20 extends Admin_Render {
             ]
                 ]
         );
-       
+
         $this->add_group_control(
                 'sa-flip-box-front-border', $this->style, [
             'type' => Controls::BORDER,
@@ -301,7 +272,14 @@ class Style20 extends Admin_Render {
                 ]
         );
 
-        
+        $this->add_group_control(
+                'sa-flip-boxes-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-20 .oxi-addons-flip-box-front-section' => '',
+            ]
+                ]
+        );
         $this->add_responsive_control(
                 'sa-ib-content-font-box-margin', $this->style, [
             'label' => __('Padding', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -371,10 +349,10 @@ class Style20 extends Admin_Render {
             ],
             'selector' => [
                 '{{WRAPPER}} .oxi-addons-flip-box-style-20 .oxi-addons-flip-box-front-img::after' => 'padding-bottom:{{SIZE}}{{UNIT}};',
-             ],
+            ],
                 ]
         );
-        
+
         $this->add_responsive_control(
                 'sa-ib-content-font-box-image-border-radius', $this->style, [
             'label' => __('Border Radius', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -405,7 +383,7 @@ class Style20 extends Admin_Render {
             ]
                 ]
         );
-        
+
 
         $this->end_controls_section();
         $this->end_section_devider();
@@ -475,7 +453,7 @@ class Style20 extends Admin_Render {
                 ]
         );
         $this->end_controls_section();
-        
+
         $this->end_section_devider();
 
         $this->end_section_tabs();
@@ -504,10 +482,18 @@ class Style20 extends Admin_Render {
             ]
                 ]
         );
-        
+
         $this->add_group_control(
                 'sa-flip-box-back-border', $this->style, [
             'type' => Controls::BORDER,
+            'selector' => [
+                '{{WRAPPER}} .oxi-addons-flip-box-style-20 .oxi-addons-flip-box-back-section' => '',
+            ]
+                ]
+        );
+        $this->add_group_control(
+                'sa-flip-boxes-hover-boxshadow', $this->style, [
+            'type' => Controls::BOXSHADOW,
             'selector' => [
                 '{{WRAPPER}} .oxi-addons-flip-box-style-20 .oxi-addons-flip-box-back-section' => '',
             ]
@@ -533,7 +519,6 @@ class Style20 extends Admin_Render {
                     'max' => 100,
                     'step' => 1,
                 ],
-                
                 'em' => [
                     'min' => 0,
                     'max' => 100,
@@ -545,14 +530,25 @@ class Style20 extends Admin_Render {
             ]
                 ]
         );
-      
+
         $this->end_controls_section();
+        
         $this->start_controls_section(
                 'shortcode-addons', [
-            'label' => esc_html__('Heading Settings', OXI_FLIP_BOX_TEXTDOMAIN),
+            'label' => esc_html__('Text Settings', OXI_FLIP_BOX_TEXTDOMAIN),
             'showing' => TRUE,
                 ]
         );
+        $this->start_controls_tabs(
+                'shortcode-addons-start-tabs', [
+            'options' => [
+                'normal' => esc_html__('Heading', OXI_FLIP_BOX_TEXTDOMAIN),
+                'hover' => esc_html__('Description', OXI_FLIP_BOX_TEXTDOMAIN),
+            ]
+                ]
+        );
+
+        $this->start_controls_tab();
 
         $this->add_control(
                 'sa-flip-box-back-heading-color', $this->style, [
@@ -611,15 +607,10 @@ class Style20 extends Admin_Render {
             ]
                 ]
         );
-        $this->end_controls_section();
         
-        $this->start_controls_section(
-                'shortcode-addons', [
-            'label' => esc_html__('Short Description', OXI_FLIP_BOX_TEXTDOMAIN),
-            'showing' => FALSE,
-                ]
-        );
-
+         $this->end_controls_tab();
+        $this->start_controls_tab();
+        
         $this->add_control(
                 'sa-flip-box-back-short-description-color', $this->style, [
             'label' => __('Color', OXI_FLIP_BOX_TEXTDOMAIN),
@@ -677,6 +668,9 @@ class Style20 extends Admin_Render {
             ]
                 ]
         );
+          $this->end_controls_tab();
+        $this->end_controls_tabs();
+        
         $this->end_controls_section();
         $this->end_section_devider();
         $this->start_section_devider();
@@ -693,7 +687,7 @@ class Style20 extends Admin_Render {
             'include' => Controls::ALIGNNORMAL,
             'selector' => [
                 '{{WRAPPER}} .oxi-addons-flip-box-style-20 .oxi-addons-flip-box-back-button .oxi-addons-flip-box-back-button-data' => '',
-                 '{{WRAPPER}} .oxi-addons-flip-box-style-20 .oxi-addons-flip-box-back-button' => '',
+                '{{WRAPPER}} .oxi-addons-flip-box-style-20 .oxi-addons-flip-box-back-button' => '',
             ]
                 ]
         );
@@ -963,7 +957,7 @@ class Style20 extends Admin_Render {
         );
         $this->end_controls_tab();
         $this->start_controls_tab();
-         $this->add_control(
+        $this->add_control(
                 'sa_flip_back_boxes_heading', $this->style, [
             'label' => __('Title', OXI_FLIP_BOX_TEXTDOMAIN),
             'type' => Controls::TEXT,
@@ -1001,6 +995,7 @@ class Style20 extends Admin_Render {
 
         echo '</div>';
     }
+
     /**
      * Template Parent Item Data Rearrange
      *
