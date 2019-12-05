@@ -14,7 +14,7 @@ jQuery.noConflict();
             },
             success: function (response) {
                 console.log(response);
-                $('.shortcode-addons-review-notice').hide();
+                $('.oxi-addons-admin-notifications').remove();
             },
             error: function (error) {
                 console.log('Something went wrong!');

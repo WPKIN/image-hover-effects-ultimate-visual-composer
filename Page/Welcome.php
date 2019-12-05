@@ -32,31 +32,31 @@ class Welcome {
                 </a>
             </h2>
             <p class="about-description">
-                Use the tips below to get started using Responsive Tabs with  Accordions. You will be up and running in no time.	
+                Use the tips below to get started using Flipbox - Awesomes Flip Boxes Image Overlay. You will be up and running in no time.	
             </p>    
             <div class="feature-section">
-                <h3>Creating Your Tabs</h3>
-                <p>Responsive Tabs with  Accordions makes it easy to create Jquery Tabs in WordPress. You can follow the video tutorial on the right or read our how to 
-                    <a href="https://www.oxilab.org/docs/responsive-tabs-with-accordions/getting-started/" target="_blank" rel="noopener">Create your Tabs guide</a>.					</p>
-                <p>But in reality, the process is so intuitive that you can just start by going to <a href="<?php echo admin_url(); ?>admin.php?page=oxi-tabs-ultimate">New Tabs</a>.				</p>
+                <h3>Creating Your Flip Box</h3>
+                <p>Flipbox - Awesomes Flip Boxes Image Overlay makes it easy to create Flipbox or Flipping Content in WordPress. You can follow the video tutorial on the right or read our how to 
+                    <a href="https://www.oxilab.org/docs/flipbox-image-overlay/getting-started/installing-for-the-first-time/" target="_blank" rel="noopener">Create your Flipbox Guide</a>.					</p>
+                <p>But in reality, the process is so intuitive that you can just start by going to <a href="<?php echo admin_url(); ?>admin.php?page=oxi-flip-box-ultimate-new">Create Flipbox</a>.				</p>
                 </br>
                 </br>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/-42zCmS2p6c" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/OaLL0DNUHWA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
             </div>
             <div class="feature-section">
-                <h3>See all Responsive Tabs with  Accordions Features</h3>
-                <p>Responsive Tabs with  Accordions is both easy to use and extremely powerful. We have tons of helpful features that allows us to give you everything you need on Tabs.</p>
+                <h3>See all Flipbox - Awesomes Flip Boxes Image Overlay Features</h3>
+                <p>Flipbox - Awesomes Flip Boxes Image Overlay is both easy to use and extremely powerful. We have tons of helpful features that allows us to give you everything you need on Flipbox.</p>
                 <p>1. Awesome Live Preview Panel</p>
                 <p>1. Can Customize with Our Settings</p>
                 <p>1. Easy to USE & Builtin Integration for popular Page Builder</p>
-                <p><a href="https://www.oxilab.org/downloads/responsive-tabs-with-accordions/" target="_blank" rel="noopener" class="iheu-image-features-button button button-primary">See all Features</a></p>
+                <p><a href="https://www.oxilab.org/downloads/flipbox-image-overlay/" target="_blank" rel="noopener" class="iheu-image-features-button button button-primary">See all Features</a></p>
 
             </div>
             <div class="feature-section">
                 <h3>Have any Bugs or Suggestion</h3>
-                <p>Your suggestions will make this plugin even better, Even if you get any bugs on Image Hover Effects with Carousel so let us to know, We will try to solved within few hours</p>
+                <p>Your suggestions will make this plugin even better, Even if you get any bugs on Flipbox - Awesomes Flip Boxes Image Overlay so let us to know, We will try to solved within few hours</p>
                 <p><a href="https://www.oxilab.org/contact-us" target="_blank" rel="noopener" class="image-features-button button button-primary">Contact Us</a>
-                    <a href="https://wordpress.org/support/plugin/vc-tabs" target="_blank" rel="noopener" class="image-features-button button button-primary">Support Forum</a></p>
+                    <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer" target="_blank" rel="noopener" class="image-features-button button button-primary">Support Forum</a></p>
 
             </div>
 

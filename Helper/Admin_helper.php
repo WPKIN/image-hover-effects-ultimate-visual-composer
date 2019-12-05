@@ -39,7 +39,7 @@ trait Admin_helper {
      * @since 2.0.0
      */
     public function check_current_tabs($agr) {
-        $vs = get_option($this->fixed_data('726573706f6e736976655f746162735f776974685f6163636f7264696f6e735f6c6963656e73655f737461747573'));
+        $vs = get_option($this->fixed_data('6f78696c61625f666c69705f626f785f6c6963656e73655f737461747573'));
         if ($vs == $this->fixed_data('76616c6964')) {
             return TRUE;
         } else {
@@ -271,7 +271,7 @@ trait Admin_helper {
         if (!empty($this->admin_notice_status())):
             return;
         endif;
-        if (strtotime('-7 days') < $this->installation_date()):
+        if (strtotime('-7 minute') < $this->installation_date()):
             return;
         endif;
         new \OXI_FLIP_BOX_PLUGINS\Classes\Support_Reviews();

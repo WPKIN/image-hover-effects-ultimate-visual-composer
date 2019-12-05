@@ -36,7 +36,7 @@ class Support_Reviews {
                         <p>Hey, You’ve using <strong>Flipbox - Awesomes Flip Boxes Image Overlay</strong> more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.!</p>
                         <ul class="shortcode-addons--notice-link">
                             <li>
-                                <a href="https://wordpress.org/plugins/vc-tabs/" target="_blank">
+                                <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/reviews/" target="_blank">
                                     <span class="dashicons dashicons-external"></span>Ok, you deserve it!
                                 </a>
                             </li>
@@ -51,7 +51,7 @@ class Support_Reviews {
                                 </a>
                             </li>
                             <li>
-                                <a href="https://wordpress.org/support/plugin/vc-tabs/">
+                                <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">
                                     <span class="dashicons dashicons-sos"></span>I need help
                                 </a>
                             </li>

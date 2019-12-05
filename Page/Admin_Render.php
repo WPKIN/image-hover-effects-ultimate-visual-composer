@@ -365,10 +365,13 @@ class Admin_Render {
             <div class="oxi-addons-wrapper">
                 <?php
                 apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
-                $this->modal_form();
                 ?>
                 <div class="oxi-addons-style-20-spacer"></div>
                 <div class="oxi-addons-row">
+                    <?php
+                    apply_filters('oxi-flip-box-support-and-comments', TRUE);
+                    $this->modal_form();
+                    ?>
                     <div class="oxi-addons-wrapper oxi-addons-flip-tabs-mode">
                         <div class="oxi-addons-settings" id="oxisettingsreload">
                             <div class="oxi-addons-style-left">
@@ -419,7 +422,7 @@ class Admin_Render {
                                             <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-flip-2-0-color" name="oxi-addons-flip-2-0-color" value="<?php echo(is_array($this->style) ? array_key_exists('oxi-addons-flip-2-0-preview', $this->style) ? $this->style['oxi-addons-flip-2-0-preview'] : '#FFF' : '#FFF'); ?>">
                                         </div>
                                     </div>
-                                    <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo $this->WRAPPER; ?>">
+                                    <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo $this->WRAPPER; ?>" style="background:<?php echo(is_array($this->style) ? array_key_exists('oxi-addons-flip-2-0-preview', $this->style) ? $this->style['oxi-addons-flip-2-0-preview'] : '#FFF' : '#FFF'); ?>">
                                         <?php
                                         $cls = '\OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $this->StyleName . '';
                                         new $cls($this->dbdata, $this->child, 'admin');
@@ -782,6 +785,25 @@ class Admin_Render {
                                 };
                         })(jQuery);
                         jQuery(\'.shortcode-addons-family\').fontselect();';
+        
+        
+        if(apply_filters('oxi-flip-box-plugin/pro_version', false) == false):
+            $data .= 'jQuery(".oxi-addons-minicolor").each(function (index, value) {                             
+                            jQuery(this).parent().parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro</span>");
+                            var datavalue = jQuery(this).val();
+                            jQuery(this).attr("oxilabvalue", datavalue);
+                        });
+                        jQuery(".shortcode-addons-family").each(function (index, value) {
+                            jQuery(this).parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro</span>");
+                            var datavalue = jQuery(this).val();
+                            jQuery(this).attr("oxilabvalue", datavalue);
+                        });
+                        jQuery(".shortcode-addons-gradient-color").each(function (index, value) {
+                            jQuery(this).parent().parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro</span>");
+                            var datavalue = jQuery(this).val();
+                            jQuery(this).attr("oxilabvalue", datavalue);
+                        });';
+        endif;
         wp_add_inline_script('oxi-flip-box-editor', $data);
     }
 

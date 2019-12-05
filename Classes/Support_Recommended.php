@@ -23,7 +23,7 @@ class Support_Recommended {
         }
         add_action('admin_notices', array($this, 'first_install'));
         add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
-        add_action('wp_ajax_oxi_tabs_admin_recommended', array($this, 'notice_dissmiss'));
+        add_action('wp_ajax_oxi_flip_admin_recommended', array($this, 'notice_dissmiss'));
         add_action('admin_notices', array($this, 'dismiss_button_scripts'));
     }
 
@@ -81,7 +81,7 @@ class Support_Recommended {
      */
     public function dismiss_button_scripts() {
         wp_enqueue_script('oxi_flip-admin-recommended', OXI_FLIP_BOX_URL . '/Assets/Backend/js/admin-recommended.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_localize_script('oxi_tabs-admin-recommended', 'oxi_flip_admin_recommended', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_flip_admin_recommended')));
+        wp_localize_script('oxi_flip-admin-recommended', 'oxi_flip_admin_recommended', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_flip_admin_recommended')));
     }
 
     /**

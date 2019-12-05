@@ -49,7 +49,7 @@ jQuery.noConflict();
 
     function OxiAddonsPreviewDataLoader() {
         OxiAddonsFLipTemplateSettings('elements_template_render_data', JSON.stringify($("#oxi-addons-form-submit").serializeJSON({checkboxUncheckedValue: "0"})), styleid, childid, function (callback) {
-            console.log(callback);
+           // console.log(callback);
             $("#oxi-addons-preview-data").html(callback);
         });
     }
@@ -81,8 +81,8 @@ jQuery.noConflict();
     $("#oxi-addons-modal-rearrange").sortable({
         axis: 'y',
         update: function (event, ui) {
-            var list_sortable = jQuery(this).sortable('toArray').toString();
-            jQuery('#oxi-addons-list-rearrange-data').val(list_sortable);
+            var list_sortable = $(this).sortable('toArray').toString();
+            $('#oxi-addons-list-rearrange-data').val(list_sortable);
         }
     });
     $("#oxi-addons-rearrange-data-modal-open").on("click", function () {
@@ -107,12 +107,12 @@ jQuery.noConflict();
             });
         });
     });
-    
+
     $("#oxi-addons-list-rearrange-submit").on("click", function (e) {
         e.preventDefault();
         $(this).val('Savings..');
         var rawdata = $('#oxi-addons-list-rearrange-data').val();
-        if(rawdata === ''){
+        if (rawdata === '') {
             alert('Kindly Rearrange, Then  Click to saved');
             return false;
         }
@@ -131,7 +131,7 @@ jQuery.noConflict();
             }
         });
     });
-    
+
     $("#oxi-addons-setting-old-version").on("click", function (e) {
         e.preventDefault();
         var status = confirm("Do you Want to use Old Version?  As using Old version You can Only View it not any editings or customization also New version data will be deleted during update old version.");
@@ -149,11 +149,29 @@ jQuery.noConflict();
     });
     $("#oxi-addons-flip-templates-submit").on("click", function (e) {
         e.preventDefault();
+        $(".oxi-addons-minicolor").each(function (index, value) {
+            var datavalue = $(this).attr("oxilabvalue");
+            if (typeof datavalue !== typeof undefined && datavalue !== false) {
+                $(this).val(datavalue);
+            }
+        });
+        $(".shortcode-addons-family").each(function (index, value) {
+            var datavalue = $(this).attr("oxilabvalue");
+            if (typeof datavalue !== typeof undefined && datavalue !== false) {
+                $(this).val(datavalue);
+            }
+        });
+        $(".shortcode-addons-gradient-color").each(function (index, value) {
+            var datavalue = $(this).attr("oxilabvalue");
+            if (typeof datavalue !== typeof undefined && datavalue !== false) {
+                $(this).val(datavalue);
+            }
+        });
         var rawdata = JSON.stringify($("#oxi-addons-form-submit").serializeJSON({checkboxUncheckedValue: "0"}));
         var functionname = "elements_template_style_data";
         $(this).html('<span class="dashicons dashicons-admin-generic"></span>');
         OxiAddonsFLipTemplateSettings(functionname, rawdata, styleid, childid, function (callback) {
-            console.log(callback);
+//            /console.log(callback);
             if (callback === "success") {
                 $("#OXIAADDONSCHANGEDPOPUP .icon-box").html('<span class="dashicons dashicons-yes"></span>');
                 $("#OXIAADDONSCHANGEDPOPUP .modal-body.text-center h4").html("Great!");
@@ -207,7 +225,7 @@ jQuery.noConflict();
             if (callback === "Go to hell") {
                 alert("Data Error");
             } else {
-                jQuery("#shortcode-addons-template-modal-form input[type='checkbox']").attr('checked', false);
+                $("#shortcode-addons-template-modal-form input[type='checkbox']").attr('checked', false);
                 $.each($.parseJSON(callback), function (key, value) {
                     var tp = $('input[name="' + key + '"]').attr("type");
                     if (typeof tp !== 'undefined') {
@@ -237,7 +255,7 @@ jQuery.noConflict();
                     $id = $(this).attr('id');
                     $('#' + $id).select2({width: '100%'});
                 });
-                 $("#oxi-flip-template-modal-submit").html("Submit");
+                $("#oxi-flip-template-modal-submit").html("Submit");
                 $("#oxi-addons-list-data-modal").modal("show");
             }
         });
@@ -324,7 +342,7 @@ jQuery.noConflict();
         if ($input.attr("retundata") !== '') {
             id = $(this).attr('id');
             var arr = [];
-            jQuery("#" + id + " option").each(function () {
+            $("#" + id + " option").each(function () {
                 arr.push($(this).val());
             });
             var $data = JSON.parse($input.attr("retundata"));
@@ -397,17 +415,17 @@ jQuery.noConflict();
         }
 
     });
-    jQuery('.oxi-addons-minicolor').each(function () {
-        jQuery(this).minicolors({
-            control: jQuery(this).attr('data-control') || 'hue',
-            defaultValue: jQuery(this).attr('data-defaultValue') || '',
-            format: jQuery(this).attr('data-format') || 'hex',
-            keywords: jQuery(this).attr('data-keywords') || 'transparent' || 'initial' || 'inherit',
-            inline: jQuery(this).attr('data-inline') === 'true',
-            letterCase: jQuery(this).attr('data-letterCase') || 'lowercase',
-            opacity: jQuery(this).attr('data-opacity'),
-            position: jQuery(this).attr('data-position') || 'bottom left',
-            swatches: jQuery(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
+    $('.oxi-addons-minicolor').each(function () {
+        $(this).minicolors({
+            control: $(this).attr('data-control') || 'hue',
+            defaultValue: $(this).attr('data-defaultValue') || '',
+            format: $(this).attr('data-format') || 'hex',
+            keywords: $(this).attr('data-keywords') || 'transparent' || 'initial' || 'inherit',
+            inline: $(this).attr('data-inline') === 'true',
+            letterCase: $(this).attr('data-letterCase') || 'lowercase',
+            opacity: $(this).attr('data-opacity'),
+            position: $(this).attr('data-position') || 'bottom left',
+            swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
             change: function (value, opacity) {
                 if (!value)
                     return;
@@ -792,7 +810,7 @@ jQuery.noConflict();
                     el = el.replace(NEWRegExp("{{KEY}}"), $input.attr('name').split('saarsa')[1]);
                 }
                 var cls = el.replace(NEWRegExp("{{WRAPPER}}"), WRAPPER);
-                var Cval = obj.replace(NEWRegExp("{{UNIT}}"), jQuery("input[name=\"" + UNIT + "\"]:checked").val());
+                var Cval = obj.replace(NEWRegExp("{{UNIT}}"), $("input[name=\"" + UNIT + "\"]:checked").val());
                 Cval = Cval.replace(NEWRegExp("{{TOP}}"), $('#' + TOP).val());
                 Cval = Cval.replace(NEWRegExp("{{RIGHT}}"), $('#' + RIGHT).val());
                 Cval = Cval.replace(NEWRegExp("{{BOTTOM}}"), $('#' + BOTTOM).val());
@@ -811,7 +829,7 @@ jQuery.noConflict();
         }
 
     });
-    jQuery(".shortcode-addons-gradient-color").each(function (i, v) {
+    $(".shortcode-addons-gradient-color").each(function (i, v) {
         $(this).coloringPick({
             "show_input": true,
             "theme": "dark",
@@ -885,4 +903,10 @@ jQuery.noConflict();
     $(document.body).on("change", ".shortcode-control-type-icon input", function () {
         OxiAddonsPreviewDataLoader();
     });
+    $("#oxi-addons-flip-2-0-color").on("change", function (e) {
+        $input = $(this).val();
+        $("#oxi-addons-preview-data").css('background', $input);
+        $("#oxi-addons-flip-2-0-preview").val($input);
+    });
+
 })(jQuery);

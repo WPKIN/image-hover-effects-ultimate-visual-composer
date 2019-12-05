@@ -110,8 +110,6 @@ class Installation {
         dbDelta($sql2);
         dbDelta($sql3);
         add_option('oxilab_flip_box_version', OXI_FLIP_BOX_PLUGIN_VERSION);
-        $fawesome = '5.3.1||https://use.fontawesome.com/releases/v5.3.1/css/all.css';
-        add_option('oxi_addons_font_awesome_version', $fawesome);
         $wpdb->query("INSERT INTO {$table_import} (name, type) VALUES
         (1, 'flip'),
         (2, 'flip'),
