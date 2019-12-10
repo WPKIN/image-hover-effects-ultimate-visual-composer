@@ -66,13 +66,13 @@ class Installation {
      * Get  Oxi Tabs Menu Deactive.
      * @return mixed
      */
-    public function Tabs_Menu_Deactive() {
+    public function Admin_Menu_Deactive() {
         delete_transient(self::ADMINMENU);
     }
     
     
 
-    public function Tabs_Datatase() {
+    public function Flip_Datatase() {
         global $wpdb;
         $table_name = $wpdb->prefix . 'oxi_div_style';
         $table_list = $wpdb->prefix . 'oxi_div_list';
@@ -83,9 +83,7 @@ class Installation {
                 name varchar(50) NOT NULL,
                 type varchar(50) NOT NULL,
                 style_name varchar(40) NOT NULL,
-                rawdata longtext,
-                stylesheet longtext,
-                font_family text,
+                css text,
 		PRIMARY KEY  (id)
 	) $charset_collate;";
 
@@ -93,8 +91,8 @@ class Installation {
 		id mediumint(5) NOT NULL AUTO_INCREMENT,
                 styleid mediumint(6) NOT NULL,
                 type varchar(50),
-                rawdata text,
-                stylesheet text,
+                files text,
+                css text,
 		PRIMARY KEY  (id)
 	) $charset_collate;";
         $sql3 = "CREATE TABLE $table_import (
@@ -125,7 +123,7 @@ class Installation {
      */
     public function plugin_activation_hook() {
         $this->Tabs_Menu();
-        $this->Tabs_Datatase();
+        $this->Flip_Datatase();
         // Redirect to options page
         set_transient('oxi_flip_box_activation_redirect', true, 30);
     }
@@ -136,7 +134,7 @@ class Installation {
      * @since 3.1.0
      */
     public function plugin_deactivation_hook() {
-        $this->Tabs_Menu_Deactive();
+        $this->Admin_Menu_Deactive();
     }
 
     /**
@@ -148,7 +146,7 @@ class Installation {
         if ($options['action'] == 'update' && $options['type'] == 'plugin') {
             if (isset($options['plugins'][OXI_FLIP_BOX_TEXTDOMAIN])) {
                 $this->Tabs_Menu();
-                $this->Tabs_Datatase();
+                $this->Flip_Datatase();
             }
         }
     }

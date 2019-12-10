@@ -9,15 +9,15 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  */
 class Import {
 
-    use \OXI_FLIP_BOX_PLUGINS\Helper\Public_Helper;
-    use \OXI_FLIP_BOX_PLUGINS\Helper\CSS_JS_Loader;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\Public_Helper;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
 
     public $IMPORT = [];
     public $wpdb;
     public $parent_table;
     public $child_table;
     public $import_table;
-    public $TEMPLATE ;
+    public $TEMPLATE;
 
     /**
      * Constructor of Oxilab tabs Home Page
@@ -50,7 +50,7 @@ class Import {
      * @return void
      */
     public function admin_ajax_load() {
-        wp_enqueue_script('oxi-flip-import', OXI_FLIP_BOX_URL . '/Assets/Backend/js/import.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_enqueue_script('oxi-flip-import', OXI_FLIP_BOX_URL . '/asset/backend/js/import.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-import', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 
@@ -93,7 +93,7 @@ class Import {
                                 if (class_exists($C)):
                                     foreach ($this->TEMPLATE[$k] as $key => $v) {
                                         $REND = json_decode($v, true);
-                                        echo '<div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">';
+                                        echo '<div class="oxilab-flip-box-col-3">';
                                         new $C($REND['style'], $REND['child']);
                                         echo '</div>';
                                     }

@@ -37,8 +37,8 @@ class Home {
      */
     public $wpdb;
 
-    use \OXI_FLIP_BOX_PLUGINS\Helper\Public_Helper;
-    use \OXI_FLIP_BOX_PLUGINS\Helper\CSS_JS_Loader;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\Public_Helper;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
 
     /**
      * Constructor of Oxilab tabs Home Page
@@ -67,7 +67,7 @@ class Home {
      * @return void
      */
     public function admin_ajax_load() {
-        wp_enqueue_script('oxi-flip-box-home', OXI_FLIP_BOX_URL . '/Assets/Backend/js/home.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_enqueue_script('oxi-flip-box-home', OXI_FLIP_BOX_URL . '/asset/backend/js/home.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-box-home', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 

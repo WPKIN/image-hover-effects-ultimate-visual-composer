@@ -12,8 +12,8 @@ if (!defined('ABSPATH'))
  */
 class Bootstrap {
 
-    use \OXI_FLIP_BOX_PLUGINS\Helper\Public_Helper;
-    use \OXI_FLIP_BOX_PLUGINS\Helper\Admin_helper;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\Public_Helper;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\Admin_helper;
 
     // instance container
     private static $instance = null;

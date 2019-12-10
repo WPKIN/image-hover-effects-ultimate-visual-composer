@@ -22,85 +22,7 @@ use OXI_FLIP_BOX_PLUGINS\Page\Public_Render;
 
 class Style19 extends Public_Render {
 
-    public function default_render($style, $child, $admin) {
-        $styledata = $this->style;
-        foreach ($child as $key => $val) {
-            $value = json_decode(stripslashes($val['rawdata']), true);
-
-            $image = $back_hadding = $backinfo = $button = $bt = $bc = '';
-            if ($this->media_render('sa_flip_boxes_media', $value) != '') {
-                $image = ' <img src="' . $this->media_render('sa_flip_boxes_media', $value) . '">';
-            }
-            if ($value['sa_flip_back_boxes_heading'] != '') {
-                $back_hadding .= '<div class="oxi-addons-flip-box-back-headding">
-                            ' . $this->text_render($value['sa_flip_back_boxes_heading']) . '
-                            </div>';
-            }
-            if ($value['sa_flip_boxes_back_description'] != '') {
-                $backinfo .= '<div class="oxi-addons-flip-box-back-info">
-                        ' . $this->text_render($value['sa_flip_boxes_back_description']) . '
-                        </div>';
-            }
-            if ($value['sa_flip_boxes_icon'] != '') {
-                $button .= '<div class="oxi-addons-flip-box-back-button">
-                            <a ' . $this->url_render('sa_flip_boxes_button_link', $value) . ' class="oxi-addons-flip-box-back-link" >' . $this->font_awesome_render($value['sa_flip_boxes_icon']) . ' </a>
-                        </div>';
-            } elseif ($value['sa_flip_boxes_icon'] == '' && $this->url_render('sa_flip_boxes_button_link', $value) != '') {
-                $bt = '<a ' . $this->url_render('sa_flip_boxes_button_link', $value) . '">';
-                $bc = '</a>';
-            }
-            echo '  <div class="oxi-flip-box-col-style-19 ' . $this->column_render('sa-flip-boxes-col', $style) . ' ' . ($admin == "admin" ? 'oxi-addons-admin-edit-list' : '') . '">
-                        <div class="oxi-addons-flip-box-style-19">
-                            ' . $bt . '
-                            <div class="oxi-addons-flip-boxes-body"  ' . $this->animation_render('sa-flip-boxes-animation', $style) . '>
-                                <div class="oxi-addons-flip-boxes-body-data">
-                                    <div class="oxi-addons-flip-box-flip ' . $styledata['sa-ac-flip_boxes_flip_direction'] . '">
-                                        <div class="oxi-addons-flip-box-flip-data ' . $styledata['sa-ac-flip_boxes_flip_effects'] . '">
-                                            <div class="oxi-addons-flip-box-style">
-                                                <div class="oxi-addons-flip-box-front">
-                                                    <div class="oxi-addons-flip-box-front-section-box">
-                                                        <div class="oxi-addons-flip-box-front-section oxi-addons-flip-box-front-section-' . $val['id'] . '">
-                                                            ' . $image . '
-                                                        </div>  
-                                                    </div>
-                                                </div>
-                                                <div class="oxi-addons-flip-box-back">
-                                                    <div class="oxi-addons-flip-box-back-section-box">
-                                                        <div class="oxi-addons-flip-box-back-section">
-                                                            <div class="oxi-addons-flip-box-back-section-content">
-                                                                ' . $back_hadding . '
-                                                                ' . $backinfo . '
-                                                            </div>
-                                                            ' . $button . '
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ' . $bc . '
-                        </div>';
-            if ($admin == 'admin') :
-                echo '  <div class="oxi-addons-admin-absulote">
-                                <div class="oxi-addons-admin-absulate-edit">
-                                    <button class="btn btn-primary shortcode-addons-template-item-edit" type="button" value="' . $val['id'] . '">Edit</button>
-                                </div>
-                                <div class="oxi-addons-admin-absulate-delete">
-                                <button class="btn btn-danger shortcode-addons-template-item-delete" type="submit" value="' . $val['id'] . '">Delete</button>
-                                </div>
-                            </div>';
-            endif;
-            echo ' </div>';
-
-            $this->inline_css .= '.' . $this->WRAPPER . ' .oxi-addons-flip-box-style-19 .oxi-addons-flip-box-front-section-' . $val['id'] . ':before{
-                        background: ' . $value['sa_flip_boxes_overlay_color'] . ';
-                    }';
-        }
-    }
-
-    public function old_render() {
+    public function default_render() {
         $styleid = $this->oxiid;
         $styledata = explode('|', $this->dbdata['css']);
         $listdata = $this->child;
@@ -117,7 +39,7 @@ class Style19 extends Public_Render {
                          sa-data-animation-delay="0ms"
                          sa-data-animation-duration=" <?php echo ($styledata[57] * 1000); ?>ms"
                          >
-                        <div class="oxilab-flip-box-body-<?php echo $styleid; ?> oxilab-flip-box-body-<?php echo $styleid; ?>-<?php echo $value['id']; ?>">
+                        <div class="<?php echo ($this->admin == 'admin') ? 'oxilab-ab-id' : ''; ?> oxilab-flip-box-body-<?php echo $styleid; ?> oxilab-flip-box-body-<?php echo $styleid; ?>-<?php echo $value['id']; ?>">
                             <?php
                             if ($filesdata[3] == '' && $filesdata[11] != '') {
                                 echo '<a href="' . $filesdata[11] . '" target="' . $styledata[53] . '">';
@@ -160,7 +82,10 @@ class Style19 extends Public_Render {
                                     </div>
                                 </div>
                             </div>
-                            <?php echo $fileslinkend; ?>
+                            <?php
+                            echo $fileslinkend;
+                            echo $this->admin_edit_panel($value['id']);
+                            ?>
                         </div>
                         <style>
                 <?php
@@ -308,7 +233,7 @@ background-size: 100% 100%;
                 .oxilab-flip-box-back-<?php echo $styleid; ?> .oxilab-button .oxi-icons:hover{
                     color:  <?php echo $styledata[11]; ?>;
                 }
-                <?php echo $styledata[199]; ?>;
+        <?php echo $styledata[199]; ?>;
             </style>
         </div>
         <?php

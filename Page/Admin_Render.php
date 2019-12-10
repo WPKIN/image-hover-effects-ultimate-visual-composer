@@ -1,9 +1,4 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 namespace OXI_FLIP_BOX_PLUGINS\Page;
 
@@ -16,8 +11,8 @@ use OXI_FLIP_BOX_PLUGINS\Classes\Controls as Controls;
 
 class Admin_Render {
 
-    use \OXI_FLIP_BOX_PLUGINS\Helper\CSS_JS_Loader;
-    use \OXI_FLIP_BOX_PLUGINS\Helper\Sanitization;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\Sanitization;
 
     /**
      * Current Elements Name
@@ -48,18 +43,11 @@ class Admin_Render {
     public $child;
 
     /**
-     * Current Elements Global CSS Data
+     * Current Elements Style Data
      *
      * @since 2.0.0
      */
-    public $CSSDATA = [];
-
-    /**
-     * Current Elements Global DATA WRAPPER
-     *
-     * @since 2.0.0
-     */
-    public $WRAPPER;
+    public $child_editable;
 
     /**
      * Database Parent Table
@@ -73,14 +61,14 @@ class Admin_Render {
      *
      * @since 2.0.0
      */
-    public $import_table;
+    public $child_table;
 
     /**
      * Database Import Table
      *
      * @since 2.0.0
      */
-    public $child_table;
+    public $itemid;
 
     /**
      * Define $wpdb
@@ -90,39 +78,11 @@ class Admin_Render {
     public $wpdb;
 
     /**
-     * Define Shortcode Addons Elements Type
+     * Define $wpdb
      *
-     * @since 2.0.0
+     * @since 3.1.0
      */
-    public $oxitype;
-
-    /**
-     * Define Shortcode Addons Elements Type
-     *
-     * @since 2.0.0
-     */
-    public $form;
-
-    /**
-     * Define Shortcode Addons Elements Font Family
-     *
-     * @since 2.0.0
-     */
-    public $font = [];
-
-    /**
-     * Define Shortcode Addons Imported Font Family
-     *
-     * @since 2.0.0
-     */
-    public $font_family = [];
-
-    /**
-     * Define Shortcode Addons Google Font Family
-     *
-     * @since 2.0.0
-     */
-    public $google_font = [];
+    public $nonce;
 
     /**
      * Define Shortcode Addons Elements Type
@@ -131,7 +91,7 @@ class Admin_Render {
      */
     public $StyleName;
 
-    public function __construct($type = '') {
+    public function __construct() {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
@@ -139,9 +99,92 @@ class Admin_Render {
         $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
         $this->oxiid = (!empty($_GET['styleid']) ? sanitize_text_field($_GET['styleid']) : '');
         $this->WRAPPER = '.oxi-addons-flip-wrapper-' . $this->oxiid;
-        if ($type != 'admin') {
-            $this->hooks();
-            $this->render();
+        if (!empty($_REQUEST['_wpnonce'])) {
+            $this->nonce = $_REQUEST['_wpnonce'];
+        }
+        $this->saving();
+        $this->hooks();
+        $this->render();
+    }
+
+    public function saving() {
+        $this->style_data();
+        $this->child_save();
+        $this->child_edit();
+        $this->rename_shortcode();
+        $this->Delete_child_data();
+    }
+
+    public function rename_shortcode() {
+        if (!empty($_POST['addonsstylenamechange']) && $_POST['addonsstylenamechange'] == 'Save') {
+            if (!wp_verify_nonce($this->nonce, 'oxi-addons-name-change')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                $name = sanitize_text_field($_POST['oxi-addons-name']);
+                $this->wpdb->query($this->wpdb->prepare("UPDATE $this->parent_table SET name = %s WHERE id = %d", $name, $this->oxiid));
+            }
+        }
+    }
+
+    public function style() {
+        return '';
+    }
+
+    public function style_data() {
+
+        if (!empty($_POST['oxi-addons-flip-templates-submit']) && $_POST['oxi-addons-flip-templates-submit'] == 'Submit') {
+            if (!wp_verify_nonce($this->nonce, 'oxiflipstylecss')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                $data = sanitize_post($this->register_style());
+                $this->wpdb->query($this->wpdb->prepare("UPDATE $this->parent_table SET css = %s WHERE id = %d", $data, $this->oxiid));
+            }
+        }
+    }
+
+    public function clild() {
+        return ['title' => '', 'files' => ''];
+    }
+
+    public function child_save() {
+        if (!empty($_POST['oxi-flip-template-modal-submit']) && $_POST['oxi-flip-template-modal-submit'] == 'Submit') {
+            if (!wp_verify_nonce($this->nonce, 'oxiflipchildnonce')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                $id = $_POST['item-id'];
+                $child = $this->register_child();
+                if ($id == '') {
+                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} ( files, styleid) VALUES ( %s, %d)", array($child, $this->oxiid)));
+                } else if ($id != '' && is_numeric($id)) {
+                    $item_id = (int) $id;
+                    $this->wpdb->update("$this->child_table", array("files" => $child), array('id' => $item_id), array('%s'), array('%d'));
+                }
+            }
+        }
+    }
+
+    public function child_edit() {
+        if (!empty($_POST['edit']) && is_numeric($_POST['item-id'])) {
+            if (!wp_verify_nonce($this->nonce, 'oxiflipeditdata')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                $item_id = (int) $_POST['item-id'];
+                $child = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->child_table . ' WHERE id = %d ', $item_id), ARRAY_A);
+                $this->child_editable = explode('{#}|{#}', $child['files']);
+                $this->itemid = $child['id'];
+                echo '<script type="text/javascript"> jQuery(document).ready(function () {setTimeout(function() { jQuery("#oxi-addons-list-data-modal").modal("show")  }, 500); });</script>';
+            }
+        }
+    }
+
+    public function Delete_child_data() {
+        if (!empty($_POST['delete']) && is_numeric($_POST['item-id'])) {
+            if (!wp_verify_nonce($this->nonce, 'oxiflipdeletedata')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                $item_id = (int) $_POST['item-id'];
+                $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->child_table} WHERE id = %d ", $item_id));
+            }
         }
     }
 
@@ -152,101 +195,14 @@ class Admin_Render {
      */
     public function hooks() {
         $this->admin_elements_frontend_loader();
-        $this->admin_editor_load();
         $this->dbdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
         $this->child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->oxiid), ARRAY_A);
-        if (!empty($this->dbdata['rawdata'])):
-            $this->style = json_decode(stripslashes($this->dbdata['rawdata']), true);
+        if (!empty($this->dbdata['css'])):
+            $this->style = explode('|', $this->dbdata['css']);
         endif;
         $this->StyleName = ucfirst(str_replace('-', '_', $this->dbdata['style_name']));
         $this->oxitype = ucfirst($this->dbdata['type']);
         $this->import_font_family();
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_editor_load() {
-        wp_enqueue_script('oxi-flip-box-editor', OXI_FLIP_BOX_URL . '/Assets/Backend/js/editor.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_localize_script('oxi-flip-box-editor', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
-    }
-
-    /**
-     * Template Modal opener
-     * Define Multiple Data With Single Data
-     *
-     * @since 2.0.0
-     */
-    public function modal_opener() {
-        $this->add_substitute_control('', [], [
-            'type' => Controls::MODALOPENER,
-            'title' => __('Add New Data', OXI_FLIP_BOX_TEXTDOMAIN),
-            'sub-title' => __('Open Data Form', OXI_FLIP_BOX_TEXTDOMAIN),
-            'showing' => TRUE,
-        ]);
-    }
-
-    /**
-     * Template Shortcode Name
-     * Define Shortcode Name
-     *
-     * @since 2.0.0
-     */
-    public function shortcode_name() {
-        $this->add_substitute_control('', $this->dbdata, [
-            'type' => Controls::SHORTCODENAME,
-            'title' => __('Shortcode Name', OXI_FLIP_BOX_TEXTDOMAIN),
-            'placeholder' => __('Set Your Shortcode Name', OXI_FLIP_BOX_TEXTDOMAIN),
-            'showing' => TRUE,
-        ]);
-    }
-
-    /**
-     * Template Shortcode Information
-     * Parent Sector where users will get Shortcode Information
-     *
-     * @since 2.0.0
-     */
-    public function shortcode_info() {
-        $this->add_substitute_control($this->oxiid, $this->dbdata, [
-            'type' => Controls::SHORTCODEINFO,
-            'title' => __('Shortcode', OXI_FLIP_BOX_TEXTDOMAIN),
-            'showing' => TRUE,
-        ]);
-    }
-
-    /**
-     * Template Modal Form Data
-     * return always false and abstract with current Style Template
-     *
-     * @since 2.0.0
-     */
-    public function modal_form_data() {
-        $this->form = 'single';
-    }
-
-    /**
-     * Template Parent Modal Form
-     *
-     * @since 2.0.0
-     */
-    public function modal_form() {
-
-        echo '<div class="modal fade" id="oxi-addons-list-data-modal" >
-                <div class="modal-dialog">
-                    <form method="post" id="oxi-flip-template-modal-form">
-                         <div class="modal-content">';
-        $this->modal_form_data();
-        echo '          <div class="modal-footer">
-                                <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success" id="oxi-flip-template-modal-submit">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-              </div>';
     }
 
     /**
@@ -259,107 +215,13 @@ class Admin_Render {
     }
 
     /**
-     * Template Parent Item Data Rearrange
-     *
-     * @since 2.0.0
-     */
-    public function shortcode_rearrange() {
-        $rearrange = $this->Rearrange();
-        if (!empty($rearrange)):
-            $this->add_substitute_control($rearrange, [], [
-                'type' => Controls::REARRANGE,
-                'showing' => TRUE,
-            ]);
-        endif;
-    }
-
-    /**
-     * Template CSS Render
-     *
-     * @since 2.0.0
-     */
-    public function template_css_render($style) {
-        $styleid = $style['oxi-addons-flip-elements-id'];
-        $this->oxiid = $styleid;
-        $this->WRAPPER = '.oxi-addons-flip-wrapper-' . $this->oxiid;
-        $this->style = $style;
-        ob_start();
-        $dt = $this->import_font_family();
-        $dt .= $this->register_controls();
-        ob_end_clean();
-
-        $fullcssfile = '';
-        foreach ($this->CSSDATA as $key => $responsive) {
-            $tempcss = '';
-            foreach ($responsive as $class => $classes) {
-                $tempcss .= $class . '{';
-                foreach ($classes as $properties) {
-                    $tempcss .= $properties;
-                }
-                $tempcss .= '}';
-            }
-            if ($key == 'laptop'):
-                $fullcssfile .= $tempcss;
-            elseif ($key == 'tab'):
-                $fullcssfile .= '@media only screen and (min-width : 669px) and (max-width : 993px){';
-                $fullcssfile .= $tempcss;
-                $fullcssfile .= '}';
-            elseif ($key == 'mobile'):
-                $fullcssfile .= '@media only screen and (max-width : 668px){';
-                $fullcssfile .= $tempcss;
-                $fullcssfile .= '}';
-            endif;
-        }
-        $font = json_encode($this->font);
-        $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET stylesheet = %s WHERE id = %d", $fullcssfile, $styleid));
-        $this->wpdb->query($this->wpdb->prepare("UPDATE {$this->parent_table} SET font_family = %s WHERE id = %d", $font, $styleid));
-        return 'success';
-    }
-
-    /**
-     * Template CSS Render
-     *
-     * @since 2.0.0
-     */
-    public function inline_template_css_render($style) {
-        $styleid = $style['oxi-addons-flip-elements-id'];
-        $this->style = $style;
-        $this->oxiid = $styleid;
-        $this->WRAPPER = '.oxi-addons-flip-wrapper-' . $this->oxiid;
-        ob_start();
-        $dt = $this->register_controls();
-        ob_end_clean();
-        $fullcssfile = '';
-        foreach ($this->CSSDATA as $key => $responsive) {
-            $tempcss = '';
-            foreach ($responsive as $class => $classes) {
-                $tempcss .= $class . '{';
-                foreach ($classes as $properties) {
-                    $tempcss .= $properties;
-                }
-                $tempcss .= '}';
-            }
-            if ($key == 'laptop'):
-                $fullcssfile .= $tempcss;
-            elseif ($key == 'tab'):
-                $fullcssfile .= '@media only screen and (min-width : 669px) and (max-width : 993px){';
-                $fullcssfile .= $tempcss;
-                $fullcssfile .= '}';
-            elseif ($key == 'mobile'):
-                $fullcssfile .= '@media only screen and (max-width : 668px){';
-                $fullcssfile .= $tempcss;
-                $fullcssfile .= '}';
-            endif;
-        }
-        return $fullcssfile;
-    }
-
-    /**
      * Template Parent Render
      *
      * @since 2.0.0
      */
     public function render() {
+
+        wp_enqueue_script('flipbox-admin' . strtolower($this->dbdata['style_name']), OXI_FLIP_BOX_URL . '/asset/backend/js-files/' . strtolower($this->dbdata['style_name']) . '.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         ?>
         <div class="wrap">  
             <div class="oxi-addons-wrapper">
@@ -370,7 +232,6 @@ class Admin_Render {
                 <div class="oxi-addons-row">
                     <?php
                     apply_filters('oxi-flip-box-support-and-comments', TRUE);
-                    $this->modal_form();
                     ?>
                     <div class="oxi-addons-wrapper oxi-addons-flip-tabs-mode">
                         <div class="oxi-addons-settings" id="oxisettingsreload">
@@ -378,37 +239,150 @@ class Admin_Render {
                                 <form method="post" id="oxi-addons-form-submit">
                                     <div class="oxi-addons-style-settings">
                                         <div class="oxi-addons-tabs-wrapper">
-                                            <?php
-                                            $this->register_controls();
-                                            ?>
+                                            <div class="oxi-addons-tabs-wrapper">
+                                                <ul class="oxi-addons-tabs-ul">
+                                                    <li ref="#oxilab-tabs-id-5" class="">
+                                                        General
+                                                    </li>
+                                                    <li ref="#oxilab-tabs-id-4" class="">
+                                                        Front
+                                                    </li>
+                                                    <li ref="#oxilab-tabs-id-3" class="">
+                                                        Backend
+                                                    </li>                                     
+                                                    <li ref="#oxilab-tabs-id-2" class="">
+                                                        Custom CSS
+                                                    </li>
+                                                    <li ref="#oxilab-tabs-id-1">
+                                                        Support
+                                                    </li>
+                                                </ul>
+                                                <div class="oxi-addons-tabs-content">
+                                                    <?php
+                                                    $this->register_controls();
+                                                    ?>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="oxi-addons-setting-save">
-                                            <?php
-                                            if (array_key_exists('css', $this->dbdata) && $this->dbdata['css'] != '' && $this->dbdata['rawdata'] != ''):
-                                                echo '<button type="button" class="btn btn-danger" id="oxi-addons-setting-old-version">Old Version</button>';
-                                            endif;
-                                            ?>
+                                            <?php wp_nonce_field("oxiflipstylecss") ?>
+                                            <input type="hidden" id="style-id" name="style-id" value="<?php echo $this->oxiid; ?>">
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
-                                            <input type="hidden"  id="oxi-addons-flip-2-0-preview" name="oxi-addons-flip-2-0-preview" value="<?php echo(is_array($this->style) ? array_key_exists('oxi-addons-flip-2-0-preview', $this->style) ? $this->style['oxi-addons-flip-2-0-preview'] : '#FFF' : '#FFF'); ?>">
-                                            <input type="hidden"  id="oxi-addons-flip-elements-id" name="oxi-addons-flip-elements-id" value="<?php echo ucfirst($this->dbdata['id']); ?>">
-                                            <input type="hidden"  id="oxi-addons-flip-elements-template" name="oxi-addons-flip-elements-template" value="<?php echo ucfirst(str_replace('-', '_', $this->dbdata['style_name'])); ?>">
-                                            <button type="button" class="btn btn-success" id="oxi-addons-flip-templates-submit"> Save</button>
+                                            <input type="submit" class="btn btn-primary" name="oxi-addons-flip-templates-submit" value="Submit">
                                         </div>
                                     </div> 
                                 </form>
                             </div>
+
                             <div class="oxi-addons-style-right">
-                                <?php
-                                if ($this->form == 'single'):
-                                    $this->shortcode_name();
-                                    $this->shortcode_info();
-                                else:
-                                    $this->modal_opener();
-                                    $this->shortcode_name();
-                                    $this->shortcode_info();
-                                    $this->shortcode_rearrange();
-                                endif;
-                                ?>
+                                <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ">
+                                    <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
+                                        Add New Flip Boxes
+                                        <div class="oxi-head-toggle"></div>
+                                    </div>
+                                    <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body" id="oxi-addons-list-data-modal-open">
+                                        <span>
+                                            <i class="dashicons dashicons-plus-alt oxi-icons"></i>
+                                            Open Flip Boxes Form
+                                        </span>
+                                    </div>
+                                </div>  <div class="oxi-addons-shortcode  shortcode-addons-templates-right-panel ">
+                                    <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
+                                        Shortcode Name
+                                        <div class="oxi-head-toggle"></div>
+                                    </div>
+                                    <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
+                                        <form method="post">
+                                            <div class="input-group my-2">
+                                                <input type="text" class="form-control" name="oxi-addons-name" placeholder=" Set Your Shortcode Name" value="<?php echo $this->dbdata['name']; ?>">
+                                                <div class="input-group-append">
+                                                    <input type="submit" class="btn btn-success" name="addonsstylenamechange" value="Save">
+                                                </div>
+                                            </div>
+                                            <?php wp_nonce_field("oxi-addons-name-change") ?>
+                                        </form>
+                                    </div>
+                                </div>  <div class="oxi-addons-shortcode shortcode-addons-templates-right-panel ">
+                                    <div class="oxi-addons-shortcode-heading  shortcode-addons-templates-right-panel-heading">
+                                        Shortcode
+                                        <div class="oxi-head-toggle"></div>
+                                    </div>
+                                    <div class="oxi-addons-shortcode-body shortcode-addons-templates-right-panel-body">
+                                        <em>Shortcode for posts/pages/plugins</em>
+                                        <p>Copy &amp;
+                                            paste the shortcode directly into any WordPress post, page or Page Builder.</p>
+                                        <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="[oxilab_flip_box id=&quot;<?php echo $this->oxiid; ?>&quot;]">
+                                        <span></span>
+                                        <em>Shortcode for templates/themes</em>
+                                        <p>Copy &amp;
+                                            paste this code into a template file to include the slideshow within your theme.</p>
+                                        <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="<?php echo '<?php echo do_shortcode(\'[oxilab_flip_box  id=&quot;' . $this->oxiid . '&quot;]\'); ?>'; ?>">
+                                        <span></span>
+                                    </div>
+                                </div> 
+                                <div class="oxi-addons-item-form shortcode-addons-templates-right-panel ">
+                                    <div class="oxi-addons-item-form-heading shortcode-addons-templates-right-panel-heading">
+                                        Flipbox Rearrange
+                                        <div class="oxi-head-toggle"></div>
+                                    </div>
+                                    <div class="oxi-addons-item-form-item shortcode-addons-templates-right-panel-body" id="oxi-addons-rearrange-data-modal-open">
+                                        <span>
+                                            <i class="dashicons dashicons-plus-alt oxi-icons"></i>
+                                            Flip Data Rearrange
+                                        </span>
+                                    </div>
+                                </div>
+                                <div id="oxi-addons-list-rearrange-modal" class="modal fade bd-example-modal-sm" role="dialog">
+                                    <div class="modal-dialog modal-sm">
+                                        <form id="oxi-addons-form-rearrange-submit">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Flipbox Rearrange</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="col-12 alert text-center" id="oxi-addons-list-rearrange-saving">
+                                                        <i class="fa fa-spinner fa-spin"></i>
+                                                    </div>
+                                                    <ul class="col-12 list-group oxi-addons-modal-rearrange"  id="oxi-addons-modal-rearrange">
+                                                        <?php
+                                                        $r = $this->Rearrange();
+                                                        foreach ($this->child as $value) {
+                                                            $val = explode('{#}|{#}', $value['files']);
+                                                            if ($r['tag'] == 'title'):
+                                                                echo '<li class="list-group-item" id="' . $value['id'] . '">' . $val[$r['id']] . '</li>';
+                                                            endif;
+                                                        }
+                                                        ?>
+                                                    </ul>
+                                                </div>
+                                                <div class="modal-footer">    
+                                                    <input type="hidden" id="oxi-addons-list-rearrange-data">
+                                                    <button type="button" id="oxi-addons-list-rearrange-close" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                    <input type="submit" id="oxi-addons-list-rearrange-submit" class="btn btn-primary" value="Save">
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>                     
+                            </div>
+                            <div class="modal fade" id="oxi-addons-list-data-modal" >
+                                <div class="modal-dialog">
+                                    <form method="post" id="oxi-flip-template-modal-form">
+                                        <div class="modal-content">
+                                            <?php echo $this->modal_form_data(); ?>
+                                            <div class="modal-footer">
+                                                <input type="hidden" id="item-id" name="item-id" value="<?php echo $this->itemid ?>">
+                                                <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                <input type="submit" id="oxi-flip-template-modal-submit" name="oxi-flip-template-modal-submit" class="btn btn-success" value="Submit">
+                                            </div>
+                                        </div>
+                                        <?php wp_nonce_field("oxiflipchildnonce") ?>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <div class="oxi-addons-Preview" id="oxipreviewreload">
@@ -419,10 +393,10 @@ class Admin_Render {
                                             Preview
                                         </div> 
                                         <div class="oxi-addons-style-left-preview-heading-right">
-                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxi-addons-minicolor" id="oxi-addons-flip-2-0-color" name="oxi-addons-flip-2-0-color" value="<?php echo(is_array($this->style) ? array_key_exists('oxi-addons-flip-2-0-preview', $this->style) ? $this->style['oxi-addons-flip-2-0-preview'] : '#FFF' : '#FFF'); ?>">
+                                            <input type="text" data-format="rgb" data-opacity="TRUE" class="oxilab-vendor-color" id="oxi-addons-flip-2-0-color" value="#FFF" oxiexportid="#oxi-addons-preview-data" oxiexporttype="background">
                                         </div>
                                     </div>
-                                    <div class="oxi-addons-preview-data" id="oxi-addons-preview-data" template-wrapper="<?php echo $this->WRAPPER; ?>" style="background:<?php echo(is_array($this->style) ? array_key_exists('oxi-addons-flip-2-0-preview', $this->style) ? $this->style['oxi-addons-flip-2-0-preview'] : '#FFF' : '#FFF'); ?>">
+                                    <div class="oxi-addons-preview-data" id="oxi-addons-preview-data">
                                         <?php
                                         $cls = '\OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $this->StyleName . '';
                                         new $cls($this->dbdata, $this->child, 'admin');
@@ -432,21 +406,7 @@ class Admin_Render {
                             </div>
                         </div>
                     </div>
-                    <div id="OXIAADDONSCHANGEDPOPUP" class="modal fade">
-                        <div class="modal-dialog modal-confirm  bounceIn ">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="icon-box">
 
-                                    </div>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <h4></h4>	
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
                 </div>
             </div>
         </div>
@@ -476,10 +436,42 @@ class Admin_Render {
 
         $custom .= '|Arial|Helvetica+Neue|Courier+New|Times+New+Roman|Comic+Sans+MS|Verdana|Impact|cursive|inherit';
 
-        $data = '(function($){
-
+        $data = 'jQuery.noConflict();
+                (function($){   setTimeout(function () { 
+                                    $("#oxi-addons-modal-rearrange").sortable({
+                                        axis: "y",
+                                        update: function (event, ui) {
+                                            var list_sortable = jQuery(this).sortable("toArray").toString();
+                                            console.log(list_sortable);
+                                            jQuery("#oxi-addons-list-rearrange-data").val(list_sortable);
+                                        }
+                                    });
+                                }, 2000);
+                                $("#oxi-addons-form-rearrange-submit").on("submit", function (e) {
+                                    e.preventDefault();
+                                    var rawdata = $("#oxi-addons-list-rearrange-data").val();
+                                    $("#oxi-addons-modal-rearrange").hide();
+                                    $("#oxi-addons-list-rearrange-saving").show();
+                                    $.ajax({
+                                        url: "' . admin_url('admin-ajax.php') . '",
+                                        type: "post",
+                                        data: {
+                                            action: "oxi_flip_box_data",
+                                            _wpnonce: "' . wp_create_nonce('oxi-flip-box-editor') . '",
+                                            functionname: "addons_rearrange",
+                                            rawdata: rawdata,
+                                            styleid: "",
+                                            childid: "",
+                                        },
+                                        success: function (response) {
+                                            console.log(response);
+                                            setTimeout(function () {
+                                                location.reload();
+                                            }, 1000);
+                                        }
+                                    });
+                                });
                                 var fontsLoaded = {};
-
                                 $.fn.fontselect = function(options) {
                                         var __bind = function(fn, me) { return function(){ return fn.apply(me, arguments); }; };
 
@@ -784,27 +776,34 @@ class Admin_Render {
                                         });
                                 };
                         })(jQuery);
-                        jQuery(\'.shortcode-addons-family\').fontselect();';
-        
-        
-        if(apply_filters('oxi-flip-box-plugin/pro_version', false) == false):
-            $data .= 'jQuery(".oxi-addons-minicolor").each(function (index, value) {                             
-                            jQuery(this).parent().parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro</span>");
+                        jQuery(\'.oxilab-admin-font\').fontselect();';
+
+
+        if (apply_filters('oxi-flip-box-plugin/pro_version', false) == false):
+            $data .= 'jQuery(".oxilab-vendor-color").each(function (index, value) {                             
+                            jQuery(this).parent().parent().siblings(".col-form-label").append(" <span class=\"oxi-pro-only\">Pro</span>");
                             var datavalue = jQuery(this).val();
                             jQuery(this).attr("oxilabvalue", datavalue);
                         });
-                        jQuery(".shortcode-addons-family").each(function (index, value) {
-                            jQuery(this).parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro</span>");
+                        jQuery(".oxilab-admin-font").each(function (index, value) {
+                            jQuery(this).parent().siblings(".col-form-label").append(" <span class=\"oxi-pro-only\">Pro</span>");
                             var datavalue = jQuery(this).val();
                             jQuery(this).attr("oxilabvalue", datavalue);
                         });
-                        jQuery(".shortcode-addons-gradient-color").each(function (index, value) {
-                            jQuery(this).parent().parent().siblings(".shortcode-form-control-title").append(" <span class=\"oxi-pro-only\">Pro</span>");
-                            var datavalue = jQuery(this).val();
-                            jQuery(this).attr("oxilabvalue", datavalue);
+                        jQuery(".custom-css").each(function (index, value) {
+                            jQuery(this).append(" <span class=\"oxi-pro-only\">Pro Only</span>");
+                        });
+                        jQuery("#oxi-addons-form-submit").on("submit", function (e) {
+                            jQuery(".oxilab-vendor-color").each(function (index, value) {   
+                                jQuery(this).val(jQuery(this).attr("oxilabvalue"));
+                            });
+                            jQuery(".oxilab-admin-font").each(function (index, value) {
+                                jQuery(this).val(jQuery(this).attr("oxilabvalue"));
+                            });
+                            jQuery("#custom-css").val("");
                         });';
         endif;
-        wp_add_inline_script('oxi-flip-box-editor', $data);
+        wp_add_inline_script('oxi-flip-box-addons-vendor', $data);
     }
 
 }

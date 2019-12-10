@@ -71,7 +71,7 @@ class Support_Reviews {
      */
     public function admin_enqueue_scripts() {
         wp_enqueue_script("jquery");
-        wp_enqueue_style('oxilab_flip-admin-notice-css', OXI_FLIP_BOX_URL . '/Assets/Backend/css/notice.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('oxilab_flip-admin-notice-css', OXI_FLIP_BOX_URL . '/asset/backend/css/notice.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         $this->dismiss_button_scripts();
     }
 
@@ -80,7 +80,7 @@ class Support_Reviews {
      * @return void
      */
     public function dismiss_button_scripts() {
-        wp_enqueue_script('oxilab_flip-admin-notice', OXI_FLIP_BOX_URL . '/Assets/Backend/js/admin-notice.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('oxilab_flip-admin-notice', OXI_FLIP_BOX_URL . '/asset/backend/js/admin-notice.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_localize_script('oxilab_flip-admin-notice', 'oxilab_flip_notice_dissmiss', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxilab_flip_notice_dissmiss')));
     }
 

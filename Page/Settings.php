@@ -14,7 +14,7 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  */
 class Settings {
 
-    use \OXI_FLIP_BOX_PLUGINS\Helper\CSS_JS_Loader;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
 
     public $roles;
     public $saved_role;
@@ -76,7 +76,7 @@ class Settings {
                                 <td scope="row">Font Awesome Support</td>
                                 <td>
                                     <input type="radio" name="oxi_addons_font_awesome" value="yes" <?php checked('yes', get_option('oxi_addons_font_awesome'), true); ?>>YES
-                                    <input type="radio" name="oxi_addons_font_awesome" value="" <?php checked('', get_option('oxi_addons_font_awesome'), true); ?>>No
+                                    <input type="radio" name="oxi_addons_font_awesome" value="no" <?php checked('', get_option('oxi_addons_font_awesome'), true); ?>>No
                                 </td>
                                 <td>
                                     <label class="description" for="oxi_addons_font_awesome"><?php _e('Load Font Awesome CSS at shortcode loading, If your theme already loaded select No for faster loading'); ?></label>

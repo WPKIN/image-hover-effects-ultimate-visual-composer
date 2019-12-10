@@ -37,8 +37,8 @@ class Create {
      */
     public $wpdb;
 
-    use \OXI_FLIP_BOX_PLUGINS\Helper\Public_Helper;
-    use \OXI_FLIP_BOX_PLUGINS\Helper\CSS_JS_Loader;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\Public_Helper;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
 
     public $IMPORT = [];
     public $TEMPLATE ;
@@ -74,7 +74,7 @@ class Create {
      * @return void
      */
     public function admin_ajax_load() {
-        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . '/Assets/Backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . '/asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 
@@ -132,7 +132,7 @@ class Create {
                                 if (class_exists($C)):
                                     foreach ($value as $k => $v) {
                                         $REND = json_decode($v, true);
-                                        echo '<div class="oxi-bt-col-lg-4 oxi-bt-col-md-6 oxi-bt-col-sm-12">';
+                                        echo '<div class="oxilab-flip-box-col-3">';
                                         new $C($REND['style'], $REND['child']);
                                         echo '<textarea style="display:none" id="oxistyle' . $number . 'data-' . $k . '">' . htmlentities(json_encode($REND)) . '</textarea>';
                                         echo '</div>';

@@ -14,8 +14,8 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  */
 class Addons {
 
-    use \OXI_FLIP_BOX_PLUGINS\Helper\Public_Helper;
-    use \OXI_FLIP_BOX_PLUGINS\Helper\CSS_JS_Loader;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\Public_Helper;
+    use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
 
     const SHORTCODE_TRANSIENT_EXTENSION = 'shortcode_addons_extension';
     const API = 'https://www.oxilab.org/wp-json/api/extension';
