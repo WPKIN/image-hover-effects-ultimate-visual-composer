@@ -76,7 +76,7 @@ trait Admin_helper {
      * @since 2.0.0
      */
     public function oxilab_admin_menu($agr) {
-        $response = [];//!empty(get_transient(self::ADMINMENU)) ? get_transient(self::ADMINMENU) : [];
+        $response = []; //!empty(get_transient(self::ADMINMENU)) ? get_transient(self::ADMINMENU) : [];
         if (!array_key_exists('Flip Box', $response)):
             $response['Flip Box']['Flip Box'] = [
                 'name' => 'Flip Box',
@@ -204,7 +204,7 @@ trait Admin_helper {
     public function Flip_Extension() {
         new \OXI_FLIP_BOX_PLUGINS\Page\Extension();
     }
-
+    
     public function Flip_Settings() {
         new \OXI_FLIP_BOX_PLUGINS\Page\Settings();
     }

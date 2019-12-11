@@ -62,12 +62,12 @@ class Bootstrap {
         add_action('init', array($this, 'i18n'));
         $this->Shortcode_loader();
         $this->Public_loader();
-        $this->Extension();
         if (is_admin()) {
             $this->Admin_Filters();
             $this->User_Admin();
             $this->User_Reviews();
         }
+        $this->Extension();
     }
 
     /**
@@ -256,7 +256,7 @@ class Bootstrap {
             );
 
             $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
-           
+
             if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
 
                 if (is_wp_error($response)) {

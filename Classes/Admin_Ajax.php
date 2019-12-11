@@ -174,5 +174,10 @@ class Admin_Ajax {
         update_option('oxi-flipbox-active-extension', $params);
         echo $data;
     }
+    public function elementor_extension_active($data = '', $styleid = '', $itemid = '') {
+        parse_str($data, $params);
+        update_option('oxi-flipbox-elementor-extension', $params);
+        print_r($params);
+    }
 
 }
