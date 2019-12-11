@@ -54,6 +54,10 @@ class Installation {
                 'name' => 'Import Templates',
                 'homepage' => 'oxi-flip-box-ultimate-import'
             ];
+            $response['Flip Box']['Extension'] = [
+                'name' => 'Extension',
+                'homepage' => 'oxi-flip-box-ultimate-extension'
+            ];
             $response['Flip Box']['Addons'] = [
                 'name' => 'Addons',
                 'homepage' => 'oxi-flip-box-ultimate-addons'

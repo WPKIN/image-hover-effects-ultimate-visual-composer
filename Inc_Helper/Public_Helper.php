@@ -8,6 +8,29 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
  */
 trait Public_Helper {
 
+    /**
+     * Check dir
+     *
+     * @since 2.0.0
+     */
+    public function check_dir() {
+        return (is_dir(OXI_FLIP_BOX_UPLOAD_PATH) ? TRUE : FALSE);
+    }
+
+    /**
+     * Plugin Pre Installation
+     *
+     * @since 2.0.0
+     */
+    public function create_upload_folder() {
+        $upload = wp_upload_dir();
+        $upload_dir = $upload['basedir'];
+        $dir = $upload_dir . '/oxi-flip-box';
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777);
+        }
+    }
+
     public function html_special_charecter($data) {
         $data = html_entity_decode($data);
         $data = str_replace("\'", "'", $data);
@@ -66,6 +89,41 @@ trait Public_Helper {
                 new $C($style, $child, $user);
             endif;
         endif;
+    }
+
+    public function elements($data = '') {
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        $tmpfile = download_url('https://shortcode-addons.com/Shortcode-Addons/Elements/' . $data . '.zip', $timeout = 500);
+        if (is_string($tmpfile)):
+            $permfile = 'oxilab.zip';
+            $zip = new \ZipArchive();
+            if ($zip->open($tmpfile) !== TRUE):
+                echo 'Problem 2';
+            endif;
+            $zip->extractTo(SA_ADDONS_UPLOAD_PATH);
+            $zip->close();
+            echo 'Done';
+        endif;
+    }
+
+    public function Download_Extension() {
+        if ($this->check_dir() == false):
+            $this->create_upload_folder();
+        endif;
+    }
+
+    public function Extension() {
+        $active = is_array(get_option('oxi-flipbox-active-extension')) ? get_option('oxi-flipbox-active-extension') : [];
+        foreach ($active as $key => $value) {
+            if ($value == 'yes'):
+                $cls = 'OXI_FLIP_BOX_UPLOAD_PATH\\' . ucfirst($key) . '\\' . ucfirst($key);
+                if (!class_exists($cls)):
+                    $this->Download_Extension($key);
+                    return;
+                endif;
+             new $cls;
+            endif;
+        }
     }
 
 }

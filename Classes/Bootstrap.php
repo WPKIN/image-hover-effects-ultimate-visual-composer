@@ -62,6 +62,7 @@ class Bootstrap {
         add_action('init', array($this, 'i18n'));
         $this->Shortcode_loader();
         $this->Public_loader();
+        $this->Extension();
         if (is_admin()) {
             $this->Admin_Filters();
             $this->User_Admin();
