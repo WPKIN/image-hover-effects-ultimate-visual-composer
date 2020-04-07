@@ -77,6 +77,17 @@ class Create {
         wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . '/asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
+     public function Admin_header() {
+        ?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Flipbox › Create New
+                </h1>
+                <p> Select Flipbox layouts, Gives your Flipbox name and create new Flipbox. </p>
+            </div>
+        </div>
+        <?php
+    }
 
     public function Render() {
         ?>
@@ -90,17 +101,7 @@ class Create {
         <?php
     }
 
-    public function Admin_header() {
-        ?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Flipbox › Create New
-                </h1>
-                <p> Select Flipbox layouts, Gives your Flipbox name and create new Flipbox. </p>
-            </div>
-        </div>
-        <?php
-    }
+   
 
     public function template() {
         ?>

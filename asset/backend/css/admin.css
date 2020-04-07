@@ -142,7 +142,7 @@ ADMIN MENU
     text-decoration: none;
     color: #555d66;
     height: 55px;
-    padding: 0 20px;
+    padding: 0 30px;
     cursor: pointer;
     position: relative;
 }
@@ -2669,7 +2669,7 @@ span.multiselect-native-select{position:relative}span.multiselect-native-select 
 
 
 
-/* Shortcode Addons Control Panel */
+/* Flipbox Control Panel */
 
 .shortcode-form-control{
     position: relative;
@@ -3838,8 +3838,6 @@ span.sa-spinner-open-left{
 }
 
 
-
-
 .form-group .form-control{
     height: 28px;
     font-size: 14px;
@@ -3930,251 +3928,4 @@ textarea#custom-css {
 }
 .oxi-addons-modules-action-status .btn.btn-light{
     color: #676767;
-}
-
-input[type=checkbox].oxi-addons-switcher-btn{
-    height: 0;
-    width: 0;
-    visibility: hidden;
-}
-
-label.oxi-addons-switcher-label {
-    cursor: pointer;
-    text-indent: -9999px;
-    width: 48px;
-    height: 24px;
-    background: rgba(128, 128, 128, 0.5);
-    display: block;
-    border-radius: 24px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0 0 0 0 !important;
-    right: 2px;
-}
-
-label.oxi-addons-switcher-label:after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border-radius: 90px;
-    transition: 0.3s;
-}
-
-input.oxi-addons-switcher-btn:checked + label.oxi-addons-switcher-label {
-    background: rgba(50, 222, 212, 1);
-}
-
-input.oxi-addons-switcher-btn:checked + label.oxi-addons-switcher-label:after {
-    left: calc(100% - 2px);
-    transform: translateX(-100%);
-}
-
-label:active:after {
-    width: 35px;
-}
-
-.oxi-sa-cards{
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 30px;
-    margin: 10px;
-    padding: 15px 10px 15px 15px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0px 1px 10px 0px rgba(0, 4, 32, 0.08);
-    transition: all 0.33s;
-    font-family: "Source Sans Pro";
-    overflow: hidden;
-}
-.oxi-sa-cards:hover{
-    box-shadow: 0px 4px 20px 0px rgba(0, 4, 32, 0.08);
-    background-color: rgba(241, 241, 241, 0.28);
-}
-.oxi-sa-cards .pro-label{
-    font-size: 10px;
-    color: #ffffff;
-    text-transform: uppercase;
-    text-align: center;
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    position: absolute;
-    top: 6px;
-    left: -25px;
-    width: 80px;
-    padding: 8px;
-    background: rgba(251, 83, 59, 0.9);
-    box-shadow: 0px 3px 7px 0px rgba(0, 5, 41, 0.1);
-    color: #fff;
-}
-.oxi-sa-cards .oxi-sa-cards-h1{
-    width: calc(100% - 50px);
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-}
-.oxi-sa-cards .oxi-sa-cards-switcher{
-    width: 55px;
-    position: relative;
-}
-.oxi-sa-cards .oxi-sa-cards-settings{
-    display: flex;
-    align-items: center;
-    margin-right: 5px;
-    opacity: 0;
-    transition: all linear 0.2s;
-}
-.oxi-sa-cards:hover .oxi-sa-cards-settings{
-    opacity: 1;
-}
-.oxi-sa-cards .oxi-sa-cards-h1 .oxi-sa-cards-settings {
-    margin-right: 3px;
-}
-.oxi-sa-cards .oxi-sa-cards-h1 .oxi-sa-cards-settings:first-child{
-    margin-left: 8px;
-}
-.oxi-sa-cards .oxi-sa-cards-settings .dashicons{
-    font-size: 14px;
-    animation: none;
-    margin: 0;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;   
-    border-radius: 40px;
-    color: #6c757d;
-    box-shadow: 0 0 2px #6c757d;
-}
-.oxi-sa-cards .oxi-sa-cards-h1 .oxi-sa-cards-settings .dashicons {
-    font-size: 10px;
-    animation: none;
-    margin: 0;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* border: 1px solid #6c757d; */
-    border-radius: 40px;
-    color: #6c757d;
-    box-shadow: 0 0 2px #6c757d;
-}
-
-
-.oxi-sa-cards .oxi-sa-cards-settings .dashicons:hover{
-    color: #ff6138;
-    box-shadow: 0 0 2px #ff6138;
-    cursor: pointer;
-}
-.oxi-addons-ce-heading{
-    position: absolute;
-    font-size: 30px;
-    text-align: left;
-    font-weight: 600;
-    font-style: normal;
-    line-height: 1;
-    font-family: "Source Sans Pro";
-    padding: 20px 10px 20px 25px;
-    top: 0px;
-    left: 0;
-    right: 0;
-    cursor: pointer;
-    border-radius: 5px 5px 0 0;
-}
-.oxi-addons-ce-heading:hover{
-    background: #f7f8fc;
-}
-.oxi-addons-ce-heading:before{
-    font-family: dashicons;
-    position: absolute;
-    color: #727272;
-    font-size: 40px;
-    right: 15px;
-    height: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    content: "\f140";
-}
-.oxi-sa-cards-hidden .oxi-addons-ce-heading:before{
-    content: "\f139";
-}
-.oxi-sa-cards-wrapper.oxi-sa-cards-hidden{
-    padding-top: 40px;
-    overflow: hidden;
-} 
-.oxi-sa-cards-hidden .row{
-    height: 0px;
-    overflow: hidden;
-}
-.oxi-sa-cards-wrapper {
-    border: 1px solid rgba(197, 197, 197, 0.50);
-    padding: 20px 20px 30px;
-    background: #fff;
-    border-radius: 5px;
-    margin: 0 0 0 0;
-    margin-bottom: 60px;
-    padding-top: 100px;
-    position: relative;
-}
-
-.oxi-addons-wrapper .sa-el-btn{
-    background-color: #0099cc;
-    color: #fff;
-    padding: 6px 20px;
-    border: none;
-    box-shadow: none;
-    font-size: 14px;
-    height: auto;
-    text-transform: uppercase;
-    text-shadow: none;
-    letter-spacing: 0.05em;
-    align-items: center;
-    justify-content: center;
-    display: inline-flex;
-}
-
-.sa-el-btn-group{
-    text-align: center;
-    width: 100%;
-    float: left;
-    margin-bottom: 50px;
-}
-.oxi-addons-wrapper .sa-el-btn-control-enable,
-.oxi-addons-wrapper .sa-el-btn-control-disable{
-    cursor: pointer;
-    border-radius: 3px;
-    margin: 5px 10px;
-    color: #fff;
-    background-color: rgba(50, 222, 212, 1);
-    width: 130px;
-    height: 45px;
-    transition: all 300ms ease-in-out;
-}
-.oxi-addons-wrapper .sa-el-btn-control-enable:hover,
-.oxi-addons-wrapper .sa-el-btn-control-enable:focus{
-    background: rgb(42, 169, 162);
-    color: #fff;
-}
-.oxi-addons-wrapper .sa-el-btn-control-disable{
-    background: #e74c3c;
-}
-.oxi-addons-wrapper .sa-el-btn-control-disable:hover,
-.oxi-addons-wrapper .sa-el-btn-control-disable:focus{
-    color: #fff;
-    background:#ab1202;
-
 }

@@ -13,6 +13,10 @@ trait CSS_JS_Loader {
             wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
         }
     }
+     public function str_replace_first($from, $to, $content) {
+        $from = '/' . preg_quote($from, '/') . '/';
+        return preg_replace($from, $to, $content, 1);
+    }
 
     public function admin_css() {
         $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
@@ -77,9 +81,6 @@ trait CSS_JS_Loader {
         wp_enqueue_script('oxi-flip-box_media_scripts');
     }
 
-    public function str_replace_first($from, $to, $content) {
-        $from = '/' . preg_quote($from, '/') . '/';
-        return preg_replace($from, $to, $content, 1);
-    }
+   
 
 }

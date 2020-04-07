@@ -138,20 +138,7 @@ class Admin_Ajax {
         else:
             echo 'Silence is Golden';
         endif;
-    }
-
-    public function shortcode_active($data = '', $styleid = '', $itemid = '') {
-        parse_str($data, $params);
-        $styleid = (int) $params['oxiimportstyle'];
-        if ($styleid):
-            $flip = 'flip';
-            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES (%s, %d)", array($flip, $styleid)));
-            echo admin_url("admin.php?page=oxi-flip-box-ultimate-new#Style" . $styleid);
-        else:
-            echo 'Silence is Golden';
-        endif;
-    }
-
+    } 
     public function addons_rearrange($data = '', $styleid = '', $itemid = '') {
         $list = explode(',', $data);
         foreach ($list as $value) {
@@ -169,15 +156,17 @@ class Admin_Ajax {
         return;
     }
 
-    public function extension_active($data = '', $styleid = '', $itemid = '') {
+    public function shortcode_active($data = '', $styleid = '', $itemid = '') {
         parse_str($data, $params);
-        update_option('oxi-flipbox-active-extension', $params);
-        echo $data;
-    }
-    public function elementor_extension_active($data = '', $styleid = '', $itemid = '') {
-        parse_str($data, $params);
-        update_option('oxi-flipbox-elementor-extension', $params);
-        print_r($params);
+        $styleid = (int) $params['oxiimportstyle'];
+        if ($styleid):
+            $flip = 'flip';
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES (%s, %d)", array($flip, $styleid)));
+            echo admin_url("admin.php?page=oxi-flip-box-ultimate-new#Style" . $styleid);
+        else:
+            echo 'Silence is Golden';
+        endif;
     }
 
+   
 }

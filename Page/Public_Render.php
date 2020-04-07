@@ -166,14 +166,6 @@ class Public_Render {
         $this->default_render($this->style, $this->child, $this->admin);
         echo '</div>';
     }
-
-    public function name_converter($data) {
-        $data = str_replace('_', ' ', $data);
-        $data = str_replace('-', ' ', $data);
-        $data = str_replace('+', ' ', $data);
-        return ucwords($data);
-    }
-
     public function font_familly($data = '') {
         wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
         $data = str_replace('+', ' ', $data);
@@ -187,6 +179,15 @@ class Public_Render {
         $data = str_replace('+', ' ', $data);
         return ucwords($data);
     }
+
+    public function name_converter($data) {
+        $data = str_replace('_', ' ', $data);
+        $data = str_replace('-', ' ', $data);
+        $data = str_replace('+', ' ', $data);
+        return ucwords($data);
+    }
+
+    
 
     public function text_render($data) {
         return do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false);

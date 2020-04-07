@@ -17,7 +17,7 @@ class Installation {
     const ADMINMENU = 'get_oxilab_addons_menu';
 
     /**
-     * Constructor of Shortcode Addons
+     * Constructor of Flipbox Plugins
      *
      * @since 2.0.0
      */
@@ -34,47 +34,7 @@ class Installation {
 
         return self::$lfe_instance;
     }
-
-    /**
-     * Get  Oxi Tabs Menu.
-     * @return mixed
-     */
-    public function Tabs_Menu() {
-        $response = !empty(get_transient(self::ADMINMENU)) ? get_transient(self::ADMINMENU) : [];
-        if (!array_key_exists('Flip Box', $response)):
-            $response['Flip Box']['Flip Box'] = [
-                'name' => 'Flip Box',
-                'homepage' => 'oxi-flip-box-ultimate'
-            ];
-            $response['Flip Box']['Create New'] = [
-                'name' => 'Create New',
-                'homepage' => 'oxi-flip-box-ultimate-new'
-            ];
-            $response['Flip Box']['Import Templates'] = [
-                'name' => 'Import Templates',
-                'homepage' => 'oxi-flip-box-ultimate-import'
-            ];
-            $response['Flip Box']['Extension'] = [
-                'name' => 'Extension',
-                'homepage' => 'oxi-flip-box-ultimate-extension'
-            ];
-            $response['Flip Box']['Addons'] = [
-                'name' => 'Addons',
-                'homepage' => 'oxi-flip-box-ultimate-addons'
-            ];
-            set_transient(self::ADMINMENU, $response, 10 * DAY_IN_SECONDS);
-        endif;
-    }
-
-    /**
-     * Get  Oxi Tabs Menu Deactive.
-     * @return mixed
-     */
-    public function Admin_Menu_Deactive() {
-        delete_transient(self::ADMINMENU);
-    }
-    
-    
+      
 
     public function Flip_Datatase() {
         global $wpdb;
@@ -121,12 +81,49 @@ class Installation {
     }
 
     /**
+     * Get  Oxi Flipbox Menu.
+     * @return mixed
+     */
+    public function Flipbox_Menu() {
+        $response = !empty(get_transient(self::ADMINMENU)) ? get_transient(self::ADMINMENU) : [];
+        if (!array_key_exists('Flip Box', $response)):
+            $response['Flip Box']['Flip Box'] = [
+                'name' => 'Flip Box',
+                'homepage' => 'oxi-flip-box-ultimate'
+            ];
+            $response['Flip Box']['Create New'] = [
+                'name' => 'Create New',
+                'homepage' => 'oxi-flip-box-ultimate-new'
+            ];
+            $response['Flip Box']['Import Templates'] = [
+                'name' => 'Import Templates',
+                'homepage' => 'oxi-flip-box-ultimate-import'
+            ];
+            $response['Flip Box']['Addons'] = [
+                'name' => 'Addons',
+                'homepage' => 'oxi-flip-box-ultimate-addons'
+            ];
+            set_transient(self::ADMINMENU, $response, 10 * DAY_IN_SECONDS);
+        endif;
+    }
+
+    /**
+     * Get  Oxi Flipbox Menu Deactive.
+     * @return mixed
+     */
+    public function Admin_Menu_Deactive() {
+        delete_transient(self::ADMINMENU);
+    }
+    
+  
+
+    /**
      * Plugin activation hook
      *
      * @since 3.1.0
      */
     public function plugin_activation_hook() {
-        $this->Tabs_Menu();
+        $this->Flipbox_Menu();
         $this->Flip_Datatase();
         // Redirect to options page
         set_transient('oxi_flip_box_activation_redirect', true, 30);
@@ -149,7 +146,7 @@ class Installation {
     public function plugin_upgrade_hook($upgrader_object, $options) {
         if ($options['action'] == 'update' && $options['type'] == 'plugin') {
             if (isset($options['plugins'][OXI_FLIP_BOX_TEXTDOMAIN])) {
-                $this->Tabs_Menu();
+                $this->Flipbox_Menu();
                 $this->Flip_Datatase();
             }
         }

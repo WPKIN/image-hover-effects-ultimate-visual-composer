@@ -35,11 +35,12 @@ class Support_Recommended {
         $installed_plugins = get_plugins();
         $plugin = '';
         $active = array_flip(get_option('active_plugins'));
-        if (isset($active['elementor/elementor.php'])):
-            if (!isset($installed_plugins['sb-image-hover-effects/index.php'])):
-                $plugin = 'sb-image-hover-effects';
-            endif;
-        elseif (!isset($installed_plugins['shortcode-addons/index.php'])):
+//        if (isset($active['elementor/elementor.php'])):
+//            if (!isset($installed_plugins['sb-image-hover-effects/index.php'])):
+//                $plugin = 'sb-image-hover-effects';
+//            endif;
+//        else
+            if (!isset($installed_plugins['shortcode-addons/index.php'])):
             $plugin = 'shortcode-addons';
         endif;
         if (!empty($plugin)):

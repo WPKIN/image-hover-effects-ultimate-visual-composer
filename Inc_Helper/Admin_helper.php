@@ -76,7 +76,7 @@ trait Admin_helper {
      * @since 2.0.0
      */
     public function oxilab_admin_menu($agr) {
-        $response = []; //!empty(get_transient(self::ADMINMENU)) ? get_transient(self::ADMINMENU) : [];
+        $response = !empty(get_transient(self::ADMINMENU)) ? get_transient(self::ADMINMENU) : [];
         if (!array_key_exists('Flip Box', $response)):
             $response['Flip Box']['Flip Box'] = [
                 'name' => 'Flip Box',
@@ -90,15 +90,10 @@ trait Admin_helper {
                 'name' => 'Import Templates',
                 'homepage' => 'oxi-flip-box-ultimate-import'
             ];
-            $response['Flip Box']['Extension'] = [
-                'name' => 'Extension',
-                'homepage' => 'oxi-flip-box-ultimate-extension'
-            ];
             $response['Flip Box']['Addons'] = [
                 'name' => 'Addons',
                 'homepage' => 'oxi-flip-box-ultimate-addons'
             ];
-
             set_transient(self::ADMINMENU, $response, 10 * DAY_IN_SECONDS);
         endif;
         $bgimage = OXI_FLIP_BOX_URL . 'image/sa-logo.png';
@@ -168,10 +163,9 @@ trait Admin_helper {
             $first_key = 'manage_options';
         }
         add_menu_page('Flip Box', 'Flip Box', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Flip Box', 'Flip Box Ultimate', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
+        add_submenu_page('oxi-flip-box-ultimate', 'Flip Box', 'Flip Box', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
         add_submenu_page('oxi-flip-box-ultimate', 'Create New', 'Create New', $first_key, 'oxi-flip-box-ultimate-new', [$this, 'Flip_Create']);
         add_submenu_page('oxi-flip-box-ultimate', 'Import Templates', 'Import Templates', $first_key, 'oxi-flip-box-ultimate-import', [$this, 'Flip_Import']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Extension', 'Extension', $first_key, 'oxi-flip-box-ultimate-extension', [$this, 'Flip_Extension']);
         add_submenu_page('oxi-flip-box-ultimate', 'Oxilab Addons', 'Oxilab Addons', $first_key, 'oxi-flip-box-ultimate-addons', [$this, 'Flip_Addons']);
         add_submenu_page('oxi-flip-box-ultimate', 'Settings', 'Settings', $first_key, 'oxi-flip-box-ultimate-settings', [$this, 'Flip_Settings']);
         add_dashboard_page('Welcome To Flipbox - Awesomes Flip Boxes Image Overlay', 'Welcome To Flipbox - Awesomes Flip Boxes Image Overlay', 'read', 'oxi-flip-box-activation', [$this, 'oxi_flip_box_activation']);
@@ -201,10 +195,6 @@ trait Admin_helper {
         new \OXI_FLIP_BOX_PLUGINS\Page\Addons();
     }
 
-    public function Flip_Extension() {
-        new \OXI_FLIP_BOX_PLUGINS\Page\Extension();
-    }
-    
     public function Flip_Settings() {
         new \OXI_FLIP_BOX_PLUGINS\Page\Settings();
     }
@@ -227,7 +217,46 @@ trait Admin_helper {
         endif;
         die();
     }
+     public function redirect_on_activation() {
+        if (get_transient('oxi_flip_box_activation_redirect')):
+            delete_transient('oxi_flip_box_activation_redirect');
+            if (is_network_admin() || isset($_GET['activate-multi'])):
+                return;
+            endif;
+            wp_safe_redirect(admin_url("admin.php?page=oxi-flip-box-activation"));
+        endif;
+    }
 
+    public function welcome_remove_menus() {
+        remove_submenu_page('index.php', 'oxi-flip-box-activation');
+    }
+
+    
+
+    public function User_Reviews() {
+        $this->admin_recommended();
+        $this->admin_notice();
+    }
+
+    /**
+     * Admin Notice Check
+     *
+     * @since 2.0.0
+     */
+    public function admin_recommended_status() {
+        $data = get_option('oxilab_flip_box_recommended');
+        return $data;
+    }
+
+    public function admin_recommended() {
+        if (!empty($this->admin_recommended_status())):
+            return;
+        endif;
+        if (strtotime('-1 day') < $this->installation_date()):
+            return;
+        endif;
+        new \OXI_FLIP_BOX_PLUGINS\Classes\Support_Recommended();
+    }
     /**
      * Admin Notice Check
      *
@@ -252,31 +281,6 @@ trait Admin_helper {
         return $data;
     }
 
-    public function User_Reviews() {
-        $this->admin_recommended();
-        $this->admin_notice();
-    }
-
-    /**
-     * Admin Notice Check
-     *
-     * @since 2.0.0
-     */
-    public function admin_recommended_status() {
-        $data = get_option('oxilab_flip_box_recommended');
-        return $data;
-    }
-
-    public function admin_recommended() {
-        if (!empty($this->admin_recommended_status())):
-            return;
-        endif;
-        if (strtotime('-30 minute') < $this->installation_date()):
-            return;
-        endif;
-        new \OXI_FLIP_BOX_PLUGINS\Classes\Support_Recommended();
-    }
-
     public function admin_notice() {
         if (!empty($this->admin_notice_status())):
             return;
@@ -287,18 +291,6 @@ trait Admin_helper {
         new \OXI_FLIP_BOX_PLUGINS\Classes\Support_Reviews();
     }
 
-    public function redirect_on_activation() {
-        if (get_transient('oxi_flip_box_activation_redirect')):
-            delete_transient('oxi_flip_box_activation_redirect');
-            if (is_network_admin() || isset($_GET['activate-multi'])):
-                return;
-            endif;
-            wp_safe_redirect(admin_url("admin.php?page=oxi-flip-box-activation"));
-        endif;
-    }
-
-    public function welcome_remove_menus() {
-        remove_submenu_page('index.php', 'oxi-flip-box-activation');
-    }
+   
 
 }

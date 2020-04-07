@@ -67,7 +67,6 @@ class Bootstrap {
             $this->User_Admin();
             $this->User_Reviews();
         }
-        $this->Extension();
     }
 
     /**
@@ -89,9 +88,9 @@ class Bootstrap {
     protected function Shortcode_loader() {
         add_shortcode('oxilab_flip_box', [$this, 'wp_shortcode']);
         new \OXI_FLIP_BOX_PLUGINS\Modules\Visual_Composer();
-        $Tabs_Widget = new \OXI_FLIP_BOX_PLUGINS\Modules\Widget();
+        $Flipbox_Widget = new \OXI_FLIP_BOX_PLUGINS\Modules\Widget();
         add_filter('widget_text', 'do_shortcode');
-        add_action('widgets_init', array($Tabs_Widget, 'flip_register_flipwidget'));
+        add_action('widgets_init', array($Flipbox_Widget, 'flip_register_flipwidget'));
     }
 
     /**
@@ -214,7 +213,7 @@ class Bootstrap {
 
                         case 'item_name_mismatch' :
 
-                            $message = sprintf(__('This appears to be an invalid license key for %s.'), Responsive_Tabs_with_Accordions);
+                            $message = sprintf(__('This appears to be an invalid license key for %s.'), OXI_FLIP_BOX_TEXTDOMAIN);
                             break;
 
                         case 'no_activations_left':
@@ -256,7 +255,7 @@ class Bootstrap {
             );
 
             $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
-
+           
             if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
 
                 if (is_wp_error($response)) {

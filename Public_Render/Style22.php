@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 /**
  * Description of Style_1
- * Content of Shortcode Addons Plugins
+ * Content of Flipbox Plugins
  *
  * @author $biplob018
  */

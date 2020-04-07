@@ -54,6 +54,10 @@ class Home {
         $this->CSSJS_load();
         $this->Render();
     }
+    
+    public function database_data() {
+        return $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->parent_table WHERE type = %s ", 'flip'), ARRAY_A);
+    }
 
     public function CSSJS_load() {
         $this->admin_css_loader();
@@ -95,9 +99,6 @@ class Home {
         <?php
     }
 
-    public function database_data() {
-        return $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->parent_table WHERE type = %s ", 'flip'), ARRAY_A);
-    }
 
     public function created_shortcode() {
         $return = _(' <div class="oxi-addons-row"> <div class="oxi-addons-row table-responsive abop" style="margin-bottom: 20px; opacity: 0; height: 0px">

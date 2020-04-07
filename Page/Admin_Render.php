@@ -85,7 +85,7 @@ class Admin_Render {
     public $nonce;
 
     /**
-     * Define Shortcode Addons Elements Type
+     * Define Flipbox Plugins Elements Type
      *
      * @since 2.0.0
      */
@@ -163,6 +163,17 @@ class Admin_Render {
         }
     }
 
+    public function Delete_child_data() {
+        if (!empty($_POST['delete']) && is_numeric($_POST['item-id'])) {
+            if (!wp_verify_nonce($this->nonce, 'oxiflipdeletedata')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                $item_id = (int) $_POST['item-id'];
+                $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->child_table} WHERE id = %d ", $item_id));
+            }
+        }
+    }
+
     public function child_edit() {
         if (!empty($_POST['edit']) && is_numeric($_POST['item-id'])) {
             if (!wp_verify_nonce($this->nonce, 'oxiflipeditdata')) {
@@ -173,17 +184,6 @@ class Admin_Render {
                 $this->child_editable = explode('{#}|{#}', $child['files']);
                 $this->itemid = $child['id'];
                 echo '<script type="text/javascript"> jQuery(document).ready(function () {setTimeout(function() { jQuery("#oxi-addons-list-data-modal").modal("show")  }, 500); });</script>';
-            }
-        }
-    }
-
-    public function Delete_child_data() {
-        if (!empty($_POST['delete']) && is_numeric($_POST['item-id'])) {
-            if (!wp_verify_nonce($this->nonce, 'oxiflipdeletedata')) {
-                die('You do not have sufficient permissions to access this page.');
-            } else {
-                $item_id = (int) $_POST['item-id'];
-                $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->child_table} WHERE id = %d ", $item_id));
             }
         }
     }
