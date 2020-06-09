@@ -96,6 +96,26 @@ class Style29 extends Public_Render {
                             echo $this->admin_edit_panel($value['id']);
                             ?>
                         </div>
+                          <style>
+                <?php
+                if ($filesdata[5] != '') {
+                    echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-' . $styleid . '{
+                                background: linear-gradient(' . $styledata[5] . ', ' . $styledata[5] . '), url("' . $filesdata[5] . '");
+                                -moz-background-size: 100% 100%;
+                                -o-background-size: 100% 100%;
+                                background-size: 100% 100%;
+                            }';
+                }
+                if ($filesdata[13] != '') {
+                    echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-back-' . $styleid . '{
+                            background: linear-gradient(' . $styledata[15] . ', ' . $styledata[15] . '), url("' . $filesdata[13] . '");
+                            -moz-background-size: 100% 100%;
+                            -o-background-size: 100% 100%;
+                            background-size: 100% 100%;
+                        }';
+                }
+                ?>
+                        </style>
                     </div>
                     <?php
                 endif;
