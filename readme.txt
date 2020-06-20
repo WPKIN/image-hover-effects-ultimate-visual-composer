@@ -249,7 +249,6 @@ If You acquired the Flipbox - Awesomes Flip Boxes Image Overlay and have not rec
 
 == Changelog ==
 = 2.4.2 = 
-*Added Elementor Extension
 *Solved Style 29 Bugs
 
 = 2.4.1 = 
@@ -295,6 +294,9 @@ If You acquired the Flipbox - Awesomes Flip Boxes Image Overlay and have not rec
 * Added 23+ responsive layout
 
 == Upgrade Notice ==
+= 2.4.2 = 
+Solved Style 29 Bugs
+
 = 2.4.1 = 
 Resolved Admin Bugs with Style
 
