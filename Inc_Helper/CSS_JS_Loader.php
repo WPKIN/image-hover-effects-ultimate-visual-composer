@@ -43,6 +43,17 @@ trait CSS_JS_Loader {
         wp_enqueue_script('jquery.dataTables.min', OXI_FLIP_BOX_URL . '/asset/backend/js/jquery.dataTables.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('dataTables.bootstrap.min', OXI_FLIP_BOX_URL . '/asset/backend/js/dataTables.bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
+     /**
+     * Admin Media Scripts.
+     * Most of time using into Style Editing Page
+     * 
+     * @since 2.0.0
+     */
+    public function admin_media_scripts() {
+        wp_enqueue_media();
+        wp_register_script('oxi-flip-box_media_scripts', OXI_FLIP_BOX_URL . '/asset/backend/js/media-uploader.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-flip-box_media_scripts');
+    }
 
     public function admin_css_loader() {
         $this->admin_css();
@@ -69,17 +80,7 @@ trait CSS_JS_Loader {
         $this->admin_media_scripts();
     }
 
-    /**
-     * Admin Media Scripts.
-     * Most of time using into Style Editing Page
-     * 
-     * @since 2.0.0
-     */
-    public function admin_media_scripts() {
-        wp_enqueue_media();
-        wp_register_script('oxi-flip-box_media_scripts', OXI_FLIP_BOX_URL . '/asset/backend/js/media-uploader.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('oxi-flip-box_media_scripts');
-    }
+   
 
    
 

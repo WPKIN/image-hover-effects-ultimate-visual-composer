@@ -41,7 +41,7 @@ class Create {
     use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
 
     public $IMPORT = [];
-    public $TEMPLATE ;
+    public $TEMPLATE;
 
     /**
      * Constructor of Oxilab tabs Home Page
@@ -58,6 +58,15 @@ class Create {
         $this->Render();
     }
 
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_ajax_load() {
+        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . '/asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
+    }
+
     public function CSSJS_load() {
         $this->admin_css_loader();
         $this->admin_ajax_load();
@@ -69,15 +78,7 @@ class Create {
         $this->TEMPLATE = include OXI_FLIP_BOX_PATH . 'Page/JSON.php';
     }
 
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_ajax_load() {
-        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . '/asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
-        wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
-    }
-     public function Admin_header() {
+    public function Admin_header() {
         ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
@@ -100,8 +101,6 @@ class Create {
         </div>
         <?php
     }
-
-   
 
     public function template() {
         ?>

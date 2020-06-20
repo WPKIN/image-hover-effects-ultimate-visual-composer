@@ -90,16 +90,7 @@ class Admin_Ajax {
         endif;
     }
 
-    public function shortcode_delete($data = '', $styleid = '', $itemid = '') {
-        $styleid = (int) $styleid;
-        if ($styleid):
-            $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->parent_table} WHERE id = %d", $styleid));
-            $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->child_table} WHERE styleid = %d", $styleid));
-            echo 'done';
-        else:
-            echo 'Silence is Golden';
-        endif;
-    }
+  
 
     public function shortcode_export($data = '', $styleid = '', $itemid = '') {
         $styleid = (int) $styleid;
@@ -163,6 +154,16 @@ class Admin_Ajax {
             $flip = 'flip';
             $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES (%s, %d)", array($flip, $styleid)));
             echo admin_url("admin.php?page=oxi-flip-box-ultimate-new#Style" . $styleid);
+        else:
+            echo 'Silence is Golden';
+        endif;
+    }
+      public function shortcode_delete($data = '', $styleid = '', $itemid = '') {
+        $styleid = (int) $styleid;
+        if ($styleid):
+            $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->parent_table} WHERE id = %d", $styleid));
+            $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->child_table} WHERE styleid = %d", $styleid));
+            echo 'done';
         else:
             echo 'Silence is Golden';
         endif;

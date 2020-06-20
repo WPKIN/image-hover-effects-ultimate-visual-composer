@@ -115,16 +115,7 @@ class Admin_Render {
         $this->Delete_child_data();
     }
 
-    public function rename_shortcode() {
-        if (!empty($_POST['addonsstylenamechange']) && $_POST['addonsstylenamechange'] == 'Save') {
-            if (!wp_verify_nonce($this->nonce, 'oxi-addons-name-change')) {
-                die('You do not have sufficient permissions to access this page.');
-            } else {
-                $name = sanitize_text_field($_POST['oxi-addons-name']);
-                $this->wpdb->query($this->wpdb->prepare("UPDATE $this->parent_table SET name = %s WHERE id = %d", $name, $this->oxiid));
-            }
-        }
-    }
+   
 
     public function style() {
         return '';
@@ -162,6 +153,19 @@ class Admin_Render {
             }
         }
     }
+      public function child_edit() {
+        if (!empty($_POST['edit']) && is_numeric($_POST['item-id'])) {
+            if (!wp_verify_nonce($this->nonce, 'oxiflipeditdata')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                $item_id = (int) $_POST['item-id'];
+                $child = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->child_table . ' WHERE id = %d ', $item_id), ARRAY_A);
+                $this->child_editable = explode('{#}|{#}', $child['files']);
+                $this->itemid = $child['id'];
+                echo '<script type="text/javascript"> jQuery(document).ready(function () {setTimeout(function() { jQuery("#oxi-addons-list-data-modal").modal("show")  }, 500); });</script>';
+            }
+        }
+    }
 
     public function Delete_child_data() {
         if (!empty($_POST['delete']) && is_numeric($_POST['item-id'])) {
@@ -174,16 +178,14 @@ class Admin_Render {
         }
     }
 
-    public function child_edit() {
-        if (!empty($_POST['edit']) && is_numeric($_POST['item-id'])) {
-            if (!wp_verify_nonce($this->nonce, 'oxiflipeditdata')) {
+  
+     public function rename_shortcode() {
+        if (!empty($_POST['addonsstylenamechange']) && $_POST['addonsstylenamechange'] == 'Save') {
+            if (!wp_verify_nonce($this->nonce, 'oxi-addons-name-change')) {
                 die('You do not have sufficient permissions to access this page.');
             } else {
-                $item_id = (int) $_POST['item-id'];
-                $child = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->child_table . ' WHERE id = %d ', $item_id), ARRAY_A);
-                $this->child_editable = explode('{#}|{#}', $child['files']);
-                $this->itemid = $child['id'];
-                echo '<script type="text/javascript"> jQuery(document).ready(function () {setTimeout(function() { jQuery("#oxi-addons-list-data-modal").modal("show")  }, 500); });</script>';
+                $name = sanitize_text_field($_POST['oxi-addons-name']);
+                $this->wpdb->query($this->wpdb->prepare("UPDATE $this->parent_table SET name = %s WHERE id = %d", $name, $this->oxiid));
             }
         }
     }

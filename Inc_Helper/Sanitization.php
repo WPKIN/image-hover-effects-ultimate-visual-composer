@@ -15,7 +15,32 @@ trait Sanitization {
 
     
 
-    public function oxilab_flip_box_flip_type_effects_type($flip_type, $effects_Type) {
+  
+    public function admin_special_charecter($data) {
+        $data = str_replace('\\\\"', '&quot;', $data);
+        $data = str_replace('\\\"', '&quot;', $data);
+        $data = str_replace('\\"', '&quot;', $data);
+        $data = str_replace('\"', '&quot;', $data);
+        $data = str_replace('"', '&quot;', $data);
+        $data = str_replace('\\\\&quot;', '&quot;', $data);
+        $data = str_replace('\\\&quot;', '&quot;', $data);
+        $data = str_replace('\\&quot;', '&quot;', $data);
+        $data = str_replace('\&quot;', '&quot;', $data);
+        $data = str_replace("\\\\'", '&apos;', $data);
+        $data = str_replace("\\\'", '&apos;', $data);
+        $data = str_replace("\\'", '&apos;', $data);
+        $data = str_replace("\'", '&apos;', $data);
+        $data = str_replace("\\\\&apos;", '&apos;', $data);
+        $data = str_replace("\\\&apos;", '&apos;', $data);
+        $data = str_replace("\\&apos;", '&apos;', $data);
+        $data = str_replace("\&apos;", '&apos;', $data);
+        $data = str_replace("'", '&apos;', $data);
+        $data = str_replace('<', '&lt;', $data);
+        $data = str_replace('>', '&gt;', $data);
+        $data = sanitize_text_field($data);
+        return $data;
+    }
+      public function oxilab_flip_box_flip_type_effects_type($flip_type, $effects_Type) {
         ?>
         <div class="form-group row form-group-sm">
             <label for="oxilab-flip-type" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Select Flip Type to use into this Flip">Flip Type </label>
@@ -67,30 +92,6 @@ trait Sanitization {
             </div>
         </div>
         <?php
-    }
-    public function admin_special_charecter($data) {
-        $data = str_replace('\\\\"', '&quot;', $data);
-        $data = str_replace('\\\"', '&quot;', $data);
-        $data = str_replace('\\"', '&quot;', $data);
-        $data = str_replace('\"', '&quot;', $data);
-        $data = str_replace('"', '&quot;', $data);
-        $data = str_replace('\\\\&quot;', '&quot;', $data);
-        $data = str_replace('\\\&quot;', '&quot;', $data);
-        $data = str_replace('\\&quot;', '&quot;', $data);
-        $data = str_replace('\&quot;', '&quot;', $data);
-        $data = str_replace("\\\\'", '&apos;', $data);
-        $data = str_replace("\\\'", '&apos;', $data);
-        $data = str_replace("\\'", '&apos;', $data);
-        $data = str_replace("\'", '&apos;', $data);
-        $data = str_replace("\\\\&apos;", '&apos;', $data);
-        $data = str_replace("\\\&apos;", '&apos;', $data);
-        $data = str_replace("\\&apos;", '&apos;', $data);
-        $data = str_replace("\&apos;", '&apos;', $data);
-        $data = str_replace("'", '&apos;', $data);
-        $data = str_replace('<', '&lt;', $data);
-        $data = str_replace('>', '&gt;', $data);
-        $data = sanitize_text_field($data);
-        return $data;
     }
 
     public function oxilab_flip_box_admin_input_text($id, $value, $name, $title) {
