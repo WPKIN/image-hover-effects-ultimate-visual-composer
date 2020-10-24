@@ -34,6 +34,32 @@ class Installation {
 
         return self::$lfe_instance;
     }
+      /**
+     * Get  Oxi Flipbox Menu.
+     * @return mixed
+     */
+    public function Flipbox_Menu() {
+        $response = !empty(get_transient(self::ADMINMENU)) ? get_transient(self::ADMINMENU) : [];
+        if (!array_key_exists('Flip Box', $response)):
+            $response['Flip Box']['Flip Box'] = [
+                'name' => 'Flip Box',
+                'homepage' => 'oxi-flip-box-ultimate'
+            ];
+            $response['Flip Box']['Create New'] = [
+                'name' => 'Create New',
+                'homepage' => 'oxi-flip-box-ultimate-new'
+            ];
+            $response['Flip Box']['Import Templates'] = [
+                'name' => 'Import Templates',
+                'homepage' => 'oxi-flip-box-ultimate-import'
+            ];
+            $response['Flip Box']['Addons'] = [
+                'name' => 'Addons',
+                'homepage' => 'oxi-flip-box-ultimate-addons'
+            ];
+            set_transient(self::ADMINMENU, $response, 10 * DAY_IN_SECONDS);
+        endif;
+    }
 
     public function Flip_Datatase() {
         global $wpdb;
@@ -114,32 +140,7 @@ class Installation {
         }
     }
 
-    /**
-     * Get  Oxi Flipbox Menu.
-     * @return mixed
-     */
-    public function Flipbox_Menu() {
-        $response = !empty(get_transient(self::ADMINMENU)) ? get_transient(self::ADMINMENU) : [];
-        if (!array_key_exists('Flip Box', $response)):
-            $response['Flip Box']['Flip Box'] = [
-                'name' => 'Flip Box',
-                'homepage' => 'oxi-flip-box-ultimate'
-            ];
-            $response['Flip Box']['Create New'] = [
-                'name' => 'Create New',
-                'homepage' => 'oxi-flip-box-ultimate-new'
-            ];
-            $response['Flip Box']['Import Templates'] = [
-                'name' => 'Import Templates',
-                'homepage' => 'oxi-flip-box-ultimate-import'
-            ];
-            $response['Flip Box']['Addons'] = [
-                'name' => 'Addons',
-                'homepage' => 'oxi-flip-box-ultimate-addons'
-            ];
-            set_transient(self::ADMINMENU, $response, 10 * DAY_IN_SECONDS);
-        endif;
-    }
+  
 
     /**
      * Get  Oxi Flipbox Menu Deactive.

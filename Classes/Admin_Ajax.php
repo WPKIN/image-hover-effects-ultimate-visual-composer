@@ -90,23 +90,6 @@ class Admin_Ajax {
         endif;
     }
 
-    public function addons_rearrange($data = '', $styleid = '', $itemid = '') {
-        $list = explode(',', $data);
-        foreach ($list as $value) {
-            $data = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE id = %d ", $value), ARRAY_A);
-            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, files, css) VALUES (%d, %s, %s)", array($data['styleid'], $data['files'], $data['css'])));
-            $redirect_id = $this->wpdb->insert_id;
-            if ($redirect_id == 0) {
-                return;
-            }
-            if ($redirect_id != 0) {
-                $this->wpdb->query($this->wpdb->prepare("DELETE FROM $this->child_table WHERE id = %d", $value));
-            }
-        }
-        echo 'success';
-        return;
-    }
-
     public function shortcode_active($data = '', $styleid = '', $itemid = '') {
         parse_str($data, $params);
         $styleid = (int) $params['oxiimportstyle'];
@@ -167,6 +150,23 @@ class Admin_Ajax {
         else:
             echo 'Silence is Golden';
         endif;
+    }
+
+    public function addons_rearrange($data = '', $styleid = '', $itemid = '') {
+        $list = explode(',', $data);
+        foreach ($list as $value) {
+            $data = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE id = %d ", $value), ARRAY_A);
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, files, css) VALUES (%d, %s, %s)", array($data['styleid'], $data['files'], $data['css'])));
+            $redirect_id = $this->wpdb->insert_id;
+            if ($redirect_id == 0) {
+                return;
+            }
+            if ($redirect_id != 0) {
+                $this->wpdb->query($this->wpdb->prepare("DELETE FROM $this->child_table WHERE id = %d", $value));
+            }
+        }
+        echo 'success';
+        return;
     }
 
 }
