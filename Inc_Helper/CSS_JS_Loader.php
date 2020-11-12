@@ -8,18 +8,12 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
  */
 trait CSS_JS_Loader {
 
-    public function admin_css_loader() {
-        $this->admin_css();
-        $this->admin_js();
-    }
-
     public function loader_font_familly_validation($data = []) {
         foreach ($data as $value) {
             wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
         }
     }
-
-    public function str_replace_first($from, $to, $content) {
+     public function str_replace_first($from, $to, $content) {
         $from = '/' . preg_quote($from, '/') . '/';
         return preg_replace($from, $to, $content, 1);
     }
@@ -49,8 +43,7 @@ trait CSS_JS_Loader {
         wp_enqueue_script('jquery.dataTables.min', OXI_FLIP_BOX_URL . '/asset/backend/js/jquery.dataTables.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('dataTables.bootstrap.min', OXI_FLIP_BOX_URL . '/asset/backend/js/dataTables.bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
-
-    /**
+     /**
      * Admin Media Scripts.
      * Most of time using into Style Editing Page
      * 
@@ -60,6 +53,11 @@ trait CSS_JS_Loader {
         wp_enqueue_media();
         wp_register_script('oxi-flip-box_media_scripts', OXI_FLIP_BOX_URL . '/asset/backend/js/media-uploader.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('oxi-flip-box_media_scripts');
+    }
+
+    public function admin_css_loader() {
+        $this->admin_css();
+        $this->admin_js();
     }
 
     public function admin_elements_frontend_loader() {
@@ -81,5 +79,9 @@ trait CSS_JS_Loader {
         wp_enqueue_script('oxi-flip-box-addons-vendor', OXI_FLIP_BOX_URL . '/asset/backend/js/vendor.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         $this->admin_media_scripts();
     }
+
+   
+
+   
 
 }

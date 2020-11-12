@@ -4,25 +4,6 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
 
 trait Admin_helper {
 
-    public function SupportAndComments($agr) {
-        echo '  <div class="oxi-addons-admin-notifications">
-                    <h3>
-                        <span class="dashicons dashicons-flag"></span> 
-                        Notifications
-                    </h3>
-                    <p></p>
-                    <div class="oxi-addons-admin-notifications-holder">
-                        <div class="oxi-addons-admin-notifications-alert">
-                            <p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. I Just wanted to see if you have any questions or concerns about my plugins. If you do, Please do not hesitate to <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer#new-post">file a bug report</a>. </p>
-                            ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) ? '' : '<p>By the way, did you know we also have a <a href="https://www.oxilab.org/downloads/flipbox-image-overlay/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
-                            <p>Thanks Again!</p>
-                            <p></p>
-                        </div>                     
-                    </div>
-                    <p></p>
-                </div>';
-    }
-
     /**
      * Plugin fixed
      *
@@ -150,6 +131,25 @@ trait Admin_helper {
 
     public function admin_url_convert($agr) {
         return admin_url(strpos($agr, 'edit') !== false ? $agr : 'admin.php?page=' . $agr);
+    }
+
+    public function SupportAndComments($agr) {
+        echo '  <div class="oxi-addons-admin-notifications">
+                    <h3>
+                        <span class="dashicons dashicons-flag"></span> 
+                        Notifications
+                    </h3>
+                    <p></p>
+                    <div class="oxi-addons-admin-notifications-holder">
+                        <div class="oxi-addons-admin-notifications-alert">
+                            <p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. I Just wanted to see if you have any questions or concerns about my plugins. If you do, Please do not hesitate to <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer#new-post">file a bug report</a>. </p>
+                            ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) ? '' : '<p>By the way, did you know we also have a <a href="https://www.oxilab.org/downloads/flipbox-image-overlay/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
+                            <p>Thanks Again!</p>
+                            <p></p>
+                        </div>                     
+                    </div>
+                    <p></p>
+                </div>';
     }
 
     public function Admin_Menu() {
