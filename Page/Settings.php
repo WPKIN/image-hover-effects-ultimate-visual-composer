@@ -40,96 +40,123 @@ class Settings {
         $this->saved_role = get_option('oxi_addons_user_permission');
         $this->license = get_option('oxilab_flip_box_license_key');
         $this->status = get_option('oxilab_flip_box_license_status');
+        $this->admin_ajax_load();
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_ajax_load() {
+        $this->admin_css_loader();
+        wp_enqueue_script('oxi-flip-settings', OXI_FLIP_BOX_URL . '/asset/backend/js/settings.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_localize_script('oxi-flip-settings', 'oxi_flip_box_settings', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 
     public function Render() {
-        $this->admin_css_loader();
         ?>
-        <div class="wrap">   
+        <div class="wrap">
             <?php
             echo apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
             ?>
-            <div class="oxi-addons-row">
-                <br>
-                <br>
-                <h2><?php _e('User Settings'); ?></h2>
+            <div class="oxi-addons-row oxi-addons-admin-settings">
+                <h2>General</h2>
                 <p>Settings for Flipbox - Image Overlay.</p>
-                <form method="post" action="options.php">
-                    <table class="form-table">
-                        <?php settings_fields('oxi-flip-box-settings-group'); ?>
-                        <?php do_settings_sections('oxi-flip-box-settings-group'); ?>
+                <form method="post">
+                    <table class="form-table" role="presentation">
                         <tbody>
-                            <tr valign="top">
-                                <td scope="row">Who Can Edit?</td>
-                                <td>
-                                    <select name="oxi_addons_user_permission">
-                                        <?php foreach ($this->roles as $key => $role) { ?>
-                                            <option value="<?php echo $key; ?>" <?php selected($this->saved_role, $key); ?>><?php echo $role; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </td>
-                                <td>
-                                    <label class="description" for="oxi_addons_user_permission"><?php _e('Select the Role who can manage This Plugins.'); ?> <a target="_blank" href="https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table">Help</a></label>
-                                </td>
-                            </tr>                        
-                            <tr valign="top">
-                                <td scope="row">Font Awesome Support</td>
-                                <td>
-                                    <input type="radio" name="oxi_addons_font_awesome" value="yes" <?php checked('yes', get_option('oxi_addons_font_awesome'), true); ?>>YES
-                                    <input type="radio" name="oxi_addons_font_awesome" value="no" <?php checked('', get_option('oxi_addons_font_awesome'), true); ?>>No
-                                </td>
-                                <td>
-                                    <label class="description" for="oxi_addons_font_awesome"><?php _e('Load Font Awesome CSS at shortcode loading, If your theme already loaded select No for faster loading'); ?></label>
-                                </td>
-                            </tr> 
-                        </tbody>
-                    </table>
-                    <?php submit_button(); ?>
-                </form>
-                <br>
-                <br>
-                <br>
-                <br>
-                <h2><?php _e('Product License Activation'); ?></h2>
-                <p>Activate your copy to get direct plugin updates and official support.</p>
-                <form method="post" action="options.php">
-                    <?php settings_fields('oxilab_flip_box_license'); ?>
-                    <table class="form-table">
-                        <tbody>
-                            <tr valign="top">
-                                <th scope="row" valign="top">
-                                    <?php _e('License Key'); ?>
+                            <tr>
+                                <th scope="row">
+                                    <label for="oxi_addons_user_permission">Who Can Edit?</label>
                                 </th>
                                 <td>
-                                    <input id="oxilab_flip_box_license_key" name="oxilab_flip_box_license_key" type="text" class="regular-text" value="<?php esc_attr_e($this->license); ?>" />
-                                    <label class="description" for="oxilab_flip_box_license_key"><?php _e('Enter your license key'); ?></label>
+                                    <fieldset>
+                                        <select name="oxi_addons_user_permission">
+                                            <?php foreach ($this->roles as $key => $role) { ?>
+                                                <option value="<?php echo $key; ?>" <?php selected($this->saved_role, $key); ?>>
+                                                    <?php echo $role; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <span class="oxi-addons-settings-connfirmation oxi_addons_user_permission"></span>
+                                        <br>
+                                        <p class="description"><?php _e('Select the Role who can manage This Plugins.'); ?> <a
+                                                target="_blank"
+                                                href="https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table">Help</a>
+                                        </p>
+                                    </fieldset>
                                 </td>
                             </tr>
-                            <?php if (!empty($this->license)) { ?>
-                                <tr valign="top">
-                                    <th scope="row" valign="top">
-                                        <?php _e('Activate License'); ?>
-                                    </th>
-                                    <td>
-                                        <?php if ($this->status !== false && $this->status == 'valid') { ?>
-                                            <span style="color:green;"><?php _e('active'); ?></span>
-                                            <?php wp_nonce_field('oxilab_flip_box_nonce', 'oxilab_flip_box_nonce'); ?>
-                                            <input type="submit" class="button-secondary" name="oxilab_flip_box_license_deactivate" value="<?php _e('Deactivate License'); ?>"/>
-                                            <?php
-                                        } else {
-                                            wp_nonce_field('oxilab_flip_box_nonce', 'oxilab_flip_box_nonce');
-                                            ?>
-                                            <input type="submit" class="button-secondary" name="oxilab_flip_box_license_activate" value="<?php _e('Activate License'); ?>"/>
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-                            <?php } ?>
+                            <tr>
+                                <th scope="row">
+                                    <label for="oxi_addons_font_awesome">Font Awesome Support</label>
+                                </th>
+                                <td>
+                                    <fieldset>
+                                        <label for="oxi_addons_font_awesome[yes]">
+                                            <input type="radio" class="radio" id="oxi_addons_font_awesome[yes]"
+                                                   name="oxi_addons_font_awesome" value="yes"
+                                                   <?php checked('yes', get_option('oxi_addons_font_awesome'), true); ?>>Yes</label>
+                                        <label for="oxi_addons_font_awesome[no]">
+                                            <input type="radio" class="radio" id="oxi_addons_font_awesome[no]"
+                                                   name="oxi_addons_font_awesome" value=""
+                                                   <?php checked('', get_option('oxi_addons_font_awesome'), true); ?>>No
+                                        </label>
+                                        <span class="oxi-addons-settings-connfirmation oxi_addons_font_awesome"></span>
+                                        <br>
+                                        <p class="description">Load Font Awesome CSS at shortcode loading, If your theme already
+                                            loaded select No for faster loading</p>
+                                    </fieldset>
+                                </td>
+                            </tr>
+
                         </tbody>
                     </table>
-                    <?php submit_button(); ?>
+                    <br>
+                    <br>
+                    <h2><?php _e('License Activation'); ?></h2>
+                    <p>Activate your copy to get direct plugin updates and official support.</p>
+                    <table class="form-table" role="presentation">
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <label for="oxilab_flip_box_license_key">License Key</label>
+                                </th>
+                                <td class="valid">
+                                    <input type="text" class="regular-text" id="oxilab_flip_box_license_key"
+                                           name="oxilab_flip_box_license_key" value="<?php echo ($this->status == 'valid' && empty($this->license)) ? '****************************************' : $this->license; ?>">
+                                    <span class="oxi-addons-settings-connfirmation oxilab_flip_box_license_massage">
+                                        <?php
+                                        if ($this->status == 'valid' && empty($this->license)) :
+                                            echo '<span class="oxi-confirmation-success"></span>';
+                                        elseif ($this->status == 'valid' && !empty($this->license)) :
+                                            echo '<span class="oxi-confirmation-success"></span>';
+                                        elseif (!empty($this->license)) :
+                                            echo '<span class="oxi-confirmation-failed"></span>';
+                                        else :
+                                            echo '<span class="oxi-confirmation-blank"></span>';
+                                        endif;
+                                        ?>
+                                    </span>
+                                    <span class="oxi-addons-settings-connfirmation oxilab_flip_box_license_text">
+                                        <?php
+                                        if ($this->status == 'valid' && empty($this->license)) :
+                                            echo '<span class="oxi-addons-settings-massage">Pre Active</span>';
+                                        elseif ($this->status == 'valid' && !empty($this->license)) :
+                                            echo '<span class="oxi-addons-settings-massage">Active</span>';
+                                        elseif (!empty($this->license)) :
+                                            echo '<span class="oxi-addons-settings-massage">' . $this->status . '</span>';
+                                        else :
+                                            echo '<span class="oxi-addons-settings-massage"></span>';
+                                        endif;
+                                        ?>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </form>
             </div>
-        </div>  
+        </div>
         <?php
     }
 
