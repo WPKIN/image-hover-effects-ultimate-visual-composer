@@ -22,6 +22,24 @@ trait Admin_helper {
         return bin2hex($str);
     }
 
+    /**
+     * Plugin check Current Tabs
+     *
+     * @since 2.0.0
+     */
+    public function check_current_tabs($agr) {
+        $vs = get_option($this->fixed_data('6f78696c61625f666c69705f626f785f6c6963656e73655f737461747573'));
+        if ($vs == $this->fixed_data('76616c6964')) {
+            return TRUE;
+        } else {
+            return false;
+        }
+    }
+
+    public function admin_url_convert($agr) {
+        return admin_url(strpos($agr, 'edit') !== false ? $agr : 'admin.php?page=' . $agr);
+    }
+
     public function Admin_Icon() {
         ?>
         <style type='text/css' media='screen'>
@@ -115,28 +133,10 @@ trait Admin_helper {
         echo __($menu, OXI_FLIP_BOX_TEXTDOMAIN);
     }
 
-    /**
-     * Plugin check Current Tabs
-     *
-     * @since 2.0.0
-     */
-    public function check_current_tabs($agr) {
-        $vs = get_option($this->fixed_data('6f78696c61625f666c69705f626f785f6c6963656e73655f737461747573'));
-        if ($vs == $this->fixed_data('76616c6964')) {
-            return TRUE;
-        } else {
-            return false;
-        }
-    }
-
-    public function admin_url_convert($agr) {
-        return admin_url(strpos($agr, 'edit') !== false ? $agr : 'admin.php?page=' . $agr);
-    }
-
     public function SupportAndComments($agr) {
         echo '  <div class="oxi-addons-admin-notifications">
                     <h3>
-                        <span class="dashicons dashicons-flag"></span> 
+                        <span class="dashicons dashicons-flag"></span>
                         Notifications
                     </h3>
                     <p></p>
@@ -146,7 +146,7 @@ trait Admin_helper {
                             ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) ? '' : '<p>By the way, did you know we also have a <a href="https://www.oxilab.org/downloads/flipbox-image-overlay/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
                             <p>Thanks Again!</p>
                             <p></p>
-                        </div>                     
+                        </div>
                     </div>
                     <p></p>
                 </div>';

@@ -130,6 +130,17 @@ class Admin_Ajax {
         endif;
     }
 
+    public function shortcode_deactive($data = '', $styleid = '', $itemid = '') {
+        parse_str($data, $params);
+        $styleid = (int) $params['oxideletestyle'];
+        if ($styleid):
+            $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->import_table} WHERE name = %d", $styleid));
+            echo 'done';
+        else:
+            echo 'Silence is Golden';
+        endif;
+    }
+
     public function shortcode_export($data = '', $styleid = '', $itemid = '') {
         $styleid = (int) $styleid;
         if ($styleid):
@@ -153,17 +164,6 @@ class Admin_Ajax {
             }
             $newdata = ['plugin' => 'flipbox', 'style' => $style, 'child' => $child];
             echo json_encode($newdata);
-        else:
-            echo 'Silence is Golden';
-        endif;
-    }
-
-    public function shortcode_deactive($data = '', $styleid = '', $itemid = '') {
-        parse_str($data, $params);
-        $styleid = (int) $params['oxideletestyle'];
-        if ($styleid):
-            $this->wpdb->query($this->wpdb->prepare("DELETE FROM {$this->import_table} WHERE name = %d", $styleid));
-            echo 'done';
         else:
             echo 'Silence is Golden';
         endif;

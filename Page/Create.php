@@ -58,15 +58,6 @@ class Create {
         $this->Render();
     }
 
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_ajax_load() {
-        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . '/asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
-        wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
-    }
-
     public function CSSJS_load() {
         $this->admin_css_loader();
         $this->admin_ajax_load();
@@ -76,6 +67,15 @@ class Create {
             $this->IMPORT[$value['name']] = $value;
         }
         $this->TEMPLATE = include OXI_FLIP_BOX_PATH . 'Page/JSON.php';
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_ajax_load() {
+        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . '/asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 
     public function Admin_header() {
@@ -147,7 +147,7 @@ class Create {
                                 <div class="oxi-addons-style-preview-bottom-right">
                                     <form method="post" style=" display: inline-block; " class="shortcode-addons-template-deactive">
                                         <input type="hidden" name="oxideletestyle" value="<?php echo $id; ?>">
-                                        <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Delete"  type="submit" value="Deactive" name="addonsstyledelete">Deactive</button>  
+                                        <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Delete"  type="submit" value="Deactive" name="addonsstyledelete">Deactive</button>
                                     </form>
                                     <button type="button" class="btn btn-success oxi-addons-addons-template-create" data-toggle="modal" addons-data="oxistyle<?php echo $number; ?>data">Create Style</button>
                                 </div>
@@ -170,7 +170,7 @@ class Create {
                                     <a href="' . admin_url("admin.php?page=oxi-flip-box-ultimate-import") . '">
                                         <div class="oxilab-admin-add-new-item">
                                             <span>
-                                                <i class="fas fa-plus-circle oxi-icons"></i>  
+                                                <i class="fas fa-plus-circle oxi-icons"></i>
                                                 Import Templates
                                             </span>
                                         </div>
@@ -184,7 +184,7 @@ class Create {
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
-                                    <div class="modal-header">                    
+                                    <div class="modal-header">
                                         <h4 class="modal-title">New Flipbox</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -208,7 +208,7 @@ class Create {
                                                     <label class="btn btn-secondary">
                                                         <input type="radio" name="flip-box-layouts" value="3">3rd
                                                     </label>
-                                                   
+
                                                 </div>
                                             </div>
                                         </div>

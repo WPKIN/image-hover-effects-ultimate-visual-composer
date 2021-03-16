@@ -99,6 +99,19 @@ class Public_Render {
     }
 
     /**
+     * front end loader css and js
+     *
+     * @since 2.0.0
+     */
+    public function public_loader() {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxi-animation', OXI_FLIP_BOX_URL . '/asset/frontend/css/animation.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('flip-box-addons-style', OXI_FLIP_BOX_URL . '/asset/frontend/css/style.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . '/asset/frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('flipbox-addons-jquery', OXI_FLIP_BOX_URL . '/asset/frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+    }
+
+    /**
      * load css and js hooks
      *
      * @since 2.0.0
@@ -135,19 +148,6 @@ class Public_Render {
     }
 
     /**
-     * front end loader css and js
-     *
-     * @since 2.0.0
-     */
-    public function public_loader() {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-animation', OXI_FLIP_BOX_URL . '/asset/frontend/css/animation.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_style('flip-box-addons-style', OXI_FLIP_BOX_URL . '/asset/frontend/css/style.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . '/asset/frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('flipbox-addons-jquery', OXI_FLIP_BOX_URL . '/asset/frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-    }
-
-    /**
      * old empty old render
      *
      * @since 2.0.0
@@ -172,7 +172,7 @@ class Public_Render {
         if ($this->admin == 'admin'):
             $data = '<div class="oxilab-admin-absulote">
                         <div class="oxilab-style-absulate-edit">
-                            <form method="post"> 
+                            <form method="post">
                                 <input type="hidden" name="item-id" value="' . $id . '">
                                 <button class="btn btn-primary" type="submit" value="edit" name="edit" title="Edit">Edit</button>
                                 ' . wp_nonce_field("oxiflipeditdata") . '

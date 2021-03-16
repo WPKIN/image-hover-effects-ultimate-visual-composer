@@ -50,7 +50,7 @@ class Support_Reviews {
             return;
         }
         $image = OXI_FLIP_BOX_URL . 'image/logo.png';
-        echo _(' <div class="notice notice-info put-dismiss-noticenotice-has-thumbnail shortcode-addons-review-notice">
+        echo _(' <div class="notice notice-info put-dismiss-noticenotice-has-thumbnail shortcode-addons-review-notice oxilab-flipbox-review-notice">
                     <div class="shortcode-addons-notice-thumbnail">
                         <img src="' . $image . '" alt=""></div>
                     <div class="shortcode-addons--notice-message">

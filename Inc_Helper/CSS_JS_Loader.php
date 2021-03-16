@@ -8,12 +8,33 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
  */
 trait CSS_JS_Loader {
 
+    public function admin_elements_frontend_loader() {
+        $this->admin_css_loader();
+        wp_enqueue_script("jquery");
+        wp_enqueue_script('jquery-ui-core');
+        wp_enqueue_script('jquery-ui-widget');
+        wp_enqueue_script('jquery-ui-mouse');
+        wp_enqueue_script('jquery-ui-accordion');
+        wp_enqueue_script('jquery-ui-autocomplete');
+        wp_enqueue_script('jquery-ui-slider');
+        wp_enqueue_script('jquery-ui-draggable');
+        wp_enqueue_style('jquery.minicolors', OXI_FLIP_BOX_URL . '/asset/backend/css/minicolors.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('jquery.minicolors', OXI_FLIP_BOX_URL . '/asset/backend/js/minicolors.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('fontawesome-iconpicker', OXI_FLIP_BOX_URL . '/asset/backend/css/fontawesome-iconpicker.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('fontawesome-iconpicker', OXI_FLIP_BOX_URL . '/asset/backend/js/fontawesome-iconpicker.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('jquery.fontselect', OXI_FLIP_BOX_URL . '/asset/backend/css/jquery.fontselect.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('jquery.bootstrap-growl', OXI_FLIP_BOX_URL . '/asset/backend/js/jquery.bootstrap-growl.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-flip-box-addons-vendor', OXI_FLIP_BOX_URL . '/asset/backend/js/vendor.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        $this->admin_media_scripts();
+    }
+
     public function loader_font_familly_validation($data = []) {
         foreach ($data as $value) {
             wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
         }
     }
-     public function str_replace_first($from, $to, $content) {
+
+    public function str_replace_first($from, $to, $content) {
         $from = '/' . preg_quote($from, '/') . '/';
         return preg_replace($from, $to, $content, 1);
     }
@@ -43,10 +64,11 @@ trait CSS_JS_Loader {
         wp_enqueue_script('jquery.dataTables.min', OXI_FLIP_BOX_URL . '/asset/backend/js/jquery.dataTables.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('dataTables.bootstrap.min', OXI_FLIP_BOX_URL . '/asset/backend/js/dataTables.bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
-     /**
+
+    /**
      * Admin Media Scripts.
      * Most of time using into Style Editing Page
-     * 
+     *
      * @since 2.0.0
      */
     public function admin_media_scripts() {
@@ -59,29 +81,5 @@ trait CSS_JS_Loader {
         $this->admin_css();
         $this->admin_js();
     }
-
-    public function admin_elements_frontend_loader() {
-        $this->admin_css_loader();
-        wp_enqueue_script("jquery");
-        wp_enqueue_script('jquery-ui-core');
-        wp_enqueue_script('jquery-ui-widget');
-        wp_enqueue_script('jquery-ui-mouse');
-        wp_enqueue_script('jquery-ui-accordion');
-        wp_enqueue_script('jquery-ui-autocomplete');
-        wp_enqueue_script('jquery-ui-slider');
-        wp_enqueue_script('jquery-ui-draggable');
-        wp_enqueue_style('jquery.minicolors', OXI_FLIP_BOX_URL . '/asset/backend/css/minicolors.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('jquery.minicolors', OXI_FLIP_BOX_URL . '/asset/backend/js/minicolors.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_style('fontawesome-iconpicker', OXI_FLIP_BOX_URL . '/asset/backend/css/fontawesome-iconpicker.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('fontawesome-iconpicker', OXI_FLIP_BOX_URL . '/asset/backend/js/fontawesome-iconpicker.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_style('jquery.fontselect', OXI_FLIP_BOX_URL . '/asset/backend/css/jquery.fontselect.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('jquery.bootstrap-growl', OXI_FLIP_BOX_URL . '/asset/backend/js/jquery.bootstrap-growl.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('oxi-flip-box-addons-vendor', OXI_FLIP_BOX_URL . '/asset/backend/js/vendor.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        $this->admin_media_scripts();
-    }
-
-   
-
-   
 
 }

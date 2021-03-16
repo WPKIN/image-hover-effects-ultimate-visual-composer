@@ -4,7 +4,7 @@ jQuery.noConflict();
     "use strict";
     $(document).on("click", ".oxi-flip-support-reviews", function (e) {
         e.preventDefault();
-      
+
         $.ajax({
             url: oxilab_flip_notice_dissmiss.ajaxurl,
             type: 'post',
@@ -15,7 +15,7 @@ jQuery.noConflict();
             },
             success: function (response) {
                 console.log(response);
-                $('.shortcode-addons-review-notice').remove();
+                $('.oxilab-flipbox-review-notice').remove();
             },
             error: function (error) {
                 console.log('Something went wrong!');

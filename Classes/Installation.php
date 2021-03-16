@@ -22,7 +22,7 @@ class Installation {
      * @since 2.0.0
      */
     public function __construct() {
-        
+
     }
 
     /**
@@ -61,7 +61,7 @@ class Installation {
         $sql3 = "CREATE TABLE $table_import (
 		id mediumint(5) NOT NULL AUTO_INCREMENT,
                 type varchar(100) NOT NULL,
-                name varchar(50) NOT NULL,                
+                name varchar(50) NOT NULL,
 		PRIMARY KEY  (id),
                 UNIQUE unique_index (type, name)
 	) $charset_collate;";
@@ -115,6 +115,14 @@ class Installation {
     }
 
     /**
+     * Get  Oxi Flipbox Menu Deactive.
+     * @return mixed
+     */
+    public function Admin_Menu_Deactive() {
+        delete_transient(self::ADMINMENU);
+    }
+
+    /**
      * Get  Oxi Flipbox Menu.
      * @return mixed
      */
@@ -139,14 +147,6 @@ class Installation {
             ];
             set_transient(self::ADMINMENU, $response, 10 * DAY_IN_SECONDS);
         endif;
-    }
-
-    /**
-     * Get  Oxi Flipbox Menu Deactive.
-     * @return mixed
-     */
-    public function Admin_Menu_Deactive() {
-        delete_transient(self::ADMINMENU);
     }
 
 }

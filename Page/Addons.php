@@ -43,33 +43,6 @@ class Addons {
         $this->Admin_header();
     }
 
-    public function extension() {
-        $response = get_transient(self::SHORTCODE_TRANSIENT_EXTENSION);
-        if (!$response || !is_array($response) || count($response) < 3) {
-            $URL = self::API;
-            $request = wp_remote_request($URL);
-            if (!is_wp_error($request)) {
-                $response = json_decode(wp_remote_retrieve_body($request), true);
-                set_transient(self::SHORTCODE_TRANSIENT_EXTENSION, $response, 10 * DAY_IN_SECONDS);
-            } else {
-                $response = $request->get_error_message();
-            }
-        }
-        $this->extensions = $response;
-    }
-
-    public function Admin_header() {
-        ?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Oxilab Addons
-                </h1>
-                <p> We Develop Couple of plugins which will help you to Create Your Modern and Dynamic Websites. Just click and Install </p>
-            </div>
-        </div>
-        <?php
-    }
-
     public function Render() {
         ?>
         <div class="oxi-addons-wrapper">
@@ -104,11 +77,11 @@ class Addons {
                                     <img class="oxi-addons-modules-banner" src="<?php echo $value['image']; ?>">
                                     <div class="oxi-addons-modules-action-wrapper">
                                         <span class="oxi-addons-modules-name"><?php echo $value['Name']; ?></span>
-                                        <span class="oxi-addons-modules-desc"><?php echo $value['content']; ?></span>	
+                                        <span class="oxi-addons-modules-desc"><?php echo $value['content']; ?></span>
                                     </div>
                                     <div class="oxi-addons-modules-action-status">
                                         <span class="oxi-addons-modules-preview"><a href="<?php echo $value['PluginURI']; ?>" class="btn btn-dark">Preview</a></span>
-                                        <span class="oxi-addons-modules-installing"><?php echo $message; ?></span>	
+                                        <span class="oxi-addons-modules-installing"><?php echo $message; ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -136,6 +109,33 @@ class Addons {
 
 
         wp_add_inline_script('oxilab-bootstrap', $data);
+    }
+
+    public function extension() {
+        $response = get_transient(self::SHORTCODE_TRANSIENT_EXTENSION);
+        if (!$response || !is_array($response) || count($response) < 3) {
+            $URL = self::API;
+            $request = wp_remote_request($URL);
+            if (!is_wp_error($request)) {
+                $response = json_decode(wp_remote_retrieve_body($request), true);
+                set_transient(self::SHORTCODE_TRANSIENT_EXTENSION, $response, 10 * DAY_IN_SECONDS);
+            } else {
+                $response = $request->get_error_message();
+            }
+        }
+        $this->extensions = $response;
+    }
+
+    public function Admin_header() {
+        ?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Oxilab Addons
+                </h1>
+                <p> We Develop Couple of plugins which will help you to Create Your Modern and Dynamic Websites. Just click and Install </p>
+            </div>
+        </div>
+        <?php
     }
 
 }
