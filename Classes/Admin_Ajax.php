@@ -37,6 +37,14 @@ class Admin_Ajax {
      */
     public $child_table;
 
+    public static function instance() {
+        if (self::$instance == null) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+
     /**
      * Constructor of plugin class
      *
@@ -51,6 +59,14 @@ class Admin_Ajax {
             $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
             $this->$type($data, $styleid, $itemid);
         endif;
+    }
+
+    public function active_data() {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
+        $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
+        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
     }
 
     public function array_replace($arr = [], $search = '', $replace = '') {
@@ -88,6 +104,7 @@ class Admin_Ajax {
                 echo admin_url("admin.php?page=oxi-flip-box-ultimate-new&styleid=$redirect_id");
             endif;
         endif;
+        return;
     }
 
     public function addons_rearrange($data = '', $styleid = '', $itemid = '') {
@@ -117,6 +134,7 @@ class Admin_Ajax {
         else:
             echo 'Silence is Golden';
         endif;
+        return;
     }
 
     public function shortcode_delete($data = '', $styleid = '', $itemid = '') {
@@ -128,6 +146,7 @@ class Admin_Ajax {
         else:
             echo 'Silence is Golden';
         endif;
+        return;
     }
 
     public function shortcode_deactive($data = '', $styleid = '', $itemid = '') {
@@ -139,34 +158,65 @@ class Admin_Ajax {
         else:
             echo 'Silence is Golden';
         endif;
+        return;
     }
 
-    public function shortcode_export($data = '', $styleid = '', $itemid = '') {
-        $styleid = (int) $styleid;
+    /**
+     * Send file headers.
+     *
+     *
+     * @param string $file_name File name.
+     * @param int    $file_size File size.
+     */
+    private function send_file_headers($file_name, $file_size) {
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . $file_name);
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . $file_size);
+    }
+
+    public function get_shortcode_export($data = '', $styleid = '', $itemid = '') {
+        echo $styleid;
         if ($styleid):
-            $st = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
-            $c = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
-            $style = [
-                'id' => $st['id'],
-                'type' => ucfirst($st['type']),
-                'name' => $st['name'],
-                'style_name' => $st['style_name'],
-                'css' => htmlentities($st['css'])
+            $style = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
+            $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
+            $filename = 'oxilab-flipboxand' . $style['id'] . '.json';
+            $files = [
+                'style' => $style,
+                'child' => $child,
             ];
-            $child = [];
-            foreach ($c as $value) {
-                $child[] = [
-                    'id' => $value['id'],
-                    'styleid' => $value['styleid'],
-                    'files' => htmlentities($value['files']),
-                    'css' => htmlentities($value['css'])
-                ];
-            }
-            $newdata = ['plugin' => 'flipbox', 'style' => $style, 'child' => $child];
-            echo json_encode($newdata);
+            $finalfiles = json_encode($files);
+            $this->send_file_headers($filename, strlen($finalfiles));
+            @ob_end_clean();
+            flush();
+            echo $finalfiles;
+            die;
         else:
-            echo 'Silence is Golden';
+            return 'Silence is Golden';
         endif;
+        return;
+    }
+
+    public function post_json_import($folder, $filename) {
+        if (is_file($folder . $filename)) {
+            $this->active_data();
+            $params = json_decode(file_get_contents($folder . $filename), true);
+            $style = $params['style'];
+            $child = $params['child'];
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, type, style_name, css) VALUES ( %s, %s, %s, %s)", array($style['name'], $style['type'], $style['style_name'], $style['css'])));
+            $redirect_id = $this->wpdb->insert_id;
+            if ($redirect_id > 0):
+                foreach ($child as $value) {
+                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, type, files, css) VALUES (%d, %s, %s, %s)", array($redirect_id, $value['type'], $value['files'], $value['css'])));
+                }
+            endif;
+            $check_import = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM  $this->import_table WHERE type = %s AND name = %s", 'flip', str_replace('style', '', $style['style_name'])), ARRAY_A);
+            if (!is_array($check_import)):
+                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES ( %s, %s)", array('flip', str_replace('style', '', $style['style_name']))));
+            endif;
+        }
     }
 
     /**
@@ -195,6 +245,7 @@ class Admin_Ajax {
             endif;
         endif;
         echo json_encode($data);
+        return;
     }
 
     public function activate_license($key) {
@@ -301,6 +352,7 @@ class Admin_Ajax {
         $rawdata = json_decode(stripslashes($data), true);
         update_option($rawdata['name'], $rawdata['value']);
         echo '<span class="oxi-confirmation-success"></span>';
+        return;
     }
 
 }

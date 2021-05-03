@@ -120,6 +120,39 @@ class Style12 extends Admin_Render {
         return $data;
     }
 
+    public function modal_form_data() {
+        ?>
+        <div class="modal-header">
+            <h5 class="modal-title">Front Settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body row">
+            <?php
+            echo $this->oxilab_flip_box_admin_input_text('flip-box-front-title', $this->child_editable[1], 'Front Title', 'Add your flip front title.');
+            echo $this->oxilab_flip_box_admin_input_text_area('flip-box-font-desc', $this->child_editable[15], 'Font Info:', 'Add font Info text unless make it blank.');
+            echo $this->oxilab_flip_box_admin_input_icon('flip-box-front-icons', $this->child_editable[3], 'Front Icon', 'Add your front icon, Use Font-Awesome class name. As example fab fa-facebook');
+            echo $this->image_upload('flip-box-image-upload-url-01', $this->child_editable[5], 'Front Image', 'Add or modify your front image.');
+            ?>
+        </div>
+        <div class="modal-header">
+            <h5 class="modal-title">Backend Settings</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body row">
+            <?php
+            echo $this->oxilab_flip_box_admin_input_text('flip-box-backend-title', $this->child_editable[17], 'Backend Title', 'Add your flip backend title.');
+            echo $this->oxilab_flip_box_admin_input_text_area('flip-box-backend-desc', $this->child_editable[7], 'Backend Info:', 'Add backend Info text unless make it blank.');
+            echo $this->oxilab_flip_box_admin_input_text('flip-box-backend-link', $this->child_editable[11], 'Link', 'Add your desire link or url unless make it blank');
+            echo $this->image_upload('flip-box-image-upload-url-02', $this->child_editable[13], 'Backend Background Image', 'Add or Modify Your Backend Background Image. Unless make it blank.');
+            ?>
+        </div>
+        <?php
+    }
+
     public function register_controls() {
         ?>
         <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-5">
@@ -297,39 +330,6 @@ class Style12 extends Admin_Render {
         <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-1">
             <?php
             echo $this->oxilab_flip_box_admin_support();
-            ?>
-        </div>
-        <?php
-    }
-
-    public function modal_form_data() {
-        ?>
-        <div class="modal-header">
-            <h5 class="modal-title">Front Settings</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body row">
-            <?php
-            echo $this->oxilab_flip_box_admin_input_text('flip-box-front-title', $this->child_editable[1], 'Front Title', 'Add your flip front title.');
-            echo $this->oxilab_flip_box_admin_input_text_area('flip-box-font-desc', $this->child_editable[15], 'Font Info:', 'Add font Info text unless make it blank.');
-            echo $this->oxilab_flip_box_admin_input_icon('flip-box-front-icons', $this->child_editable[3], 'Front Icon', 'Add your front icon, Use Font-Awesome class name. As example fab fa-facebook');
-            echo $this->image_upload('flip-box-image-upload-url-01', $this->child_editable[5], 'Front Image', 'Add or modify your front image.');
-            ?>
-        </div>
-        <div class="modal-header">
-            <h5 class="modal-title">Backend Settings</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body row">
-            <?php
-            echo $this->oxilab_flip_box_admin_input_text('flip-box-backend-title', $this->child_editable[17], 'Backend Title', 'Add your flip backend title.');
-            echo $this->oxilab_flip_box_admin_input_text_area('flip-box-backend-desc', $this->child_editable[7], 'Backend Info:', 'Add backend Info text unless make it blank.');
-            echo $this->oxilab_flip_box_admin_input_text('flip-box-backend-link', $this->child_editable[11], 'Link', 'Add your desire link or url unless make it blank');
-            echo $this->image_upload('flip-box-image-upload-url-02', $this->child_editable[13], 'Backend Background Image', 'Add or Modify Your Backend Background Image. Unless make it blank.');
             ?>
         </div>
         <?php

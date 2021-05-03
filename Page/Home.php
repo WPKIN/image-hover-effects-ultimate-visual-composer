@@ -54,12 +54,13 @@ class Home {
         $this->CSSJS_load();
         $this->Render();
     }
-    
+
     public function database_data() {
         return $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->parent_table WHERE type = %s ", 'flip'), ARRAY_A);
     }
 
     public function CSSJS_load() {
+        $this->manual_import_style();
         $this->admin_css_loader();
         $this->admin_home();
         $this->admin_ajax_load();
@@ -73,6 +74,46 @@ class Home {
     public function admin_ajax_load() {
         wp_enqueue_script('oxi-flip-box-home', OXI_FLIP_BOX_URL . '/asset/backend/js/home.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-box-home', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
+    }
+
+    /**
+     * Generate safe path
+     * @since v1.0.0
+     */
+    public function safe_path($path) {
+
+        $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
+        return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
+    }
+
+    public function manual_import_style() {
+        if (!empty($_REQUEST['_wpnonce'])) {
+            $nonce = $_REQUEST['_wpnonce'];
+        }
+
+        if (!empty($_POST['importdatasubmit']) && $_POST['importdatasubmit'] == 'Save') {
+            if (!wp_verify_nonce($nonce, 'oxilab-flipbox-import')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                if (apply_filters('oxi-flip-box-plugin/pro_version', false) == TRUE):
+                    if (isset($_FILES['importoxilabflipboxfile'])) {
+                        $filename = $_FILES["importoxilabflipboxfile"]["name"];
+                        $folder = $this->safe_path(OXI_FLIP_BOX_PATH . 'asset/export/');
+
+                        if (is_file($folder . $filename)) {
+                            unlink($folder . $filename); // delete file
+                        }
+                        move_uploaded_file($_FILES['importoxilabflipboxfile']['tmp_name'], $folder . $filename);
+                        $FlipboxApi = new \OXI_FLIP_BOX_PLUGINS\Classes\Admin_Ajax;
+                        $FlipboxApi->post_json_import($folder, $filename);
+
+                        if (is_file($folder . $filename)) {
+                            unlink($folder . $filename); // delete file
+                        }
+                    }
+                endif;
+            }
+        }
     }
 
     public function Render() {
@@ -93,12 +134,25 @@ class Home {
             <div class="oxi-addons-import-layouts">
                 <h1>Flipbox › Home
                 </h1>
-                <p> Collect Flipbox Shortcode, Edit, Delect, Clone or Export it. </p>
+                <p> Collect Flipbox Shortcode, Edit, Delect, Clone or Export it.  <button type="button" id="oxi-import-style" class="btn btn-info">Import Shortcode</button> </p>
             </div>
         </div>
         <?php
     }
 
+    private function create_export_link($rawdata = '', $shortcode_id = '', $child_id = '') {
+        return add_query_arg(
+                [
+                    'action' => 'oxi_flip_box_data',
+                    'functionname' => 'get_shortcode_export',
+                    'styleid' => $shortcode_id,
+                    'childid' => $child_id,
+                    'rawdata' => $rawdata,
+                    '_wpnonce' => wp_create_nonce('oxi-flip-box-editor'),
+                ],
+                admin_url('admin-ajax.php')
+        );
+    }
 
     public function created_shortcode() {
         $return = _(' <div class="oxi-addons-row"> <div class="oxi-addons-row table-responsive abop" style="margin-bottom: 20px; opacity: 0; height: 0px">
@@ -122,17 +176,14 @@ class Home {
             $return .= _('<td><span>Shortcode &nbsp;&nbsp;<input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="[oxilab_flip_box id=&quot;' . $id . '&quot;]"></span> <br>'
                     . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[oxilab_flip_box  id=&quot;' . $id . '&quot;]&#039;); ?&gt;"></span></td>');
             $return .= _('<td> 
-                        <button type="button" class="btn btn-success oxi-addons-style-clone"  style="float:left" oxiaddonsdataid="' . $id . '">Clone</button>
-                        <a href="' . admin_url("admin.php?page=oxi-flip-box-ultimate-new&styleid=$id") . '"  title="Edit"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Edit</a>
-                       <form method="post" class="oxi-addons-style-delete">
-                               <input type="hidden" name="oxideleteid" id="oxideleteid" value="' . $id . '">
-                               <button class="btn btn-danger" style="float:left"  title="Delete"  type="submit" value="delete" name="addonsdatadelete">Delete</button>  
-                       </form>
-                       <form method="post" class="oxi-addons-style-export">
-                               <input type="hidden" name="oxiexportid" id="oxiexportid" value="' . $id . '">
-                               <button class="btn btn-info" style="float:left; margin-left: 5px;"  title="Export"  type="submit" value="export" name="export">Export</button>  
-                       </form>
-                </td>');
+                            <button type="button" class="btn btn-success oxi-addons-style-clone"  style="float:left" oxiaddonsdataid="' . $id . '">Clone</button>
+                            <a href="' . admin_url("admin.php?page=oxi-flip-box-ultimate-new&styleid=$id") . '"  title="Edit"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Edit</a>
+                            <form method="post" class="oxi-addons-style-delete">
+                                   <input type="hidden" name="oxideleteid" id="oxideleteid" value="' . $id . '">
+                                   <button class="btn btn-danger" style="float:left"  title="Delete"  type="submit" value="delete" name="addonsdatadelete">Delete</button>  
+                            </form>
+                            <a href="' . $this->create_export_link('demo', $id, '') . '"  title="Export"  class="btn btn-info" style="float:left; margin-left: 5px;">Export</a>
+                       </td>');
             $return .= _(' </tr>');
         }
         $return .= _('      </tbody>
@@ -186,23 +237,25 @@ class Home {
                             </div>
                         </form>
                     </div>
-                    <div class="modal fade" id="oxi-addons-style-export-modal" >
-                        <form method="post" id="oxi-addons-style-export-form">
-                            <div class="modal-dialog">
+                    <div class="modal fade" id="oxi-addons-style-import-modal" >
+                        <form method="post" id="oxi-addons-import-modal-form" enctype = "multipart/form-data">
+                            <div class="modal-dialog modal-sm">
                                 <div class="modal-content">
                                     <div class="modal-header">                    
-                                        <h4 class="modal-title">Export Data</h4>
+                                        <h4 class="modal-title">Import Form</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
-                                        <textarea id="OxiAddImportDatacontent" class="oxi-addons-export-data-code"></textarea>
+                                            ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE ? ' <a target="_blank" style"text-align:center" href="https://www.oxilab.org/downloads/flipbox-image-overlay/">**Works only with Pro Version</a><br> <br>' : '') . '
+                                             <input class="form-control" type="file" name="importoxilabflipboxfile" accept=".json,application/json,.zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-info OxiAddImportDatacontent">Copy</button>
+                                        <input type="submit" class="btn btn-success" name="importdatasubmit" id="importdatasubmit" value="Save">
                                     </div>
                                 </div>
                             </div>
+                               ' . wp_nonce_field("oxilab-flipbox-import") . '
                         </form>
                     </div>');
     }

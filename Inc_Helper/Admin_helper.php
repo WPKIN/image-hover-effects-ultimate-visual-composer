@@ -89,7 +89,6 @@ trait Admin_helper {
                         <nav class="oxilab-sa-admin-nav">
                             <ul class="oxilab-sa-admin-menu">';
 
-
         $GETPage = sanitize_text_field($_GET['page']);
         if (count($response) == 1):
             foreach ($response['Flip Box'] as $key => $value) {
@@ -203,18 +202,38 @@ trait Admin_helper {
         new \OXI_FLIP_BOX_PLUGINS\Page\Welcome();
     }
 
+    private function handle_direct_action_error($message) {
+        _default_wp_die_handler($message, 'Flipbox Error');
+    }
+
+    public function verify_request_nonce() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $METHOD = $_POST;
+        } else {
+            $METHOD = $_REQUEST;
+        }
+        return !empty($METHOD['_wpnonce']) && wp_verify_nonce($METHOD['_wpnonce'], 'oxi-flip-box-editor');
+    }
+
     public function data_process() {
-        if (isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi-flip-box-editor')):
-            $functionname = isset($_POST['functionname']) ? sanitize_text_field($_POST['functionname']) : '';
-            $rawdata = isset($_POST['rawdata']) ? sanitize_post($_POST['rawdata']) : '';
-            $styleid = isset($_POST['styleid']) ? (int) $_POST['styleid'] : '';
-            $childid = isset($_POST['childid']) ? (int) $_POST['childid'] : '';
-            if (!empty($functionname) && !empty($rawdata)):
-                new \OXI_FLIP_BOX_PLUGINS\Classes\Admin_Ajax($functionname, $rawdata, $styleid, $childid);
-            endif;
-        else:
-            return;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $METHOD = $_POST;
+        } else {
+            $METHOD = $_REQUEST;
+        }
+        if (!$this->verify_request_nonce()) {
+            $this->handle_direct_action_error('Access Denied');
+        }
+
+        $functionname = isset($METHOD['functionname']) ? sanitize_text_field($METHOD['functionname']) : '';
+        $rawdata = isset($METHOD['rawdata']) ? sanitize_post($METHOD['rawdata']) : '';
+        $styleid = isset($METHOD['styleid']) ? (int) $METHOD['styleid'] : '';
+        $childid = isset($METHOD['childid']) ? (int) $METHOD['childid'] : '';
+
+        if (!empty($functionname) && !empty($rawdata)):
+            new \OXI_FLIP_BOX_PLUGINS\Classes\Admin_Ajax($functionname, $rawdata, $styleid, $childid);
         endif;
+
         die();
     }
 

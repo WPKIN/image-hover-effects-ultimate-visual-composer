@@ -22,27 +22,15 @@ jQuery.noConflict();
             });
         }
     }
+    
+    jQuery("#oxi-import-style").on("click", function () {
+        jQuery("#oxi-addons-style-import-modal").modal("show");
+    });
     jQuery(".oxi-addons-style-clone").on("click", function () {
         $("#oxi-addons-style-modal-form")[0].reset();
         var dataid = jQuery(this).attr('oxiaddonsdataid');
         jQuery('#oxistyleid').val(dataid);
         jQuery("#oxi-addons-style-create-modal").modal("show");
-    });
-    jQuery(".oxi-addons-style-export").submit(function (e) {
-        e.preventDefault();
-        var rawdata = 'export';
-        var styleid = $(this).children('#oxiexportid').val();
-        console.log(styleid);
-        var functionname = "shortcode_export";
-        $(this).prepend('<span class="spinner sa-spinner-open"></span>');
-        Oxi_Flip_Admin_Home(functionname, rawdata, styleid, childid, function (callback) {
-            setTimeout(function () {
-                $('.sa-spinner-open').remove();
-                $("#oxi-addons-style-export-form")[0].reset();
-                jQuery("#OxiAddImportDatacontent").val(callback);
-                jQuery("#oxi-addons-style-export-modal").modal("show");
-            }, 1000);
-        });
     });
     jQuery("#oxi-addons-style-modal-form").submit(function (e) {
         e.preventDefault();
