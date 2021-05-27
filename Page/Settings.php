@@ -98,8 +98,8 @@ class Settings {
                                                    <?php checked('yes', get_option('oxi_addons_font_awesome'), true); ?>>Yes</label>
                                         <label for="oxi_addons_font_awesome[no]">
                                             <input type="radio" class="radio" id="oxi_addons_font_awesome[no]"
-                                                   name="oxi_addons_font_awesome" value=""
-                                                   <?php checked('', get_option('oxi_addons_font_awesome'), true); ?>>No
+                                                   name="oxi_addons_font_awesome" value="no"
+                                                   <?php checked('no', get_option('oxi_addons_font_awesome'), true); ?>>No
                                         </label>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_font_awesome"></span>
                                         <br>
