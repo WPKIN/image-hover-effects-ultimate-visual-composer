@@ -99,7 +99,9 @@ class Home {
                     if (isset($_FILES['importoxilabflipboxfile'])) {
                         $filename = $_FILES["importoxilabflipboxfile"]["name"];
                         $folder = $this->safe_path(OXI_FLIP_BOX_PATH . 'asset/export/');
-
+                        if (!file_exists($folder)) {
+                            wp_mkdir_p($folder);
+                        }
                         if (is_file($folder . $filename)) {
                             unlink($folder . $filename); // delete file
                         }
