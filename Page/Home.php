@@ -136,7 +136,7 @@ class Home {
             <div class="oxi-addons-import-layouts">
                 <h1>Flipbox › Home
                 </h1>
-                <p> Collect Flipbox Shortcode, Edit, Delect, Clone or Export it.  <button type="button" id="oxi-import-style" class="btn btn-info">Import Shortcode</button> </p>
+                <p> Collect Flipbox Shortcode, Edit, Delect, Clone or Export it.</p>
             </div>
         </div>
         <?php
@@ -201,11 +201,11 @@ class Home {
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
                                 <div class="oxilab-admin-style-preview-top">
-                                    <a href="' . admin_url("admin.php?page=oxi-flip-box-ultimate-new") . '">
+                                    <a href="#" id="oxi-import-style">
                                         <div class="oxilab-admin-add-new-item">
                                             <span>
                                                 <i class="fas fa-plus-circle oxi-icons"></i>  
-                                                Create New Flipbox
+                                                Import Flipbox JSON
                                             </span>
                                         </div>
                                     </a>
@@ -216,7 +216,7 @@ class Home {
 
         echo _('<div class="modal fade" id="oxi-addons-style-create-modal" >
                         <form method="post" id="oxi-addons-style-modal-form">
-                            <div class="modal-dialog modal-sm">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">                    
                                         <h4 class="modal-title">FlipBox Clone</h4>
@@ -241,7 +241,7 @@ class Home {
                     </div>
                     <div class="modal fade" id="oxi-addons-style-import-modal" >
                         <form method="post" id="oxi-addons-import-modal-form" enctype = "multipart/form-data">
-                            <div class="modal-dialog modal-sm">
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">                    
                                         <h4 class="modal-title">Import Form</h4>
