@@ -3,7 +3,7 @@ Contributors: Biplob018
 Donate link: https://www.oxilab.org
 Tags: flip box, flip image, flip, wordpress flipbox plugins, flipboxes, flipbox
 Requires at least: 4.4
-Tested up to: 5.7.1
+Tested up to: 5.8
 Stable tag: 2.5.1
 Requires PHP: 5.4
 License: GPLv2 or later

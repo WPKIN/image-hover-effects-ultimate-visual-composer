@@ -197,7 +197,8 @@ class Home {
     }
 
     public function create_new() {
-        echo _('<div class="oxi-addons-row">
+        if (apply_filters('oxi-flip-box-plugin/pro_version', false)):
+            echo _('<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
                                 <div class="oxilab-admin-style-preview-top">
@@ -213,7 +214,7 @@ class Home {
                             </div>
                         </div>
                     </div>');
-
+        endif;
         echo _('<div class="modal fade" id="oxi-addons-style-create-modal" >
                         <form method="post" id="oxi-addons-style-modal-form">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -248,7 +249,6 @@ class Home {
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
-                                            ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE ? ' <a target="_blank" style"text-align:center" href="https://www.oxilab.org/downloads/flipbox-image-overlay/">**Works only with Pro Version</a><br> <br>' : '') . '
                                              <input class="form-control" type="file" name="importoxilabflipboxfile" accept=".json,application/json,.zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed">
                                     </div>
                                     <div class="modal-footer">
