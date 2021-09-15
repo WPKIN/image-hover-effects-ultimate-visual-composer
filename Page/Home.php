@@ -7,7 +7,8 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  *
  * @author biplo
  */
-class Home {
+class Home
+{
 
     /**
      * Database Parent Table
@@ -45,7 +46,8 @@ class Home {
      *
      * @since 2.0.0
      */
-    public function __construct() {
+    public function __construct()
+    {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
@@ -55,11 +57,13 @@ class Home {
         $this->Render();
     }
 
-    public function database_data() {
+    public function database_data()
+    {
         return $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->parent_table WHERE type = %s ", 'flip'), ARRAY_A);
     }
 
-    public function CSSJS_load() {
+    public function CSSJS_load()
+    {
         $this->manual_import_style();
         $this->admin_css_loader();
         $this->admin_home();
@@ -71,7 +75,8 @@ class Home {
      * Admin Notice JS file loader
      * @return void
      */
-    public function admin_ajax_load() {
+    public function admin_ajax_load()
+    {
         wp_enqueue_script('oxi-flip-box-home', OXI_FLIP_BOX_URL . '/asset/backend/js/home.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-box-home', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
@@ -80,13 +85,15 @@ class Home {
      * Generate safe path
      * @since v1.0.0
      */
-    public function safe_path($path) {
+    public function safe_path($path)
+    {
 
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
-    public function manual_import_style() {
+    public function manual_import_style()
+    {
         if (!empty($_REQUEST['_wpnonce'])) {
             $nonce = $_REQUEST['_wpnonce'];
         }
@@ -95,31 +102,31 @@ class Home {
             if (!wp_verify_nonce($nonce, 'oxilab-flipbox-import')) {
                 die('You do not have sufficient permissions to access this page.');
             } else {
-                if (apply_filters('oxi-flip-box-plugin/pro_version', false) == TRUE):
-                    if (isset($_FILES['importoxilabflipboxfile'])) {
-                        $filename = $_FILES["importoxilabflipboxfile"]["name"];
-                        $folder = $this->safe_path(OXI_FLIP_BOX_PATH . 'asset/export/');
-                        if (!file_exists($folder)) {
-                            wp_mkdir_p($folder);
-                        }
-                        if (is_file($folder . $filename)) {
-                            unlink($folder . $filename); // delete file
-                        }
-                        move_uploaded_file($_FILES['importoxilabflipboxfile']['tmp_name'], $folder . $filename);
-                        $FlipboxApi = new \OXI_FLIP_BOX_PLUGINS\Classes\Admin_Ajax;
-                        $FlipboxApi->post_json_import($folder, $filename);
 
-                        if (is_file($folder . $filename)) {
-                            unlink($folder . $filename); // delete file
-                        }
+                if (isset($_FILES['importoxilabflipboxfile'])) {
+                    $filename = $_FILES["importoxilabflipboxfile"]["name"];
+                    $folder = $this->safe_path(OXI_FLIP_BOX_PATH . 'asset/export/');
+                    if (!file_exists($folder)) {
+                        wp_mkdir_p($folder);
                     }
-                endif;
+                    if (is_file($folder . $filename)) {
+                        unlink($folder . $filename); // delete file
+                    }
+                    move_uploaded_file($_FILES['importoxilabflipboxfile']['tmp_name'], $folder . $filename);
+                    $FlipboxApi = new \OXI_FLIP_BOX_PLUGINS\Classes\Admin_Ajax;
+                    $FlipboxApi->post_json_import($folder, $filename);
+
+                    if (is_file($folder . $filename)) {
+                        unlink($folder . $filename); // delete file
+                    }
+                }
             }
         }
     }
 
-    public function Render() {
-        ?>
+    public function Render()
+    {
+?>
         <div class="oxi-addons-row">
             <?php
             $this->Admin_header();
@@ -127,11 +134,12 @@ class Home {
             $this->create_new();
             ?>
         </div>
-        <?php
+    <?php
     }
 
-    public function Admin_header() {
-        ?>
+    public function Admin_header()
+    {
+    ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Flipbox › Home
@@ -139,24 +147,26 @@ class Home {
                 <p> Collect Flipbox Shortcode, Edit, Delect, Clone or Export it.</p>
             </div>
         </div>
-        <?php
+<?php
     }
 
-    private function create_export_link($rawdata = '', $shortcode_id = '', $child_id = '') {
+    private function create_export_link($rawdata = '', $shortcode_id = '', $child_id = '')
+    {
         return add_query_arg(
-                [
-                    'action' => 'oxi_flip_box_data',
-                    'functionname' => 'get_shortcode_export',
-                    'styleid' => $shortcode_id,
-                    'childid' => $child_id,
-                    'rawdata' => $rawdata,
-                    '_wpnonce' => wp_create_nonce('oxi-flip-box-editor'),
-                ],
-                admin_url('admin-ajax.php')
+            [
+                'action' => 'oxi_flip_box_data',
+                'functionname' => 'get_shortcode_export',
+                'styleid' => $shortcode_id,
+                'childid' => $child_id,
+                'rawdata' => $rawdata,
+                '_wpnonce' => wp_create_nonce('oxi-flip-box-editor'),
+            ],
+            admin_url('admin-ajax.php')
         );
     }
 
-    public function created_shortcode() {
+    public function created_shortcode()
+    {
         $return = _(' <div class="oxi-addons-row"> <div class="oxi-addons-row table-responsive abop" style="margin-bottom: 20px; opacity: 0; height: 0px">
                         <table class="table table-hover widefat oxi_addons_table_data" style="background-color: #fff; border: 1px solid #ccc">
                             <thead>
@@ -176,9 +186,8 @@ class Home {
             $return .= _('<td>' . $this->name_converter($value['name']) . '</td>');
             $return .= _('<td>' . $this->name_converter($value['style_name']) . '</td>');
             $return .= _('<td><span>Shortcode &nbsp;&nbsp;<input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="[oxilab_flip_box id=&quot;' . $id . '&quot;]"></span> <br>'
-                    . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[oxilab_flip_box  id=&quot;' . $id . '&quot;]&#039;); ?&gt;"></span></td>');
+                . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[oxilab_flip_box  id=&quot;' . $id . '&quot;]&#039;); ?&gt;"></span></td>');
             $return .= _('<td> 
-                            <button type="button" class="btn btn-success oxi-addons-style-clone"  style="float:left" oxiaddonsdataid="' . $id . '">Clone</button>
                             <a href="' . admin_url("admin.php?page=oxi-flip-box-ultimate-new&styleid=$id") . '"  title="Edit"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Edit</a>
                             <form method="post" class="oxi-addons-style-delete">
                                    <input type="hidden" name="oxideleteid" id="oxideleteid" value="' . $id . '">
@@ -196,9 +205,10 @@ class Home {
         echo $return;
     }
 
-    public function create_new() {
-        if (apply_filters('oxi-flip-box-plugin/pro_version', false)):
-            echo _('<div class="oxi-addons-row">
+    public function create_new()
+    {
+
+        echo _('<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
                             <div class="oxi-addons-style-preview">
                                 <div class="oxilab-admin-style-preview-top">
@@ -214,33 +224,8 @@ class Home {
                             </div>
                         </div>
                     </div>');
-        endif;
-        echo _('<div class="modal fade" id="oxi-addons-style-create-modal" >
-                        <form method="post" id="oxi-addons-style-modal-form">
-                            <div class="modal-dialog modal-sm modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">                    
-                                        <h4 class="modal-title">FlipBox Clone</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class=" form-group row">
-                                            <label for="addons-style-name" class="col-sm-6 col-form-label" oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
-                                            <div class="col-sm-6 addons-dtm-laptop-lock">
-                                                <input class="form-control" type="text" value="" id="addons-style-name"  name="addons-style-name">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input type="hidden" id="oxistyleid" name="oxistyleid" value="">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <input type="submit" class="btn btn-success" name="addonsdatasubmit" id="addonsdatasubmit" value="Save">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal fade" id="oxi-addons-style-import-modal" >
+
+        echo _('   <div class="modal fade" id="oxi-addons-style-import-modal" >
                         <form method="post" id="oxi-addons-import-modal-form" enctype = "multipart/form-data">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
@@ -261,5 +246,4 @@ class Home {
                         </form>
                     </div>');
     }
-
 }
