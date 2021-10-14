@@ -108,6 +108,26 @@ class Settings {
                                     </fieldset>
                                 </td>
                             </tr>
+                            <tr>
+                                <th scope="row">
+                                    <label for="oxi_addons_google_font">Google Font Support</label>
+                                </th>
+                                <td>
+                                    <fieldset>
+                                        <label for="oxi_addons_google_font[yes]">
+                                            <input type="radio" class="radio" id="oxi_addons_google_font[yes]" name="oxi_addons_google_font" value="" <?php checked('', get_option('oxi_addons_google_font'), true); ?>>Yes</label>
+                                        <label for="oxi_addons_google_font[no]">
+                                            <input type="radio" class="radio" id="oxi_addons_google_font[no]" name="oxi_addons_google_font" value="no"  <?php checked('no', get_option('oxi_addons_google_font'), true); ?>>No
+                                        </label>
+                                        <span class="oxi-addons-settings-connfirmation oxi_addons_google_font"></span>
+                                        <br>
+                                        <p class="description">Load Google Font CSS at shortcode loading, If your theme already loaded select No for faster loading</p>
+                                    </fieldset>
+                                </td>
+                            </tr>
+
+
+
 
                         </tbody>
                     </table>

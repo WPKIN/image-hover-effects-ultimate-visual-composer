@@ -9,11 +9,17 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
 trait Public_Helper {
 
     public function font_familly_charecter($data) {
-        wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
+
+
+        $check = get_option('oxi_addons_google_font');
+        if ($check != 'no'):
+            wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
+        endif;
         $data = str_replace('+', ' ', $data);
         $data = explode(':', $data);
         $data = $data[0];
         $data = '"' . $data . '"';
+
         return $data;
     }
 

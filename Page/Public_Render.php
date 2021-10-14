@@ -204,7 +204,12 @@ class Public_Render {
     }
 
     public function font_familly($data = '') {
-        wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
+
+
+        $check = get_option('oxi_addons_google_font');
+        if ($check != 'no'):
+            wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
+        endif;
         $data = str_replace('+', ' ', $data);
         $data = explode(':', $data);
         return '"' . $data[0] . '"';
