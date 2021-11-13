@@ -126,6 +126,24 @@ class Settings {
                                 </td>
                             </tr>
 
+                            <tr>
+                                <th scope="row">
+                                    <label for="oxi_addons_pre_loader">PreLoader</label>
+                                </th>
+                                <td>
+                                    <fieldset>
+                                        <label for="oxi_addons_pre_loader[yes]">
+                                            <input type="radio" class="radio" id="oxi_addons_pre_loader[yes]" name="oxi_addons_pre_loader" value="yes" <?php checked('yes', get_option('oxi_addons_pre_loader'), true); ?>>Yes</label>
+                                        <label for="oxi_addons_pre_loader[no]">
+                                            <input type="radio" class="radio" id="oxi_addons_pre_loader[no]" name="oxi_addons_pre_loader" value=""  <?php checked('', get_option('oxi_addons_pre_loader'), true); ?>>No
+                                        </label>
+                                        <span class="oxi-addons-settings-connfirmation oxi_addons_pre_loader"></span>
+                                        <br>
+                                        <p class="description">Add Preloader into Flipbox content, Flipbox will show after load all image or content perfectly</p>
+                                    </fieldset>
+                                </td>
+                            </tr>
+
 
 
 

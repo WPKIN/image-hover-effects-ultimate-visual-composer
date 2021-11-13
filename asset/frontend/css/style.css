@@ -3,6 +3,14 @@
     position: relative;
     display: flex;
 }
+.oxi-addons-container-flipbox-preloader{
+    opacity: 0;
+}
+
+.oxi-addons-container.oxi-addons-container-flipbox-preloader.oxi-addons-container-flipbox-loaded{
+    opacity: 1;
+}
+
 .oxilab-flip-box-wrapper{
     width: 100%;
     float: left;
@@ -129,8 +137,6 @@
     backface-visibility: hidden;
     -webkit-transition-property: transform;
     transition-property: transform;
-    -webkit-transition-duration: inherit;
-    transition-duration: inherit;
 }
 .easing_easeInOutExpo * {
     -webkit-transition-timing-function: cubic-bezier(1, 0, 0, 1);

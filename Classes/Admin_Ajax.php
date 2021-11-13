@@ -296,7 +296,7 @@ class Admin_Ajax {
 
                     case 'item_name_mismatch' :
 
-                        $message = sprintf(__('This appears to be an invalid license key for %s.'), OXI_IMAGE_HOVER_TEXTDOMAIN);
+                        $message = sprintf(__('This appears to be an invalid license key for %s.'), OXI_FLIP_BOX_TEXTDOMAIN);
                         break;
 
                     case 'no_activations_left':

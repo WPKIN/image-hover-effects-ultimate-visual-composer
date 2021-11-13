@@ -2,11 +2,11 @@
 
 /*
   Plugin Name: Flipbox - Awesomes Flip Boxes Image Overlay
-  Plugin URI: https://www.oxilab.org/downloads/flipbox-image-overlay/
+  Plugin URI: https://oxilabdemos.com/flipbox/
   Description: Flipbox - Awesomes Flip Boxes Image Overlay is the most easiest Flip builder Plugin. Create multiple Flip or  Flipboxes  with this.
   Author: Biplob Adhikari
   Author URI: http://www.oxilab.org/
-  Version: 2.5.1
+  Version: 2.5.2
  */
 if (!defined('ABSPATH'))
     exit;
@@ -15,7 +15,7 @@ define('OXI_FLIP_BOX_FILE', __FILE__);
 define('OXI_FLIP_BOX_BASENAME', plugin_basename(__FILE__));
 define('OXI_FLIP_BOX_PATH', plugin_dir_path(__FILE__));
 define('OXI_FLIP_BOX_URL', plugins_url('/', __FILE__));
-define('OXI_FLIP_BOX_PLUGIN_VERSION', '2.5.1');
+define('OXI_FLIP_BOX_PLUGIN_VERSION', '2.5.2');
 define('OXI_FLIP_BOX_TEXTDOMAIN', 'oxi-flip-box-plugin');
 
 /**
@@ -34,7 +34,6 @@ add_action('plugins_loaded', function () {
     \OXI_FLIP_BOX_PLUGINS\Classes\Bootstrap::instance();
 });
 
-
 /**
  * Activation hook
  *
@@ -43,16 +42,6 @@ add_action('plugins_loaded', function () {
 register_activation_hook(__FILE__, function () {
     $Installation = new \OXI_FLIP_BOX_PLUGINS\Classes\Installation();
     $Installation->plugin_activation_hook();
-});
-
-/**
- * Deactivation hook
- *
- * @since 2.3.0
- */
-register_deactivation_hook(__FILE__, function () {
-    $Installation = new \OXI_FLIP_BOX_PLUGINS\Classes\Installation();
-    $Installation->plugin_deactivation_hook();
 });
 
 /**

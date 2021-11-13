@@ -57,26 +57,25 @@ trait Admin_helper {
      * @since 2.0.0
      */
     public function oxilab_admin_menu($agr) {
-        $response = !empty(get_transient(self::ADMINMENU)) ? get_transient(self::ADMINMENU) : [];
-        if (!array_key_exists('Flip Box', $response)):
-            $response['Flip Box']['Flip Box'] = [
+        $response = [
+            'Flip Box' => [
                 'name' => 'Flip Box',
                 'homepage' => 'oxi-flip-box-ultimate'
-            ];
-            $response['Flip Box']['Create New'] = [
+            ],
+            'Create New' => [
                 'name' => 'Create New',
                 'homepage' => 'oxi-flip-box-ultimate-new'
-            ];
-            $response['Flip Box']['Import Templates'] = [
+            ],
+            'Import Templates' => [
                 'name' => 'Import Templates',
                 'homepage' => 'oxi-flip-box-ultimate-import'
-            ];
-            $response['Flip Box']['Addons'] = [
+            ],
+            'Addons' => [
                 'name' => 'Addons',
                 'homepage' => 'oxi-flip-box-ultimate-addons'
-            ];
-            set_transient(self::ADMINMENU, $response, 10 * DAY_IN_SECONDS);
-        endif;
+            ]
+        ];
+
         $bgimage = OXI_FLIP_BOX_URL . 'image/sa-logo.png';
         $sub = '';
 
@@ -90,38 +89,16 @@ trait Admin_helper {
                             <ul class="oxilab-sa-admin-menu">';
 
         $GETPage = sanitize_text_field($_GET['page']);
-        if (count($response) == 1):
-            foreach ($response['Flip Box'] as $key => $value) {
-                $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
-                $menu .= '<li ' . $active . '><a href="' . $this->admin_url_convert($value['homepage']) . '">' . $this->name_converter($value['name']) . '</a></li>';
-            }
-        else:
-            foreach ($response as $key => $value) {
-                $active = ($key == 'Flip Box' ? 'active' : '');
-                $menu .= '<li class="' . $active . '"><a class="oxi-nev-drop-menu" href="#">' . $this->name_converter($key) . '</a>';
-                $menu .= '   <div class="oxi-nev-d-menu">
-                                    <div class="oxi-nev-drop-menu-li">';
-                foreach ($value as $key2 => $submenu) {
-                    $menu .= '<a href="' . $this->admin_url_convert($submenu['homepage']) . '">' . $this->name_converter($submenu['name']) . '</a>';
-                }
-                $menu .= '</div>';
-                $menu .= '</li>';
-            }
-            if ($GETPage == 'oxi-flip-box-ultimate' || $GETPage == 'oxi-flip-box-ultimate-new' || $GETPage == 'oxi-flip-box-ultimate-import' || $GETPage == 'oxi-flip-box-ultimate-addons'):
-                $sub .= '<div class="shortcode-addons-main-tab-header">';
-                foreach ($response['Flip Box'] as $key => $value) {
-                    $active = ($GETPage == $value['homepage'] ? 'oxi-active' : '');
-                    $sub .= '<a href="' . $this->admin_url_convert($value['homepage']) . '">
-                                <div class="shortcode-addons-header ' . $active . '">' . $this->name_converter($value['name']) . '</div>
-                              </a>';
-                }
-                $sub .= '</div>';
-            endif;
-        endif;
+
+        foreach ($response as $key => $value) {
+            $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
+            $menu .= '<li ' . $active . '><a href="' . $this->admin_url_convert($value['homepage']) . '">' . $this->name_converter($value['name']) . '</a></li>';
+        }
+
         $menu .= '              </ul>
                             <ul class="oxilab-sa-admin-menu2">
-                               ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://www.oxilab.org/downloads/flipbox-image-overlay/">Upgrade</a></li>' : '') . '
-                               <li class="saadmin-doc"><a target="_black" href="https://www.oxilab.org/docs/flipbox-image-overlay/getting-started/installing-for-the-first-time/">Docs</a></li>
+                               ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://oxilabdemos.com/flipbox/pricing/">Upgrade</a></li>' : '') . '
+                               <li class="saadmin-doc"><a target="_black" href="https://oxilabdemos.com/flipbox/docs/installations/how-to-install-the-plugin/">Docs</a></li>
                                <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">Support</a></li>
                                <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-flip-box-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
                             </ul>
@@ -142,7 +119,7 @@ trait Admin_helper {
                     <div class="oxi-addons-admin-notifications-holder">
                         <div class="oxi-addons-admin-notifications-alert">
                             <p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. I Just wanted to see if you have any questions or concerns about my plugins. If you do, Please do not hesitate to <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer#new-post">file a bug report</a>. </p>
-                            ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) ? '' : '<p>By the way, did you know we also have a <a href="https://www.oxilab.org/downloads/flipbox-image-overlay/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
+                            ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) ? '' : '<p>By the way, did you know we also have a <a href="https://oxilabdemos.com/flipbox/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
                             <p>Thanks Again!</p>
                             <p></p>
                         </div>

@@ -87,17 +87,6 @@ jQuery.noConflict();
         }
     });
 
-//    $(".sa-data-animation").each(function () {
-//        var _this = $(this);
-//        var animation = _this.attr('sa-data-animation');
-//        var offset = _this.attr('sa-data-animation-offset');
-//        _this.waypoint({
-//            handler: function () {
-//                _this.addClass('animated').addClass(animation);
-//            },
-//            triggerOnce: true,
-//            offset: offset});
-//    });
 
     function OxiAddonsEqualHeightWidth(data) {
         var cw = $(data).outerWidth();
@@ -339,5 +328,9 @@ jQuery.noConflict();
         });
     };
 
+    $(window).load(function () {
+        // Animate loader off screen
+        $(".oxi-addons-container-flipbox-preloader").addClass('oxi-addons-container-flipbox-loaded');
+    });
 })(jQuery);
 

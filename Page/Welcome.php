@@ -28,16 +28,16 @@ class Welcome {
             </div>
             <h2 class="nav-tab-wrapper">
                 <a class="nav-tab nav-tab-active">
-                    Getting Started		
+                    Getting Started
                 </a>
             </h2>
             <p class="about-description">
-                Use the tips below to get started using Flipbox - Awesomes Flip Boxes Image Overlay. You will be up and running in no time.	
-            </p>    
+                Use the tips below to get started using Flipbox - Awesomes Flip Boxes Image Overlay. You will be up and running in no time.
+            </p>
             <div class="feature-section">
                 <h3>Creating Your Flip Box</h3>
-                <p>Flipbox - Awesomes Flip Boxes Image Overlay makes it easy to create Flipbox or Flipping Content in WordPress. You can follow the video tutorial on the right or read our how to 
-                    <a href="https://www.oxilab.org/docs/flipbox-image-overlay/getting-started/installing-for-the-first-time/" target="_blank" rel="noopener">Create your Flipbox Guide</a>.					</p>
+                <p>Flipbox - Awesomes Flip Boxes Image Overlay makes it easy to create Flipbox or Flipping Content in WordPress. You can follow the video tutorial on the right or read our how to
+                    <a href="https://oxilabdemos.com/flipbox/docs/installations/how-to-install-the-plugin/" target="_blank" rel="noopener">Create your Flipbox Guide</a>.					</p>
                 <p>But in reality, the process is so intuitive that you can just start by going to <a href="<?php echo admin_url(); ?>admin.php?page=oxi-flip-box-ultimate-new">Create Flipbox</a>.				</p>
                 </br>
                 </br>
@@ -49,7 +49,7 @@ class Welcome {
                 <p>1. Awesome Live Preview Panel</p>
                 <p>1. Can Customize with Our Settings</p>
                 <p>1. Easy to USE & Builtin Integration for popular Page Builder</p>
-                <p><a href="https://www.oxilab.org/downloads/flipbox-image-overlay/" target="_blank" rel="noopener" class="iheu-image-features-button button button-primary">See all Features</a></p>
+                <p><a href="https://oxilabdemos.com/flipbox/pricing" target="_blank" rel="noopener" class="iheu-image-features-button button button-primary">See all Features</a></p>
 
             </div>
             <div class="feature-section">
