@@ -25,7 +25,7 @@ class Support_Reviews {
      * @return void
      */
     public function notice_dissmiss() {
-        if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxilab_flip_notice_dissmiss')):
+        if (isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxilab_flip_notice_dissmiss')):
             $notice = isset($_POST['notice']) ? sanitize_text_field($_POST['notice']) : '';
             if ($notice == 'maybe'):
                 $data = strtotime("now");

@@ -225,7 +225,7 @@ class Admin_Ajax {
      */
     public function oxi_license($data = '', $styleid = '', $itemid = '') {
         $rawdata = json_decode(stripslashes($data), true);
-        $new = $rawdata['license'];
+        $new = sanitize_text_field($rawdata['license']);
         $old = get_option('oxilab_flip_box_license_key');
         $status = get_option('oxilab_flip_box_license_status');
         if ($new == ''):
@@ -350,8 +350,21 @@ class Admin_Ajax {
      */
     public function oxi_settings($data = '', $styleid = '', $itemid = '') {
         $rawdata = json_decode(stripslashes($data), true);
-        update_option($rawdata['name'], $rawdata['value']);
-        echo '<span class="oxi-confirmation-success"></span>';
+        $name = sanitize_text_field($rawdata['name']);
+        $value = sanitize_text_field($rawdata['value']);
+        if ($name === 'oxi_addons_user_permissions'):
+            update_option('oxi_addons_user_permission', $value);
+            echo '<span class="oxi-confirmation-success"></span>';
+        elseif ($name === 'oxi_addons_font_awesome'):
+            update_option('oxi_addons_font_awesome', $value);
+            echo '<span class="oxi-confirmation-success"></span>';
+        elseif ($name === 'oxi_addons_google_font'):
+            update_option('oxi_addons_google_font', $value);
+            echo '<span class="oxi-confirmation-success"></span>';
+        elseif ($name === 'oxi_addons_pre_loader'):
+            update_option('oxi_addons_pre_loader', $value);
+            echo '<span class="oxi-confirmation-success"></span>';
+        endif;
         return;
     }
 

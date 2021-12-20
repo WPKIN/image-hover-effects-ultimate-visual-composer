@@ -7,8 +7,7 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  *
  * @author biplo
  */
-class Home
-{
+class Home {
 
     /**
      * Database Parent Table
@@ -46,8 +45,7 @@ class Home
      *
      * @since 2.0.0
      */
-    public function __construct()
-    {
+    public function __construct() {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
@@ -57,13 +55,11 @@ class Home
         $this->Render();
     }
 
-    public function database_data()
-    {
+    public function database_data() {
         return $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->parent_table WHERE type = %s ", 'flip'), ARRAY_A);
     }
 
-    public function CSSJS_load()
-    {
+    public function CSSJS_load() {
         $this->manual_import_style();
         $this->admin_css_loader();
         $this->admin_home();
@@ -75,8 +71,7 @@ class Home
      * Admin Notice JS file loader
      * @return void
      */
-    public function admin_ajax_load()
-    {
+    public function admin_ajax_load() {
         wp_enqueue_script('oxi-flip-box-home', OXI_FLIP_BOX_URL . '/asset/backend/js/home.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-box-home', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
@@ -85,15 +80,13 @@ class Home
      * Generate safe path
      * @since v1.0.0
      */
-    public function safe_path($path)
-    {
+    public function safe_path($path) {
 
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
 
-    public function manual_import_style()
-    {
+    public function manual_import_style() {
         if (!empty($_REQUEST['_wpnonce'])) {
             $nonce = $_REQUEST['_wpnonce'];
         }
@@ -103,7 +96,7 @@ class Home
                 die('You do not have sufficient permissions to access this page.');
             } else {
 
-                if (isset($_FILES['importoxilabflipboxfile'])) {
+                if (isset($_FILES['importoxilabflipboxfile']) && current_user_can('upload_files')) {
                     $filename = $_FILES["importoxilabflipboxfile"]["name"];
                     $folder = $this->safe_path(OXI_FLIP_BOX_PATH . 'asset/export/');
                     if (!file_exists($folder)) {
@@ -124,9 +117,8 @@ class Home
         }
     }
 
-    public function Render()
-    {
-?>
+    public function Render() {
+        ?>
         <div class="oxi-addons-row">
             <?php
             $this->Admin_header();
@@ -134,12 +126,11 @@ class Home
             $this->create_new();
             ?>
         </div>
-    <?php
+        <?php
     }
 
-    public function Admin_header()
-    {
-    ?>
+    public function Admin_header() {
+        ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Flipbox › Home
@@ -147,26 +138,24 @@ class Home
                 <p> Collect Flipbox Shortcode, Edit, Delect, Clone or Export it.</p>
             </div>
         </div>
-<?php
+        <?php
     }
 
-    private function create_export_link($rawdata = '', $shortcode_id = '', $child_id = '')
-    {
+    private function create_export_link($rawdata = '', $shortcode_id = '', $child_id = '') {
         return add_query_arg(
-            [
-                'action' => 'oxi_flip_box_data',
-                'functionname' => 'get_shortcode_export',
-                'styleid' => $shortcode_id,
-                'childid' => $child_id,
-                'rawdata' => $rawdata,
-                '_wpnonce' => wp_create_nonce('oxi-flip-box-editor'),
-            ],
-            admin_url('admin-ajax.php')
+                [
+                    'action' => 'oxi_flip_box_data',
+                    'functionname' => 'get_shortcode_export',
+                    'styleid' => $shortcode_id,
+                    'childid' => $child_id,
+                    'rawdata' => $rawdata,
+                    '_wpnonce' => wp_create_nonce('oxi-flip-box-editor'),
+                ],
+                admin_url('admin-ajax.php')
         );
     }
 
-    public function created_shortcode()
-    {
+    public function created_shortcode() {
         $return = _(' <div class="oxi-addons-row"> <div class="oxi-addons-row table-responsive abop" style="margin-bottom: 20px; opacity: 0; height: 0px">
                         <table class="table table-hover widefat oxi_addons_table_data" style="background-color: #fff; border: 1px solid #ccc">
                             <thead>
@@ -186,12 +175,12 @@ class Home
             $return .= _('<td>' . $this->name_converter($value['name']) . '</td>');
             $return .= _('<td>' . $this->name_converter($value['style_name']) . '</td>');
             $return .= _('<td><span>Shortcode &nbsp;&nbsp;<input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="[oxilab_flip_box id=&quot;' . $id . '&quot;]"></span> <br>'
-                . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[oxilab_flip_box  id=&quot;' . $id . '&quot;]&#039;); ?&gt;"></span></td>');
-            $return .= _('<td> 
+                    . '<span>Php Code &nbsp;&nbsp; <input type="text" onclick="this.setSelectionRange(0, this.value.length)" value="&lt;?php echo do_shortcode(&#039;[oxilab_flip_box  id=&quot;' . $id . '&quot;]&#039;); ?&gt;"></span></td>');
+            $return .= _('<td>
                             <a href="' . admin_url("admin.php?page=oxi-flip-box-ultimate-new&styleid=$id") . '"  title="Edit"  class="btn btn-info" style="float:left; margin-right: 5px; margin-left: 5px;">Edit</a>
                             <form method="post" class="oxi-addons-style-delete">
                                    <input type="hidden" name="oxideleteid" id="oxideleteid" value="' . $id . '">
-                                   <button class="btn btn-danger" style="float:left"  title="Delete"  type="submit" value="delete" name="addonsdatadelete">Delete</button>  
+                                   <button class="btn btn-danger" style="float:left"  title="Delete"  type="submit" value="delete" name="addonsdatadelete">Delete</button>
                             </form>
                             <a href="' . $this->create_export_link('demo', $id, '') . '"  title="Export"  class="btn btn-info" style="float:left; margin-left: 5px;">Export</a>
                        </td>');
@@ -205,8 +194,7 @@ class Home
         echo $return;
     }
 
-    public function create_new()
-    {
+    public function create_new() {
 
         echo _('<div class="oxi-addons-row">
                         <div class="oxi-addons-col-1 oxi-import">
@@ -215,7 +203,7 @@ class Home
                                     <a href="#" id="oxi-import-style">
                                         <div class="oxilab-admin-add-new-item">
                                             <span>
-                                                <i class="fas fa-plus-circle oxi-icons"></i>  
+                                                <i class="fas fa-plus-circle oxi-icons"></i>
                                                 Import Flipbox JSON
                                             </span>
                                         </div>
@@ -229,7 +217,7 @@ class Home
                         <form method="post" id="oxi-addons-import-modal-form" enctype = "multipart/form-data">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
-                                    <div class="modal-header">                    
+                                    <div class="modal-header">
                                         <h4 class="modal-title">Import Form</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
@@ -246,4 +234,5 @@ class Home
                         </form>
                     </div>');
     }
+
 }

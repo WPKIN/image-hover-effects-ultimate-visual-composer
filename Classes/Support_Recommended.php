@@ -60,7 +60,7 @@ class Support_Recommended {
      * @return void
      */
     public function notice_dissmiss() {
-        if (isset($_POST['_wpnonce']) || wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_flip_admin_recommended')):
+        if (isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_flip_admin_recommended')):
             $data = 'done';
             update_option('oxilab_flip_box_recommended', $data);
             echo 'done';
