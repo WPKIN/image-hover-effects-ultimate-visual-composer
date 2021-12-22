@@ -48,17 +48,10 @@ jQuery.noConflict();
         });
     }, 1000));
 
-
-
-
-    $(document.body).on("click", "input", function (e) {
-
+    $("input[name=oxi_addons_font_awesome] ").on("change", function (e) {
         var $This = $(this), name = $This.attr('name'), $value = $This.val();
-        var rawdata = JSON.stringify({name: name, value: $value});
-        if (name === 'oxilab_flip_box_license_key') {
-            return;
-        }
-        var functionname = "oxi_settings";
+        var rawdata = JSON.stringify({value: $value});
+        var functionname = "oxi_addons_font_awesome";
         $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
         Oxi_Flip_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
             $('.' + name).html(callback);
@@ -67,10 +60,37 @@ jQuery.noConflict();
             }, 8000);
         });
     });
-    $(document.body).on("change", "select", function (e) {
+     $("input[name=oxi_addons_google_font] ").on("change", function (e) {
         var $This = $(this), name = $This.attr('name'), $value = $This.val();
-        var rawdata = JSON.stringify({name: name, value: $value});
-        var functionname = "oxi_settings";
+        var rawdata = JSON.stringify({value: $value});
+        var functionname = "oxi_addons_google_font";
+        $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
+        Oxi_Flip_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
+            $('.' + name).html(callback);
+            setTimeout(function () {
+                $('.' + name).html('');
+            }, 8000);
+        });
+    });
+     $("input[name=oxi_addons_pre_loader] ").on("change", function (e) {
+        var $This = $(this), name = $This.attr('name'), $value = $This.val();
+        var rawdata = JSON.stringify({value: $value});
+        var functionname = "oxi_addons_pre_loader";
+        $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
+        Oxi_Flip_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
+            $('.' + name).html(callback);
+            setTimeout(function () {
+                $('.' + name).html('');
+            }, 8000);
+        });
+    });
+
+
+
+    $("#oxi_addons_user_permission").on("change", function (e) {
+        var $This = $(this), name = $This.attr('name'), $value = $This.val();
+        var rawdata = JSON.stringify({ value: $value});
+        var functionname = "oxi_addons_user_permission";
         $('.' + name).html('<span class="spinner sa-spinner-open"></span>');
         Oxi_Flip_Admin_Settings(functionname, rawdata, styleid, childid, function (callback) {
             $('.' + name).html(callback);

@@ -199,24 +199,26 @@ class Admin_Ajax {
         return;
     }
 
-    public function post_json_import($folder, $filename) {
-        if (is_file($folder . $filename)) {
-            $this->active_data();
-            $params = json_decode(file_get_contents($folder . $filename), true);
-            $style = $params['style'];
-            $child = $params['child'];
-            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, type, style_name, css) VALUES ( %s, %s, %s, %s)", array($style['name'], $style['type'], $style['style_name'], $style['css'])));
-            $redirect_id = $this->wpdb->insert_id;
-            if ($redirect_id > 0):
-                foreach ($child as $value) {
-                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, type, files, css) VALUES (%d, %s, %s, %s)", array($redirect_id, $value['type'], $value['files'], $value['css'])));
-                }
-            endif;
-            $check_import = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM  $this->import_table WHERE type = %s AND name = %s", 'flip', str_replace('style', '', $style['style_name'])), ARRAY_A);
-            if (!is_array($check_import)):
-                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES ( %s, %s)", array('flip', str_replace('style', '', $style['style_name']))));
-            endif;
+    public function post_json_import($params) {
+        if (!is_array($params) || $params['style']['type'] != 'flip') {
+            return new \WP_Error('file_error', 'Invalid Content In File');
         }
+        $this->active_data();
+
+        $style = $params['style'];
+        $child = $params['child'];
+        $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->parent_table} (name, type, style_name, css) VALUES ( %s, %s, %s, %s)", array($style['name'], $style['type'], $style['style_name'], $style['css'])));
+        $redirect_id = $this->wpdb->insert_id;
+        if ($redirect_id > 0):
+            foreach ($child as $value) {
+                $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, type, files, css) VALUES (%d, %s, %s, %s)", array($redirect_id, $value['type'], $value['files'], $value['css'])));
+            }
+        endif;
+        $check_import = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM  $this->import_table WHERE type = %s AND name = %s", 'flip', str_replace('style', '', $style['style_name'])), ARRAY_A);
+        if (!is_array($check_import)):
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES ( %s, %s)", array('flip', str_replace('style', '', $style['style_name']))));
+        endif;
+        return admin_url("admin.php?page=oxi-flip-box-ultimate-new&styleid=$redirect_id");
     }
 
     /**
@@ -348,23 +350,47 @@ class Admin_Ajax {
      * Admin Settings
      * @return void
      */
-    public function oxi_settings($data = '', $styleid = '', $itemid = '') {
+    public function oxi_addons_user_permission($data = '', $styleid = '', $itemid = '') {
         $rawdata = json_decode(stripslashes($data), true);
-        $name = sanitize_text_field($rawdata['name']);
         $value = sanitize_text_field($rawdata['value']);
-        if ($name === 'oxi_addons_user_permissions'):
-            update_option('oxi_addons_user_permission', $value);
-            echo '<span class="oxi-confirmation-success"></span>';
-        elseif ($name === 'oxi_addons_font_awesome'):
-            update_option('oxi_addons_font_awesome', $value);
-            echo '<span class="oxi-confirmation-success"></span>';
-        elseif ($name === 'oxi_addons_google_font'):
-            update_option('oxi_addons_google_font', $value);
-            echo '<span class="oxi-confirmation-success"></span>';
-        elseif ($name === 'oxi_addons_pre_loader'):
-            update_option('oxi_addons_pre_loader', $value);
-            echo '<span class="oxi-confirmation-success"></span>';
-        endif;
+        update_option('oxi_addons_user_permission', $value);
+        echo '<span class="oxi-confirmation-success"></span>';
+        return;
+    }
+
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function oxi_addons_font_awesome($data = '', $styleid = '', $itemid = '') {
+        $rawdata = json_decode(stripslashes($data), true);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_addons_font_awesome', $value);
+        echo '<span class="oxi-confirmation-success"></span>';
+        return;
+    }
+
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function oxi_addons_google_font($data = '', $styleid = '', $itemid = '') {
+        $rawdata = json_decode(stripslashes($data), true);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_addons_google_font', $value);
+        echo '<span class="oxi-confirmation-success"></span>';
+        return;
+    }
+
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function oxi_addons_pre_loader($data = '', $styleid = '', $itemid = '') {
+        $rawdata = json_decode(stripslashes($data), true);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_addons_pre_loader', $value);
+        echo '<span class="oxi-confirmation-success"></span>';
         return;
     }
 

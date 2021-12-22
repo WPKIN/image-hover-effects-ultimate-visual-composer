@@ -103,7 +103,7 @@ class Import {
                             </div>
                             <div class="oxi-addons-style-preview-bottom">
                                 <div class="oxi-addons-style-preview-bottom-left">
-                                    Style <?php echo $id; ?>
+                                    Style <?php echo esc_html($id); ?>
                                 </div>
                                 <div class="oxi-addons-style-preview-bottom-right">
                                     <?php
@@ -111,14 +111,14 @@ class Import {
                                     if ($id > 10 && $checking == false):
                                         ?>
                                         <form method="post" style=" display: inline-block; " class="shortcode-addons-template-pro-only">
-                                            <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  
+                                            <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>
                                         </form>
                                         <?php
                                     else:
                                         ?>
                                         <form method="post" style=" display: inline-block; " class="shortcode-addons-template-import">
-                                            <input type="hidden" name="oxiimportstyle" value="<?php echo $id; ?>">
-                                            <button class="btn btn-success oxi-addons-addons-template-create" title="import"  type="submit" value="Import" name="addonsstyleimport">Import</button>  
+                                            <input type="hidden" name="oxiimportstyle" value="<?php echo esc_attr($id); ?>">
+                                            <button class="btn btn-success oxi-addons-addons-template-create" title="import"  type="submit" value="Import" name="addonsstyleimport">Import</button>
                                         </form>
                                     <?php
                                     endif;

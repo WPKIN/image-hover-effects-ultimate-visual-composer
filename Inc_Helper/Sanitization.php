@@ -95,9 +95,9 @@ trait Sanitization {
     public function oxilab_flip_box_admin_input_text($id, $value, $name, $title) {
         ?>
         <div class="form-group col-sm-12">
-            <label for="<?php echo $id; ?>"><?php echo $name; ?></label>
-            <input type="text "class="form-control" id="<?php echo $id; ?>" name="<?php echo $id; ?>" value="<?php echo $this->admin_special_charecter($value); ?>">
-            <small class="form-text text-muted"><?php echo $title; ?></small>
+            <label for="<?php echo esc_attr($id); ?>"><?php echo esc_html($name); ?></label>
+            <input type="text "class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" value="<?php echo $this->admin_special_charecter(esc_html($value)); ?>">
+            <small class="form-text text-muted"><?php echo esc_html($title); ?></small>
         </div>
         <?php
     }
@@ -105,9 +105,9 @@ trait Sanitization {
     public function oxilab_flip_box_admin_input_icon($id, $value, $name, $title) {
         ?>
         <div class="form-group col-sm-12">
-            <label for="<?php echo $id; ?>"><?php echo $name; ?></label>
-            <input type="text "class="form-control flip_box_admin_input_icon" id="<?php echo $id; ?>" name="<?php echo $id; ?>" value="<?php echo $value; ?>">
-            <small class="form-text text-muted"><?php echo $title; ?></small>
+            <label for="<?php echo esc_attr($id); ?>"><?php echo esc_html($name); ?></label>
+            <input type="text "class="form-control flip_box_admin_input_icon" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" value="<?php echo esc_attr($value); ?>">
+            <small class="form-text text-muted"><?php echo esc_html($title); ?></small>
         </div>
         <?php
     }
@@ -115,9 +115,9 @@ trait Sanitization {
     public function oxilab_flip_box_admin_input_text_area($id, $value, $name, $title) {
         ?>
         <div class="form-group col-sm-12">
-            <label for="<?php echo $id; ?>"><?php echo $name; ?></label>
-            <textarea class="form-control" rows="4" id="<?php echo $id; ?>" name="<?php echo $id; ?>"><?php echo $this->admin_special_charecter($value); ?></textarea>
-            <small class="form-text text-muted"><?php echo $title; ?></small>
+            <label for="<?php echo esc_attr($id); ?>"><?php echo esc_html($name); ?></label>
+            <textarea class="form-control" rows="4" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>"><?php echo $this->admin_special_charecter($value); ?></textarea>
+            <small class="form-text text-muted"><?php echo esc_html($title); ?></small>
         </div>
         <?php
     }
@@ -125,9 +125,9 @@ trait Sanitization {
     public function oxilab_flip_box_admin_number($id, $value, $step, $name, $title) {
         ?>
         <div class="form-group row form-group-sm">
-            <label for="<?php echo $id; ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo $title; ?>" ><?php echo $name; ?> </label>
+            <label for="<?php echo esc_attr($id); ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>" ><?php echo esc_html($name); ?> </label>
             <div class="col-sm-6">
-                <input class="form-control" type="number" step="<?php echo $step; ?>" value="<?php echo $value; ?>" id="<?php echo $id; ?>" name="<?php echo $id; ?>">
+                <input class="form-control" type="number" step="<?php echo esc_attr($step); ?>" value="<?php echo esc_attr($value); ?>" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>">
             </div>
         </div>
         <?php
@@ -136,12 +136,12 @@ trait Sanitization {
     public function oxilab_flip_box_admin_number_double($frist_id, $first_value, $second_id, $second_value, $name, $title) {
         ?>
         <div class="form-group row form-group-sm">
-            <label for="<?php echo $frist_id; ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo $title; ?>" ><?php echo $name; ?> </label>
+            <label for="<?php echo esc_attr($frist_id); ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>" ><?php echo esc_html($name); ?> </label>
             <div class="col-sm-3">
-                <input class="form-control" type="number"  min="0" value="<?php echo $first_value; ?>" id="<?php echo $frist_id; ?>" name="<?php echo $frist_id; ?>">
+                <input class="form-control" type="number"  min="0" value="<?php echo esc_attr($first_value); ?>" id="<?php echo esc_attr($frist_id); ?>" name="<?php echo esc_attr($frist_id); ?>">
             </div>
             <div class="col-sm-3">
-                <input class="form-control" type="number"  min="0" value="<?php echo $second_value; ?>" id="<?php echo $second_id; ?>" name="<?php echo $second_id; ?>">
+                <input class="form-control" type="number"  min="0" value="<?php echo esc_attr($second_value); ?>" id="<?php echo esc_attr($second_id); ?>" name="<?php echo esc_attr($second_id); ?>">
             </div>
         </div>
         <?php
@@ -155,9 +155,9 @@ trait Sanitization {
         }
         ?>
         <div class="form-group row form-group-sm">
-            <label for="<?php echo $id; ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo $title; ?>" ><?php echo $name; ?> </label>
+            <label for="<?php echo esc_attr($id); ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_attr($title); ?>" ><?php echo esc_attr($name); ?> </label>
             <div class="col-sm-6">
-                <input type="text" <?php echo $colortype; ?> class="form-control oxilab-vendor-color" oxiexporttype="<?php echo $exporttype; ?>" oxiexportid="<?php echo $exportid; ?>" id="<?php echo $id; ?>" name="<?php echo $id; ?>" value="<?php echo $value; ?>">
+                <input type="text" <?php echo esc_attr($colortype); ?> class="form-control oxilab-vendor-color" oxiexporttype="<?php echo esc_attr($exporttype); ?>" oxiexportid="<?php echo esc_attr($exportid); ?>" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" value="<?php echo esc_attr($value); ?>">
             </div>
         </div>
 
@@ -167,9 +167,9 @@ trait Sanitization {
     public function oxilab_flip_box_admin_font_family($id, $value, $name, $title) {
         ?>
         <div class="form-group row form-group-sm">
-            <label for="<?php echo $id; ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo $title; ?>" ><?php echo $name; ?> </label>
+            <label for="<?php echo esc_attr($id); ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>" ><?php echo esc_html($name); ?> </label>
             <div class="col-sm-6">
-                <input class="form-control oxilab-admin-font" type="text" value="<?php echo $value; ?>" id="<?php echo $id; ?>" name="<?php echo $id; ?>">
+                <input class="form-control oxilab-admin-font" type="text" value="<?php echo esc_attr($value); ?>" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>">
             </div>
         </div>
         <?php
@@ -178,7 +178,7 @@ trait Sanitization {
     public function oxilab_flip_box_admin_true_false($id, $value, $fristname, $fristvalue, $Secondname, $Secondvalue, $name, $title) {
         ?>
         <div class="form-group row">
-            <label class="col-sm-6 control-label"  data-toggle="tooltip" data-placement="top" title="<?php echo $title; ?>"><?php echo $name; ?></label>
+            <label class="col-sm-6 control-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>"><?php echo esc_html($name); ?></label>
             <div class="col-sm-6">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-primary <?php
@@ -189,7 +189,7 @@ trait Sanitization {
                                if ($fristvalue == $value) {
                                    echo 'checked';
                                }
-                               ?> name="<?php echo $id; ?>" id="<?php echo $id; ?>-yes" autocomplete="off" value="<?php echo $fristvalue; ?>"><?php echo $fristname; ?></label>
+                               ?> name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>-yes" autocomplete="off" value="<?php echo esc_attr($fristvalue); ?>"><?php echo esc_html($fristname); ?></label>
                     <label class="btn btn-primary <?php
                     if ($Secondvalue == $value) {
                         echo 'active';
@@ -198,7 +198,7 @@ trait Sanitization {
                                if ($Secondvalue == $value) {
                                    echo 'checked';
                                }
-                               ?> name="<?php echo $id; ?>" id="<?php echo $id; ?>-no"  autocomplete="off" value="<?php echo $Secondvalue; ?>"><?php echo $Secondname; ?> </label>
+                               ?> name="<?php echo $id; ?>" id="<?php echo esc_attr($id); ?>-no"  autocomplete="off" value="<?php echo esc_attr($Secondvalue); ?>"><?php echo esc_html($Secondname); ?> </label>
                 </div>
             </div>
         </div>
@@ -208,9 +208,9 @@ trait Sanitization {
     public function oxilab_flip_box_admin_font_weight($id, $value, $name, $title) {
         ?>
         <div class="form-group row form-group-sm">
-            <label for="<?php echo $id; ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo $title; ?>" ><?php echo $name; ?> </label>
+            <label for="<?php echo esc_attr($id); ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>" ><?php echo esc_html($name); ?> </label>
             <div class="col-sm-6">
-                <select class="form-control" id="<?php echo $id; ?>" name="<?php echo $id; ?>">
+                <select class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>">
                     <option value="100" <?php
                     if ($value == '100') {
                         echo 'selected';
@@ -285,9 +285,9 @@ trait Sanitization {
     public function oxilab_flip_box_admin_font_style($id, $value, $name, $title) {
         ?>
         <div class="form-group row form-group-sm">
-            <label for="<?php echo $id; ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo $title; ?>" ><?php echo $name; ?> </label>
+            <label for="<?php echo $id; ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>" ><?php echo esc_html($name); ?> </label>
             <div class="col-sm-6">
-                <select class="form-control" id="<?php echo $id; ?>" name="<?php echo $id; ?>">
+                <select class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>">
                     <option <?php
                     if ($value == 'normal') {
                         echo 'selected';
@@ -322,9 +322,9 @@ trait Sanitization {
     public function oxilab_flip_box_admin_text_align($id, $value, $name, $title) {
         ?>
         <div class="form-group row form-group-sm">
-            <label for="<?php echo $id; ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo $title; ?>" ><?php echo $name; ?> </label>
+            <label for="<?php echo esc_attr($id); ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>" ><?php echo esc_html($name); ?> </label>
             <div class="col-sm-6">
-                <select class="form-control" id="<?php echo $id; ?>" name="<?php echo $id; ?>">
+                <select class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>">
                     <option value="left" <?php
                     if ($value == 'left') {
                         echo 'selected';
@@ -349,13 +349,13 @@ trait Sanitization {
     public function oxilab_flip_box_admin_border($border_size, $border_size_value, $border_type, $border_type_value, $name, $title) {
         ?>
         <div class="form-group row form-group-sm">
-            <label for="<?php echo $border_size; ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo $title; ?>" ><?php echo $name; ?> </label>
+            <label for="<?php echo esc_attr($border_size); ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>" ><?php echo esc_html($name); ?> </label>
             <div class="col-sm-3">
-                <input class="form-control" type="number"  min="0" value="<?php echo $border_size_value; ?>" id="<?php echo $border_size; ?>" name="<?php echo $border_size; ?>">
+                <input class="form-control" type="number"  min="0" value="<?php echo esc_attr($border_size_value); ?>" id="<?php echo esc_attr($border_size); ?>" name="<?php echo esc_attr($border_size); ?>">
             </div>
 
             <div class="col-sm-3">
-                <select class="form-control" id="<?php echo $border_type; ?>" name="<?php echo $border_type; ?>">
+                <select class="form-control" id="<?php echo esc_attr($border_type); ?>" name="<?php echo esc_attr($border_type); ?>">
                     <option value="dotted" <?php
                     if ($border_type_value == 'dotted') {
                         echo 'selected';
@@ -421,9 +421,9 @@ trait Sanitization {
     public function oxilab_flip_box_admin_col_data($id, $value, $name, $title) {
         ?>
         <div class="form-group row form-group-sm">
-            <label for="<?php echo $id; ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo $title; ?>" ><?php echo $name; ?> </label>
+            <label for="<?php echo esc_attr($id); ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>" ><?php echo esc_html($name); ?> </label>
             <div class="col-sm-6">
-                <select class="form-control" id="<?php echo $id; ?>" name="<?php echo $id; ?>">
+                <select class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>">
                     <option value="oxilab-flip-box-col-1" <?php
                     if ($value == 'oxilab-flip-box-col-1') {
                         echo 'selected';
@@ -835,16 +835,16 @@ trait Sanitization {
     public function image_upload($id, $value, $name, $title) {
         ?>
         <div class="form-group col-sm-12">
-            <label for="<?php echo $id; ?>"><?php echo $name; ?></label>
+            <label for="<?php echo esc_attr($id); ?>"><?php echo esc_html($name); ?></label>
             <div class="form-group row col-sm-12  mb-0">
                 <div class="col-md-8 col-xs-6" style="padding-left: 0px;">
-                    <input type="text "class="form-control" name="<?php echo $id; ?>" id="<?php echo $id; ?>"  value="<?php echo $value; ?>">
+                    <input type="text "class="form-control" name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>"  value="<?php echo esc_attr($value); ?>">
                 </div>
                 <div class="col-md-4 col-xs-6" style="padding-left: 0px;">
-                    <button type="button" oxi-upload="#<?php echo $id; ?>" class="flip-box-image-upload btn btn-outline-secondary" style="font-size: 12px;">Upload Image</button>
+                    <button type="button" oxi-upload="#<?php echo esc_attr($id); ?>" class="flip-box-image-upload btn btn-outline-secondary" style="font-size: 12px;">Upload Image</button>
                 </div>
             </div>
-            <small class="form-text text-muted"><?php echo $title; ?></small>
+            <small class="form-text text-muted"><?php echo esc_html($title); ?></small>
         </div>
         <?php
     }

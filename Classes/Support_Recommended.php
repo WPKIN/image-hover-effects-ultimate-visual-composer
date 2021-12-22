@@ -111,7 +111,6 @@ class Support_Recommended {
 
         if (count($recommend) > 2 && $recommend['modules-path'] != '') :
             $plugin = explode('/', $recommend['modules-path'])[0];
-            $massage = '<p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. ' . $recommend['modules-massage'] . '</p>';
 
             $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
             echo '<div class="oxi-addons-admin-notifications" style=" width: auto;">
@@ -122,7 +121,7 @@ class Support_Recommended {
                         <p></p>
                         <div class="oxi-addons-admin-notifications-holder">
                             <div class="oxi-addons-admin-notifications-alert">
-                                ' . $massage . '
+                                ' . sprintf('<p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. %s</p>', $recommend['modules-massage']) . '
                                 <p>' . sprintf('<a href="%s" class="button button-large button-primary">%s</a>', $install_url, __('Install Now', OXI_FLIP_BOX_TEXTDOMAIN)) . ' &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-flip-admin-recommended-dismiss">No, Thanks</a></p>
                             </div>
                         </div>

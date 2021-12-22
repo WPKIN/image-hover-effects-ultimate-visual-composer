@@ -248,7 +248,7 @@ If You acquired the Flipbox - Awesomes Flip Boxes Image Overlay and have not rec
 
 
 == Changelog ==
-= 2.6.0 = 
+= 2.6.1 = 
 *Update Security
 *Modify Admin Modules
 
@@ -316,7 +316,7 @@ If You acquired the Flipbox - Awesomes Flip Boxes Image Overlay and have not rec
 * Added 23+ responsive layout
 
 == Upgrade Notice ==
-= 2.6.0 = 
+= 2.6.1 = 
 Update Security
 Modify Admin Modules
 

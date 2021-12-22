@@ -71,10 +71,10 @@ class Settings {
                                 </th>
                                 <td>
                                     <fieldset>
-                                        <select name="oxi_addons_user_permission">
+                                        <select name="oxi_addons_user_permission" id="oxi_addons_user_permission">
                                             <?php foreach ($this->roles as $key => $role) { ?>
-                                                <option value="<?php echo $key; ?>" <?php selected($this->saved_role, $key); ?>>
-                                                    <?php echo $role; ?></option>
+                                                <option value="<?php echo esc_attr($key); ?>" <?php selected($this->saved_role, $key); ?>>
+                                                    <?php echo esc_html($role); ?></option>
                                             <?php } ?>
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_user_permission"></span>
@@ -161,7 +161,7 @@ class Settings {
                                 </th>
                                 <td class="valid">
                                     <input type="text" class="regular-text" id="oxilab_flip_box_license_key"
-                                           name="oxilab_flip_box_license_key" value="<?php echo ($this->status == 'valid' && empty($this->license)) ? '****************************************' : $this->license; ?>">
+                                           name="oxilab_flip_box_license_key" value="<?php echo ($this->status == 'valid' && empty($this->license)) ? '****************************************' : esc_html($this->license); ?>">
                                     <span class="oxi-addons-settings-connfirmation oxilab_flip_box_license_massage">
                                         <?php
                                         if ($this->status == 'valid' && empty($this->license)) :
@@ -182,7 +182,7 @@ class Settings {
                                         elseif ($this->status == 'valid' && !empty($this->license)) :
                                             echo '<span class="oxi-addons-settings-massage">Active</span>';
                                         elseif (!empty($this->license)) :
-                                            echo '<span class="oxi-addons-settings-massage">' . $this->status . '</span>';
+                                            echo '<span class="oxi-addons-settings-massage">' . esc_html($this->status) . '</span>';
                                         else :
                                             echo '<span class="oxi-addons-settings-massage"></span>';
                                         endif;

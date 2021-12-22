@@ -143,7 +143,7 @@ class Admin_Render {
                 die('You do not have sufficient permissions to access this page.');
             } else {
                 $id = (int) $_POST['item-id'];
-                $child = $this->register_child();
+                $child = sanitize_post($this->register_child());
                 if ($id == '') {
                     $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} ( files, styleid) VALUES ( %s, %d)", array($child, $this->oxiid)));
                 } else if ($id != '' && is_numeric($id)) {
@@ -269,7 +269,7 @@ class Admin_Render {
                                         </div>
                                         <div class="oxi-addons-setting-save">
                                             <?php wp_nonce_field("oxiflipstylecss") ?>
-                                            <input type="hidden" id="style-id" name="style-id" value="<?php echo $this->oxiid; ?>">
+                                            <input type="hidden" id="style-id" name="style-id" value="<?php echo esc_attr($this->oxiid); ?>">
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
                                             <input type="submit" class="btn btn-primary" name="oxi-addons-flip-templates-submit" value="Submit">
                                         </div>
@@ -297,7 +297,7 @@ class Admin_Render {
                                     <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
                                         <form method="post">
                                             <div class="input-group my-2">
-                                                <input type="text" class="form-control" name="oxi-addons-name" placeholder=" Set Your Shortcode Name" value="<?php echo $this->dbdata['name']; ?>">
+                                                <input type="text" class="form-control" name="oxi-addons-name" placeholder=" Set Your Shortcode Name" value="<?php echo esc_attr($this->dbdata['name']); ?>">
                                                 <div class="input-group-append">
                                                     <input type="submit" class="btn btn-success" name="addonsstylenamechange" value="Save">
                                                 </div>
@@ -314,12 +314,12 @@ class Admin_Render {
                                         <em>Shortcode for posts/pages/plugins</em>
                                         <p>Copy &amp;
                                             paste the shortcode directly into any WordPress post, page or Page Builder.</p>
-                                        <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="[oxilab_flip_box id=&quot;<?php echo $this->oxiid; ?>&quot;]">
+                                        <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="[oxilab_flip_box id=&quot;<?php echo esc_attr($this->oxiid); ?>&quot;]">
                                         <span></span>
                                         <em>Shortcode for templates/themes</em>
                                         <p>Copy &amp;
                                             paste this code into a template file to include the slideshow within your theme.</p>
-                                        <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="<?php echo '<?php echo do_shortcode(\'[oxilab_flip_box  id=&quot;' . $this->oxiid . '&quot;]\'); ?>'; ?>">
+                                        <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="<?php echo '<?php echo do_shortcode(\'[oxilab_flip_box  id=&quot;' . esc_attr($this->oxiid) . '&quot;]\'); ?>'; ?>">
                                         <span></span>
                                     </div>
                                 </div>
@@ -353,7 +353,7 @@ class Admin_Render {
                                                         foreach ($this->child as $value) {
                                                             $val = explode('{#}|{#}', $value['files']);
                                                             if ($r['tag'] == 'title'):
-                                                                echo '<li class="list-group-item" id="' . $value['id'] . '">' . $val[$r['id']] . '</li>';
+                                                                echo '<li class="list-group-item" id="' . esc_attr($value['id']) . '">' . esc_html($val[$r['id']]) . '</li>';
                                                             endif;
                                                         }
                                                         ?>
@@ -376,7 +376,7 @@ class Admin_Render {
                                         <div class="modal-content">
                                             <?php echo $this->modal_form_data(); ?>
                                             <div class="modal-footer">
-                                                <input type="hidden" id="item-id" name="item-id" value="<?php echo $this->itemid ?>">
+                                                <input type="hidden" id="item-id" name="item-id" value="<?php echo esc_attr($this->itemid) ?>">
                                                 <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                                 <input type="submit" id="oxi-flip-template-modal-submit" name="oxi-flip-template-modal-submit" class="btn btn-success" value="Submit">

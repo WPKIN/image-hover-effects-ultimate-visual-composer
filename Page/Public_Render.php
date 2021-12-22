@@ -121,29 +121,11 @@ class Public_Render {
         $inlinecss = $this->inline_css;
 
         if ($this->inline_js != ''):
-            if ($this->admin == 'admin'):
-                //only load while ajax called
-                echo _('<script>
-                        (function ($) {
-                            setTimeout(function () {');
-                echo $this->inline_js;
-                echo _('    }, 2000);
-                        })(jQuery)</script>');
-            else:
-                $jquery = '(function ($) {' . $this->inline_js . '})(jQuery);';
-                wp_add_inline_script($this->JSHANDLE, $jquery);
-            endif;
-
+            $jquery = '(function ($) {' . $this->inline_js . '})(jQuery);';
+            wp_add_inline_script($this->JSHANDLE, $jquery);
         endif;
         if ($this->inline_css != ''):
-            if ($this->admin == 'admin'):
-                //only load while ajax called
-                echo _('<style>');
-                echo $inlinecss;
-                echo _('</style>');
-            else:
-                wp_add_inline_style('flip-box-addons-style', $inlinecss);
-            endif;
+            wp_add_inline_style('flip-box-addons-style', $inlinecss);
         endif;
     }
 
@@ -181,14 +163,14 @@ class Public_Render {
             $data = '<div class="oxilab-admin-absulote">
                         <div class="oxilab-style-absulate-edit">
                             <form method="post">
-                                <input type="hidden" name="item-id" value="' . $id . '">
+                                <input type="hidden" name="item-id" value="' . esc_attr($id) . '">
                                 <button class="btn btn-primary" type="submit" value="edit" name="edit" title="Edit">Edit</button>
                                 ' . wp_nonce_field("oxiflipeditdata") . '
                             </form>
                         </div>
                         <div class="oxilab-style-absulate-delete">
                             <form method="post" class="oxilab-style-absulate-delete-confirmation">
-                                <input type="hidden" name="item-id" value="' . $id . '">
+                                <input type="hidden" name="item-id" value="' . esc_attr($id) . '">
                                 <button class="btn btn-danger" type="submit" value="delete" name="delete" title="Delete">Delete</button>
                                 ' . wp_nonce_field("oxiflipdeletedata") . '
                             </form>
@@ -207,7 +189,7 @@ class Public_Render {
         if ($fadata != 'no'):
             wp_enqueue_style('font-awsome.min', OXI_FLIP_BOX_URL . '/asset/frontend/css/font-awsome.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         endif;
-        $files = '<i class="' . $data . ' oxi-icons"></i>';
+        $files = '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
         return $files;
     }
 
@@ -220,7 +202,7 @@ class Public_Render {
         endif;
         $data = str_replace('+', ' ', $data);
         $data = explode(':', $data);
-        return '"' . $data[0] . '"';
+        return '"' . esc_attr($data[0]) . '"';
     }
 
     public function admin_name_validation($data) {

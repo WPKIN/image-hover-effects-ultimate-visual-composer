@@ -25,6 +25,7 @@ class Style6 extends Public_Render {
     public function default_render() {
         $styleid = $this->oxiid;
         $styledata = explode('|', $this->dbdata['css']);
+        $styledata = array_map('esc_attr', explode('|', $this->dbdata['css']));
         $listdata = $this->child;
         ?>
         <div class="oxilab-flip-box-wrapper">
@@ -32,9 +33,9 @@ class Style6 extends Public_Render {
             foreach ($listdata as $value) {
                 if (!empty($value['files'])):
 
-                    $filesdata = explode("{#}|{#}", $value['files']);
+                    $filesdata = array_map('wp_kses_post', explode("{#}|{#}", $value['files']));
                     ?>
-                    <div class="<?php echo $styledata[43]; ?> oxilab-flip-box-padding-<?php echo $styleid; ?> 
+                    <div class="<?php echo $styledata[43]; ?> oxilab-flip-box-padding-<?php echo $styleid; ?>
                          sa-data-animation="<?php echo $styledata[55]; ?>"
                          sa-data-animation-offset="100%"
                          sa-data-animation-delay="0ms"
@@ -55,7 +56,7 @@ class Style6 extends Public_Render {
                                         <div class="oxilab-flip-box-style">
                                             <div class="oxilab-flip-box-front">
                                                 <div class="oxilab-flip-box-<?php echo $styleid; ?>">
-                                                    <div class="oxilab-flip-box-<?php echo $styleid; ?>-data"> 
+                                                    <div class="oxilab-flip-box-<?php echo $styleid; ?>-data">
 
                                                     </div>
                                                 </div>
@@ -68,7 +69,7 @@ class Style6 extends Public_Render {
                                                         </div>
                                                         <div class="oxilab-info">
                                                             <?php echo $this->text_render($filesdata[7]); ?>
-                                                        </div>                                                
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -101,7 +102,7 @@ background: linear-gradient(' . $styledata[15] . ', ' . $styledata[15] . '), url
 background-size: 100% 100%;
 }';
                 }
-                ?>    
+                ?>
                         </style>
                     </div>
                     <?php
@@ -127,7 +128,7 @@ background-size: 100% 100%;
                     max-width: <?php echo $styledata[45]; ?>px;
                     width: 100%;
                     margin: 0 auto;
-                    position: relative;   
+                    position: relative;
                 }
                 .oxilab-flip-box-body-<?php echo $styleid; ?>:after {
                     padding-bottom: <?php echo $styledata[47] / $styledata[45] * 100; ?>%;
@@ -144,7 +145,7 @@ background-size: 100% 100%;
                     border-color: <?php echo $styledata[7]; ?>;
                     background-color: <?php echo $styledata[5]; ?>;
                     border-width: <?php echo $styledata[69]; ?>px;
-                    border-style:<?php echo $styledata[71]; ?>;  
+                    border-style:<?php echo $styledata[71]; ?>;
                     -webkit-border-radius: <?php echo $styledata[153]; ?>px;
                     -moz-border-radius: <?php echo $styledata[153]; ?>px;
                     -ms-border-radius: <?php echo $styledata[153]; ?>px;
@@ -157,10 +158,10 @@ background-size: 100% 100%;
                     -o-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
                     box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
                 }
-                .oxilab-flip-box-<?php echo $styleid; ?>-data{           
+                .oxilab-flip-box-<?php echo $styleid; ?>-data{
                     position: absolute;
                     left: 0%;
-                    top: 50%;            
+                    top: 50%;
                     -webkit-transform: translateY(-50%);
                     -ms-transform: translateY(-50%);
                     -moz-transform: translateY(-50%);
@@ -178,7 +179,7 @@ background-size: 100% 100%;
                     border-color: <?php echo $styledata[17]; ?>;
                     background-color: <?php echo $styledata[15]; ?>;
                     border-width: <?php echo $styledata[97]; ?>px;
-                    border-style:<?php echo $styledata[99]; ?>; 
+                    border-style:<?php echo $styledata[99]; ?>;
                     -webkit-border-radius: <?php echo $styledata[153]; ?>px;
                     -moz-border-radius: <?php echo $styledata[153]; ?>px;
                     -ms-border-radius: <?php echo $styledata[153]; ?>px;
@@ -191,23 +192,23 @@ background-size: 100% 100%;
                     -o-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
                     box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
                 }
-                .oxilab-flip-box-back-<?php echo $styleid; ?>-data{           
+                .oxilab-flip-box-back-<?php echo $styleid; ?>-data{
                     position: absolute;
                     left: 0%;
                     right: 0;
-                    top: 50%;            
+                    top: 50%;
                     padding: <?php echo $styledata[101]; ?>px <?php echo $styledata[103]; ?>px;
                     -webkit-transform: translateY(-50%);
                     -ms-transform: translateY(-50%);
                     -moz-transform: translateY(-50%);
                     -o-transform: translateY(-50%);
-                    transform: translateY(-50%);           
+                    transform: translateY(-50%);
                 }
                 .oxilab-flip-box-back-<?php echo $styleid; ?>-data .oxilab-heading{
                     display: block;
                     color:  <?php echo $styledata[31]; ?>;
-                    text-align: <?php echo $styledata[189]; ?>;            
-                    font-size: <?php echo $styledata[181]; ?>px;          
+                    text-align: <?php echo $styledata[189]; ?>;
+                    font-size: <?php echo $styledata[181]; ?>px;
                     font-family: <?php echo $this->font_familly($styledata[183]); ?>;
                     font-weight: <?php echo $styledata[187]; ?>;
                     font-style:<?php echo $styledata[185]; ?>;
@@ -216,12 +217,12 @@ background-size: 100% 100%;
                 .oxilab-flip-box-back-<?php echo $styleid; ?>-data .oxilab-info{
                     display: block;
                     color: <?php echo $styledata[19]; ?>;
-                    text-align: <?php echo $styledata[115]; ?>;            
-                    font-size: <?php echo $styledata[107]; ?>px;          
+                    text-align: <?php echo $styledata[115]; ?>;
+                    font-size: <?php echo $styledata[107]; ?>px;
                     font-family: <?php echo $this->font_familly($styledata[109]); ?>;
                     font-weight: <?php echo $styledata[113]; ?>;
                     font-style:<?php echo $styledata[111]; ?>;
-                    padding:<?php echo $styledata[117]; ?>px <?php echo $styledata[123]; ?>px <?php echo $styledata[119]; ?>px <?php echo $styledata[121]; ?>px;           
+                    padding:<?php echo $styledata[117]; ?>px <?php echo $styledata[123]; ?>px <?php echo $styledata[119]; ?>px <?php echo $styledata[121]; ?>px;
 
                 }
                 <?php echo $styledata[199]; ?>;

@@ -82,7 +82,7 @@ trait Admin_helper {
         $menu = '<div class="oxi-addons-wrapper">
                     <div class="oxilab-new-admin-menu">
                         <div class="oxi-site-logo">
-                            <a href="' . $this->admin_url_convert('oxi-flip-box-ultimate') . '" class="header-logo" style=" background-image: url(' . $bgimage . ');">
+                            <a href="' . esc_url($this->admin_url_convert('oxi-flip-box-ultimate')) . '" class="header-logo" style=" background-image: url(' . esc_url($bgimage) . ');">
                             </a>
                         </div>
                         <nav class="oxilab-sa-admin-nav">
@@ -92,7 +92,7 @@ trait Admin_helper {
 
         foreach ($response as $key => $value) {
             $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
-            $menu .= '<li ' . $active . '><a href="' . $this->admin_url_convert($value['homepage']) . '">' . $this->name_converter($value['name']) . '</a></li>';
+            $menu .= '<li ' . $active . '><a href="' . esc_url($this->admin_url_convert($value['homepage'])) . '">' . esc_html($this->name_converter($value['name'])) . '</a></li>';
         }
 
         $menu .= '              </ul>
@@ -100,7 +100,7 @@ trait Admin_helper {
                                ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://oxilabdemos.com/flipbox/pricing/">Upgrade</a></li>' : '') . '
                                <li class="saadmin-doc"><a target="_black" href="https://oxilabdemos.com/flipbox/docs/installations/how-to-install-the-plugin/">Docs</a></li>
                                <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">Support</a></li>
-                               <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-flip-box-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
+                               <li class="saadmin-set"><a href="' . esc_url(admin_url('admin.php?page=oxi-flip-box-ultimate-settings')) . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
                             </ul>
                         </nav>
                     </div>
