@@ -102,86 +102,85 @@ class Style2 extends Public_Render {
                             echo $this->admin_edit_panel($value['id']);
                             ?>
                         </div>
-                        <style>
-                <?php
-                if ($filesdata[5] != '') {
-                    echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-' . $styleid . '{
+
+                        <?php
+                        if ($filesdata[5] != '') {
+                            $this->inline_css .= '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-' . $styleid . '{
 background: linear-gradient(' . $styledata[5] . ', ' . $styledata[5] . '), url("' . $filesdata[5] . '");
 -moz-background-size: 100% 100%;
 -o-background-size: 100% 100%;
 background-size: 100% 100%;
 }';
-                }
-                ?>
-                <?php
-                if ($filesdata[13] != '') {
-                    echo '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-back-' . $styleid . '{
+                        }
+                        ?>
+                        <?php
+                        if ($filesdata[13] != '') {
+                            $this->inline_css .= '.oxilab-flip-box-body-' . $styleid . '-' . $value['id'] . ' .oxilab-flip-box-back-' . $styleid . '{
 background: linear-gradient(' . $styledata[15] . ', ' . $styledata[15] . '), url("' . $filesdata[13] . '");
 -moz-background-size: 100% 100%;
 -o-background-size: 100% 100%;
 background-size: 100% 100%;
 }';
-                }
-                ?>
-                        </style>
+                        }
+                        ?>
+
                     </div>
                     <?php
                 endif;
             }
-            ?>
-            <style>
-                .oxilab-flip-box-padding-<?php echo $styleid; ?>{
-                    padding: <?php echo $styledata[49]; ?>px <?php echo $styledata[51]; ?>px;
-                    -webkit-transition:  opacity <?php echo $styledata[57]; ?>s linear;
-                    -moz-transition:  opacity <?php echo $styledata[57]; ?>s linear;
-                    -ms-transition:  opacity <?php echo $styledata[57]; ?>s linear;
-                    -o-transition:  opacity <?php echo $styledata[57]; ?>s linear;
-                    transition:  opacity <?php echo $styledata[57]; ?>s linear;
-                    -webkit-animation-duration: <?php echo $styledata[57]; ?>s;
-                    -moz-animation-duration: <?php echo $styledata[57]; ?>s;
-                    -ms-animation-duration: <?php echo $styledata[57]; ?>s;
-                    -o-animation-duration: <?php echo $styledata[57]; ?>s;
-                    animation-duration: <?php echo $styledata[57]; ?>s;
+
+            $this->inline_css .= '.oxilab-flip-box-padding-' . $styleid . '{
+                    padding: ' . $styledata[49] . 'px ' . $styledata[51] . 'px;
+                    -webkit-transition:  opacity ' . $styledata[57] . 's linear;
+                    -moz-transition:  opacity ' . $styledata[57] . 's linear;
+                    -ms-transition:  opacity ' . $styledata[57] . 's linear;
+                    -o-transition:  opacity ' . $styledata[57] . 's linear;
+                    transition:  opacity ' . $styledata[57] . 's linear;
+                    -webkit-animation-duration: ' . $styledata[57] . 's;
+                    -moz-animation-duration: ' . $styledata[57] . 's;
+                    -ms-animation-duration: ' . $styledata[57] . 's;
+                    -o-animation-duration: ' . $styledata[57] . 's;
+                    animation-duration: ' . $styledata[57] . 's;
                 }
-                .oxilab-flip-box-body-<?php echo $styleid; ?>{
-                    max-width: <?php echo $styledata[45]; ?>px;
+                .oxilab-flip-box-body-' . $styleid . '{
+                    max-width: ' . $styledata[45] . 'px;
                     width: 100%;
                     margin: 0 auto;
                     position: relative;
                 }
-                .oxilab-flip-box-body-<?php echo $styleid; ?>:after {
-                    padding-bottom: <?php echo $styledata[47] / $styledata[45] * 100; ?>%;
+                .oxilab-flip-box-body-' . $styleid . ':after {
+                    padding-bottom: ' . ($styledata[47] / $styledata[45] * 100) . '%;
                     content: "";
                     display: block;
                 }
-                .oxilab-flip-box-<?php echo $styleid; ?>{
+                .oxilab-flip-box-' . $styleid . '{
                     position: absolute;
                     top: 0;
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    border-width: <?php echo $styledata[149]; ?>px;
-                    border-style:<?php echo $styledata[151]; ?>;
-                    border-color: <?php echo $styledata[7]; ?>;
-                    background-color: <?php echo $styledata[5]; ?>;
+                    border-width: ' . $styledata[149] . 'px;
+                    border-style:' . $styledata[151] . ';
+                    border-color: ' . $styledata[7] . ';
+                    background-color: ' . $styledata[5] . ';
                     display: block;
-                    -webkit-border-radius: <?php echo $styledata[153]; ?>px;
-                    -moz-border-radius: <?php echo $styledata[153]; ?>px;
-                    -ms-border-radius: <?php echo $styledata[153]; ?>px;
-                    -o-border-radius: <?php echo $styledata[153]; ?>px;
-                    border-radius: <?php echo $styledata[153]; ?>px;
+                    -webkit-border-radius: ' . $styledata[153] . 'px;
+                    -moz-border-radius: ' . $styledata[153] . 'px;
+                    -ms-border-radius: ' . $styledata[153] . 'px;
+                    -o-border-radius: ' . $styledata[153] . 'px;
+                    border-radius: ' . $styledata[153] . 'px;
                     overflow: hidden;
-                    -webkit-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
-                    -moz-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
-                    -ms-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
-                    -o-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
-                    box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+                    -webkit-box-shadow: ' . $styledata[61] . 'px ' . $styledata[63] . 'px ' . $styledata[65] . 'px ' . $styledata[67] . 'px ' . $styledata[59] . ';
+                    -moz-box-shadow: ' . $styledata[61] . 'px ' . $styledata[63] . 'px ' . $styledata[65] . 'px ' . $styledata[67] . 'px ' . $styledata[59] . ';
+                    -ms-box-shadow: ' . $styledata[61] . 'px ' . $styledata[63] . 'px ' . $styledata[65] . 'px ' . $styledata[67] . 'px ' . $styledata[59] . ';
+                    -o-box-shadow: ' . $styledata[61] . 'px ' . $styledata[63] . 'px ' . $styledata[65] . 'px ' . $styledata[67] . 'px ' . $styledata[59] . ';
+                    box-shadow: ' . $styledata[61] . 'px ' . $styledata[63] . 'px ' . $styledata[65] . 'px ' . $styledata[67] . 'px ' . $styledata[59] . ';
                 }
-                .oxilab-flip-box-<?php echo $styleid; ?>-data{
+                .oxilab-flip-box-' . $styleid . '-data{
                     position: absolute;
                     left: 0%;
                     top: 50%;
-                    padding: <?php echo $styledata[71]; ?>px <?php echo $styledata[73]; ?>px;
+                    padding: ' . $styledata[71] . 'px ' . $styledata[73] . 'px;
                     -webkit-transform: translateY(-50%);
                     -ms-transform: translateY(-50%);
                     -moz-transform: translateY(-50%);
@@ -190,78 +189,78 @@ background-size: 100% 100%;
                     transform: translateY(-50%);
                     width: 100%;
                 }
-                .oxilab-flip-box-<?php echo $styleid; ?>-data .oxilab-icon{
+                .oxilab-flip-box-' . $styleid . '-data .oxilab-icon{
                     width: 100%;
                     float: left;
                     text-align: center;
-                    padding:<?php echo $styledata[159]; ?>px <?php echo $styledata[161]; ?>px;
+                    padding:' . $styledata[159] . 'px ' . $styledata[161] . 'px;
                 }
-                .oxilab-flip-box-<?php echo $styleid; ?>-data .oxilab-icon-data{
+                .oxilab-flip-box-' . $styleid . '-data .oxilab-icon-data{
                     display: inline-block;
-                    background-color: <?php echo $styledata[11]; ?>;
-                    width:  <?php echo $styledata[79]; ?>px;
-                    height:  <?php echo $styledata[79]; ?>px;
-                    -webkit-border-radius: <?php echo $styledata[81]; ?>px;
-                    -moz-border-radius: <?php echo $styledata[81]; ?>px;
-                    -ms-border-radius: <?php echo $styledata[81]; ?>px;
-                    -o-border-radius: <?php echo $styledata[81]; ?>px;
-                    border-radius:  <?php echo $styledata[81]; ?>px;
+                    background-color: ' . $styledata[11] . ';
+                    width:  ' . $styledata[79] . 'px;
+                    height:  ' . $styledata[79] . 'px;
+                    -webkit-border-radius: ' . $styledata[81] . 'px;
+                    -moz-border-radius: ' . $styledata[81] . 'px;
+                    -ms-border-radius: ' . $styledata[81] . 'px;
+                    -o-border-radius: ' . $styledata[81] . 'px;
+                    border-radius:  ' . $styledata[81] . 'px;
                 }
-                .oxilab-flip-box-<?php echo $styleid; ?>-data .oxilab-icon-data .oxi-icons{
-                    line-height:  <?php echo $styledata[79]; ?>px;
-                    font-size:  <?php echo $styledata[77]; ?>px;
-                    color: <?php echo $styledata[9]; ?>;
+                .oxilab-flip-box-' . $styleid . '-data .oxilab-icon-data .oxi-icons{
+                    line-height:  ' . $styledata[79] . 'px;
+                    font-size:  ' . $styledata[77] . 'px;
+                    color: ' . $styledata[9] . ';
                 }
-                .oxilab-flip-box-<?php echo $styleid; ?>-data .oxilab-heading{
+                .oxilab-flip-box-' . $styleid . '-data .oxilab-heading{
                     width: 100%;
                     float: left;
-                    color: <?php echo $styledata[13]; ?>;
-                    text-align: <?php echo $styledata[91]; ?>;
-                    font-size: <?php echo $styledata[83]; ?>px;
-                    font-family: <?php echo $this->font_familly($styledata[85]); ?>;
-                    font-weight: <?php echo $styledata[89]; ?>;
-                    font-style:<?php echo $styledata[87]; ?>;
-                    padding: <?php echo $styledata[93]; ?>px <?php echo $styledata[99]; ?>px <?php echo $styledata[95]; ?>px <?php echo $styledata[97]; ?>px;
+                    color: ' . $styledata[13] . ';
+                    text-align: ' . $styledata[91] . ';
+                    font-size: ' . $styledata[83] . 'px;
+                    font-family: ' . $this->font_familly($styledata[85]) . ';
+                    font-weight: ' . $styledata[89] . ';
+                    font-style:' . $styledata[87] . ';
+                    padding: ' . $styledata[93] . 'px ' . $styledata[99] . 'px ' . $styledata[95] . 'px ' . $styledata[97] . 'px;
                 }
-                .oxilab-flip-box-<?php echo $styleid; ?>-data .oxilab-info{
+                .oxilab-flip-box-' . $styleid . '-data .oxilab-info{
                     width: 100%;
                     float: left;
-                    color:  <?php echo $styledata[29]; ?>;
-                    text-align: <?php echo $styledata[171]; ?>;
-                    font-size: <?php echo $styledata[163]; ?>px;
-                    font-family: <?php echo $this->font_familly($styledata[165]); ?>;
-                    font-weight: <?php echo $styledata[169]; ?>;
-                    font-style:<?php echo $styledata[167]; ?>;
-                    padding: <?php echo $styledata[173]; ?>px <?php echo $styledata[179]; ?>px <?php echo $styledata[175]; ?>px <?php echo $styledata[177]; ?>px;
+                    color:  ' . $styledata[29] . ';
+                    text-align: ' . $styledata[171] . ';
+                    font-size: ' . $styledata[163] . 'px;
+                    font-family: ' . $this->font_familly($styledata[165]) . ';
+                    font-weight: ' . $styledata[169] . ';
+                    font-style:' . $styledata[167] . ';
+                    padding: ' . $styledata[173] . 'px ' . $styledata[179] . 'px ' . $styledata[175] . 'px ' . $styledata[177] . 'px;
                 }
-                .oxilab-flip-box-back-<?php echo $styleid; ?>{
+                .oxilab-flip-box-back-' . $styleid . '{
                     position: absolute;
                     top: 0;
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    border-width: <?php echo $styledata[155]; ?>px;
-                    border-style:<?php echo $styledata[157]; ?>;
-                    border-color: <?php echo $styledata[17]; ?>;
-                    background-color: <?php echo $styledata[15]; ?>;
+                    border-width: ' . $styledata[155] . 'px;
+                    border-style:' . $styledata[157] . ';
+                    border-color: ' . $styledata[17] . ';
+                    background-color: ' . $styledata[15] . ';
                     display: block;
-                    -webkit-border-radius: <?php echo $styledata[153]; ?>px;
-                    -moz-border-radius: <?php echo $styledata[153]; ?>px;
-                    -ms-border-radius: <?php echo $styledata[153]; ?>px;
-                    -o-border-radius: <?php echo $styledata[153]; ?>px;
-                    border-radius:<?php echo $styledata[153]; ?>px;
+                    -webkit-border-radius: ' . $styledata[153] . 'px;
+                    -moz-border-radius: ' . $styledata[153] . 'px;
+                    -ms-border-radius: ' . $styledata[153] . 'px;
+                    -o-border-radius: ' . $styledata[153] . 'px;
+                    border-radius:' . $styledata[153] . 'px;
                     overflow: hidden;
-                    -webkit-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
-                    -moz-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
-                    -ms-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
-                    -o-box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
-                    box-shadow: <?php echo $styledata[61]; ?>px <?php echo $styledata[63]; ?>px <?php echo $styledata[65]; ?>px <?php echo $styledata[67]; ?>px <?php echo $styledata[59]; ?>;
+                    -webkit-box-shadow: ' . $styledata[61] . 'px ' . $styledata[63] . 'px ' . $styledata[65] . 'px ' . $styledata[67] . 'px ' . $styledata[59] . ';
+                    -moz-box-shadow: ' . $styledata[61] . 'px ' . $styledata[63] . 'px ' . $styledata[65] . 'px ' . $styledata[67] . 'px ' . $styledata[59] . ';
+                    -ms-box-shadow: ' . $styledata[61] . 'px ' . $styledata[63] . 'px ' . $styledata[65] . 'px ' . $styledata[67] . 'px ' . $styledata[59] . ';
+                    -o-box-shadow: ' . $styledata[61] . 'px ' . $styledata[63] . 'px ' . $styledata[65] . 'px ' . $styledata[67] . 'px ' . $styledata[59] . ';
+                    box-shadow: ' . $styledata[61] . 'px ' . $styledata[63] . 'px ' . $styledata[65] . 'px ' . $styledata[67] . 'px ' . $styledata[59] . ';
                 }
-                .oxilab-flip-box-back-<?php echo $styleid; ?>-data{
+                .oxilab-flip-box-back-' . $styleid . '-data{
                     position: absolute;
                     left: 0%;
                     top: 50%;
-                    padding: <?php echo $styledata[101]; ?>px <?php echo $styledata[103]; ?>px;
+                    padding: ' . $styledata[101] . 'px ' . $styledata[103] . 'px;
                     -webkit-transform: translateY(-50%);
                     -ms-transform: translateY(-50%);
                     -moz-transform: translateY(-50%);
@@ -269,55 +268,56 @@ background-size: 100% 100%;
                     transform: translateY(-50%);
                     width: 100%;
                 }
-                .oxilab-flip-box-back-<?php echo $styleid; ?>-data .oxilab-heading{
+                .oxilab-flip-box-back-' . $styleid . '-data .oxilab-heading{
                     width: 100%;
                     float: left;
-                    color:  <?php echo $styledata[31]; ?>;
-                    text-align: <?php echo $styledata[189]; ?>;
-                    font-size: <?php echo $styledata[181]; ?>px;
-                    font-family: <?php echo $this->font_familly($styledata[183]); ?>;
-                    font-weight: <?php echo $styledata[187]; ?>;
-                    font-style:<?php echo $styledata[185]; ?>;
-                    padding:<?php echo $styledata[191]; ?>px <?php echo $styledata[197]; ?>px <?php echo $styledata[193]; ?>px <?php echo $styledata[195]; ?>px;
+                    color:  ' . $styledata[31] . ';
+                    text-align: ' . $styledata[189] . ';
+                    font-size: ' . $styledata[181] . 'px;
+                    font-family: ' . $this->font_familly($styledata[183]) . ';
+                    font-weight: ' . $styledata[187] . ';
+                    font-style:' . $styledata[185] . ';
+                    padding:' . $styledata[191] . 'px ' . $styledata[197] . 'px ' . $styledata[193] . 'px ' . $styledata[195] . 'px;
                 }
-                .oxilab-flip-box-back-<?php echo $styleid; ?>-data .oxilab-info{
+                .oxilab-flip-box-back-' . $styleid . '-data .oxilab-info{
                     width: 100%;
                     float: left;
-                    color: <?php echo $styledata[19]; ?>;
-                    text-align: <?php echo $styledata[115]; ?>;
-                    font-size: <?php echo $styledata[107]; ?>px;
-                    font-family: <?php echo $this->font_familly($styledata[109]); ?>;
-                    font-weight: <?php echo $styledata[113]; ?>;
-                    font-style:<?php echo $styledata[111]; ?>;
-                    padding:<?php echo $styledata[117]; ?>px <?php echo $styledata[123]; ?>px <?php echo $styledata[119]; ?>px <?php echo $styledata[121]; ?>px;
+                    color: ' . $styledata[19] . ';
+                    text-align: ' . $styledata[115] . ';
+                    font-size: ' . $styledata[107] . 'px;
+                    font-family: ' . $this->font_familly($styledata[109]) . ';
+                    font-weight: ' . $styledata[113] . ';
+                    font-style:' . $styledata[111] . ';
+                    padding:' . $styledata[117] . 'px ' . $styledata[123] . 'px ' . $styledata[119] . 'px ' . $styledata[121] . 'px;
                 }
-                .oxilab-flip-box-back-<?php echo $styleid; ?>-data .oxilab-button{
+                .oxilab-flip-box-back-' . $styleid . '-data .oxilab-button{
                     width: 100%;
                     float: left;
-                    text-align: <?php echo $styledata[139]; ?>;
-                    padding: <?php echo $styledata[141]; ?>px <?php echo $styledata[147]; ?>px <?php echo $styledata[143]; ?>px <?php echo $styledata[145]; ?>px;
+                    text-align: ' . $styledata[139] . ';
+                    padding: ' . $styledata[141] . 'px ' . $styledata[147] . 'px ' . $styledata[143] . 'px ' . $styledata[145] . 'px;
                 }
-                .oxilab-flip-box-back-<?php echo $styleid; ?>-data .oxilab-button-data{
+                .oxilab-flip-box-back-' . $styleid . '-data .oxilab-button-data{
                     display: inline-block;
-                    color: <?php echo $styledata[21]; ?>;
-                    background-color:  <?php echo $styledata[23]; ?>;
-                    font-size: <?php echo $styledata[125]; ?>px;
-                    font-family: <?php echo $this->font_familly($styledata[127]); ?>;
-                    font-weight: <?php echo $styledata[131]; ?>;
-                    font-style:<?php echo $styledata[129]; ?>;
-                    padding: <?php echo $styledata[133]; ?>px <?php echo $styledata[135]; ?>px;
-                    -webkit-border-radius: <?php echo $styledata[137]; ?>px;
-                    -moz-border-radius: <?php echo $styledata[137]; ?>px;
-                    -ms-border-radius: <?php echo $styledata[137]; ?>px;
-                    -o-border-radius: <?php echo $styledata[137]; ?>px;
-                    border-radius: <?php echo $styledata[137]; ?>px;
+                    color: ' . $styledata[21] . ';
+                    background-color:  ' . $styledata[23] . ';
+                    font-size: ' . $styledata[125] . 'px;
+                    font-family: ' . $this->font_familly($styledata[127]) . ';
+                    font-weight: ' . $styledata[131] . ';
+                    font-style:' . $styledata[129] . ';
+                    padding: ' . $styledata[133] . 'px ' . $styledata[135] . 'px;
+                    -webkit-border-radius: ' . $styledata[137] . 'px;
+                    -moz-border-radius: ' . $styledata[137] . 'px;
+                    -ms-border-radius: ' . $styledata[137] . 'px;
+                    -o-border-radius: ' . $styledata[137] . 'px;
+                    border-radius: ' . $styledata[137] . 'px;
                 }
-                .oxilab-flip-box-back-<?php echo $styleid; ?>-data .oxilab-button-data:hover{
-                    background-color: <?php echo $styledata[27]; ?>;
-                    color:  <?php echo $styledata[25]; ?>;
+                .oxilab-flip-box-back-' . $styleid . '-data .oxilab-button-data:hover{
+                    background-color: ' . $styledata[27] . ';
+                    color:  ' . $styledata[25] . ';
                 }
-                <?php echo $styledata[199]; ?>;
-            </style>
+                ' . $styledata[199] . ';';
+            ?>
+
         </div>
         <?php
     }
