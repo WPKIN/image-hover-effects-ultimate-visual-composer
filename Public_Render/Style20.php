@@ -34,30 +34,30 @@ class Style20 extends Public_Render {
                 if (!empty($value['files'])):
                     $filesdata = array_map('wp_kses_post', explode("{#}|{#}", $value['files']));
                     ?>
-                    <div class="<?php echo $styledata[43]; ?> oxilab-flip-box-padding-<?php echo $styleid; ?>"
-                         sa-data-animation="<?php echo $styledata[55]; ?>"
+                    <div class="<?php echo esc_attr($styledata[43]); ?> oxilab-flip-box-padding-<?php echo esc_attr($styleid); ?>"
+                         sa-data-animation="<?php echo esc_attr($styledata[55]); ?>"
                          sa-data-animation-offset="100%"
                          sa-data-animation-delay="0ms"
-                         sa-data-animation-duration=" <?php echo ($styledata[57] * 1000); ?>ms"
+                         sa-data-animation-duration=" <?php echo esc_attr(($styledata[57] * 1000)); ?>ms"
                          >
-                        <div class="<?php echo ($this->admin == 'admin') ? 'oxilab-ab-id' : ''; ?> oxilab-flip-box-body-<?php echo $styleid; ?> oxilab-flip-box-body-<?php echo $styleid; ?>-<?php echo $value['id']; ?>">
+                        <div class="<?php echo ($this->admin == 'admin') ? 'oxilab-ab-id' : ''; ?> oxilab-flip-box-body-<?php echo esc_attr($styleid); ?> oxilab-flip-box-body-<?php echo esc_attr($styleid); ?>-<?php echo esc_attr($value['id']); ?>">
                             <?php
                             if ($filesdata[9] == '' && $filesdata[11] != '') {
-                                echo '<a href="' . $filesdata[11] . '" target="' . $styledata[53] . '">';
+                                echo '<a href="' . esc_url($filesdata[11]) . '" target="' . esc_attr($styledata[53]) . '">';
                                 $fileslinkend = '</a>';
                             } else {
                                 $fileslinkend = '';
                             }
                             ?>
                             <div class="oxilab-flip-box-body-absulote">
-                                <div class="<?php echo $styledata[1]; ?>">
-                                    <div class="oxilab-flip-box-style-data <?php echo $styledata[3]; ?>">
+                                <div class="<?php echo esc_attr($styledata[1]); ?>">
+                                    <div class="oxilab-flip-box-style-data <?php echo esc_attr($styledata[3]); ?>">
                                         <div class="oxilab-flip-box-style">
                                             <div class="oxilab-flip-box-front">
-                                                <div class="oxilab-flip-box-<?php echo $styleid; ?>">
-                                                    <div class="oxilab-flip-box-<?php echo $styleid; ?>-data">
+                                                <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>">
+                                                    <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>-data">
                                                         <div class="oxilab-image">
-                                                            <img src="<?php echo $filesdata[5]; ?>">
+                                                            <img src="<?php echo esc_url($filesdata[5]); ?>">
                                                         </div>
                                                         <div class="oxilab-heading">
                                                             <?php echo $this->text_render($filesdata[1]); ?>
@@ -66,8 +66,8 @@ class Style20 extends Public_Render {
                                                 </div>
                                             </div>
                                             <div class="oxilab-flip-box-back">
-                                                <div class="oxilab-flip-box-back-<?php echo $styleid; ?>">
-                                                    <div class="oxilab-flip-box-back-<?php echo $styleid; ?>-data">
+                                                <div class="oxilab-flip-box-back-<?php echo esc_attr($styleid); ?>">
+                                                    <div class="oxilab-flip-box-back-<?php echo esc_attr($styleid); ?>-data">
                                                         <div class="oxilab-heading">
                                                             <?php echo $this->text_render($filesdata[17]); ?>
                                                         </div>
@@ -76,7 +76,7 @@ class Style20 extends Public_Render {
                                                         </div>
                                                         <?php
                                                         if ($filesdata[9] != '') {
-                                                            echo '<a href="' . $filesdata[11] . '" target="' . $styledata[53] . '">';
+                                                            echo '<a href="' . esc_url($filesdata[11]) . '" target="' . esc_attr($styledata[53]) . '">';
                                                             echo '<div class="oxilab-button">
                                                                     <div class="oxilab-button-data">
                                                                     ' . $this->text_render($filesdata[9]) . '
