@@ -52,6 +52,12 @@ class Admin_Ajax {
      */
     public function __construct($type = '', $data = '', $styleid = '', $itemid = '') {
         if (!empty($type) && !empty($data)):
+
+            $user_permission = $this->check_user_permission();
+            if (!current_user_can($user_permission)):
+                return wp_die(__('You do not have permission.'));
+            endif;
+
             global $wpdb;
             $this->wpdb = $wpdb;
             $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
@@ -61,7 +67,25 @@ class Admin_Ajax {
         endif;
     }
 
+    public function check_user_permission() {
+        $user_role = get_option('oxi_addons_user_permission');
+        $role_object = get_role($user_role);
+        $first_key = '';
+        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
+            reset($role_object->capabilities);
+            $first_key = key($role_object->capabilities);
+        } else {
+            $first_key = 'manage_options';
+        }
+        return $first_key;
+    }
+
     public function active_data() {
+        $user_permission = $this->check_user_permission();
+        if (!current_user_can($user_permission)):
+            return wp_die(__('You do not have permission.'));
+        endif;
+
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
@@ -178,7 +202,7 @@ class Admin_Ajax {
     }
 
     public function get_shortcode_export($data = '', $styleid = '', $itemid = '') {
-        echo $styleid;
+
         if ($styleid):
             $style = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->parent_table WHERE id = %d", $styleid), ARRAY_A);
             $child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $styleid), ARRAY_A);
@@ -298,7 +322,7 @@ class Admin_Ajax {
 
                     case 'item_name_mismatch' :
 
-                        $message = sprintf(__('This appears to be an invalid license key for %s.'), OXI_FLIP_BOX_TEXTDOMAIN);
+                        $message = sprintf(__('This appears to be an invalid license key for %s.'), 'image-hover-effects-ultimate-visual-composer');
                         break;
 
                     case 'no_activations_left':
@@ -351,6 +375,10 @@ class Admin_Ajax {
      * @return void
      */
     public function oxi_addons_user_permission($data = '', $styleid = '', $itemid = '') {
+        $user_permission = $this->check_user_permission();
+        if (!current_user_can($user_permission)):
+            return wp_die(__('You do not have permission.'));
+        endif;
         $rawdata = json_decode(stripslashes($data), true);
         $value = sanitize_text_field($rawdata['value']);
         update_option('oxi_addons_user_permission', $value);
@@ -363,6 +391,10 @@ class Admin_Ajax {
      * @return void
      */
     public function oxi_addons_font_awesome($data = '', $styleid = '', $itemid = '') {
+        $user_permission = $this->check_user_permission();
+        if (!current_user_can($user_permission)):
+            return wp_die(__('You do not have permission.'));
+        endif;
         $rawdata = json_decode(stripslashes($data), true);
         $value = sanitize_text_field($rawdata['value']);
         update_option('oxi_addons_font_awesome', $value);
@@ -375,6 +407,10 @@ class Admin_Ajax {
      * @return void
      */
     public function oxi_addons_google_font($data = '', $styleid = '', $itemid = '') {
+        $user_permission = $this->check_user_permission();
+        if (!current_user_can($user_permission)):
+            return wp_die(__('You do not have permission.'));
+        endif;
         $rawdata = json_decode(stripslashes($data), true);
         $value = sanitize_text_field($rawdata['value']);
         update_option('oxi_addons_google_font', $value);
@@ -387,6 +423,10 @@ class Admin_Ajax {
      * @return void
      */
     public function oxi_addons_pre_loader($data = '', $styleid = '', $itemid = '') {
+        $user_permission = $this->check_user_permission();
+        if (!current_user_can($user_permission)):
+            return wp_die(__('You do not have permission.'));
+        endif;
         $rawdata = json_decode(stripslashes($data), true);
         $value = sanitize_text_field($rawdata['value']);
         update_option('oxi_addons_pre_loader', $value);

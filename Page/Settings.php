@@ -49,7 +49,7 @@ class Settings {
      */
     public function admin_ajax_load() {
         $this->admin_css_loader();
-        wp_enqueue_script('oxi-flip-settings', OXI_FLIP_BOX_URL . '/asset/backend/js/settings.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_enqueue_script('oxi-flip-settings', OXI_FLIP_BOX_URL . '/asset/backend/js/settings.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_localize_script('oxi-flip-settings', 'oxi_flip_box_settings', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 

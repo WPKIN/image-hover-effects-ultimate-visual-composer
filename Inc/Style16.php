@@ -221,7 +221,7 @@ class Style16 extends Admin_Render {
             <div class="col-xs-12 p-2">
                 <div class="form-group">
                     <label for="custom-css" class="custom-css">Custom CSS:</label>
-                    <textarea class="form-control" rows="4" id="custom-css" name="custom-css"><?php echo esc_attr($this->style[143]); ?></textarea>
+                    <textarea class="form-control" rows="4" id="custom-css" name="custom-css"><?php echo esc_textarea($this->style[143]); ?></textarea>
                     <small class="form-text text-muted">Add Your Custom CSS Unless make it blank.</small>
                 </div>
             </div>

@@ -94,8 +94,8 @@ class Public_Render {
      */
     public function loader() {
         $this->oxiid = $this->dbdata['id'];
-        $this->hooks();
         $this->render();
+        $this->hooks();
     }
 
     /**
@@ -152,7 +152,7 @@ class Public_Render {
         else:
             $preloadercls = '';
         endif;
-        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' ' . $preloadercls . '">';
+        echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . ' ' . esc_attr($preloadercls) . '">';
         $this->default_render($this->style, $this->child, $this->admin);
         echo '</div>';
     }

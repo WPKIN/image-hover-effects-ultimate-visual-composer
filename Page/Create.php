@@ -74,7 +74,7 @@ class Create {
      * @return void
      */
     public function admin_ajax_load() {
-        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . '/asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . '/asset/backend/js/create.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 
@@ -125,7 +125,7 @@ class Create {
                 if (array_key_exists($id, $this->IMPORT)):
                     $C = 'OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $key;
                     ?>
-                    <div class="oxi-addons-col-1" id="<?php echo $key; ?>">
+                    <div class="oxi-addons-col-1" id="<?php echo esc_attr($key); ?>">
                         <div class="oxi-addons-style-preview">
                             <div class="oxi-addons-style-preview-top oxi-addons-center">
                                 <?php
@@ -134,7 +134,7 @@ class Create {
                                         $REND = json_decode($v, true);
                                         echo '<div class="oxilab-flip-box-col-3">';
                                         new $C($REND['style'], $REND['child']);
-                                        echo '<textarea style="display:none" id="oxistyle' . esc_attr($number) . 'data-' . esc_attr($k) . '">' . htmlentities(json_encode($REND)) . '</textarea>';
+                                        echo '<textarea style="display:none" id="oxistyle' . esc_attr($number) . 'data-' . esc_attr($k) . '">' . sanitize_text_field(htmlentities(json_encode($REND))) . '</textarea>';
                                         echo '</div>';
                                     }
                                 endif;

@@ -106,7 +106,7 @@ trait Admin_helper {
                     </div>
                 </div>
                 ' . $sub;
-        echo __($menu, OXI_FLIP_BOX_TEXTDOMAIN);
+        echo $menu;
     }
 
     public function SupportAndComments($agr) {

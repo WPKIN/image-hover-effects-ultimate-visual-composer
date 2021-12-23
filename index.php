@@ -16,7 +16,7 @@ define('OXI_FLIP_BOX_BASENAME', plugin_basename(__FILE__));
 define('OXI_FLIP_BOX_PATH', plugin_dir_path(__FILE__));
 define('OXI_FLIP_BOX_URL', plugins_url('/', __FILE__));
 define('OXI_FLIP_BOX_PLUGIN_VERSION', '2.6.1');
-define('OXI_FLIP_BOX_TEXTDOMAIN', 'oxi-flip-box-plugin');
+define('OXI_FLIP_BOX_TEXTDOMAIN', 'image-hover-effects-ultimate-visual-composer');
 
 /**
  * Including composer autoloader globally.
