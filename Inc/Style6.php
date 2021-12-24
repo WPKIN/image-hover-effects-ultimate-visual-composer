@@ -15,12 +15,12 @@ class Style6 extends Admin_Render {
         $data = '  {#}|{#}{#}|{#}'
                 . ' {#}|{#}{#}|{#}'
                 . ' flip-box-image-upload-url-01 {#}|{#}' . sanitize_text_field($_POST['flip-box-image-upload-url-01']) . '{#}|{#}'
-                . ' flip-box-backend-desc {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-desc']) . '{#}|{#}'
+                . ' flip-box-backend-desc {#}|{#}' . sanitize_text_field($_POST['flip-box-backend-desc']) . '{#}|{#}'
                 . '  {#}|{#}{#}|{#}'
                 . ' flip-box-backend-link {#}|{#}' . sanitize_text_field($_POST['flip-box-backend-link']) . '{#}|{#}'
                 . ' flip-box-image-upload-url-02 {#}|{#}' . sanitize_text_field($_POST['flip-box-image-upload-url-02']) . '{#}|{#}'
                 . '  {#}|{#}{#}|{#}'
-                . ' flip-box-backend-title {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-title']) . '{#}|{#}';
+                . ' flip-box-backend-title {#}|{#}' . sanitize_text_field($_POST['flip-box-backend-title']) . '{#}|{#}';
         return $data;
     }
 

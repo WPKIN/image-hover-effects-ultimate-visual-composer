@@ -96,7 +96,7 @@ trait Sanitization {
         ?>
         <div class="form-group col-sm-12">
             <label for="<?php echo esc_attr($id); ?>"><?php echo esc_html($name); ?></label>
-            <input type="text "class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" value="<?php echo $this->admin_special_charecter(esc_html($value)); ?>">
+            <input type="text "class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" value="<?php echo esc_html($this->admin_special_charecter($value)); ?>">
             <small class="form-text text-muted"><?php echo esc_html($title); ?></small>
         </div>
         <?php
@@ -116,7 +116,7 @@ trait Sanitization {
         ?>
         <div class="form-group col-sm-12">
             <label for="<?php echo esc_attr($id); ?>"><?php echo esc_html($name); ?></label>
-            <textarea class="form-control" rows="4" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>"><?php echo $this->admin_special_charecter(esc_html($value)); ?></textarea>
+            <textarea class="form-control" rows="4" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>"><?php echo esc_html($this->admin_special_charecter($value)); ?></textarea>
             <small class="form-text text-muted"><?php echo esc_html($title); ?></small>
         </div>
         <?php
