@@ -163,7 +163,8 @@ class Admin_Render {
                 $child = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->child_table . ' WHERE id = %d ', $item_id), ARRAY_A);
                 $this->child_editable = explode('{#}|{#}', $child['files']);
                 $this->itemid = $child['id'];
-                echo '<script type="text/javascript"> jQuery(document).ready(function () {setTimeout(function() { jQuery("#oxi-addons-list-data-modal").modal("show")  }, 500); });</script>';
+                $data = 'jQuery(document).ready(function () {setTimeout(function() { jQuery("#oxi-addons-list-data-modal").modal("show")  }, 500); });';
+                wp_add_inline_script('oxi-flip-box-addons-vendor', $data);
             }
         }
     }

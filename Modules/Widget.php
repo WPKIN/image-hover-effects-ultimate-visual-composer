@@ -6,7 +6,7 @@ class Widget extends \WP_Widget {
 
     function __construct() {
         parent::__construct(
-                'oxi_flip_box_widget', esc_html('Flipbox - Awesomes Flip Boxes Image Overlay', 'image-hover-effects-ultimate-visual-composer'), array('description' => esc_html('Flipbox - Awesomes Flip Boxes Image Overlay', 'image-hover-effects-ultimate-visual-composer'),)
+                'oxi_flip_box_widget', esc_html__('Flipbox - Awesomes Flip Boxes Image Overlay', 'image-hover-effects-ultimate-visual-composer'), array('description' => esc_html__('Flipbox - Awesomes Flip Boxes Image Overlay', 'image-hover-effects-ultimate-visual-composer'),)
         );
     }
 
@@ -25,11 +25,11 @@ class Widget extends \WP_Widget {
         if (isset($instance['title'])) {
             $title = $instance['title'];
         } else {
-            $title = esc_html('1', 'image-hover-effects-ultimate-visual-composer');
+            $title = esc_html__('1', 'image-hover-effects-ultimate-visual-composer');
         }
         ?>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_html('Style ID:', 'image-hover-effects-ultimate-visual-composer'); ?></label>
+            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_html__('Style ID:', 'image-hover-effects-ultimate-visual-composer'); ?></label>
             <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text" value="<?php echo esc_html($title); ?>" />
         </p>
         <?php

@@ -79,7 +79,7 @@ class Settings {
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_user_permission"></span>
                                         <br>
-                                        <p class="description"><?php _e('Select the Role who can manage This Plugins.'); ?> <a
+                                        <p class="description">Select the Role who can manage This Plugins. <a
                                                 target="_blank"
                                                 href="https://codex.wordpress.org/Roles_and_Capabilities#Capability_vs._Role_Table">Help</a>
                                         </p>
@@ -151,7 +151,7 @@ class Settings {
                     </table>
                     <br>
                     <br>
-                    <h2><?php _e('License Activation'); ?></h2>
+                    <h2>License Activation</h2>
                     <p>Activate your copy to get direct plugin updates and official support.</p>
                     <table class="form-table" role="presentation">
                         <tbody>

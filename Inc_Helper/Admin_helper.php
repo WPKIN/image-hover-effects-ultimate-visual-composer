@@ -48,7 +48,6 @@ trait Admin_helper {
             }
         </style>
         <?php
-
     }
 
     /**
@@ -77,36 +76,43 @@ trait Admin_helper {
         ];
 
         $bgimage = OXI_FLIP_BOX_URL . 'image/sa-logo.png';
-        $sub = '';
+        ?>
 
-        $menu = '<div class="oxi-addons-wrapper">
-                    <div class="oxilab-new-admin-menu">
-                        <div class="oxi-site-logo">
-                            <a href="' . esc_url($this->admin_url_convert('oxi-flip-box-ultimate')) . '" class="header-logo" style=" background-image: url(' . esc_url($bgimage) . ');">
-                            </a>
-                        </div>
-                        <nav class="oxilab-sa-admin-nav">
-                            <ul class="oxilab-sa-admin-menu">';
 
-        $GETPage = sanitize_text_field($_GET['page']);
-
-        foreach ($response as $key => $value) {
-            $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
-            $menu .= '<li ' . $active . '><a href="' . esc_url($this->admin_url_convert($value['homepage'])) . '">' . esc_html($this->name_converter($value['name'])) . '</a></li>';
-        }
-
-        $menu .= '              </ul>
-                            <ul class="oxilab-sa-admin-menu2">
-                               ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://oxilabdemos.com/flipbox/pricing/">Upgrade</a></li>' : '') . '
-                               <li class="saadmin-doc"><a target="_black" href="https://oxilabdemos.com/flipbox/docs/installations/how-to-install-the-plugin/">Docs</a></li>
-                               <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">Support</a></li>
-                               <li class="saadmin-set"><a href="' . esc_url(admin_url('admin.php?page=oxi-flip-box-ultimate-settings')) . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
-                            </ul>
-                        </nav>
-                    </div>
+        <div class="oxi-addons-wrapper">
+            <div class="oxilab-new-admin-menu">
+                <div class="oxi-site-logo">
+                    <a href="<?php echo esc_url($this->admin_url_convert('oxi-flip-box-ultimate')) ?>" class="header-logo" style=" background-image: url(<?php echo esc_url($bgimage); ?>);">
+                    </a>
                 </div>
-                ' . $sub;
-        echo $menu;
+                <nav class="oxilab-sa-admin-nav">
+                    <ul class="oxilab-sa-admin-menu">
+
+                        <?php
+                        $GETPage = sanitize_text_field($_GET['page']);
+
+                        foreach ($response as $key => $value) {
+                            $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
+                            echo '<li ' . esc_attr($active) . '><a href="' . esc_url($this->admin_url_convert($value['homepage'])) . '">' . esc_html($this->name_converter($value['name'])) . '</a></li>';
+                        }
+                        ?>
+
+                    </ul>
+                    <ul class="oxilab-sa-admin-menu2">
+
+                        <?php
+                        if (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE):
+                            echo ' <li class="fazil-class" ><a target="_blank" href="https://oxilabdemos.com/flipbox/pricing/">Upgrade</a></li>';
+                        endif;
+                        ?>
+                        <li class="saadmin-doc"><a target="_black" href="https://oxilabdemos.com/flipbox/docs/installations/how-to-install-the-plugin/">Docs</a></li>
+                        <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">Support</a></li>
+                        <li class="saadmin-set"><a href="<?php echo esc_url(admin_url('admin.php?page=oxi-flip-box-ultimate-settings')); ?>"><span class="dashicons dashicons-admin-generic"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <?php
     }
 
     public function SupportAndComments($agr) {

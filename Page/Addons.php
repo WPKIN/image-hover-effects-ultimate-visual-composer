@@ -103,21 +103,6 @@ class Addons {
                                     </div>
                                     <div class="oxi-addons-modules-action-status">
                                         <span class="oxi-addons-modules-preview"><a href="<?php echo esc_url($value['plugin-url']); ?>" class="btn btn-dark">Preview</a></span>
-                                        <span class="oxi-addons-modules-installing"><?php
-                                            if (isset($installed_plugins[$file_path])) :
-                                                if (array_key_exists($file_path, $active_plugins)) :
-                                                    echo '<a href="#" class="btn btn-light">Installed</a>';
-                                                else :
-                                                    $activation_url = wp_nonce_url(admin_url('plugins.php?action=activate&plugin=' . $file_path), 'activate-plugin_' . $file_path);
-                                                    echo sprintf('<a href="%s" class="btn btn-info">%s</a>', $activation_url, esc_html('Activate', 'image-hover-effects-ultimate-visual-composer'));
-                                                endif;
-                                            else :
-                                                if (current_user_can('install_plugins')) :
-                                                    $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
-                                                    echo sprintf('<a href="%s" class="btn btn-success">%s</a>', $install_url, esc_html('Install', 'image-hover-effects-ultimate-visual-composer'));
-                                                endif;
-                                            endif;
-                                            ?></span>
                                     </div>
                                 </div>
                             </div>

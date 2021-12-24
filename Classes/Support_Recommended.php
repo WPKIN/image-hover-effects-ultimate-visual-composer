@@ -34,7 +34,7 @@ class Support_Recommended {
             return;
         }
         $this->extension();
-        add_action('admin_notices', array($this, 'first_install'));
+
         add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
         add_action('admin_notices', array($this, 'dismiss_button_scripts'));
         add_action('wp_ajax_oxi_flip_admin_recommended', array($this, 'notice_dissmiss'));
@@ -69,65 +69,6 @@ class Support_Recommended {
         endif;
 
         die();
-    }
-
-    /**
-     * First Installation Track
-     * @return void
-     */
-    public function first_install() {
-        $installed_plugins = get_plugins();
-
-        $plugin = [];
-        $i = 1;
-
-        foreach ($this->get_plugins as $key => $value) {
-            if (!isset($installed_plugins[$value['modules-path']])) :
-                $plugin[$i] = $value;
-                $i++;
-            endif;
-        }
-
-
-        $recommend = [];
-
-        for ($p = 1; $p < 100; $p++) :
-            if (isset($plugin[$p]) && count($recommend) < 3) :
-                if (isset($plugin[$p]['dependency']) && $plugin[$p]['dependency'] != '') :
-                    if (isset($installed_plugins[$plugin[$p]['dependency']])) :
-                        $recommend = $plugin[$p];
-                        $p = 100;
-                    endif;
-                elseif ($plugin[$p]['modules-path'] != $this->current_plugins) :
-
-                    $recommend = $plugin[$p];
-                    $p = 100;
-                endif;
-
-            else :
-                $p = 100;
-            endif;
-        endfor;
-
-        if (count($recommend) > 2 && $recommend['modules-path'] != '') :
-            $plugin = explode('/', $recommend['modules-path'])[0];
-
-            $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
-            echo '<div class="oxi-addons-admin-notifications" style=" width: auto;">
-                        <h3>
-                            <span class="dashicons dashicons-flag"></span>
-                            Notifications
-                        </h3>
-                        <p></p>
-                        <div class="oxi-addons-admin-notifications-holder">
-                            <div class="oxi-addons-admin-notifications-alert">
-                                ' . sprintf('<p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. %s</p>', $recommend['modules-massage']) . '
-                                <p>' . sprintf('<a href="%s" class="button button-large button-primary">%s</a>', $install_url, __('Install Now', 'image-hover-effects-ultimate-visual-composer')) . ' &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-flip-admin-recommended-dismiss">No, Thanks</a></p>
-                            </div>
-                        </div>
-                        <p></p>
-                    </div>';
-        endif;
     }
 
     /**

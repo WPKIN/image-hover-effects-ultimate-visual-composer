@@ -16,16 +16,16 @@ class Visual_Composer {
 
     public function VC_extension() {
         vc_map(array(
-            "name" => __("Flip Boxes and Image Overlay"),
-            "base" => "oxilab_flip_box_VC",
-            "category" => __("Content"),
+            "name" => esc_html("Flip Boxes and Image Overlay"),
+            "base" => esc_html("oxilab_flip_box_VC"),
+            "category" => esc_html("Content"),
             "params" => array(
                 array(
                     "type" => "textfield",
-                    "holder" => "div",
-                    "heading" => __("ID"),
-                    "param_name" => "id",
-                    "description" => __("Input your Flip ID in input box")
+                    "holder" => esc_html("div"),
+                    "heading" => esc_html("ID"),
+                    "param_name" => esc_html("id"),
+                    "description" => esc_html("Input your Flip ID in input box")
                 ),
             )
         ));
