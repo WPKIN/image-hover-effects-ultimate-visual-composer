@@ -116,7 +116,7 @@ trait Sanitization {
         ?>
         <div class="form-group col-sm-12">
             <label for="<?php echo esc_attr($id); ?>"><?php echo esc_html($name); ?></label>
-            <textarea class="form-control" rows="4" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>"><?php echo $this->admin_special_charecter($value); ?></textarea>
+            <textarea class="form-control" rows="4" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>"><?php echo $this->admin_special_charecter(esc_html($value)); ?></textarea>
             <small class="form-text text-muted"><?php echo esc_html($title); ?></small>
         </div>
         <?php
@@ -198,7 +198,7 @@ trait Sanitization {
                                if ($Secondvalue == $value) {
                                    echo 'checked';
                                }
-                               ?> name="<?php echo $id; ?>" id="<?php echo esc_attr($id); ?>-no"  autocomplete="off" value="<?php echo esc_attr($Secondvalue); ?>"><?php echo esc_html($Secondname); ?> </label>
+                               ?> name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>-no"  autocomplete="off" value="<?php echo esc_attr($Secondvalue); ?>"><?php echo esc_html($Secondname); ?> </label>
                 </div>
             </div>
         </div>
@@ -285,7 +285,7 @@ trait Sanitization {
     public function oxilab_flip_box_admin_font_style($id, $value, $name, $title) {
         ?>
         <div class="form-group row form-group-sm">
-            <label for="<?php echo $id; ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>" ><?php echo esc_html($name); ?> </label>
+            <label for="<?php echo esc_attr($id); ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>" ><?php echo esc_html($name); ?> </label>
             <div class="col-sm-6">
                 <select class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>">
                     <option <?php

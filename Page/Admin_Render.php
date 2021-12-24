@@ -375,7 +375,7 @@ class Admin_Render {
                                 <div class="modal-dialog">
                                     <form method="post" id="oxi-flip-template-modal-form">
                                         <div class="modal-content">
-                                            <?php echo $this->modal_form_data(); ?>
+                                            <?php $this->modal_form_data(); ?>
                                             <div class="modal-footer">
                                                 <input type="hidden" id="item-id" name="item-id" value="<?php echo esc_attr($this->itemid) ?>">
                                                 <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">

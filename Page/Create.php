@@ -134,7 +134,7 @@ class Create {
                                         $REND = json_decode($v, true);
                                         echo '<div class="oxilab-flip-box-col-3">';
                                         new $C($REND['style'], $REND['child']);
-                                        echo '<textarea style="display:none" id="oxistyle' . esc_attr($number) . 'data-' . esc_attr($k) . '">' . sanitize_text_field(htmlentities(json_encode($REND))) . '</textarea>';
+                                        echo '<textarea style="display:none" id="oxistyle' . esc_attr($number) . 'data-' . esc_attr($k) . '">' . sanitize_textarea_field(htmlentities(json_encode($REND))) . '</textarea>';
                                         echo '</div>';
                                     }
                                 endif;

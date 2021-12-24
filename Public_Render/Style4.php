@@ -44,9 +44,6 @@ class Style4 extends Public_Render {
                             <?php
                             if ($filesdata[9] == '' && $filesdata[11] != '') {
                                 echo '<a href="' . esc_url($filesdata[11]) . '" target="' . esc_attr($styledata[53]) . '">';
-                                $fileslinkend = '</a>';
-                            } else {
-                                $fileslinkend = '';
                             }
                             ?>
                             <div class="oxilab-flip-box-body-absulote">
@@ -99,7 +96,9 @@ class Style4 extends Public_Render {
                                 </div>
                             </div>
                             <?php
-                            echo $fileslinkend;
+                            if ($filesdata[9] == '' && $filesdata[11] != '') {
+                                echo '</a>';
+                            }
                             echo $this->admin_edit_panel($value['id']);
                             ?>
 

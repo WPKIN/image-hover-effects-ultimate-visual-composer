@@ -45,9 +45,6 @@ class Style12 extends Public_Render {
                             <?php
                             if ($filesdata[11] != '') {
                                 echo '<a href="' . esc_url($filesdata[11]) . '" target="' . esc_html($styledata[53]) . '">';
-                                $fileslinkend = '</a>';
-                            } else {
-                                $fileslinkend = '';
                             }
                             ?>
                             <div class="oxilab-flip-box-body-absulote">
@@ -92,7 +89,9 @@ class Style12 extends Public_Render {
                                 </div>
                             </div>
                             <?php
-                            echo $fileslinkend;
+                            if ($filesdata[11] != '') {
+                                echo '</a>';
+                            }
                             echo $this->admin_edit_panel($value['id']);
                             ?>
                         </div>
