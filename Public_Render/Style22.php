@@ -59,11 +59,11 @@ class Style22 extends Public_Render {
                                                 <div class="oxilab-flip-box-back-<?php echo esc_attr($styleid); ?>">
                                                     <div class="oxilab-flip-box-back-<?php echo esc_attr($styleid); ?>-data">
                                                         <div class="oxilab-heading">
-                                                            <?php echo $this->text_render($filesdata[17]); ?>
+                                                            <?php  $this->text_render($filesdata[17]); ?>
                                                             <div class="oxilab-span"></div>
                                                         </div>
                                                         <div class="oxilab-info">
-                                                            <?php echo $this->text_render($filesdata[7]); ?>
+                                                            <?php  $this->text_render($filesdata[7]); ?>
                                                         </div>
                                                         <?php
                                                         if ($filesdata[9] != '') {
@@ -87,7 +87,7 @@ class Style22 extends Public_Render {
                             if ($filesdata[9] == '' && $filesdata[11] != '') {
                                 echo '</a>';
                             }
-                            echo $this->admin_edit_panel($value['id']);
+                             $this->admin_edit_panel($value['id']);
                             ?>
                         </div>
 

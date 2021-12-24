@@ -54,13 +54,13 @@ class Style1 extends Public_Render {
                                                     <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>-data">
                                                         <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>-image">
                                                             <img src="<?php echo esc_url($this->text_render($filesdata[5])); ?>">
-                                                            <div class="oxilab-flip-box-<?php echo $styleid; ?>-image-icon">
-                                                                <?php echo $this->font_awesome_render($filesdata[3]) ?>
+                                                            <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>-image-icon">
+                                                                <?php $this->font_awesome_render($filesdata[3]) ?>
                                                             </div>
                                                         </div>
                                                         <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>-heading">
                                                             <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>-heading-data">
-                                                                <?php echo $this->text_render($filesdata[1]); ?>
+                                                                <?php $this->text_render($filesdata[1]); ?>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -71,7 +71,7 @@ class Style1 extends Public_Render {
                                                     <div class="oxilab-flip-box-back-<?php echo esc_attr($styleid); ?>-data">
                                                         <div class="oxilab-flip-box-back-<?php echo esc_attr($styleid); ?>-file">
                                                             <div class="oxilab-info">
-                                                                <?php echo $this->text_render($filesdata[7]); ?>
+                                                                <?php $this->text_render($filesdata[7]); ?>
                                                             </div>
                                                             <?php
                                                             if ($filesdata[9] != '') {
@@ -98,7 +98,7 @@ class Style1 extends Public_Render {
                             if ($filesdata[9] == '' && $filesdata[11] != '') {
                                 echo '</a>';
                             }
-                            echo $this->admin_edit_panel($value['id']);
+                            $this->admin_edit_panel($value['id']);
                             ?>
                         </div>
 

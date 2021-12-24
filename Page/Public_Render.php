@@ -268,7 +268,7 @@ class Public_Render {
             ),
         );
 
-        return wp_kses($data, $allowed_tags);
+        echo wp_kses($data, $allowed_tags);
     }
 
     public function font_awesome_render($data) {

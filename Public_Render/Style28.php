@@ -55,11 +55,11 @@ class Style28 extends Public_Render {
                                                     <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>-data">
                                                         <div class="oxilab-icon">
                                                             <div class="oxilab-icon-data">
-                                                                <?php echo $this->font_awesome_render($filesdata[3]) ?>
+                                                                <?php  $this->font_awesome_render($filesdata[3]) ?>
                                                             </div>
                                                         </div>
                                                         <div class="oxilab-heading">
-                                                            <?php echo $this->text_render($filesdata[1]); ?>
+                                                            <?php  $this->text_render($filesdata[1]); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -68,10 +68,10 @@ class Style28 extends Public_Render {
                                                 <div class="oxilab-flip-box-back-<?php echo esc_attr($styleid); ?>">
                                                     <div class="oxilab-flip-box-back-<?php echo esc_attr($styleid); ?>-data">
                                                         <div class="oxilab-heading">
-                                                            <?php echo $this->text_render($filesdata[17]); ?>
+                                                            <?php  $this->text_render($filesdata[17]); ?>
                                                         </div>
                                                         <div class="oxilab-info">
-                                                            <?php echo $this->text_render($filesdata[7]); ?>
+                                                            <?php  $this->text_render($filesdata[7]); ?>
                                                         </div>
                                                         <?php
                                                         if ($filesdata[9] != '') {
@@ -95,7 +95,7 @@ class Style28 extends Public_Render {
                             if ($filesdata[9] == '' && $filesdata[11] != '') {
                                 echo '</a>';
                             }
-                            echo $this->admin_edit_panel($value['id']);
+                             $this->admin_edit_panel($value['id']);
                             ?>
                         </div>
 

@@ -57,7 +57,7 @@ class Settings {
         ?>
         <div class="wrap">
             <?php
-            echo apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
+            apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
             ?>
             <div class="oxi-addons-row oxi-addons-admin-settings">
                 <h2>General</h2>
