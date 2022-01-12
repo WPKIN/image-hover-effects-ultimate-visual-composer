@@ -94,8 +94,8 @@ class Public_Render {
      */
     public function loader() {
         $this->oxiid = $this->dbdata['id'];
-        $this->render();
         $this->hooks();
+        $this->render();
     }
 
     /**
@@ -121,11 +121,29 @@ class Public_Render {
         $inlinecss = $this->inline_css;
 
         if ($this->inline_js != ''):
-            $jquery = '(function ($) {' . $this->inline_js . '})(jQuery);';
-            wp_add_inline_script($this->JSHANDLE, $jquery);
+            if ($this->admin == 'admin'):
+                //only load while ajax called
+                echo '<script>
+                        (function ($) {
+                            setTimeout(function () {';
+                echo $this->inline_js;
+                echo '    }, 2000);
+                        })(jQuery)</script>';
+            else:
+                $jquery = '(function ($) {' . $this->inline_js . '})(jQuery);';
+                wp_add_inline_script($this->JSHANDLE, $jquery);
+            endif;
+
         endif;
         if ($this->inline_css != ''):
-            wp_add_inline_style('flip-box-addons-style', $inlinecss);
+            if ($this->admin == 'admin'):
+                //only load while ajax called
+                echo '<style>';
+                echo $inlinecss;
+                echo '</style>';
+            else:
+                wp_add_inline_style('flip-box-addons-style', $inlinecss);
+            endif;
         endif;
     }
 
@@ -152,7 +170,7 @@ class Public_Render {
         else:
             $preloadercls = '';
         endif;
-        echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . ' ' . esc_attr($preloadercls) . '">';
+        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' ' . $preloadercls . '">';
         $this->default_render($this->style, $this->child, $this->admin);
         echo '</div>';
     }
@@ -163,14 +181,14 @@ class Public_Render {
             $data = '<div class="oxilab-admin-absulote">
                         <div class="oxilab-style-absulate-edit">
                             <form method="post">
-                                <input type="hidden" name="item-id" value="' . esc_attr($id) . '">
+                                <input type="hidden" name="item-id" value="' . $id . '">
                                 <button class="btn btn-primary" type="submit" value="edit" name="edit" title="Edit">Edit</button>
                                 ' . wp_nonce_field("oxiflipeditdata") . '
                             </form>
                         </div>
                         <div class="oxilab-style-absulate-delete">
                             <form method="post" class="oxilab-style-absulate-delete-confirmation">
-                                <input type="hidden" name="item-id" value="' . esc_attr($id) . '">
+                                <input type="hidden" name="item-id" value="' . $id . '">
                                 <button class="btn btn-danger" type="submit" value="delete" name="delete" title="Delete">Delete</button>
                                 ' . wp_nonce_field("oxiflipdeletedata") . '
                             </form>
@@ -181,94 +199,7 @@ class Public_Render {
     }
 
     public function text_render($data) {
-
-        $allowed_tags = array(
-            'a' => array(
-                'class' => array(),
-                'href' => array(),
-                'rel' => array(),
-                'title' => array(),
-            ),
-            'abbr' => array(
-                'title' => array(),
-            ),
-            'b' => array(),
-            'blockquote' => array(
-                'cite' => array(),
-            ),
-            'cite' => array(
-                'title' => array(),
-            ),
-            'code' => array(),
-            'del' => array(
-                'datetime' => array(),
-                'title' => array(),
-            ),
-            'dd' => array(),
-            'div' => array(
-                'class' => array(),
-                'title' => array(),
-                'style' => array(),
-                'id' => array(),
-            ),
-            'table' => array(
-                'class' => array(),
-                'id' => array(),
-                'style' => array(),
-            ),
-            'button' => array(
-                'class' => array(),
-                'type' => array(),
-                'value' => array(),
-            ),
-            'thead' => array(),
-            'tbody' => array(),
-            'tr' => array(),
-            'td' => array(),
-            'dt' => array(),
-            'em' => array(),
-            'h1' => array(),
-            'h2' => array(),
-            'h3' => array(),
-            'h4' => array(),
-            'h5' => array(),
-            'h6' => array(),
-            'i' => array(
-                'class' => array(),
-            ),
-            'img' => array(
-                'alt' => array(),
-                'class' => array(),
-                'height' => array(),
-                'src' => array(),
-                'width' => array(),
-            ),
-            'li' => array(
-                'class' => array(),
-            ),
-            'ol' => array(
-                'class' => array(),
-            ),
-            'p' => array(
-                'class' => array(),
-            ),
-            'q' => array(
-                'cite' => array(),
-                'title' => array(),
-            ),
-            'span' => array(
-                'class' => array(),
-                'title' => array(),
-                'style' => array(),
-            ),
-            'strike' => array(),
-            'strong' => array(),
-            'ul' => array(
-                'class' => array(),
-            ),
-        );
-
-        echo wp_kses($data, $allowed_tags);
+        return do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false);
     }
 
     public function font_awesome_render($data) {
@@ -276,7 +207,7 @@ class Public_Render {
         if ($fadata != 'no'):
             wp_enqueue_style('font-awsome.min', OXI_FLIP_BOX_URL . '/asset/frontend/css/font-awsome.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         endif;
-        $files = '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
+        $files = '<i class="' . $data . ' oxi-icons"></i>';
         return $files;
     }
 
@@ -289,7 +220,7 @@ class Public_Render {
         endif;
         $data = str_replace('+', ' ', $data);
         $data = explode(':', $data);
-        return '"' . esc_attr($data[0]) . '"';
+        return '"' . $data[0] . '"';
     }
 
     public function admin_name_validation($data) {

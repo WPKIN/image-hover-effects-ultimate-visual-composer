@@ -48,6 +48,7 @@ trait Admin_helper {
             }
         </style>
         <?php
+
     }
 
     /**
@@ -76,43 +77,36 @@ trait Admin_helper {
         ];
 
         $bgimage = OXI_FLIP_BOX_URL . 'image/sa-logo.png';
-        ?>
+        $sub = '';
 
+        $menu = '<div class="oxi-addons-wrapper">
+                    <div class="oxilab-new-admin-menu">
+                        <div class="oxi-site-logo">
+                            <a href="' . $this->admin_url_convert('oxi-flip-box-ultimate') . '" class="header-logo" style=" background-image: url(' . $bgimage . ');">
+                            </a>
+                        </div>
+                        <nav class="oxilab-sa-admin-nav">
+                            <ul class="oxilab-sa-admin-menu">';
 
-        <div class="oxi-addons-wrapper">
-            <div class="oxilab-new-admin-menu">
-                <div class="oxi-site-logo">
-                    <a href="<?php echo esc_url($this->admin_url_convert('oxi-flip-box-ultimate')) ?>" class="header-logo" style=" background-image: url(<?php echo esc_url($bgimage); ?>);">
-                    </a>
+        $GETPage = sanitize_text_field($_GET['page']);
+
+        foreach ($response as $key => $value) {
+            $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
+            $menu .= '<li ' . $active . '><a href="' . $this->admin_url_convert($value['homepage']) . '">' . $this->name_converter($value['name']) . '</a></li>';
+        }
+
+        $menu .= '              </ul>
+                            <ul class="oxilab-sa-admin-menu2">
+                               ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://oxilabdemos.com/flipbox/pricing/">Upgrade</a></li>' : '') . '
+                               <li class="saadmin-doc"><a target="_black" href="https://oxilabdemos.com/flipbox/docs/installations/how-to-install-the-plugin/">Docs</a></li>
+                               <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">Support</a></li>
+                               <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-flip-box-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-                <nav class="oxilab-sa-admin-nav">
-                    <ul class="oxilab-sa-admin-menu">
-
-                        <?php
-                        $GETPage = sanitize_text_field($_GET['page']);
-
-                        foreach ($response as $key => $value) {
-                            $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
-                            echo '<li ' . esc_attr($active) . '><a href="' . esc_url($this->admin_url_convert($value['homepage'])) . '">' . esc_html($this->name_converter($value['name'])) . '</a></li>';
-                        }
-                        ?>
-
-                    </ul>
-                    <ul class="oxilab-sa-admin-menu2">
-
-                        <?php
-                        if (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE):
-                            echo ' <li class="fazil-class" ><a target="_blank" href="https://oxilabdemos.com/flipbox/pricing/">Upgrade</a></li>';
-                        endif;
-                        ?>
-                        <li class="saadmin-doc"><a target="_black" href="https://oxilabdemos.com/flipbox/docs/installations/how-to-install-the-plugin/">Docs</a></li>
-                        <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">Support</a></li>
-                        <li class="saadmin-set"><a href="<?php echo esc_url(admin_url('admin.php?page=oxi-flip-box-ultimate-settings')); ?>"><span class="dashicons dashicons-admin-generic"></span></a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <?php
+                ' . $sub;
+        echo $menu;
     }
 
     public function SupportAndComments($agr) {
@@ -163,7 +157,9 @@ trait Admin_helper {
             $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
             $style = ucfirst($style['style_name']);
             $cls = '\OXI_FLIP_BOX_PLUGINS\Inc\\' . $style;
-            new $cls();
+            if (class_exists($cls)):
+                new $cls();
+            endif;
         else:
             new \OXI_FLIP_BOX_PLUGINS\Page\Create();
         endif;
@@ -193,7 +189,7 @@ trait Admin_helper {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $METHOD = $_POST;
         } else {
-            $METHOD = $_REQUEST;
+            $METHOD = $_GET;
         }
         return !empty($METHOD['_wpnonce']) && wp_verify_nonce($METHOD['_wpnonce'], 'oxi-flip-box-editor');
     }
@@ -202,12 +198,11 @@ trait Admin_helper {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $METHOD = $_POST;
         } else {
-            $METHOD = $_REQUEST;
+            $METHOD = $_GET;
         }
         if (!$this->verify_request_nonce()) {
             $this->handle_direct_action_error('Access Denied');
         }
-
         $functionname = isset($METHOD['functionname']) ? sanitize_text_field($METHOD['functionname']) : '';
         $rawdata = isset($METHOD['rawdata']) ? sanitize_post($METHOD['rawdata']) : '';
         $styleid = isset($METHOD['styleid']) ? (int) $METHOD['styleid'] : '';

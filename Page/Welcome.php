@@ -38,7 +38,7 @@ class Welcome {
                 <h3>Creating Your Flip Box</h3>
                 <p>Flipbox - Awesomes Flip Boxes Image Overlay makes it easy to create Flipbox or Flipping Content in WordPress. You can follow the video tutorial on the right or read our how to
                     <a href="https://oxilabdemos.com/flipbox/docs/installations/how-to-install-the-plugin/" target="_blank" rel="noopener">Create your Flipbox Guide</a>.					</p>
-                <p>But in reality, the process is so intuitive that you can just start by going to <a href="<?php echo esc_url(admin_url()); ?>admin.php?page=oxi-flip-box-ultimate-new">Create Flipbox</a>.				</p>
+                <p>But in reality, the process is so intuitive that you can just start by going to <a href="<?php echo admin_url(); ?>admin.php?page=oxi-flip-box-ultimate-new">Create Flipbox</a>.				</p>
                 </br>
                 </br>
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/OaLL0DNUHWA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>

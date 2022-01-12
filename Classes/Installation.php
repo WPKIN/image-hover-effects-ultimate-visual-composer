@@ -96,7 +96,7 @@ class Installation {
      */
     public function plugin_upgrade_hook($upgrader_object, $options) {
         if ($options['action'] == 'update' && $options['type'] == 'plugin') {
-            if (isset($options['plugins']['image-hover-effects-ultimate-visual-composer'])) {
+            if (isset($options['plugins'][OXI_FLIP_BOX_TEXTDOMAIN])) {
 
                 $this->Flip_Datatase();
             }

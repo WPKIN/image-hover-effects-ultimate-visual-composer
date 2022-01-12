@@ -14,9 +14,6 @@ class Support_Reviews {
      *
      */
     public function __construct() {
-        if (!current_user_can('install_plugins')):
-            return;
-        endif;
         add_action('admin_notices', array($this, 'first_install'));
         add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
         add_action('wp_ajax_oxilab_flip_notice_dissmiss', array($this, 'notice_dissmiss'));
@@ -53,42 +50,40 @@ class Support_Reviews {
             return;
         }
         $image = OXI_FLIP_BOX_URL . 'image/logo.png';
-        ?>
-        <div class="notice notice-info put-dismiss-noticenotice-has-thumbnail shortcode-addons-review-notice oxilab-flipbox-review-notice">
-            <div class="shortcode-addons-notice-thumbnail">
-                <img src="<?php echo esc_url($image); ?>" alt=""></div>
-            <div class="shortcode-addons--notice-message">
-                <p>Hey, You’ve using <strong>Flipbox - Awesomes Flip Boxes Image Overlay</strong> more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.!</p>
-                <ul class="shortcode-addons--notice-link">
-                    <li>
-                        <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/reviews/" target="_blank">
-                            <span class="dashicons dashicons-external"></span>Ok, you deserve it!
-                        </a>
-                    </li>
-                    <li>
-                        <a class="oxi-flip-support-reviews" sup-data="success" href="#">
-                            <span class="dashicons dashicons-smiley"></span>I already did
-                        </a>
-                    </li>
-                    <li>
-                        <a class="oxi-flip-support-reviews" sup-data="maybe" href="#">
-                            <span class="dashicons dashicons-calendar-alt"></span>Maybe Later
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">
-                            <span class="dashicons dashicons-sos"></span>I need help
-                        </a>
-                    </li>
-                    <li>
-                        <a class="oxi-flip-support-reviews" sup-data="never"  href="#">
-                            <span class="dashicons dashicons-dismiss"></span>Never show again
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <?php
+        echo ' <div class="notice notice-info put-dismiss-noticenotice-has-thumbnail shortcode-addons-review-notice oxilab-flipbox-review-notice">
+                    <div class="shortcode-addons-notice-thumbnail">
+                        <img src="' . esc_url($image) . '" alt=""></div>
+                    <div class="shortcode-addons--notice-message">
+                        <p>Hey, You’ve using <strong>Flipbox - Awesomes Flip Boxes Image Overlay</strong> more than 1 week – that’s awesome! Could you please do me a BIG favor and give it a 5-star rating on WordPress? Just to help us spread the word and boost our motivation.!</p>
+                        <ul class="shortcode-addons--notice-link">
+                            <li>
+                                <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/reviews/" target="_blank">
+                                    <span class="dashicons dashicons-external"></span>Ok, you deserve it!
+                                </a>
+                            </li>
+                            <li>
+                                <a class="oxi-flip-support-reviews" sup-data="success" href="#">
+                                    <span class="dashicons dashicons-smiley"></span>I already did
+                                </a>
+                            </li>
+                            <li>
+                                <a class="oxi-flip-support-reviews" sup-data="maybe" href="#">
+                                    <span class="dashicons dashicons-calendar-alt"></span>Maybe Later
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">
+                                    <span class="dashicons dashicons-sos"></span>I need help
+                                </a>
+                            </li>
+                            <li>
+                                <a class="oxi-flip-support-reviews" sup-data="never"  href="#">
+                                    <span class="dashicons dashicons-dismiss"></span>Never show again
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>';
     }
 
     /**

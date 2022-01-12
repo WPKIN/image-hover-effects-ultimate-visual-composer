@@ -18,7 +18,7 @@ trait Public_Helper {
         $data = str_replace('+', ' ', $data);
         $data = explode(':', $data);
         $data = $data[0];
-        $data = '"' . esc_attr($data) . '"';
+        $data = '"' . $data . '"';
 
         return $data;
     }
@@ -43,7 +43,7 @@ trait Public_Helper {
         if ($fadata != 'no') {
             wp_enqueue_style('font-awesome-' . $faversion[0], $faversion[1]);
         }
-        $files = '<i class="' . esc_attr($data) . ' oxi-icons"></i>';
+        $files = '<i class="' . $data . ' oxi-icons"></i>';
         return $files;
     }
 

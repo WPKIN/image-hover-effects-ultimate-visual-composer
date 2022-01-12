@@ -17,7 +17,7 @@ class Widget extends \WP_Widget {
     public function widget($args, $instance) {
         $title = apply_filters('widget_title', $instance['title']);
         echo $args['before_widget'];
-        \OXI_FLIP_BOX_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($title, 'user');
+        echo \OXI_FLIP_BOX_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($title, 'user');
         echo $args['after_widget'];
     }
 
@@ -29,8 +29,8 @@ class Widget extends \WP_Widget {
         }
         ?>
         <p>
-            <label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_html__('Style ID:', 'image-hover-effects-ultimate-visual-composer'); ?></label>
-            <input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text" value="<?php echo esc_html($title); ?>" />
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Style ID:'); ?></label>
+            <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
         </p>
         <?php
     }

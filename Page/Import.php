@@ -39,7 +39,7 @@ class Import {
      * @return void
      */
     public function admin_ajax_load() {
-        wp_enqueue_script('oxi-flip-import', OXI_FLIP_BOX_URL . '/asset/backend/js/import.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-flip-import', OXI_FLIP_BOX_URL . '/asset/backend/js/import.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-import', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 
@@ -86,7 +86,7 @@ class Import {
                 if (!array_key_exists($id, $this->IMPORT)):
                     $C = 'OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $k;
                     ?>
-                    <div class="oxi-addons-col-1" id="<?php echo esc_attr($k); ?>">
+                    <div class="oxi-addons-col-1" id="<?php echo $k; ?>">
                         <div class="oxi-addons-style-preview">
                             <div class="oxi-addons-style-preview-top oxi-addons-center">
                                 <?php
@@ -103,7 +103,7 @@ class Import {
                             </div>
                             <div class="oxi-addons-style-preview-bottom">
                                 <div class="oxi-addons-style-preview-bottom-left">
-                                    Style <?php echo esc_html($id); ?>
+                                    Style <?php echo $id; ?>
                                 </div>
                                 <div class="oxi-addons-style-preview-bottom-right">
                                     <?php
@@ -111,14 +111,14 @@ class Import {
                                     if ($id > 10 && $checking == false):
                                         ?>
                                         <form method="post" style=" display: inline-block; " class="shortcode-addons-template-pro-only">
-                                            <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>
+                                            <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Pro Only"  type="submit" value="pro only" name="addonsstyleproonly">Pro Only</button>  
                                         </form>
                                         <?php
                                     else:
                                         ?>
                                         <form method="post" style=" display: inline-block; " class="shortcode-addons-template-import">
-                                            <input type="hidden" name="oxiimportstyle" value="<?php echo esc_attr($id); ?>">
-                                            <button class="btn btn-success oxi-addons-addons-template-create" title="import"  type="submit" value="Import" name="addonsstyleimport">Import</button>
+                                            <input type="hidden" name="oxiimportstyle" value="<?php echo $id; ?>">
+                                            <button class="btn btn-success oxi-addons-addons-template-create" title="import"  type="submit" value="Import" name="addonsstyleimport">Import</button>  
                                         </form>
                                     <?php
                                     endif;
