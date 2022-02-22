@@ -125,7 +125,7 @@ class Create {
                 if (array_key_exists($id, $this->IMPORT)):
                     $C = 'OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $key;
                     ?>
-                    <div class="oxi-addons-col-1" id="<?php echo $key; ?>">
+                    <div class="oxi-addons-col-1" id="<?php echo esc_attr($key); ?>">
                         <div class="oxi-addons-style-preview">
                             <div class="oxi-addons-style-preview-top oxi-addons-center">
                                 <?php
@@ -134,7 +134,7 @@ class Create {
                                         $REND = json_decode($v, true);
                                         echo '<div class="oxilab-flip-box-col-3">';
                                         new $C($REND['style'], $REND['child']);
-                                        echo '<textarea style="display:none" id="oxistyle' . $number . 'data-' . $k . '">' . htmlentities(json_encode($REND)) . '</textarea>';
+                                        echo '<textarea style="display:none" id="oxistyle' . esc_attr($number) . 'data-' . esc_attr($k) . '">' . htmlentities(json_encode($REND)) . '</textarea>';
                                         echo '</div>';
                                     }
                                 endif;
@@ -142,14 +142,14 @@ class Create {
                             </div>
                             <div class="oxi-addons-style-preview-bottom">
                                 <div class="oxi-addons-style-preview-bottom-left">
-                                    Style <?php echo $id; ?>
+                                    Style <?php echo esc_html($id); ?>
                                 </div>
                                 <div class="oxi-addons-style-preview-bottom-right">
                                     <form method="post" style=" display: inline-block; " class="shortcode-addons-template-deactive">
-                                        <input type="hidden" name="oxideletestyle" value="<?php echo $id; ?>">
+                                        <input type="hidden" name="oxideletestyle" value="<?php echo esc_attr($id); ?>">
                                         <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Delete"  type="submit" value="Deactive" name="addonsstyledelete">Deactive</button>
                                     </form>
-                                    <button type="button" class="btn btn-success oxi-addons-addons-template-create" data-toggle="modal" addons-data="oxistyle<?php echo $number; ?>data">Create Style</button>
+                                    <button type="button" class="btn btn-success oxi-addons-addons-template-create" data-toggle="modal" addons-data="oxistyle<?php echo esc_attr($number); ?>data">Create Style</button>
                                 </div>
                             </div>
                         </div>
@@ -163,65 +163,67 @@ class Create {
     }
 
     public function create_new() {
-        echo '<div class="oxi-addons-row">
-                        <div class="oxi-addons-col-1 oxi-import">
-                            <div class="oxi-addons-style-preview">
-                                <div class="oxilab-admin-style-preview-top">
-                                    <a href="' . admin_url("admin.php?page=oxi-flip-box-ultimate-import") . '">
-                                        <div class="oxilab-admin-add-new-item">
-                                            <span>
-                                                <i class="fas fa-plus-circle oxi-icons"></i>
-                                                Import Templates
-                                            </span>
-                                        </div>
-                                    </a>
+        ?>
+        <div class="oxi-addons-row">
+            <div class="oxi-addons-col-1 oxi-import">
+                <div class="oxi-addons-style-preview">
+                    <div class="oxilab-admin-style-preview-top">
+                        <a href="<?php echo esc_url(admin_url("admin.php?page=oxi-flip-box-ultimate-import")); ?>">
+                            <div class="oxilab-admin-add-new-item">
+                                <span>
+                                    <i class="fas fa-plus-circle oxi-icons"></i>
+                                    Import Templates
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="oxi-addons-style-create-modal" >
+            <form method="post" id="oxi-addons-style-modal-form">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">New Flipbox</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class=" form-group row">
+                                <label for="addons-style-name" class="col-sm-6 col-form-label" oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
+                                <div class="col-sm-6 addons-dtm-laptop-lock">
+                                    <input class="form-control" type="text" value="" id="addons-style-name"  name="addons-style-name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="oxi-tabs-link" class="col-sm-5 col-form-label" title="Select Layouts">Layouts</label>
+                                <div class="col-sm-7">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-secondary active">
+                                            <input type="radio" name="flip-box-layouts"value="1"  checked="">1st
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="flip-box-layouts" value="2">2nd
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="flip-box-layouts" value="3">3rd
+                                        </label>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>';
-
-        echo '<div class="modal fade" id="oxi-addons-style-create-modal" >
-                        <form method="post" id="oxi-addons-style-modal-form">
-                            <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">New Flipbox</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class=" form-group row">
-                                            <label for="addons-style-name" class="col-sm-6 col-form-label" oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
-                                            <div class="col-sm-6 addons-dtm-laptop-lock">
-                                                <input class="form-control" type="text" value="" id="addons-style-name"  name="addons-style-name">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="oxi-tabs-link" class="col-sm-5 col-form-label" title="Select Layouts">Layouts</label>
-                                            <div class="col-sm-7">
-                                                <div class="btn-group" data-toggle="buttons">
-                                                    <label class="btn btn-secondary active">
-                                                        <input type="radio" name="flip-box-layouts"value="1"  checked="">1st
-                                                    </label>
-                                                    <label class="btn btn-secondary">
-                                                        <input type="radio" name="flip-box-layouts" value="2">2nd
-                                                    </label>
-                                                    <label class="btn btn-secondary">
-                                                        <input type="radio" name="flip-box-layouts" value="3">3rd
-                                                    </label>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input type="hidden" id="oxistyledata" name="oxistyledata" value="">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        <input type="submit" class="btn btn-success" name="addonsdatasubmit" id="addonsdatasubmit" value="Save">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>';
+                        <div class="modal-footer">
+                            <input type="hidden" id="oxistyledata" name="oxistyledata" value="">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-success" name="addonsdatasubmit" id="addonsdatasubmit" value="Save">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <?php
     }
 
 }

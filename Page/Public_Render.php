@@ -94,8 +94,8 @@ class Public_Render {
      */
     public function loader() {
         $this->oxiid = $this->dbdata['id'];
-        $this->hooks();
         $this->render();
+        $this->hooks();
     }
 
     /**
@@ -121,29 +121,11 @@ class Public_Render {
         $inlinecss = $this->inline_css;
 
         if ($this->inline_js != ''):
-            if ($this->admin == 'admin'):
-                //only load while ajax called
-                echo '<script>
-                        (function ($) {
-                            setTimeout(function () {';
-                echo $this->inline_js;
-                echo '    }, 2000);
-                        })(jQuery)</script>';
-            else:
-                $jquery = '(function ($) {' . $this->inline_js . '})(jQuery);';
-                wp_add_inline_script($this->JSHANDLE, $jquery);
-            endif;
-
+            $jquery = '(function ($) {' . $this->inline_js . '})(jQuery);';
+            wp_add_inline_script($this->JSHANDLE, $jquery);
         endif;
         if ($this->inline_css != ''):
-            if ($this->admin == 'admin'):
-                //only load while ajax called
-                echo '<style>';
-                echo $inlinecss;
-                echo '</style>';
-            else:
-                wp_add_inline_style('flip-box-addons-style', $inlinecss);
-            endif;
+            wp_add_inline_style('flip-box-addons-style', $inlinecss);
         endif;
     }
 
@@ -170,7 +152,7 @@ class Public_Render {
         else:
             $preloadercls = '';
         endif;
-        echo '<div class="oxi-addons-container ' . $this->WRAPPER . ' ' . $preloadercls . '">';
+        echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . ' ' . esc_attr($preloadercls) . '">';
         $this->default_render($this->style, $this->child, $this->admin);
         echo '</div>';
     }
@@ -181,25 +163,25 @@ class Public_Render {
             $data = '<div class="oxilab-admin-absulote">
                         <div class="oxilab-style-absulate-edit">
                             <form method="post">
-                                <input type="hidden" name="item-id" value="' . $id . '">
+                                <input type="hidden" name="item-id" value="' . esc_attr($id) . '">
                                 <button class="btn btn-primary" type="submit" value="edit" name="edit" title="Edit">Edit</button>
                                 ' . wp_nonce_field("oxiflipeditdata") . '
                             </form>
                         </div>
                         <div class="oxilab-style-absulate-delete">
                             <form method="post" class="oxilab-style-absulate-delete-confirmation">
-                                <input type="hidden" name="item-id" value="' . $id . '">
+                                <input type="hidden" name="item-id" value="' . esc_attr($id) . '">
                                 <button class="btn btn-danger" type="submit" value="delete" name="delete" title="Delete">Delete</button>
                                 ' . wp_nonce_field("oxiflipdeletedata") . '
                             </form>
                         </div>
                     </div>';
         endif;
-        return $data;
+        echo $data;
     }
 
     public function text_render($data) {
-        return do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false);
+        echo do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false);
     }
 
     public function font_awesome_render($data) {
@@ -207,12 +189,12 @@ class Public_Render {
         if ($fadata != 'no'):
             wp_enqueue_style('font-awsome.min', OXI_FLIP_BOX_URL . '/asset/frontend/css/font-awsome.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         endif;
-        $files = '<i class="' . $data . ' oxi-icons"></i>';
-        return $files;
+        ?>
+        <i class="<?php echo esc_attr(esc_attr($data)); ?> oxi-icons"></i>
+        <?php
     }
 
     public function font_familly($data = '') {
-
 
         $check = get_option('oxi_addons_google_font');
         if ($check != 'no'):
@@ -220,7 +202,7 @@ class Public_Render {
         endif;
         $data = str_replace('+', ' ', $data);
         $data = explode(':', $data);
-        return '"' . $data[0] . '"';
+        return '"' . esc_attr($data[0]) . '"';
     }
 
     public function admin_name_validation($data) {

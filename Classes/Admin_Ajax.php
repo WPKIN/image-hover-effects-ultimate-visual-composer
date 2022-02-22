@@ -419,6 +419,7 @@ class Admin_Ajax {
             endif;
         endif;
 
+        echo json_encode($data);
         return;
     }
 
@@ -447,8 +448,7 @@ class Admin_Ajax {
 
                     case 'expired' :
 
-                        $message = esc_html('Your license key expired')
-                        ;
+                        $message = esc_html('Your license key expired');
                         break;
 
                     case 'revoked' :

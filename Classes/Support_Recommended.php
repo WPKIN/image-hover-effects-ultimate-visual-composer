@@ -111,23 +111,25 @@ class Support_Recommended {
 
         if (count($recommend) > 2 && $recommend['modules-path'] != '') :
             $plugin = explode('/', $recommend['modules-path'])[0];
-            $massage = '<p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. ' . $recommend['modules-massage'] . '</p>';
+           
 
             $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
-            echo '<div class="oxi-addons-admin-notifications" style=" width: auto;">
-                        <h3>
-                            <span class="dashicons dashicons-flag"></span>
-                            Notifications
-                        </h3>
-                        <p></p>
-                        <div class="oxi-addons-admin-notifications-holder">
-                            <div class="oxi-addons-admin-notifications-alert">
-                                ' . $massage . '
-                                <p>' . sprintf('<a href="%s" class="button button-large button-primary">%s</a>', $install_url, esc_html__('Install Now', OXI_FLIP_BOX_TEXTDOMAIN)) . ' &nbsp;&nbsp;<a href="#" class="button button-large button-secondary oxi-flip-admin-recommended-dismiss">No, Thanks</a></p>
-                            </div>
-                        </div>
-                        <p></p>
-                    </div>';
+            ?>
+            <div class="oxi-addons-admin-notifications" style=" width: auto;">
+                <h3>
+                    <span class="dashicons dashicons-flag"></span>
+                    Notifications
+                </h3>
+                <p></p>
+                <div class="oxi-addons-admin-notifications-holder">
+                    <div class="oxi-addons-admin-notifications-alert">
+                        <p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. <?php echo esc_html($recommend['modules-massage']);?></p>
+                        <p><a href="<?php echo esc_url($install_url); ?>" class="button button-large button-primary">Install Now</a <a href="#" class="button button-large button-secondary oxi-flip-admin-recommended-dismiss">No, Thanks</a></p>
+                    </div>
+                </div>
+                <p></p>
+            </div>
+            <?php
         endif;
     }
 

@@ -48,7 +48,6 @@ trait Admin_helper {
             }
         </style>
         <?php
-
     }
 
     /**
@@ -78,54 +77,77 @@ trait Admin_helper {
 
         $bgimage = OXI_FLIP_BOX_URL . 'image/sa-logo.png';
         $sub = '';
-
-        $menu = '<div class="oxi-addons-wrapper">
-                    <div class="oxilab-new-admin-menu">
-                        <div class="oxi-site-logo">
-                            <a href="' . $this->admin_url_convert('oxi-flip-box-ultimate') . '" class="header-logo" style=" background-image: url(' . $bgimage . ');">
-                            </a>
-                        </div>
-                        <nav class="oxilab-sa-admin-nav">
-                            <ul class="oxilab-sa-admin-menu">';
-
-        $GETPage = sanitize_text_field($_GET['page']);
-
-        foreach ($response as $key => $value) {
-            $active = ($GETPage == $value['homepage'] ? ' class="active" ' : '');
-            $menu .= '<li ' . $active . '><a href="' . $this->admin_url_convert($value['homepage']) . '">' . $this->name_converter($value['name']) . '</a></li>';
-        }
-
-        $menu .= '              </ul>
-                            <ul class="oxilab-sa-admin-menu2">
-                               ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE ? ' <li class="fazil-class" ><a target="_blank" href="https://oxilabdemos.com/flipbox/pricing/">Upgrade</a></li>' : '') . '
-                               <li class="saadmin-doc"><a target="_black" href="https://oxilabdemos.com/flipbox/docs/installations/how-to-install-the-plugin/">Docs</a></li>
-                               <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">Support</a></li>
-                               <li class="saadmin-set"><a href="' . admin_url('admin.php?page=oxi-flip-box-ultimate-settings') . '"><span class="dashicons dashicons-admin-generic"></span></a></li>
-                            </ul>
-                        </nav>
-                    </div>
+        ?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxilab-new-admin-menu">
+                <div class="oxi-site-logo">
+                    <a href="<?php echo esc_url($this->admin_url_convert('oxi-flip-box-ultimate')); ?>" class="header-logo" style=" background-image: url(<?php echo esc_url($bgimage); ?>);">
+                    </a>
                 </div>
-                ' . $sub;
-        echo $menu;
+                <nav class="oxilab-sa-admin-nav">
+                    <ul class="oxilab-sa-admin-menu">
+                        <?php
+                        $GETPage = sanitize_text_field($_GET['page']);
+
+                        foreach ($response as $key => $value) {
+                            ?>
+                            <li
+                            <?php
+                            if ($GETPage == $value['homepage']):
+
+                                echo ' class="active" ';
+                            endif;
+                            ?>><a href="<?php echo esc_url($this->admin_url_convert($value['homepage'])); ?>"><?php echo esc_html($this->name_converter($value['name'])); ?></a></li>
+                                <?php
+                            }
+                            ?>
+
+                    </ul>
+                    <ul class="oxilab-sa-admin-menu2">
+                        <?php
+                        if (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE):
+                            ?>
+                            <li class="fazil-class" ><a target="_blank" href="https://oxilabdemos.com/flipbox/pricing/">Upgrade</a></li>
+                            <?php
+                        endif;
+                        ?>
+
+                        <li class="saadmin-doc"><a target="_black" href="https://oxilabdemos.com/flipbox/docs/installations/how-to-install-the-plugin/">Docs</a></li>
+                        <li class="saadmin-doc"><a target="_black" href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer/">Support</a></li>
+                        <li class="saadmin-set"><a href="<?php echo esc_url(admin_url('admin.php?page=oxi-flip-box-ultimate-settings')); ?>"><span class="dashicons dashicons-admin-generic"></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <?php
     }
 
     public function SupportAndComments($agr) {
-        echo '  <div class="oxi-addons-admin-notifications">
-                    <h3>
-                        <span class="dashicons dashicons-flag"></span>
-                        Notifications
-                    </h3>
+        ?>
+        <div class="oxi-addons-admin-notifications">
+            <h3>
+                <span class="dashicons dashicons-flag"></span>
+                Notifications
+            </h3>
+            <p></p>
+            <div class="oxi-addons-admin-notifications-holder">
+                <div class="oxi-addons-admin-notifications-alert">
+                    <p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. I Just wanted to see if you have any questions or concerns about my plugins. If you do, Please do not hesitate to <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer#new-post">file a bug report</a>. </p>
+
+                    <?php
+                    if (apply_filters('oxi-flip-box-plugin/pro_version', false)):
+                        ?>
+                        <p>By the way, did you know we also have a <a href="https://oxilabdemos.com/flipbox/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>
+                        <?php
+                    endif;
+                    ?>
+                    <p>Thanks Again!</p>
                     <p></p>
-                    <div class="oxi-addons-admin-notifications-holder">
-                        <div class="oxi-addons-admin-notifications-alert">
-                            <p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. I Just wanted to see if you have any questions or concerns about my plugins. If you do, Please do not hesitate to <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer#new-post">file a bug report</a>. </p>
-                            ' . (apply_filters('oxi-flip-box-plugin/pro_version', false) ? '' : '<p>By the way, did you know we also have a <a href="https://oxilabdemos.com/flipbox/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>') . '
-                            <p>Thanks Again!</p>
-                            <p></p>
-                        </div>
-                    </div>
-                    <p></p>
-                </div>';
+                </div>
+            </div>
+            <p></p>
+        </div>
+        <?php
     }
 
     public function Admin_Menu() {

@@ -97,7 +97,7 @@ class Admin_Render {
         $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
         $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
         $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-        $this->oxiid = (!empty($_GET['styleid']) ? sanitize_text_field($_GET['styleid']) : '');
+        $this->oxiid = (!empty($_GET['styleid']) ? (int)$_GET['styleid'] : '');
         $this->WRAPPER = '.oxi-addons-flip-wrapper-' . $this->oxiid;
         if (!empty($_REQUEST['_wpnonce'])) {
             $this->nonce = $_REQUEST['_wpnonce'];
@@ -227,14 +227,14 @@ class Admin_Render {
         ?>
         <div class="wrap">  
             <div class="oxi-addons-wrapper">
-        <?php
-        apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
-        ?>
+                <?php
+                apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
+                ?>
                 <div class="oxi-addons-style-20-spacer"></div>
                 <div class="oxi-addons-row">
-        <?php
-        apply_filters('oxi-flip-box-support-and-comments', TRUE);
-        ?>
+                    <?php
+                    apply_filters('oxi-flip-box-support-and-comments', TRUE);
+                    ?>
                     <div class="oxi-addons-wrapper oxi-addons-flip-tabs-mode">
                         <div class="oxi-addons-settings" id="oxisettingsreload">
                             <div class="oxi-addons-style-left">
@@ -260,16 +260,16 @@ class Admin_Render {
                                                     </li>
                                                 </ul>
                                                 <div class="oxi-addons-tabs-content">
-        <?php
-        $this->register_controls();
-        ?>
+                                                    <?php
+                                                    $this->register_controls();
+                                                    ?>
                                                 </div>
                                             </div>
 
                                         </div>
                                         <div class="oxi-addons-setting-save">
-        <?php wp_nonce_field("oxiflipstylecss") ?>
-                                            <input type="hidden" id="style-id" name="style-id" value="<?php echo $this->oxiid; ?>">
+                                            <?php wp_nonce_field("oxiflipstylecss") ?>
+                                            <input type="hidden" id="style-id" name="style-id" value="<?php echo (int) $this->oxiid; ?>">
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
                                             <input type="submit" class="btn btn-primary" name="oxi-addons-flip-templates-submit" value="Submit">
                                         </div>
@@ -297,12 +297,12 @@ class Admin_Render {
                                     <div class="oxi-addons-shortcode-body  shortcode-addons-templates-right-panel-body">
                                         <form method="post">
                                             <div class="input-group my-2">
-                                                <input type="text" class="form-control" name="oxi-addons-name" placeholder=" Set Your Shortcode Name" value="<?php echo $this->dbdata['name']; ?>">
+                                                <input type="text" class="form-control" name="oxi-addons-name" placeholder=" Set Your Shortcode Name" value="<?php echo esc_attr($this->dbdata['name']); ?>">
                                                 <div class="input-group-append">
                                                     <input type="submit" class="btn btn-success" name="addonsstylenamechange" value="Save">
                                                 </div>
                                             </div>
-        <?php wp_nonce_field("oxi-addons-name-change") ?>
+                                            <?php wp_nonce_field("oxi-addons-name-change") ?>
                                         </form>
                                     </div>
                                 </div>  <div class="oxi-addons-shortcode shortcode-addons-templates-right-panel ">
@@ -314,12 +314,12 @@ class Admin_Render {
                                         <em>Shortcode for posts/pages/plugins</em>
                                         <p>Copy &amp;
                                             paste the shortcode directly into any WordPress post, page or Page Builder.</p>
-                                        <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="[oxilab_flip_box id=&quot;<?php echo $this->oxiid; ?>&quot;]">
+                                        <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="[oxilab_flip_box id=&quot;<?php echo (int) $this->oxiid; ?>&quot;]">
                                         <span></span>
                                         <em>Shortcode for templates/themes</em>
                                         <p>Copy &amp;
                                             paste this code into a template file to include the slideshow within your theme.</p>
-                                        <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="<?php echo '<?php echo do_shortcode(\'[oxilab_flip_box  id=&quot;' . $this->oxiid . '&quot;]\'); ?>'; ?>">
+                                        <input type="text" class="form-control" onclick="this.setSelectionRange(0, this.value.length)" value="<?php echo '<?php echo do_shortcode(\'[oxilab_flip_box  id=&quot;' . (int) $this->oxiid . '&quot;]\'); ?>'; ?>">
                                         <span></span>
                                     </div>
                                 </div> 
@@ -348,15 +348,15 @@ class Admin_Render {
                                                         <i class="fa fa-spinner fa-spin"></i>
                                                     </div>
                                                     <ul class="col-12 list-group oxi-addons-modal-rearrange"  id="oxi-addons-modal-rearrange">
-        <?php
-        $r = $this->Rearrange();
-        foreach ($this->child as $value) {
-            $val = explode('{#}|{#}', $value['files']);
-            if ($r['tag'] == 'title'):
-                echo '<li class="list-group-item" id="' . $value['id'] . '">' . $val[$r['id']] . '</li>';
-            endif;
-        }
-        ?>
+                                                        <?php
+                                                        $r = $this->Rearrange();
+                                                        foreach ($this->child as $value) {
+                                                            $val = explode('{#}|{#}', $value['files']);
+                                                            if ($r['tag'] == 'title'):
+                                                                echo '<li class="list-group-item" id="' . esc_attr($value['id']) . '">' . esc_html($val[$r['id']]) . '</li>';
+                                                            endif;
+                                                        }
+                                                        ?>
                                                     </ul>
                                                 </div>
                                                 <div class="modal-footer">    
@@ -374,15 +374,15 @@ class Admin_Render {
                                 <div class="modal-dialog">
                                     <form method="post" id="oxi-flip-template-modal-form">
                                         <div class="modal-content">
-        <?php echo $this->modal_form_data(); ?>
+                                            <?php $this->modal_form_data(); ?>
                                             <div class="modal-footer">
-                                                <input type="hidden" id="item-id" name="item-id" value="<?php echo $this->itemid ?>">
+                                                <input type="hidden" id="item-id" name="item-id" value="<?php echo (int) $this->itemid ?>">
                                                 <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                                 <input type="submit" id="oxi-flip-template-modal-submit" name="oxi-flip-template-modal-submit" class="btn btn-success" value="Submit">
                                             </div>
                                         </div>
-        <?php wp_nonce_field("oxiflipchildnonce") ?>
+                                        <?php wp_nonce_field("oxiflipchildnonce") ?>
                                     </form>
                                 </div>
                             </div>
@@ -399,10 +399,10 @@ class Admin_Render {
                                         </div>
                                     </div>
                                     <div class="oxi-addons-preview-data" id="oxi-addons-preview-data">
-        <?php
-        $cls = '\OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $this->StyleName . '';
-        new $cls($this->dbdata, $this->child, 'admin');
-        ?>
+                                        <?php
+                                        $cls = '\OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $this->StyleName . '';
+                                        new $cls($this->dbdata, $this->child, 'admin');
+                                        ?>
                                     </div>
                                 </div>
                             </div>
