@@ -106,8 +106,29 @@ trait Sanitization {
         endif;
     }
 
-    public function admin_special_charecter($data) {
-        return sanitize_post($data);
+     public function admin_special_charecter($data) {
+        $data = str_replace('\\\\"', '&quot;', $data);
+        $data = str_replace('\\\"', '&quot;', $data);
+        $data = str_replace('\\"', '&quot;', $data);
+        $data = str_replace('\"', '&quot;', $data);
+        $data = str_replace('"', '&quot;', $data);
+        $data = str_replace('\\\\&quot;', '&quot;', $data);
+        $data = str_replace('\\\&quot;', '&quot;', $data);
+        $data = str_replace('\\&quot;', '&quot;', $data);
+        $data = str_replace('\&quot;', '&quot;', $data);
+        $data = str_replace("\\\\'", '&apos;', $data);
+        $data = str_replace("\\\'", '&apos;', $data);
+        $data = str_replace("\\'", '&apos;', $data);
+        $data = str_replace("\'", '&apos;', $data);
+        $data = str_replace("\\\\&apos;", '&apos;', $data);
+        $data = str_replace("\\\&apos;", '&apos;', $data);
+        $data = str_replace("\\&apos;", '&apos;', $data);
+        $data = str_replace("\&apos;", '&apos;', $data);
+        $data = str_replace("'", '&apos;', $data);
+        $data = str_replace('<', '&lt;', $data);
+        $data = str_replace('>', '&gt;', $data);
+        $data = sanitize_text_field($data);
+        return $data;
     }
 
     public function oxilab_flip_box_flip_type_effects_type($flip_type, $effects_Type) {

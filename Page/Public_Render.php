@@ -144,7 +144,7 @@ class Public_Render {
      * @since 2.0.0
      */
     public function render() {
-
+     
         $preloader = get_option('oxi_addons_pre_loader');
 
         if ($preloader == 'yes' && $this->admin != 'admin'):
@@ -152,7 +152,7 @@ class Public_Render {
         else:
             $preloadercls = '';
         endif;
-        echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . ' ' . esc_attr($preloadercls) . '">';
+        echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . ' ' . esc_attr($preloadercls) . '  oxi-addons-flipbox-template-'. esc_attr($this->dbdata['style_name']).'">';
         $this->default_render($this->style, $this->child, $this->admin);
         echo '</div>';
     }
@@ -197,7 +197,20 @@ class Public_Render {
     public function font_familly($data = '') {
 
         $check = get_option('oxi_addons_google_font');
-        if ($check != 'no'):
+        
+        $custom = [
+            'Arial' => '',
+            'Helvetica+Neue' => '',
+            'Courier+New' => '',
+            'Times+New+Roman' => '',
+            'Comic+Sans+MS' => '',
+            'Verdana' => '',
+            'Impact' => '',
+            'cursive' => '',
+            'inherit' => ''
+            
+        ];
+        if ($check != 'no' && !array_key_exists($data, $custom)):
             wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
         endif;
         $data = str_replace('+', ' ', $data);
@@ -218,5 +231,8 @@ class Public_Render {
         $data = str_replace('+', ' ', $data);
         return ucwords($data);
     }
+    
+    
+    
 
 }

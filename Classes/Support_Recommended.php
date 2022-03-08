@@ -124,7 +124,7 @@ class Support_Recommended {
                 <div class="oxi-addons-admin-notifications-holder">
                     <div class="oxi-addons-admin-notifications-alert">
                         <p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. <?php echo esc_html($recommend['modules-massage']);?></p>
-                        <p><a href="<?php echo esc_url($install_url); ?>" class="button button-large button-primary">Install Now</a <a href="#" class="button button-large button-secondary oxi-flip-admin-recommended-dismiss">No, Thanks</a></p>
+                        <p><a href="<?php echo esc_url($install_url); ?>" class="button button-large button-primary">Install Now</a> <a href="#" class="button button-large button-secondary oxi-flip-admin-recommended-dismiss">No, Thanks</a></p>
                     </div>
                 </div>
                 <p></p>

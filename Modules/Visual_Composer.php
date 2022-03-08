@@ -37,7 +37,7 @@ class Visual_Composer {
                         ), $atts));
         $styleid = $atts['id'];
         ob_start();
-        echo \OXI_FLIP_BOX_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($styleid, 'user');
+        \OXI_FLIP_BOX_PLUGINS\Classes\Bootstrap::instance()->shortcode_render($styleid, 'user');
         return ob_get_clean();
     }
 

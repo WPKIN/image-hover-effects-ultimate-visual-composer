@@ -327,8 +327,7 @@ jQuery.noConflict();
             }
         });
     };
-
-    $(window).load(function () {
+    $(window).on('load', function () {
         // Animate loader off screen
         $(".oxi-addons-container-flipbox-preloader").addClass('oxi-addons-container-flipbox-loaded');
     });

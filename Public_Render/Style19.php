@@ -66,7 +66,7 @@ class Style19 extends Public_Render {
                                                         </div>
                                                     </div>
                                                     <?php
-                                                    if ($filesdata[3] != '') {
+                                                    if ($filesdata[3] != '' && $filesdata[11] != '') {
                                                         ?>
                                                         <a href="<?php echo esc_url($filesdata[11]) ?>" target="<?php echo esc_attr($styledata[53]) ?>">
                                                             <div class="oxilab-button">

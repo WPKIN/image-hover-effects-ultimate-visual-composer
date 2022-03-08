@@ -543,7 +543,6 @@ class Admin_Ajax {
             return wp_die('You do not have permission.');
         endif;
         $rawdata = json_decode(stripslashes($data), true);
-        $rawdata = $this->validate_post(json_decode(stripslashes($rawdata), true));
         $value = sanitize_text_field($rawdata['value']);
         update_option('oxi_addons_font_awesome', $value);
         echo '<span class="oxi-confirmation-success"></span>';
@@ -560,7 +559,6 @@ class Admin_Ajax {
             return wp_die('You do not have permission.');
         endif;
         $rawdata = json_decode(stripslashes($data), true);
-        $rawdata = $this->validate_post(json_decode(stripslashes($rawdata), true));
         $value = sanitize_text_field($rawdata['value']);
         update_option('oxi_addons_google_font', $value);
         echo '<span class="oxi-confirmation-success"></span>';
@@ -577,7 +575,6 @@ class Admin_Ajax {
             return wp_die('You do not have permission.');
         endif;
         $rawdata = json_decode(stripslashes($data), true);
-        $rawdata = $this->validate_post(json_decode(stripslashes($rawdata), true));
         $value = sanitize_text_field($rawdata['value']);
         update_option('oxi_addons_pre_loader', $value);
         echo '<span class="oxi-confirmation-success"></span>';

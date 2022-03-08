@@ -12,7 +12,18 @@ trait Public_Helper {
 
 
         $check = get_option('oxi_addons_google_font');
-        if ($check != 'no'):
+        $custom = [
+            'Arial' => '',
+            'Helvetica+Neue' => '',
+            'Courier+New' => '',
+            'Times+New+Roman' => '',
+            'Comic+Sans+MS' => '',
+            'Verdana' => '',
+            'Impact' => '',
+            'cursive' => '',
+            'inherit' => ''
+        ];
+        if ($check != 'no' && !array_key_exists($data, $custom)):
             wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
         endif;
         $data = str_replace('+', ' ', $data);
