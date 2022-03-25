@@ -106,7 +106,7 @@ trait Sanitization {
         endif;
     }
 
-     public function admin_special_charecter($data) {
+    public function admin_special_charecter($data) {
         $data = str_replace('\\\\"', '&quot;', $data);
         $data = str_replace('\\\"', '&quot;', $data);
         $data = str_replace('\\"', '&quot;', $data);

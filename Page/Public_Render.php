@@ -144,15 +144,7 @@ class Public_Render {
      * @since 2.0.0
      */
     public function render() {
-     
-        $preloader = get_option('oxi_addons_pre_loader');
-
-        if ($preloader == 'yes' && $this->admin != 'admin'):
-            $preloadercls = 'oxi-addons-container-flipbox-preloader';
-        else:
-            $preloadercls = '';
-        endif;
-        echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . ' ' . esc_attr($preloadercls) . '  oxi-addons-flipbox-template-'. esc_attr($this->dbdata['style_name']).'">';
+        echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . '  oxi-addons-flipbox-template-'. esc_attr($this->dbdata['style_name']).'">';
         $this->default_render($this->style, $this->child, $this->admin);
         echo '</div>';
     }

@@ -81,11 +81,11 @@ class Style11 extends Public_Render {
                                                         if ($filesdata[13] != '' && $filesdata[15] != '') {
                                                             ?>
                                                             <a href="<?php echo esc_url($filesdata[15]); ?>'" target="<?php echo esc_attr($styledata[53]); ?>">
-                                                                <div class="oxilab-button">
-                                                                    <div class="oxilab-button-data">
+                                                                <span class="oxilab-button">
+                                                                    <span class="oxilab-button-data">
                                                                         <?php $this->text_render($filesdata[13]) ?>
-                                                                    </div>
-                                                                </div>
+                                                                    </span>
+                                                                </span>
                                                             </a>
                                                             <?php
                                                         }

@@ -77,11 +77,11 @@ class Style7 extends Public_Render {
                                                         <?php
                                                         if ($filesdata[9] != '' && $filesdata[11] != '') {
                                                             ?><a href="<?php echo  esc_url($filesdata[11]) ?>" target="<?php echo  esc_attr($styledata[53]) ?>">
-                                                            <div class="oxilab-button">
-                                                                    <div class="oxilab-button-data">
+                                                            <span class="oxilab-button">
+                                                                    <span class="oxilab-button-data">
                                                                     <?php   $this->text_render($filesdata[9]) ?>
-                                                                    </div>
-                                                                </div>
+                                                                    </span>
+                                                                </span>
                                                             </a>
                                                         <?php 
                                                         }

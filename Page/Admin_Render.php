@@ -127,7 +127,7 @@ class Admin_Render {
             if (!wp_verify_nonce($this->nonce, 'oxiflipstylecss')) {
                 die('You do not have sufficient permissions to access this page.');
             } else {
-                $data = sanitize_post($this->register_style());
+                $data = $this->register_style();
                 $this->wpdb->query($this->wpdb->prepare("UPDATE $this->parent_table SET css = %s WHERE id = %d", $data, $this->oxiid));
             }
         }
