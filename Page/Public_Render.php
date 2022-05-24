@@ -94,6 +94,9 @@ class Public_Render {
      */
     public function loader() {
         $this->oxiid = $this->dbdata['id'];
+        foreach ($this->child as $key => $value) {
+           $this->child[$key]['files'] = $value['files'] . '{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}';
+        }
         $this->render();
         $this->hooks();
     }
@@ -144,7 +147,7 @@ class Public_Render {
      * @since 2.0.0
      */
     public function render() {
-        echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . '  oxi-addons-flipbox-template-'. esc_attr($this->dbdata['style_name']).'">';
+        echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . '  oxi-addons-flipbox-template-' . esc_attr($this->dbdata['style_name']) . '">';
         $this->default_render($this->style, $this->child, $this->admin);
         echo '</div>';
     }
@@ -189,7 +192,7 @@ class Public_Render {
     public function font_familly($data = '') {
 
         $check = get_option('oxi_addons_google_font');
-        
+
         $custom = [
             'Arial' => '',
             'Helvetica+Neue' => '',
@@ -200,7 +203,6 @@ class Public_Render {
             'Impact' => '',
             'cursive' => '',
             'inherit' => ''
-            
         ];
         if ($check != 'no' && !array_key_exists($data, $custom)):
             wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
@@ -223,8 +225,5 @@ class Public_Render {
         $data = str_replace('+', ' ', $data);
         return ucwords($data);
     }
-    
-    
-    
 
 }

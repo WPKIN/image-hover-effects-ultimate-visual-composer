@@ -98,7 +98,8 @@ class Style1 extends Admin_Render {
                 . ' flip-box-backend-desc {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-desc']) . '{#}|{#}'
                 . ' flip-box-backend-button-text {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-button-text']) . '{#}|{#}'
                 . ' flip-box-backend-link {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-link']) . '{#}|{#}'
-                . ' flip-box-image-upload-url-02 {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-image-upload-url-02']) . '{#}|{#}';
+                . ' flip-box-image-upload-url-02 {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-image-upload-url-02']) . '{#}|{#}'
+                . ' flip-box-image-upload-url-01-alt {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-image-upload-url-01-alt']) . '{#}|{#}';
         return $data;
     }
 
@@ -114,7 +115,7 @@ class Style1 extends Admin_Render {
             <?php
              $this->oxilab_flip_box_admin_input_text('flip-box-front-title', $this->child_editable[1], 'Front Title', 'Add your flip front title.');
              $this->oxilab_flip_box_admin_input_icon('flip-box-front-icons', $this->child_editable[3], 'Front Icon', 'Add your front icon, Use Font-Awesome class name. As example fab fa-facebook-f');
-             $this->image_upload('flip-box-image-upload-url-01', $this->child_editable[5], 'Front Image', 'Add or modify your front image.');
+             $this->image_upload('flip-box-image-upload-url-01', $this->child_editable[5], 'Front Image', 'Add or modify your front image.', $this->child_editable[15]);
             ?>
         </div>
         <div class="modal-header">

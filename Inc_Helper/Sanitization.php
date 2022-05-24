@@ -924,13 +924,15 @@ trait Sanitization {
         <?php
     }
 
-    public function image_upload($id, $value, $name, $title) {
+    public function image_upload($id, $value, $name, $title, $alt = '') {
         ?>
         <div class="form-group col-sm-12">
             <label for="<?php echo esc_attr($id); ?>"><?php echo esc_html($name); ?></label>
             <div class="form-group row col-sm-12  mb-0">
                 <div class="col-md-8 col-xs-6" style="padding-left: 0px;">
-                    <input type="text "class="form-control" name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>"  value="<?php echo esc_attr($value); ?>">
+                    <input type="text" class="form-control" name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>"  value="<?php echo esc_attr($value); ?>">
+                    <input type="hidden" class="form-control" name="<?php echo esc_attr($id); ?>-alt" id="<?php echo esc_attr($id); ?>-alt"  value="<?php echo esc_attr($alt); ?>">
+
                 </div>
                 <div class="col-md-4 col-xs-6" style="padding-left: 0px;">
                     <button type="button" oxi-upload="#<?php echo esc_attr($id); ?>" class="flip-box-image-upload btn btn-outline-secondary" style="font-size: 12px;">Upload Image</button>

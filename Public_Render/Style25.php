@@ -52,7 +52,10 @@ class Style25 extends Public_Render {
                                         <div class="oxilab-flip-box-style">
                                             <div class="oxilab-flip-box-front">
                                                 <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>">
-                                                    <img src="<?php echo esc_url($filesdata[5]); ?>">
+                                                    <img src="<?php echo esc_url($filesdata[5]); ?>" <?php
+                                                            if (isset($filesdata[15])): echo 'alt="' . $filesdata[19] . '"';
+                                                            endif;
+                                                            ?>>
                                                 </div>
                                             </div>
                                             <div class="oxilab-flip-box-back">

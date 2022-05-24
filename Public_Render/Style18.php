@@ -55,7 +55,10 @@ class Style18 extends Public_Render {
                                                 <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>">
                                                     <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>-data">
                                                         <div class="oxilab-image">
-                                                            <img src="<?php echo esc_url($filesdata[5]); ?>">
+                                                            <img src="<?php echo esc_url($filesdata[5]); ?>" <?php
+                                                            if (isset($filesdata[15])): echo 'alt="' . $filesdata[19] . '"';
+                                                            endif;
+                                                            ?>>
                                                         </div>
                                                         <div class="oxilab-heading">
                                                             <?php $this->text_render($filesdata[1]); ?>
@@ -75,7 +78,7 @@ class Style18 extends Public_Render {
                                                         <?php
                                                         if ($filesdata[9] != '' && $filesdata[11] != '') {
                                                             ?>
-                                                            <a href="<?php echo esc_url($filesdata[11]) ?>" target="<?php echo esc_attr($styledata[53]) ?>">';
+                                                            <a href="<?php echo esc_url($filesdata[11]) ?>" target="<?php echo esc_attr($styledata[53]) ?>">
                                                                 <span class="oxilab-button">
                                                                     <span class="oxilab-button-data">
                                                                         <?php echo $this->text_render($filesdata[9]) ?>

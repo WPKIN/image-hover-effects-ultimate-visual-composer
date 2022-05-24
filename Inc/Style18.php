@@ -11,8 +11,6 @@ use OXI_FLIP_BOX_PLUGINS\Page\Admin_Render;
 
 class Style18 extends Admin_Render {
 
-    
-
     public function register_style() {
         $data = 'oxilab-flip-type |' . sanitize_text_field($_POST['oxilab-flip-type']) . '|'
                 . ' oxilab-flip-effects |' . sanitize_text_field($_POST['oxilab-flip-effects']) . '|'
@@ -117,6 +115,7 @@ class Style18 extends Admin_Render {
                 . '|';
         return $data;
     }
+
     public function register_child() {
         $data = ' flip-box-front-title {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-front-title']) . '{#}|{#}'
                 . ' {#}|{#}{#}|{#}'
@@ -126,10 +125,12 @@ class Style18 extends Admin_Render {
                 . ' flip-box-backend-link {#}|{#}' . sanitize_text_field($_POST['flip-box-backend-link']) . '{#}|{#}'
                 . ' flip-box-image-upload-url-02 {#}|{#}' . sanitize_text_field($_POST['flip-box-image-upload-url-02']) . '{#}|{#}'
                 . ' {#}|{#}{#}|{#}'
-                . ' flip-box-backend-title {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-title']) . '{#}|{#}';
+                . ' flip-box-backend-title {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-title']) . '{#}|{#}'
+                . ' flip-box-image-upload-url-01-alt {#}|{#}' . sanitize_text_field($_POST['flip-box-image-upload-url-01-alt']) . '{#}|{#}';
 
         return $data;
     }
+
     public function register_controls() {
         ?>
         <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-5">
@@ -306,7 +307,7 @@ class Style18 extends Admin_Render {
         <div class="modal-body row">
             <?php
             $this->oxilab_flip_box_admin_input_text('flip-box-front-title', $this->child_editable[1], 'Front Title', 'Add your flip front title.');
-            $this->image_upload('flip-box-image-upload-url-01', $this->child_editable[5], 'Front Image', 'Add or modify your front image.');
+            $this->image_upload('flip-box-image-upload-url-01', $this->child_editable[5], 'Front Image', 'Add or modify your front image.', $this->child_editable[19]);
             ?>                                           
         </div>
         <div class="modal-header">

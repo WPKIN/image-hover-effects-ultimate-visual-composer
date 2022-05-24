@@ -32,7 +32,7 @@ class Style1 extends Public_Render {
             foreach ($listdata as $value) {
                 if (!empty($value['files'])):
                     $filesdata = explode("{#}|{#}", $value['files']);
-        ?>
+                    ?>
                     <div class="<?php echo esc_attr($styledata[43]); ?> oxilab-flip-box-padding-<?php echo esc_attr($styleid); ?>"
                          sa-data-animation="<?php echo esc_attr($styledata[55]); ?>"
                          sa-data-animation-offset="100%"
@@ -53,7 +53,11 @@ class Style1 extends Public_Render {
                                                 <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>">
                                                     <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>-data">
                                                         <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>-image">
-                                                            <img src="<?php echo esc_url($filesdata[5]); ?>">
+                                                            <img src="<?php echo esc_url($filesdata[5]); ?>" <?php
+                                                            if (isset($filesdata[15])): echo 'alt="' . $filesdata[15] . '"';
+                                                            endif;
+                                                            ?>>
+
                                                             <div class="oxilab-flip-box-<?php echo esc_attr($styleid); ?>-image-icon">
                                                                 <?php $this->font_awesome_render($filesdata[3]) ?>
                                                             </div>
