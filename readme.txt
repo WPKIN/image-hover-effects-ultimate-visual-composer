@@ -330,8 +330,8 @@ If You acquired the Flipbox - Awesomes Flip Boxes Image Overlay and have not rec
 
 == Upgrade Notice ==
 = 2.8.3 = 
-*Compatible with 6.0.0
-*Add alt tag
+Compatible with 6.0.0
+Add alt tag
 
 = 2.8.2 = 
 Solve html issues
