@@ -35,7 +35,7 @@ class Style6 extends Public_Render {
 
                     $filesdata = explode("{#}|{#}", $value['files']);
                     ?>
-                    <div class="<?php echo esc_attr($styledata[43]); ?> oxilab-flip-box-padding-<?php echo esc_attr($styleid); ?>
+                    <div class="<?php echo esc_attr($styledata[43]); ?> oxilab-flip-box-padding-<?php echo esc_attr($styleid); ?>"
                          sa-data-animation="<?php echo esc_attr($styledata[55]); ?>"
                          sa-data-animation-offset="100%"
                          sa-data-animation-delay="0ms"
