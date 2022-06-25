@@ -203,7 +203,7 @@ class Admin_Render {
         $this->dbdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
         $this->child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->oxiid), ARRAY_A);
         if (!empty($this->dbdata['css'])):
-            $this->style = explode('|', $this->dbdata['css']);
+            $this->style = explode('|', stripslashes($this->dbdata['css']));
         endif;
         $this->StyleName = ucfirst(str_replace('-', '_', $this->dbdata['style_name']));
         $this->oxitype = ucfirst($this->dbdata['type']);

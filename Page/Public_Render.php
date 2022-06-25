@@ -127,8 +127,9 @@ class Public_Render {
             $jquery = '(function ($) {' . $this->inline_js . '})(jQuery);';
             wp_add_inline_script($this->JSHANDLE, $jquery);
         endif;
+       
         if ($this->inline_css != ''):
-            wp_add_inline_style('flip-box-addons-style', $inlinecss);
+           wp_add_inline_style('flip-box-addons-style', wp_kses_decode_entities(stripslashes($inlinecss)));
         endif;
     }
 
