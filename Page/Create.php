@@ -7,7 +7,8 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  *
  * @author biplo
  */
-class Create {
+class Create
+{
 
     /**
      * Database Parent Table
@@ -48,7 +49,8 @@ class Create {
      *
      * @since 2.0.0
      */
-    public function __construct() {
+    public function __construct()
+    {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
@@ -58,7 +60,8 @@ class Create {
         $this->Render();
     }
 
-    public function CSSJS_load() {
+    public function CSSJS_load()
+    {
         $this->admin_css_loader();
         $this->admin_ajax_load();
         apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
@@ -73,13 +76,16 @@ class Create {
      * Admin Notice JS file loader
      * @return void
      */
-    public function admin_ajax_load() {
+    public function admin_ajax_load()
+    {
         wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . '/asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 
-    public function Admin_header() {
-        ?>
+    public function Admin_header()
+    {
+        apply_filters('oxi-flip-box-support-and-comments', TRUE);
+?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Flipbox › Create New
@@ -87,11 +93,13 @@ class Create {
                 <p> Select Flipbox layouts, Gives your Flipbox name and create new Flipbox. </p>
             </div>
         </div>
-        <?php
+    <?php
+
     }
 
-    public function Render() {
-        ?>
+    public function Render()
+    {
+    ?>
         <div class="oxi-addons-row">
             <?php
             $this->Admin_header();
@@ -99,14 +107,15 @@ class Create {
             $this->create_new();
             ?>
         </div>
-        <?php
+    <?php
     }
 
-    public function template() {
-        ?>
+    public function template()
+    {
+    ?>
         <div class="oxi-addons-row">
             <?php
-            if (count($this->IMPORT) == 0):
+            if (count($this->IMPORT) == 0) :
                 $this->IMPORT = [
                     1 => ['type' => 'flip', 'name' => 1],
                     2 => ['type' => 'flip', 'name' => 2],
@@ -122,14 +131,14 @@ class Create {
             foreach ($this->TEMPLATE as $key => $value) {
                 $id = explode('tyle', $key)[1];
                 $number = rand();
-                if (array_key_exists($id, $this->IMPORT)):
+                if (array_key_exists($id, $this->IMPORT)) :
                     $C = 'OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $key;
-                    ?>
+            ?>
                     <div class="oxi-addons-col-1" id="<?php echo esc_attr($key); ?>">
                         <div class="oxi-addons-style-preview">
                             <div class="oxi-addons-style-preview-top oxi-addons-center">
                                 <?php
-                                if (class_exists($C)):
+                                if (class_exists($C)) :
                                     foreach ($value as $k => $v) {
                                         $REND = json_decode($v, true);
                                         echo '<div class="oxilab-flip-box-col-3">';
@@ -147,23 +156,24 @@ class Create {
                                 <div class="oxi-addons-style-preview-bottom-right">
                                     <form method="post" style=" display: inline-block; " class="shortcode-addons-template-deactive">
                                         <input type="hidden" name="oxideletestyle" value="<?php echo esc_attr($id); ?>">
-                                        <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Delete"  type="submit" value="Deactive" name="addonsstyledelete">Deactive</button>
+                                        <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Delete" type="submit" value="Deactive" name="addonsstyledelete">Deactive</button>
                                     </form>
                                     <button type="button" class="btn btn-success oxi-addons-addons-template-create" data-toggle="modal" addons-data="oxistyle<?php echo esc_attr($number); ?>data">Create Style</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <?php
+            <?php
                 endif;
             }
             ?>
         </div>
-        <?php
+    <?php
     }
 
-    public function create_new() {
-        ?>
+    public function create_new()
+    {
+    ?>
         <div class="oxi-addons-row">
             <div class="oxi-addons-col-1 oxi-import">
                 <div class="oxi-addons-style-preview">
@@ -181,7 +191,7 @@ class Create {
             </div>
         </div>
 
-        <div class="modal fade" id="oxi-addons-style-create-modal" >
+        <div class="modal fade" id="oxi-addons-style-create-modal">
             <form method="post" id="oxi-addons-style-modal-form">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
@@ -193,7 +203,7 @@ class Create {
                             <div class=" form-group row">
                                 <label for="addons-style-name" class="col-sm-6 col-form-label" oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
                                 <div class="col-sm-6 addons-dtm-laptop-lock">
-                                    <input class="form-control" type="text" value="" id="addons-style-name"  name="addons-style-name">
+                                    <input class="form-control" type="text" value="" id="addons-style-name" name="addons-style-name">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -201,7 +211,7 @@ class Create {
                                 <div class="col-sm-7">
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-secondary active">
-                                            <input type="radio" name="flip-box-layouts"value="1"  checked="">1st
+                                            <input type="radio" name="flip-box-layouts" value="1" checked="">1st
                                         </label>
                                         <label class="btn btn-secondary">
                                             <input type="radio" name="flip-box-layouts" value="2">2nd
@@ -223,7 +233,6 @@ class Create {
                 </div>
             </form>
         </div>
-        <?php
+<?php
     }
-
 }
