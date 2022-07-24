@@ -91,6 +91,18 @@ class Home
         $path = str_replace(['//', '\\\\'], ['/', '\\'], $path);
         return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     }
+    public function Render()
+    {
+?>
+        <div class="oxi-addons-row">
+            <?php
+            $this->Admin_header();
+            $this->created_shortcode();
+            $this->create_new();
+            ?>
+        </div>
+    <?php
+    }
 
     public function manual_import_json()
     {
@@ -138,18 +150,7 @@ class Home
         }
     }
 
-    public function Render()
-    {
-?>
-        <div class="oxi-addons-row">
-            <?php
-            $this->Admin_header();
-            $this->created_shortcode();
-            $this->create_new();
-            ?>
-        </div>
-    <?php
-    }
+
 
     public function Admin_header()
     {

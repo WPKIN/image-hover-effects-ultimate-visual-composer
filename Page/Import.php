@@ -35,6 +35,17 @@ class Import
         $this->CSSJS_load();
         $this->Render();
     }
+    public function Render()
+    {
+?>
+        <div class="oxi-addons-row">
+            <?php
+            $this->Admin_header();
+            $this->template();
+            ?>
+        </div>
+    <?php
+    }
 
     /**
      * Admin Notice JS file loader
@@ -58,17 +69,7 @@ class Import
         $this->TEMPLATE = include OXI_FLIP_BOX_PATH . 'Page/JSON.php';
     }
 
-    public function Render()
-    {
-?>
-        <div class="oxi-addons-row">
-            <?php
-            $this->Admin_header();
-            $this->template();
-            ?>
-        </div>
-    <?php
-    }
+
 
     public function Admin_header()
     {
