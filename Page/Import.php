@@ -71,19 +71,7 @@ class Import
 
 
 
-    public function Admin_header()
-    {
-        apply_filters('oxi-flip-box-support-and-comments', TRUE);
-    ?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Flipbox › Import Template
-                </h1>
-                <p> Select Flip layouts and Import For Create Shortcode. </p>
-            </div>
-        </div>
-    <?php
-    }
+  
 
     public function template()
     {
@@ -142,5 +130,18 @@ class Import
             ?>
         </div>
 <?php
+    }
+      public function Admin_header()
+    {
+        apply_filters('oxi-flip-box-support-and-comments', TRUE);
+    ?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Flipbox › Import Template
+                </h1>
+                <p> Select Flip layouts and Import For Create Shortcode. </p>
+            </div>
+        </div>
+    <?php
     }
 }

@@ -13,6 +13,11 @@ class Widget extends \WP_Widget {
     public function flip_register_flipwidget() {
         register_widget($this);
     }
+    public function update($new_instance, $old_instance) {
+        $instance = array();
+        $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
+        return $instance;
+    }
 
     public function widget($args, $instance) {
         $title = apply_filters('widget_title', $instance['title']);
@@ -35,10 +40,6 @@ class Widget extends \WP_Widget {
         <?php
     }
 
-    public function update($new_instance, $old_instance) {
-        $instance = array();
-        $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
-        return $instance;
-    }
+    
 
 }

@@ -8,6 +8,19 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
  */
 trait CSS_JS_Loader {
 
+    public function admin_home() {
+        wp_enqueue_script("jquery");
+        wp_enqueue_script('jquery-ui-core');
+        wp_enqueue_script('jquery-ui-widget');
+        wp_enqueue_script('jquery-ui-mouse');
+        wp_enqueue_script('jquery-ui-accordion');
+        wp_enqueue_script('jquery-ui-autocomplete');
+        wp_enqueue_script('jquery-ui-slider');
+        wp_enqueue_script('jquery-ui-draggable');
+        wp_enqueue_script('jquery.dataTables.min', OXI_FLIP_BOX_URL . '/asset/backend/js/jquery.dataTables.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('dataTables.bootstrap.min', OXI_FLIP_BOX_URL . '/asset/backend/js/dataTables.bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+    }
+
     public function admin_elements_frontend_loader() {
         $this->admin_css_loader();
         wp_enqueue_script("jquery");
@@ -50,19 +63,6 @@ trait CSS_JS_Loader {
         wp_enqueue_script("jquery");
         wp_enqueue_script('oxilab-popper', OXI_FLIP_BOX_URL . '/asset/backend/js/popper.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('oxilab-bootstrap', OXI_FLIP_BOX_URL . '/asset/backend/js/bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-    }
-
-    public function admin_home() {
-        wp_enqueue_script("jquery");
-        wp_enqueue_script('jquery-ui-core');
-        wp_enqueue_script('jquery-ui-widget');
-        wp_enqueue_script('jquery-ui-mouse');
-        wp_enqueue_script('jquery-ui-accordion');
-        wp_enqueue_script('jquery-ui-autocomplete');
-        wp_enqueue_script('jquery-ui-slider');
-        wp_enqueue_script('jquery-ui-draggable');
-        wp_enqueue_script('jquery.dataTables.min', OXI_FLIP_BOX_URL . '/asset/backend/js/jquery.dataTables.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('dataTables.bootstrap.min', OXI_FLIP_BOX_URL . '/asset/backend/js/dataTables.bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
 
     /**

@@ -111,66 +111,6 @@ class Create
 
 
 
-    public function template()
-    {
-    ?>
-        <div class="oxi-addons-row">
-            <?php
-            if (count($this->IMPORT) == 0) :
-                $this->IMPORT = [
-                    1 => ['type' => 'flip', 'name' => 1],
-                    2 => ['type' => 'flip', 'name' => 2],
-                    3 => ['type' => 'flip', 'name' => 3],
-                    4 => ['type' => 'flip', 'name' => 4],
-                    5 => ['type' => 'flip', 'name' => 5],
-                ];
-                foreach ($this->IMPORT as $value) {
-                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES ( %s, %d)", array($value['type'], $value['name'])));
-                }
-            endif;
-
-            foreach ($this->TEMPLATE as $key => $value) {
-                $id = explode('tyle', $key)[1];
-                $number = rand();
-                if (array_key_exists($id, $this->IMPORT)) :
-                    $C = 'OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $key;
-            ?>
-                    <div class="oxi-addons-col-1" id="<?php echo esc_attr($key); ?>">
-                        <div class="oxi-addons-style-preview">
-                            <div class="oxi-addons-style-preview-top oxi-addons-center">
-                                <?php
-                                if (class_exists($C)) :
-                                    foreach ($value as $k => $v) {
-                                        $REND = json_decode($v, true);
-                                        echo '<div class="oxilab-flip-box-col-3">';
-                                        new $C($REND['style'], $REND['child']);
-                                        echo '<textarea style="display:none" id="oxistyle' . esc_attr($number) . 'data-' . esc_attr($k) . '">' . htmlentities(json_encode($REND)) . '</textarea>';
-                                        echo '</div>';
-                                    }
-                                endif;
-                                ?>
-                            </div>
-                            <div class="oxi-addons-style-preview-bottom">
-                                <div class="oxi-addons-style-preview-bottom-left">
-                                    Style <?php echo esc_html($id); ?>
-                                </div>
-                                <div class="oxi-addons-style-preview-bottom-right">
-                                    <form method="post" style=" display: inline-block; " class="shortcode-addons-template-deactive">
-                                        <input type="hidden" name="oxideletestyle" value="<?php echo esc_attr($id); ?>">
-                                        <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Delete" type="submit" value="Deactive" name="addonsstyledelete">Deactive</button>
-                                    </form>
-                                    <button type="button" class="btn btn-success oxi-addons-addons-template-create" data-toggle="modal" addons-data="oxistyle<?php echo esc_attr($number); ?>data">Create Style</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            <?php
-                endif;
-            }
-            ?>
-        </div>
-    <?php
-    }
 
     public function create_new()
     {
@@ -235,5 +175,66 @@ class Create
             </form>
         </div>
 <?php
+    }
+    
+    public function template()
+    {
+    ?>
+        <div class="oxi-addons-row">
+            <?php
+            if (count($this->IMPORT) == 0) :
+                $this->IMPORT = [
+                    1 => ['type' => 'flip', 'name' => 1],
+                    2 => ['type' => 'flip', 'name' => 2],
+                    3 => ['type' => 'flip', 'name' => 3],
+                    4 => ['type' => 'flip', 'name' => 4],
+                    5 => ['type' => 'flip', 'name' => 5],
+                ];
+                foreach ($this->IMPORT as $value) {
+                    $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->import_table} (type, name) VALUES ( %s, %d)", array($value['type'], $value['name'])));
+                }
+            endif;
+
+            foreach ($this->TEMPLATE as $key => $value) {
+                $id = explode('tyle', $key)[1];
+                $number = rand();
+                if (array_key_exists($id, $this->IMPORT)) :
+                    $C = 'OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $key;
+            ?>
+                    <div class="oxi-addons-col-1" id="<?php echo esc_attr($key); ?>">
+                        <div class="oxi-addons-style-preview">
+                            <div class="oxi-addons-style-preview-top oxi-addons-center">
+                                <?php
+                                if (class_exists($C)) :
+                                    foreach ($value as $k => $v) {
+                                        $REND = json_decode($v, true);
+                                        echo '<div class="oxilab-flip-box-col-3">';
+                                        new $C($REND['style'], $REND['child']);
+                                        echo '<textarea style="display:none" id="oxistyle' . esc_attr($number) . 'data-' . esc_attr($k) . '">' . htmlentities(json_encode($REND)) . '</textarea>';
+                                        echo '</div>';
+                                    }
+                                endif;
+                                ?>
+                            </div>
+                            <div class="oxi-addons-style-preview-bottom">
+                                <div class="oxi-addons-style-preview-bottom-left">
+                                    Style <?php echo esc_html($id); ?>
+                                </div>
+                                <div class="oxi-addons-style-preview-bottom-right">
+                                    <form method="post" style=" display: inline-block; " class="shortcode-addons-template-deactive">
+                                        <input type="hidden" name="oxideletestyle" value="<?php echo esc_attr($id); ?>">
+                                        <button class="btn btn-warning oxi-addons-addons-style-btn-warning" title="Delete" type="submit" value="Deactive" name="addonsstyledelete">Deactive</button>
+                                    </form>
+                                    <button type="button" class="btn btn-success oxi-addons-addons-template-create" data-toggle="modal" addons-data="oxistyle<?php echo esc_attr($number); ?>data">Create Style</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <?php
+                endif;
+            }
+            ?>
+        </div>
+    <?php
     }
 }
