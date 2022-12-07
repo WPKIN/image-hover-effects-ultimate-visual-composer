@@ -50,7 +50,7 @@ class Import {
          * @return void
          */
         public function admin_ajax_load() {
-            wp_enqueue_script('oxi-flip-import', OXI_FLIP_BOX_URL . '/asset/backend/js/import.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+            wp_enqueue_script('oxi-flip-import', OXI_FLIP_BOX_URL . 'asset/backend/js/import.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
             wp_localize_script('oxi-flip-import', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
         }
 

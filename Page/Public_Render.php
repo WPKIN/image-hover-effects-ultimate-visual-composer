@@ -108,10 +108,10 @@ class Public_Render {
      */
     public function public_loader() {
         wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-animation', OXI_FLIP_BOX_URL . '/asset/frontend/css/animation.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_style('flip-box-addons-style', OXI_FLIP_BOX_URL . '/asset/frontend/css/style.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . '/asset/frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('flipbox-addons-jquery', OXI_FLIP_BOX_URL . '/asset/frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('oxi-animation', OXI_FLIP_BOX_URL . 'asset/frontend/css/animation.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('flip-box-addons-style', OXI_FLIP_BOX_URL . 'asset/frontend/css/style.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . 'asset/frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('flipbox-addons-jquery', OXI_FLIP_BOX_URL . 'asset/frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
 
     /**
@@ -197,7 +197,7 @@ class Public_Render {
     public function font_awesome_render($data) {
         $fadata = get_option('oxi_addons_font_awesome');
         if ($fadata != 'no') :
-            wp_enqueue_style('font-awsome.min', OXI_FLIP_BOX_URL . '/asset/frontend/css/font-awsome.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+            wp_enqueue_style('font-awsome.min', OXI_FLIP_BOX_URL . 'asset/frontend/css/font-awsome.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         endif;
         ?>
         <i class="<?php echo esc_attr($data); ?> oxi-icons"></i>
