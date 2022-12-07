@@ -73,7 +73,7 @@ class Style19 extends Public_Render {
                                                         ?>
                                                         <a href="<?php echo esc_url($filesdata[11]) ?>" target="<?php echo esc_attr($styledata[53]) ?>">
                                                             <span class="oxilab-button">
-                                                                <?php echo $this->font_awesome_render($filesdata[3]) ?>
+                                                                <?php $this->font_awesome_render($filesdata[3]) ?>
                                                             </span>
                                                         </a>
                                                         <?php

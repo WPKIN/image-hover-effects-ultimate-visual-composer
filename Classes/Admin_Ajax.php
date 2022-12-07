@@ -67,32 +67,6 @@ class Admin_Ajax {
         endif;
     }
 
-    public function check_user_permission() {
-        $user_role = get_option('oxi_addons_user_permission');
-        $role_object = get_role($user_role);
-        $first_key = '';
-        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
-            reset($role_object->capabilities);
-            $first_key = key($role_object->capabilities);
-        } else {
-            $first_key = 'manage_options';
-        }
-        return $first_key;
-    }
-
-    public function active_data() {
-        $user_permission = $this->check_user_permission();
-        if (!current_user_can($user_permission)) :
-            return wp_die('You do not have permission.');
-        endif;
-
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
-        $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-    }
-
     public function array_replace($arr = [], $search = '', $replace = '') {
         array_walk($arr, function (&$v) use ($search, $replace) {
             $v = str_replace($search, $replace, $v);
@@ -595,6 +569,32 @@ class Admin_Ajax {
         update_option('oxi_addons_google_font', $value);
         echo '<span class="oxi-confirmation-success"></span>';
         return;
+    }
+
+    public function check_user_permission() {
+        $user_role = get_option('oxi_addons_user_permission');
+        $role_object = get_role($user_role);
+        $first_key = '';
+        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
+            reset($role_object->capabilities);
+            $first_key = key($role_object->capabilities);
+        } else {
+            $first_key = 'manage_options';
+        }
+        return $first_key;
+    }
+
+    public function active_data() {
+        $user_permission = $this->check_user_permission();
+        if (!current_user_can($user_permission)) :
+            return wp_die('You do not have permission.');
+        endif;
+
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
+        $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
+        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
     }
 
 }

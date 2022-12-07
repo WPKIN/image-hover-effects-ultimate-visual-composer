@@ -114,6 +114,13 @@ class Bootstrap {
         $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
         $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
     }
+
+    public function Admin_Filters() {
+        add_filter($this->fixed_data('6f78692d666c69702d626f782d737570706f72742d616e642d636f6d6d656e7473'), array($this, $this->fixed_data('537570706f7274416e64436f6d6d656e7473')));
+        add_filter($this->fixed_data('6f78692d666c69702d626f782d706c7567696e2f70726f5f76657273696f6e'), array($this, $this->fixed_data('636865636b5f63757272656e745f74616273')));
+        add_filter($this->fixed_data('6f78692d666c69702d626f782d706c7567696e2f61646d696e5f6d656e75'), array($this, $this->fixed_data('6f78696c61625f61646d696e5f6d656e75')));
+    }
+
     public function User_Admin() {
 
         add_action('admin_menu', [$this, 'Admin_Menu']);
@@ -122,13 +129,5 @@ class Bootstrap {
         add_action('admin_init', array($this, 'redirect_on_activation'));
         add_action('admin_head', [$this, 'welcome_remove_menus']);
     }
-
-    public function Admin_Filters() {
-        add_filter($this->fixed_data('6f78692d666c69702d626f782d737570706f72742d616e642d636f6d6d656e7473'), array($this, $this->fixed_data('537570706f7274416e64436f6d6d656e7473')));
-        add_filter($this->fixed_data('6f78692d666c69702d626f782d706c7567696e2f70726f5f76657273696f6e'), array($this, $this->fixed_data('636865636b5f63757272656e745f74616273')));
-        add_filter($this->fixed_data('6f78692d666c69702d626f782d706c7567696e2f61646d696e5f6d656e75'), array($this, $this->fixed_data('6f78696c61625f61646d696e5f6d656e75')));
-    }
-
-   
 
 }

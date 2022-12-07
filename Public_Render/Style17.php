@@ -32,7 +32,7 @@ class Style17 extends Public_Render {
             <?php
             foreach ($listdata as $value) {
                 if (!empty($value['files'])):
-                   $filesdata = explode("{#}|{#}", $value['files']);
+                    $filesdata = explode("{#}|{#}", $value['files']);
                     ?>
                     <div class="<?php echo esc_attr($styledata[43]); ?> oxilab-flip-box-padding-<?php echo esc_attr($styleid); ?>"
                          sa-data-animation="<?php echo esc_attr($styledata[55]); ?>"
@@ -76,7 +76,7 @@ class Style17 extends Public_Render {
                                                             <a href="<?php echo esc_url($filesdata[9]) ?>" target="<?php echo esc_attr($styledata[53]) ?>">
                                                                 <span class="oxilab-button">
                                                                     <span class="oxilab-button-data">
-                                                                        <?php echo $this->text_render($filesdata[13]) ?>
+                                                                        <?php $this->text_render($filesdata[13]) ?>
                                                                     </span>
                                                                 </span>
                                                             </a>

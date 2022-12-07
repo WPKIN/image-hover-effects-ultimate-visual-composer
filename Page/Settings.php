@@ -12,8 +12,7 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  *
  * @author biplo
  */
-class Settings
-{
+class Settings {
 
     use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
 
@@ -30,20 +29,36 @@ class Settings
      *
      * @since 2.0.0
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->admin();
         $this->Render();
     }
 
-   
-    public function Render()
-    {
-?>
+    public function admin() {
+        global $wp_roles;
+        $this->roles = $wp_roles->get_names();
+        $this->saved_role = get_option('oxi_addons_user_permission');
+        $this->license = get_option('oxilab_flip_box_license_key');
+        $this->status = get_option('oxilab_flip_box_license_status');
+        $this->admin_ajax_load();
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_ajax_load() {
+        $this->admin_css_loader();
+        wp_enqueue_script('oxi-flip-settings', OXI_FLIP_BOX_URL . '/asset/backend/js/settings.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_localize_script('oxi-flip-settings', 'oxi_flip_box_settings', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
+    }
+
+    public function Render() {
+        ?>
         <div class="wrap">
-            <?php
-            apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
-            ?>
+        <?php
+        apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
+        ?>
             <div class="oxi-addons-row oxi-addons-admin-settings">
                 <h2>General</h2>
                 <p>Settings for Flipbox - Image Overlay.</p>
@@ -57,9 +72,9 @@ class Settings
                                 <td>
                                     <fieldset>
                                         <select name="oxi_addons_user_permission" id="oxi_addons_user_permission">
-                                            <?php foreach ($this->roles as $key => $role) { ?>
+        <?php foreach ($this->roles as $key => $role) { ?>
                                                 <option value="<?php echo esc_attr($key); ?>" <?php selected($this->saved_role, $key); ?>>
-                                                    <?php echo esc_html($role); ?></option>
+            <?php echo esc_html($role); ?></option>
                                             <?php } ?>
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_user_permission"></span>
@@ -137,17 +152,17 @@ class Settings
                                 <td class="valid">
                                     <input type="text" class="regular-text" id="oxilab_flip_box_license_key" name="oxilab_flip_box_license_key" value="<?php echo ($this->status == 'valid' && empty($this->license)) ? '****************************************' : esc_html($this->license); ?>">
                                     <span class="oxi-addons-settings-connfirmation oxilab_flip_box_license_massage">
-                                        <?php
-                                        if ($this->status == 'valid' && empty($this->license)) :
-                                            echo '<span class="oxi-confirmation-success"></span>';
-                                        elseif ($this->status == 'valid' && !empty($this->license)) :
-                                            echo '<span class="oxi-confirmation-success"></span>';
-                                        elseif (!empty($this->license)) :
-                                            echo '<span class="oxi-confirmation-failed"></span>';
-                                        else :
-                                            echo '<span class="oxi-confirmation-blank"></span>';
-                                        endif;
-                                        ?>
+        <?php
+        if ($this->status == 'valid' && empty($this->license)) :
+            echo '<span class="oxi-confirmation-success"></span>';
+        elseif ($this->status == 'valid' && !empty($this->license)) :
+            echo '<span class="oxi-confirmation-success"></span>';
+        elseif (!empty($this->license)) :
+            echo '<span class="oxi-confirmation-failed"></span>';
+        else :
+            echo '<span class="oxi-confirmation-blank"></span>';
+        endif;
+        ?>
                                     </span>
                                     <span class="oxi-addons-settings-connfirmation oxilab_flip_box_license_text">
                                         <?php
@@ -169,27 +184,7 @@ class Settings
                 </form>
             </div>
         </div>
-<?php
-    }
-     public function admin()
-    {
-        global $wp_roles;
-        $this->roles = $wp_roles->get_names();
-        $this->saved_role = get_option('oxi_addons_user_permission');
-        $this->license = get_option('oxilab_flip_box_license_key');
-        $this->status = get_option('oxilab_flip_box_license_status');
-        $this->admin_ajax_load();
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_ajax_load()
-    {
-        $this->admin_css_loader();
-        wp_enqueue_script('oxi-flip-settings', OXI_FLIP_BOX_URL . '/asset/backend/js/settings.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_localize_script('oxi-flip-settings', 'oxi_flip_box_settings', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
+        <?php
     }
 
 }

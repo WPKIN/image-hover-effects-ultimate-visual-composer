@@ -78,18 +78,6 @@ class Installation {
     }
 
     /**
-     * Plugin activation hook
-     *
-     * @since 3.1.0
-     */
-    public function plugin_activation_hook() {
-
-        $this->Flip_Datatase();
-        // Redirect to options page
-        set_transient('oxi_flip_box_activation_redirect', true, 30);
-    }
-
-    /**
      * Plugin upgrade hook
      *
      * @since 1.0.0
@@ -101,6 +89,18 @@ class Installation {
                 $this->Flip_Datatase();
             }
         }
+    }
+
+    /**
+     * Plugin activation hook
+     *
+     * @since 3.1.0
+     */
+    public function plugin_activation_hook() {
+
+        $this->Flip_Datatase();
+        // Redirect to options page
+        set_transient('oxi_flip_box_activation_redirect', true, 30);
     }
 
 }

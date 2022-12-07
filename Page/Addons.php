@@ -64,22 +64,37 @@ class Addons {
         $this->Admin_header();
     }
 
+    public function extension() {
+        $response = get_transient(self::GET_LOCAL_PLUGINS);
+        if (!$response || !is_array($response)) {
+            $URL = self::PLUGINS;
+            $request = wp_remote_request($URL);
+            if (!is_wp_error($request)) {
+                $response = json_decode(wp_remote_retrieve_body($request), true);
+                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
+            } else {
+                $response = $request->get_error_message();
+            }
+        }
+        $this->get_plugins = $response;
+    }
+
     public function Render() {
         ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-row">
                 <div class="row">
-        <?php
-        $installed_plugins = get_plugins();
-        $active_plugins = array_flip(get_option('active_plugins'));
+                    <?php
+                    $installed_plugins = get_plugins();
+                    $active_plugins = array_flip(get_option('active_plugins'));
 
-        foreach ($this->get_plugins as $key => $value) {
-            $modulespath = $value['modules-path'];
-            if ($modulespath != $this->current_plugins) :
-                $file_path = $modulespath;
-                $plugin = explode('/', $file_path)[0];
-                $message = '';
-                ?>
+                    foreach ($this->get_plugins as $key => $value) {
+                        $modulespath = $value['modules-path'];
+                        if ($modulespath != $this->current_plugins) :
+                            $file_path = $modulespath;
+                            $plugin = explode('/', $file_path)[0];
+                            $message = '';
+                            ?>
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="oxi-addons-modules-elements">
                                     <img class="oxi-addons-modules-banner" src="<?php echo esc_url($value['modules-img']); ?>">
@@ -92,13 +107,13 @@ class Addons {
                                         <span class="oxi-addons-modules-installing"><?php
                 if (isset($installed_plugins[$file_path])) :
                     if (array_key_exists($file_path, $active_plugins)) :
-                        ?>
+                                    ?>
                                                     <a href="#" class="btn btn-light">Installed</a>
-                        <?php
-                    else :
+                                                    <?php
+                                                else :
 
-                        $activation_url = wp_nonce_url(admin_url('plugins.php?action=activate&plugin=' . $file_path), 'activate-plugin_' . $file_path);
-                        ?>
+                                                    $activation_url = wp_nonce_url(admin_url('plugins.php?action=activate&plugin=' . $file_path), 'activate-plugin_' . $file_path);
+                                                    ?>
                                                     <a href="<?php echo esc_url($activation_url); ?>" class="btn btn-info">Activate</a>
                                                 <?php
                                                 endif;
@@ -114,10 +129,10 @@ class Addons {
                                     </div>
                                 </div>
                             </div>
-                                            <?php
-                                        endif;
-                                    }
-                                    ?>
+                            <?php
+                        endif;
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -137,21 +152,6 @@ class Addons {
                 }, 1000);';
 
         wp_add_inline_script('oxilab-bootstrap', $data);
-    }
-
-    public function extension() {
-        $response = get_transient(self::GET_LOCAL_PLUGINS);
-        if (!$response || !is_array($response)) {
-            $URL = self::PLUGINS;
-            $request = wp_remote_request($URL);
-            if (!is_wp_error($request)) {
-                $response = json_decode(wp_remote_retrieve_body($request), true);
-                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
-            } else {
-                $response = $request->get_error_message();
-            }
-        }
-        $this->get_plugins = $response;
     }
 
 }

@@ -7,11 +7,9 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  *
  * @author biplo
  */
-
 use OXI_FLIP_BOX_PLUGINS\Classes\Controls as Controls;
 
-class Admin_Render
-{
+class Admin_Render {
 
     use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
     use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\Sanitization;
@@ -93,14 +91,13 @@ class Admin_Render
      */
     public $StyleName;
 
-    public function __construct()
-    {
+    public function __construct() {
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
         $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
         $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-        $this->oxiid = (!empty($_GET['styleid']) ? (int)$_GET['styleid'] : '');
+        $this->oxiid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
         $this->WRAPPER = '.oxi-addons-flip-wrapper-' . $this->oxiid;
         if (!empty($_REQUEST['_wpnonce'])) {
             $this->nonce = $_REQUEST['_wpnonce'];
@@ -110,8 +107,7 @@ class Admin_Render
         $this->render();
     }
 
-    public function saving()
-    {
+    public function saving() {
         $demos = '{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}';
         $this->child_editable = explode('{#}|{#}', $demos);
         $this->style_data();
@@ -121,29 +117,27 @@ class Admin_Render
         $this->Delete_child_data();
     }
 
-    public function style()
-    {
-        return '';
-    }
-    public function register_style()
-    {
-        return '';
-    }
-    public function register_child()
-    {
-        return '';
-    }
-    public function register_controls()
-    {
-        return '';
-    }
-    public function modal_form_data()
-    {
+    public function style() {
         return '';
     }
 
-    public function style_data()
-    {
+    public function register_style() {
+        return '';
+    }
+
+    public function register_child() {
+        return '';
+    }
+
+    public function register_controls() {
+        return '';
+    }
+
+    public function modal_form_data() {
+        return '';
+    }
+
+    public function style_data() {
 
         if (!empty($_POST['oxi-addons-flip-templates-submit']) && $_POST['oxi-addons-flip-templates-submit'] == 'Submit') {
             if (!wp_verify_nonce($this->nonce, 'oxiflipstylecss')) {
@@ -155,13 +149,11 @@ class Admin_Render
         }
     }
 
-    public function clild()
-    {
+    public function clild() {
         return ['title' => '', 'files' => ''];
     }
 
-    public function child_save()
-    {
+    public function child_save() {
         if (!empty($_POST['oxi-flip-template-modal-submit']) && $_POST['oxi-flip-template-modal-submit'] == 'Submit') {
             if (!wp_verify_nonce($this->nonce, 'oxiflipchildnonce')) {
                 die('You do not have sufficient permissions to access this page.');
@@ -178,8 +170,7 @@ class Admin_Render
         }
     }
 
-    public function child_edit()
-    {
+    public function child_edit() {
         if (!empty($_POST['edit']) && is_numeric($_POST['item-id'])) {
             if (!wp_verify_nonce($this->nonce, 'oxiflipeditdata')) {
                 die('You do not have sufficient permissions to access this page.');
@@ -196,8 +187,7 @@ class Admin_Render
         }
     }
 
-    public function Delete_child_data()
-    {
+    public function Delete_child_data() {
         if (!empty($_POST['delete']) && is_numeric($_POST['item-id'])) {
             if (!wp_verify_nonce($this->nonce, 'oxiflipdeletedata')) {
                 die('You do not have sufficient permissions to access this page.');
@@ -207,8 +197,8 @@ class Admin_Render
             }
         }
     }
-      public function import_font_family()
-    {
+
+    public function import_font_family() {
         $this->font_family = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->import_table WHERE type = %s ORDER by id ASC", 'oxi-addons-flip'), ARRAY_A);
         $google = $custom = '';
         foreach ($this->font_family as $key => $value) {
@@ -232,7 +222,7 @@ class Admin_Render
         $custom .= '|Arial|Helvetica+Neue|Courier+New|Times+New+Roman|Comic+Sans+MS|Verdana|Impact|cursive|inherit';
 
         $data = 'jQuery.noConflict();
-                (function($){   setTimeout(function () { 
+                (function($){   setTimeout(function () {
                                     $("#oxi-addons-modal-rearrange").sortable({
                                         axis: "y",
                                         update: function (event, ui) {
@@ -574,7 +564,7 @@ class Admin_Render
                         jQuery(\'.oxilab-admin-font\').fontselect();';
 
         if (apply_filters('oxi-flip-box-plugin/pro_version', false) == false) :
-            $data .= 'jQuery(".oxilab-vendor-color").each(function (index, value) {                             
+            $data .= 'jQuery(".oxilab-vendor-color").each(function (index, value) {
                             jQuery(this).parent().parent().siblings(".col-form-label").append(" <span class=\"oxi-pro-only\">Pro</span>");
                             var datavalue = jQuery(this).val();
                             jQuery(this).attr("oxilabvalue", datavalue);
@@ -588,7 +578,7 @@ class Admin_Render
                             jQuery(this).append(" <span class=\"oxi-pro-only\">Pro Only</span>");
                         });
                         jQuery("#oxi-addons-form-submit").on("submit", function (e) {
-                            jQuery(".oxilab-vendor-color").each(function (index, value) {   
+                            jQuery(".oxilab-vendor-color").each(function (index, value) {
                                 jQuery(this).val(jQuery(this).attr("oxilabvalue"));
                             });
                             jQuery(".oxilab-admin-font").each(function (index, value) {
@@ -600,8 +590,7 @@ class Admin_Render
         wp_add_inline_script('oxi-flip-box-addons-vendor', $data);
     }
 
-    public function rename_shortcode()
-    {
+    public function rename_shortcode() {
         if (!empty($_POST['addonsstylenamechange']) && $_POST['addonsstylenamechange'] == 'Save') {
             if (!wp_verify_nonce($this->nonce, 'oxi-addons-name-change')) {
                 die('You do not have sufficient permissions to access this page.');
@@ -613,53 +602,24 @@ class Admin_Render
     }
 
     /**
-     * Template hooks
-     *
-     * @since 2.0.0
-     */
-    public function hooks()
-    {
-        $this->admin_elements_frontend_loader();
-        $this->dbdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
-        $this->child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->oxiid), ARRAY_A);
-        if (!empty($this->dbdata['css'])) :
-            $this->style = explode('|', stripslashes($this->dbdata['css']));
-        endif;
-        $this->StyleName = ucfirst(str_replace('-', '_', $this->dbdata['style_name']));
-        $this->oxitype = ucfirst($this->dbdata['type']);
-        $this->import_font_family();
-    }
-
-    /**
-     * Template Parent Item Data Rearrange
-     *
-     * @since 2.0.0
-     */
-    public function Rearrange()
-    {
-        echo '';
-    }
-
-    /**
      * Template Parent Render
      *
      * @since 2.0.0
      */
-    public function render()
-    {
+    public function render() {
 
         wp_enqueue_script('flipbox-admin' . strtolower($this->dbdata['style_name']), OXI_FLIP_BOX_URL . '/asset/backend/js-files/' . strtolower($this->dbdata['style_name']) . '.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-?>
+        ?>
         <div class="wrap">
             <div class="oxi-addons-wrapper">
-                <?php
-                apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
-                ?>
+        <?php
+        apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
+        ?>
                 <div class="oxi-addons-style-20-spacer"></div>
                 <div class="oxi-addons-row">
-                    <?php
-                    apply_filters('oxi-flip-box-support-and-comments', TRUE);
-                    ?>
+        <?php
+        apply_filters('oxi-flip-box-support-and-comments', TRUE);
+        ?>
                     <div class="oxi-addons-wrapper oxi-addons-flip-tabs-mode">
                         <div class="oxi-addons-settings" id="oxisettingsreload">
                             <div class="oxi-addons-style-left">
@@ -685,15 +645,15 @@ class Admin_Render
                                                     </li>
                                                 </ul>
                                                 <div class="oxi-addons-tabs-content">
-                                                    <?php
-                                                    $this->register_controls();
-                                                    ?>
+        <?php
+        $this->register_controls();
+        ?>
                                                 </div>
                                             </div>
 
                                         </div>
                                         <div class="oxi-addons-setting-save">
-                                            <?php wp_nonce_field("oxiflipstylecss") ?>
+        <?php wp_nonce_field("oxiflipstylecss") ?>
                                             <input type="hidden" id="style-id" name="style-id" value="<?php echo (int) $this->oxiid; ?>">
                                             <button type="button" class="btn btn-danger" id="oxi-addons-setting-reload">Reload</button>
                                             <input type="submit" class="btn btn-primary" name="oxi-addons-flip-templates-submit" value="Submit">
@@ -728,7 +688,7 @@ class Admin_Render
                                                     <input type="submit" class="btn btn-success" name="addonsstylenamechange" value="Save">
                                                 </div>
                                             </div>
-                                            <?php wp_nonce_field("oxi-addons-name-change") ?>
+        <?php wp_nonce_field("oxi-addons-name-change") ?>
                                         </form>
                                     </div>
                                 </div>
@@ -775,15 +735,15 @@ class Admin_Render
                                                         <i class="fa fa-spinner fa-spin"></i>
                                                     </div>
                                                     <ul class="col-12 list-group oxi-addons-modal-rearrange" id="oxi-addons-modal-rearrange">
-                                                        <?php
-                                                        $r = $this->Rearrange();
-                                                        foreach ($this->child as $value) {
-                                                            $val = explode('{#}|{#}', $value['files']);
-                                                            if ($r['tag'] == 'title') :
-                                                                echo '<li class="list-group-item" id="' . esc_attr($value['id']) . '">' . esc_html($val[$r['id']]) . '</li>';
-                                                            endif;
-                                                        }
-                                                        ?>
+        <?php
+        $r = $this->Rearrange();
+        foreach ($this->child as $value) {
+            $val = explode('{#}|{#}', $value['files']);
+            if ($r['tag'] == 'title') :
+                echo '<li class="list-group-item" id="' . esc_attr($value['id']) . '">' . esc_html($val[$r['id']]) . '</li>';
+            endif;
+        }
+        ?>
                                                     </ul>
                                                 </div>
                                                 <div class="modal-footer">
@@ -801,7 +761,7 @@ class Admin_Render
                                 <div class="modal-dialog">
                                     <form method="post" id="oxi-flip-template-modal-form">
                                         <div class="modal-content">
-                                            <?php $this->modal_form_data(); ?>
+        <?php $this->modal_form_data(); ?>
                                             <div class="modal-footer">
                                                 <input type="hidden" id="item-id" name="item-id" value="<?php echo (int) $this->itemid ?>">
                                                 <input type="hidden" id="shortcodeitemid" name="shortcodeitemid" value="">
@@ -809,7 +769,7 @@ class Admin_Render
                                                 <input type="submit" id="oxi-flip-template-modal-submit" name="oxi-flip-template-modal-submit" class="btn btn-success" value="Submit">
                                             </div>
                                         </div>
-                                        <?php wp_nonce_field("oxiflipchildnonce") ?>
+        <?php wp_nonce_field("oxiflipchildnonce") ?>
                                     </form>
                                 </div>
                             </div>
@@ -826,10 +786,10 @@ class Admin_Render
                                         </div>
                                     </div>
                                     <div class="oxi-addons-preview-data" id="oxi-addons-preview-data">
-                                        <?php
-                                        $cls = '\OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $this->StyleName . '';
-                                        new $cls($this->dbdata, $this->child, 'admin');
-                                        ?>
+        <?php
+        $cls = '\OXI_FLIP_BOX_PLUGINS\Public_Render\\' . $this->StyleName . '';
+        new $cls($this->dbdata, $this->child, 'admin');
+        ?>
                                     </div>
                                 </div>
                             </div>
@@ -839,8 +799,33 @@ class Admin_Render
                 </div>
             </div>
         </div>
-<?php
-    }
+                                        <?php
+                                    }
 
-  
-}
+                                    /**
+                                     * Template hooks
+                                     *
+                                     * @since 2.0.0
+                                     */
+                                    public function hooks() {
+                                        $this->admin_elements_frontend_loader();
+                                        $this->dbdata = $this->wpdb->get_row($this->wpdb->prepare('SELECT * FROM ' . $this->parent_table . ' WHERE id = %d ', $this->oxiid), ARRAY_A);
+                                        $this->child = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE styleid = %d ORDER by id ASC", $this->oxiid), ARRAY_A);
+                                        if (!empty($this->dbdata['css'])) :
+                                            $this->style = explode('|', stripslashes($this->dbdata['css']));
+                                        endif;
+                                        $this->StyleName = ucfirst(str_replace('-', '_', $this->dbdata['style_name']));
+                                        $this->oxitype = ucfirst($this->dbdata['type']);
+                                        $this->import_font_family();
+                                    }
+
+                                    /**
+                                     * Template Parent Item Data Rearrange
+                                     *
+                                     * @since 2.0.0
+                                     */
+                                    public function Rearrange() {
+                                        echo '';
+                                    }
+
+                                }

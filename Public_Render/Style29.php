@@ -80,7 +80,7 @@ class Style29 extends Public_Render {
                                                             <a href="<?php echo esc_url($filesdata[11]) ?>" target="<?php echo esc_attr($styledata[53]) ?>">
                                                                 <span class="oxilab-button">
                                                                     <span class="oxilab-button-data">
-                                                                        <?php echo $this->text_render($filesdata[9]) ?>
+                                                                        <?php $this->text_render($filesdata[9]) ?>
                                                                     </span>
                                                                 </span>
                                                             </a>

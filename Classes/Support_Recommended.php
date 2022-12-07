@@ -56,22 +56,6 @@ class Support_Recommended {
     }
 
     /**
-     * Admin Notice Ajax  loader
-     * @return void
-     */
-    public function notice_dissmiss() {
-        if (isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_flip_admin_recommended')):
-            $data = 'done';
-            update_option('oxilab_flip_box_recommended', $data);
-            echo 'done';
-        else:
-            return;
-        endif;
-
-        die();
-    }
-
-    /**
      * First Installation Track
      * @return void
      */
@@ -111,7 +95,6 @@ class Support_Recommended {
 
         if (count($recommend) > 2 && $recommend['modules-path'] != '') :
             $plugin = explode('/', $recommend['modules-path'])[0];
-           
 
             $install_url = wp_nonce_url(add_query_arg(array('action' => 'install-plugin', 'plugin' => $plugin), admin_url('update.php')), 'install-plugin' . '_' . $plugin);
             ?>
@@ -123,7 +106,7 @@ class Support_Recommended {
                 <p></p>
                 <div class="oxi-addons-admin-notifications-holder">
                     <div class="oxi-addons-admin-notifications-alert">
-                        <p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. <?php echo esc_html($recommend['modules-massage']);?></p>
+                        <p>Thank you for using my Flipbox - Awesomes Flip Boxes Image Overlay. <?php echo esc_html($recommend['modules-massage']); ?></p>
                         <p><a href="<?php echo esc_url($install_url); ?>" class="button button-large button-primary">Install Now</a> <a href="#" class="button button-large button-secondary oxi-flip-admin-recommended-dismiss">No, Thanks</a></p>
                     </div>
                 </div>
@@ -150,6 +133,22 @@ class Support_Recommended {
     public function dismiss_button_scripts() {
         wp_enqueue_script('oxi_flip-admin-recommended', OXI_FLIP_BOX_URL . '/asset/backend/js/admin-recommended.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_localize_script('oxi_flip-admin-recommended', 'oxi_flip_admin_recommended', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi_flip_admin_recommended')));
+    }
+
+    /**
+     * Admin Notice Ajax  loader
+     * @return void
+     */
+    public function notice_dissmiss() {
+        if (isset($_POST['_wpnonce']) && wp_verify_nonce(sanitize_key(wp_unslash($_POST['_wpnonce'])), 'oxi_flip_admin_recommended')):
+            $data = 'done';
+            update_option('oxilab_flip_box_recommended', $data);
+            echo 'done';
+        else:
+            return;
+        endif;
+
+        die();
     }
 
 }

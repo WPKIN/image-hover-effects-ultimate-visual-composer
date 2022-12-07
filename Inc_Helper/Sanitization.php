@@ -13,31 +13,6 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
  */
 trait Sanitization {
 
-    public function admin_special_charecter($data) {
-        $data = str_replace('\\\\"', '&quot;', $data);
-        $data = str_replace('\\\"', '&quot;', $data);
-        $data = str_replace('\\"', '&quot;', $data);
-        $data = str_replace('\"', '&quot;', $data);
-        $data = str_replace('"', '&quot;', $data);
-        $data = str_replace('\\\\&quot;', '&quot;', $data);
-        $data = str_replace('\\\&quot;', '&quot;', $data);
-        $data = str_replace('\\&quot;', '&quot;', $data);
-        $data = str_replace('\&quot;', '&quot;', $data);
-        $data = str_replace("\\\\'", '&apos;', $data);
-        $data = str_replace("\\\'", '&apos;', $data);
-        $data = str_replace("\\'", '&apos;', $data);
-        $data = str_replace("\'", '&apos;', $data);
-        $data = str_replace("\\\\&apos;", '&apos;', $data);
-        $data = str_replace("\\\&apos;", '&apos;', $data);
-        $data = str_replace("\\&apos;", '&apos;', $data);
-        $data = str_replace("\&apos;", '&apos;', $data);
-        $data = str_replace("'", '&apos;', $data);
-        $data = str_replace('<', '&lt;', $data);
-        $data = str_replace('>', '&gt;', $data);
-        $data = sanitize_text_field($data);
-        return $data;
-    }
-
     public function oxilab_flip_box_flip_type_effects_type($flip_type, $effects_Type) {
         ?>
         <div class="form-group row form-group-sm">
@@ -45,25 +20,25 @@ trait Sanitization {
             <div class="col-sm-6">
                 <select class="form-control" id="oxilab-flip-type" name="oxilab-flip-type">
                     <option value="oxilab-flip-box-flip oxilab-flip-box-flip-top-to-bottom" <?php
-                    if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-top-to-bottom') {
-                        echo 'selected';
-                    }
-                    ?>>Flip top to Bottom</option>
+        if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-top-to-bottom') {
+            echo 'selected';
+        }
+        ?>>Flip top to Bottom</option>
                     <option value="oxilab-flip-box-flip oxilab-flip-box-flip-left-to-right" <?php
-                    if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-left-to-right') {
-                        echo 'selected';
-                    }
-                    ?>>Flip Left to Right</option>
+                            if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-left-to-right') {
+                                echo 'selected';
+                            }
+                            ?>>Flip Left to Right</option>
                     <option value="oxilab-flip-box-flip oxilab-flip-box-flip-bottom-to-top" <?php
-                    if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-bottom-to-top') {
-                        echo 'selected';
-                    }
-                    ?>>Flip Bottom to Top</option>
+                            if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-bottom-to-top') {
+                                echo 'selected';
+                            }
+                            ?>>Flip Bottom to Top</option>
                     <option value="oxilab-flip-box-flip oxilab-flip-box-flip-right-to-left" <?php
-                    if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-right-to-left') {
-                        echo 'selected';
-                    }
-                    ?>>Flip Right to Left</option>
+                            if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-right-to-left') {
+                                echo 'selected';
+                            }
+                            ?>>Flip Right to Left</option>
                 </select>
             </div>
         </div>
@@ -72,20 +47,20 @@ trait Sanitization {
             <div class="col-sm-6">
                 <select class="form-control" id="oxilab-flip-effects" name="oxilab-flip-effects">
                     <option value="easing_easeInOutExpo" <?php
-                    if ($effects_Type == 'easing_easeInOutExpo') {
-                        echo 'selected';
-                    }
-                    ?>>easing_easeInOutExpo</option>
+            if ($effects_Type == 'easing_easeInOutExpo') {
+                echo 'selected';
+            }
+                            ?>>easing_easeInOutExpo</option>
                     <option value="easing_easeInOutCirc" <?php
-                    if ($effects_Type == 'easing_easeInOutCirc') {
-                        echo 'selected';
-                    }
-                    ?>>easing_easeInOutCirc</option>
+                            if ($effects_Type == 'easing_easeInOutCirc') {
+                                echo 'selected';
+                            }
+                            ?>>easing_easeInOutCirc</option>
                     <option value="easing_easeOutBack" <?php
-                    if ($effects_Type == 'easing_easeOutBack') {
-                        echo 'selected';
-                    }
-                    ?>>easing_easeOutBack</option>
+                            if ($effects_Type == 'easing_easeOutBack') {
+                                echo 'selected';
+                            }
+                            ?>>easing_easeOutBack</option>
                 </select>
             </div>
         </div>
@@ -153,10 +128,10 @@ trait Sanitization {
             <label for="<?php echo esc_attr($id); ?>" class="col-sm-6 col-form-label"  data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>" ><?php echo esc_html($name); ?> </label>
             <div class="col-sm-6">
                 <input type="text" <?php
-                if ($type == 'rgba') {
-                    echo ' data-format="rgb" data-opacity="true" ';
-                }
-                ?> class="form-control oxilab-vendor-color" oxiexporttype="<?php echo esc_attr($exporttype); ?>" oxiexportid="<?php echo esc_attr($exportid); ?>" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" value="<?php echo esc_attr($value); ?>">
+        if ($type == 'rgba') {
+            echo ' data-format="rgb" data-opacity="true" ';
+        }
+        ?> class="form-control oxilab-vendor-color" oxiexporttype="<?php echo esc_attr($exporttype); ?>" oxiexportid="<?php echo esc_attr($exportid); ?>" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" value="<?php echo esc_attr($value); ?>">
             </div>
         </div>
 
@@ -181,23 +156,23 @@ trait Sanitization {
             <div class="col-sm-6">
                 <div class="btn-group" data-toggle="buttons">
                     <label class="btn btn-primary <?php
+        if ($fristvalue == $value) {
+            echo 'active';
+        }
+        ?>"> <input type="radio" <?php
                     if ($fristvalue == $value) {
-                        echo 'active';
+                        echo 'checked';
                     }
-                    ?>"> <input type="radio" <?php
-                               if ($fristvalue == $value) {
-                                   echo 'checked';
-                               }
-                               ?> name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>-yes" autocomplete="off" value="<?php echo esc_attr($fristvalue); ?>"><?php echo esc_html($fristname); ?></label>
+                    ?> name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>-yes" autocomplete="off" value="<?php echo esc_attr($fristvalue); ?>"><?php echo esc_html($fristname); ?></label>
                     <label class="btn btn-primary <?php
+                             if ($Secondvalue == $value) {
+                                 echo 'active';
+                             }
+                             ?>"> <input type="radio" <?php
                     if ($Secondvalue == $value) {
-                        echo 'active';
+                        echo 'checked';
                     }
-                    ?>"> <input type="radio" <?php
-                               if ($Secondvalue == $value) {
-                                   echo 'checked';
-                               }
-                               ?> name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>-no"  autocomplete="off" value="<?php echo esc_attr($Secondvalue); ?>"><?php echo esc_html($Secondname); ?> </label>
+                    ?> name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>-no"  autocomplete="off" value="<?php echo esc_attr($Secondvalue); ?>"><?php echo esc_html($Secondname); ?> </label>
                 </div>
             </div>
         </div>
@@ -211,70 +186,70 @@ trait Sanitization {
             <div class="col-sm-6">
                 <select class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>">
                     <option value="100" <?php
-                    if ($value == '100') {
-                        echo 'selected';
-                    };
-                    ?>>100</option>
+        if ($value == '100') {
+            echo 'selected';
+        };
+        ?>>100</option>
                     <option value="200" <?php
-                    if ($value == '200') {
-                        echo 'selected';
-                    };
-                    ?>>200</option>
+                            if ($value == '200') {
+                                echo 'selected';
+                            };
+                            ?>>200</option>
                     <option value="300" <?php
-                    if ($value == '300') {
-                        echo 'selected';
-                    };
-                    ?>>300</option>
+                            if ($value == '300') {
+                                echo 'selected';
+                            };
+                            ?>>300</option>
                     <option value="400" <?php
-                    if ($value == '400') {
-                        echo 'selected';
-                    };
-                    ?>>400</option>
+                            if ($value == '400') {
+                                echo 'selected';
+                            };
+                            ?>>400</option>
                     <option value="500" <?php
-                    if ($value == '500') {
-                        echo 'selected';
-                    };
-                    ?>>500</option>
+                            if ($value == '500') {
+                                echo 'selected';
+                            };
+                            ?>>500</option>
                     <option value="600" <?php
-                    if ($value == '600') {
-                        echo 'selected';
-                    };
-                    ?>>600</option>
+                            if ($value == '600') {
+                                echo 'selected';
+                            };
+                            ?>>600</option>
                     <option value="700" <?php
-                    if ($value == '700') {
-                        echo 'selected';
-                    };
-                    ?>>700</option>
+                            if ($value == '700') {
+                                echo 'selected';
+                            };
+                            ?>>700</option>
                     <option value="800" <?php
-                    if ($value == '800') {
-                        echo 'selected';
-                    };
-                    ?>>800</option>
+                            if ($value == '800') {
+                                echo 'selected';
+                            };
+                            ?>>800</option>
                     <option value="900" <?php
-                    if ($value == '900') {
-                        echo 'selected';
-                    };
-                    ?>>900</option>
+                            if ($value == '900') {
+                                echo 'selected';
+                            };
+                            ?>>900</option>
                     <option value="normal" <?php
-                    if ($value == 'normal') {
-                        echo 'selected';
-                    };
-                    ?>>Normal</option>
+                            if ($value == 'normal') {
+                                echo 'selected';
+                            };
+                            ?>>Normal</option>
                     <option value="bold" <?php
-                    if ($value == 'bold') {
-                        echo 'selected';
-                    };
-                    ?>>Bold</option>
+                            if ($value == 'bold') {
+                                echo 'selected';
+                            };
+                            ?>>Bold</option>
                     <option value="lighter" <?php
-                    if ($value == 'lighter') {
-                        echo 'selected';
-                    };
-                    ?>>Lighter</option>
+                            if ($value == 'lighter') {
+                                echo 'selected';
+                            };
+                            ?>>Lighter</option>
                     <option value="initial" <?php
-                    if ($value == 'initial') {
-                        echo 'selected';
-                    };
-                    ?>>Initial</option>
+                            if ($value == 'initial') {
+                                echo 'selected';
+                            };
+                            ?>>Initial</option>
                 </select>
             </div>
         </div>
@@ -288,30 +263,30 @@ trait Sanitization {
             <div class="col-sm-6">
                 <select class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>">
                     <option <?php
-                    if ($value == 'normal') {
-                        echo 'selected';
-                    }
-                    ?> value="normal">Normal</option>
+        if ($value == 'normal') {
+            echo 'selected';
+        }
+        ?> value="normal">Normal</option>
                     <option <?php
-                    if ($value == 'italic') {
-                        echo 'selected';
-                    }
-                    ?> value="italic">Italic</option>
+                        if ($value == 'italic') {
+                            echo 'selected';
+                        }
+                        ?> value="italic">Italic</option>
                     <option <?php
-                    if ($value == 'oblique') {
-                        echo 'selected';
-                    }
-                    ?> value="oblique">Oblique</option>
+                        if ($value == 'oblique') {
+                            echo 'selected';
+                        }
+                        ?> value="oblique">Oblique</option>
                     <option <?php
-                    if ($value == 'initial') {
-                        echo 'selected';
-                    }
-                    ?> value="initial">Initial</option>
+                        if ($value == 'initial') {
+                            echo 'selected';
+                        }
+                        ?> value="initial">Initial</option>
                     <option <?php
-                    if ($value == 'inherit') {
-                        echo 'selected';
-                    }
-                    ?> value="inherit">Inherit</option>
+                        if ($value == 'inherit') {
+                            echo 'selected';
+                        }
+                        ?> value="inherit">Inherit</option>
                 </select>
             </div>
         </div>
@@ -325,20 +300,20 @@ trait Sanitization {
             <div class="col-sm-6">
                 <select class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>">
                     <option value="left" <?php
-                    if ($value == 'left') {
-                        echo 'selected';
-                    }
-                    ?>>Left</option>
+        if ($value == 'left') {
+            echo 'selected';
+        }
+        ?>>Left</option>
                     <option value="Center" <?php
-                    if ($value == 'Center') {
-                        echo 'selected';
-                    }
-                    ?>>Center</option>
+                            if ($value == 'Center') {
+                                echo 'selected';
+                            }
+                            ?>>Center</option>
                     <option value="Right" <?php
-                    if ($value == 'Right') {
-                        echo 'selected';
-                    }
-                    ?>>Right</option>
+                            if ($value == 'Right') {
+                                echo 'selected';
+                            }
+                            ?>>Right</option>
                 </select>
             </div>
         </div>
@@ -356,60 +331,60 @@ trait Sanitization {
             <div class="col-sm-3">
                 <select class="form-control" id="<?php echo esc_attr($border_type); ?>" name="<?php echo esc_attr($border_type); ?>">
                     <option value="dotted" <?php
-                    if ($border_type_value == 'dotted') {
-                        echo 'selected';
-                    }
-                    ?>>Dotted</option>
+        if ($border_type_value == 'dotted') {
+            echo 'selected';
+        }
+        ?>>Dotted</option>
                     <option value="dashed" <?php
-                    if ($border_type_value == 'dashed') {
-                        echo 'selected';
-                    }
-                    ?>>Dashed</option>
+                            if ($border_type_value == 'dashed') {
+                                echo 'selected';
+                            }
+                            ?>>Dashed</option>
                     <option value="solid" <?php
-                    if ($border_type_value == 'solid') {
-                        echo 'selected';
-                    }
-                    ?>>Solid</option>
+                            if ($border_type_value == 'solid') {
+                                echo 'selected';
+                            }
+                            ?>>Solid</option>
                     <option value="double" <?php
-                    if ($border_type_value == 'double') {
-                        echo 'selected';
-                    }
-                    ?>>Double</option>
+                            if ($border_type_value == 'double') {
+                                echo 'selected';
+                            }
+                            ?>>Double</option>
                     <option value="groove" <?php
-                    if ($border_type_value == 'groove') {
-                        echo 'selected';
-                    }
-                    ?>>Groove</option>
+                            if ($border_type_value == 'groove') {
+                                echo 'selected';
+                            }
+                            ?>>Groove</option>
                     <option value="ridge" <?php
-                    if ($border_type_value == 'ridge') {
-                        echo 'selected';
-                    }
-                    ?>>Ridge</option>
+                            if ($border_type_value == 'ridge') {
+                                echo 'selected';
+                            }
+                            ?>>Ridge</option>
                     <option value="inset" <?php
-                    if ($border_type_value == 'inset') {
-                        echo 'selected';
-                    }
-                    ?>>Inset</option>
+                            if ($border_type_value == 'inset') {
+                                echo 'selected';
+                            }
+                            ?>>Inset</option>
                     <option value="outset" <?php
-                    if ($border_type_value == 'outset') {
-                        echo 'selected';
-                    }
-                    ?>>Outset</option>
+                            if ($border_type_value == 'outset') {
+                                echo 'selected';
+                            }
+                            ?>>Outset</option>
                     <option value="dotted solid" <?php
-                    if ($border_type_value == 'dotted solid') {
-                        echo 'selected';
-                    }
-                    ?>>Custom 1</option>
+                            if ($border_type_value == 'dotted solid') {
+                                echo 'selected';
+                            }
+                            ?>>Custom 1</option>
                     <option value="dotted solid dashed" <?php
-                    if ($border_type_value == 'dotted solid dashed') {
-                        echo 'selected';
-                    }
-                    ?>>Custom 2</option>
+                            if ($border_type_value == 'dotted solid dashed') {
+                                echo 'selected';
+                            }
+                            ?>>Custom 2</option>
                     <option value="dotted solid dashed double" <?php
-                    if ($border_type_value == 'dotted solid dashed double') {
-                        echo 'selected';
-                    }
-                    ?>>Custom 3</option>
+                            if ($border_type_value == 'dotted solid dashed double') {
+                                echo 'selected';
+                            }
+                            ?>>Custom 3</option>
                 </select>
             </div>
 
@@ -424,35 +399,35 @@ trait Sanitization {
             <div class="col-sm-6">
                 <select class="form-control" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>">
                     <option value="oxilab-flip-box-col-1" <?php
-                    if ($value == 'oxilab-flip-box-col-1') {
-                        echo 'selected';
-                    }
-                    ?>>Single Item</option>
+        if ($value == 'oxilab-flip-box-col-1') {
+            echo 'selected';
+        }
+        ?>>Single Item</option>
                     <option value="oxilab-flip-box-col-2" <?php
-                    if ($value == 'oxilab-flip-box-col-2') {
-                        echo 'selected';
-                    }
-                    ?>>2 Items</option>
+                            if ($value == 'oxilab-flip-box-col-2') {
+                                echo 'selected';
+                            }
+                            ?>>2 Items</option>
                     <option value="oxilab-flip-box-col-3" <?php
-                    if ($value == 'oxilab-flip-box-col-3') {
-                        echo 'selected';
-                    }
-                    ?>>3 Items</option>
+                            if ($value == 'oxilab-flip-box-col-3') {
+                                echo 'selected';
+                            }
+                            ?>>3 Items</option>
                     <option value="oxilab-flip-box-col-4" <?php
-                    if ($value == 'oxilab-flip-box-col-4') {
-                        echo 'selected';
-                    }
-                    ?>>4 Items</option>
+                            if ($value == 'oxilab-flip-box-col-4') {
+                                echo 'selected';
+                            }
+                            ?>>4 Items</option>
                     <option value="oxilab-flip-box-col-5" <?php
-                    if ($value == 'oxilab-flip-box-col-5') {
-                        echo 'selected';
-                    }
-                    ?>>5 Items</option>
+                            if ($value == 'oxilab-flip-box-col-5') {
+                                echo 'selected';
+                            }
+                            ?>>5 Items</option>
                     <option value="oxilab-flip-box-col-6" <?php
-                    if ($value == 'oxilab-flip-box-col-6') {
-                        echo 'selected';
-                    }
-                    ?>>6 Items</option>
+                            if ($value == 'oxilab-flip-box-col-6') {
+                                echo 'selected';
+                            }
+                            ?>>6 Items</option>
                 </select>
             </div>
         </div>
@@ -467,315 +442,315 @@ trait Sanitization {
                 <select class="form-control" id="oxilab-animation" name="oxilab-animation">
                     <optgroup label="No Animation">
                         <option value="" <?php
-                        if ($value == '') {
-                            echo 'selected';
-                        }
-                        ?>>No Animation</option>
+        if ($value == '') {
+            echo 'selected';
+        }
+        ?>>No Animation</option>
                     </optgroup>
                     <optgroup label="Attention Seekers">
                         <option value="bounce" <?php
-                        if ($value == 'bounce') {
-                            echo 'selected';
-                        }
-                        ?>>bounce</option>
+                if ($value == 'bounce') {
+                    echo 'selected';
+                }
+        ?>>bounce</option>
                         <option value="flash" <?php
-                        if ($value == 'flash') {
-                            echo 'selected';
-                        }
-                        ?>>flash</option>
+                                if ($value == 'flash') {
+                                    echo 'selected';
+                                }
+                                ?>>flash</option>
                         <option value="pulse" <?php
-                        if ($value == 'pulse') {
-                            echo 'selected';
-                        }
-                        ?>>pulse</option>
+                                if ($value == 'pulse') {
+                                    echo 'selected';
+                                }
+                                ?>>pulse</option>
                         <option value="rubberBand" <?php
-                        if ($value == 'rubberBand') {
-                            echo 'selected';
-                        }
-                        ?>>rubberBand</option>
+                                if ($value == 'rubberBand') {
+                                    echo 'selected';
+                                }
+                                ?>>rubberBand</option>
                         <option value="shake" <?php
-                        if ($value == 'shake') {
-                            echo 'selected';
-                        }
-                        ?>>shake</option>
+                                if ($value == 'shake') {
+                                    echo 'selected';
+                                }
+                                ?>>shake</option>
                         <option value="swing" <?php
-                        if ($value == 'swing') {
-                            echo 'selected';
-                        }
-                        ?>>swing</option>
+                                if ($value == 'swing') {
+                                    echo 'selected';
+                                }
+                                ?>>swing</option>
                         <option value="tada" <?php
-                        if ($value == 'tada') {
-                            echo 'selected';
-                        }
-                        ?>>tada</option>
+                                if ($value == 'tada') {
+                                    echo 'selected';
+                                }
+                                ?>>tada</option>
                         <option value="wobble" <?php
-                        if ($value == 'wobble') {
-                            echo 'selected';
-                        }
-                        ?>>wobble</option>
+                                if ($value == 'wobble') {
+                                    echo 'selected';
+                                }
+                                ?>>wobble</option>
                         <option value="jello" <?php
-                        if ($value == 'jello') {
-                            echo 'selected';
-                        }
-                        ?>>jello</option>
+                                if ($value == 'jello') {
+                                    echo 'selected';
+                                }
+                                ?>>jello</option>
                     </optgroup>
 
                     <optgroup label="Bouncing Entrances">
                         <option value="bounceIn" <?php
-                        if ($value == 'bounceIn') {
-                            echo 'selected';
-                        }
-                        ?>>bounceIn</option>
+                if ($value == 'bounceIn') {
+                    echo 'selected';
+                }
+                                ?>>bounceIn</option>
                         <option value="bounceInDown" <?php
-                        if ($value == 'bounceInDown') {
-                            echo 'selected';
-                        }
-                        ?>>bounceInDown</option>
+                                if ($value == 'bounceInDown') {
+                                    echo 'selected';
+                                }
+                                ?>>bounceInDown</option>
                         <option value="bounceInLeft" <?php
-                        if ($value == 'bounceInLeft') {
-                            echo 'selected';
-                        }
-                        ?>>bounceInLeft</option>
+                                if ($value == 'bounceInLeft') {
+                                    echo 'selected';
+                                }
+                                ?>>bounceInLeft</option>
                         <option value="bounceInRight" <?php
-                        if ($value == 'bounceInRight') {
-                            echo 'selected';
-                        }
-                        ?>>bounceInRight</option>
+                                if ($value == 'bounceInRight') {
+                                    echo 'selected';
+                                }
+                                ?>>bounceInRight</option>
                         <option value="bounceInUp" <?php
-                        if ($value == 'bounceInUp') {
-                            echo 'selected';
-                        }
-                        ?>>bounceInUp</option>
+                                if ($value == 'bounceInUp') {
+                                    echo 'selected';
+                                }
+                                ?>>bounceInUp</option>
                     </optgroup>
                     <optgroup label="Fading Entrances">
                         <option value="fadeIn" <?php
-                        if ($value == 'fadeIn') {
-                            echo 'selected';
-                        }
-                        ?>>fadeIn</option>
+                if ($value == 'fadeIn') {
+                    echo 'selected';
+                }
+                                ?>>fadeIn</option>
                         <option value="fadeInDown" <?php
-                        if ($value == 'fadeInDown') {
-                            echo 'selected';
-                        }
-                        ?>>fadeInDown</option>
+                                if ($value == 'fadeInDown') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeInDown</option>
                         <option value="fadeInDownBig" <?php
-                        if ($value == 'fadeInDownBig') {
-                            echo 'selected';
-                        }
-                        ?>>fadeInDownBig</option>
+                                if ($value == 'fadeInDownBig') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeInDownBig</option>
                         <option value="fadeInLeft" <?php
-                        if ($value == 'fadeInLeft') {
-                            echo 'selected';
-                        }
-                        ?>>fadeInLeft</option>
+                                if ($value == 'fadeInLeft') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeInLeft</option>
                         <option value="fadeInLeftBig" <?php
-                        if ($value == 'fadeInLeftBig') {
-                            echo 'selected';
-                        }
-                        ?>>fadeInLeftBig</option>
+                                if ($value == 'fadeInLeftBig') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeInLeftBig</option>
                         <option value="fadeInRight" <?php
-                        if ($value == 'fadeInRight') {
-                            echo 'selected';
-                        }
-                        ?>>fadeInRight</option>
+                                if ($value == 'fadeInRight') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeInRight</option>
                         <option value="fadeInRightBig" <?php
-                        if ($value == 'fadeInRightBig') {
-                            echo 'selected';
-                        }
-                        ?>>fadeInRightBig</option>
+                                if ($value == 'fadeInRightBig') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeInRightBig</option>
                         <option value="fadeInUp" <?php
-                        if ($value == 'fadeInUp') {
-                            echo 'selected';
-                        }
-                        ?>>fadeInUp</option>
+                                if ($value == 'fadeInUp') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeInUp</option>
                         <option value="fadeInUpBig" <?php
-                        if ($value == 'fadeInUpBig') {
-                            echo 'selected';
-                        }
-                        ?>>fadeInUpBig</option>
+                                if ($value == 'fadeInUpBig') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeInUpBig</option>
                     </optgroup>
 
                     <optgroup label="Fading Exits">
                         <option value="fadeOut" <?php
-                        if ($value == 'fadeOut') {
-                            echo 'selected';
-                        }
-                        ?>>fadeOut</option>
+                if ($value == 'fadeOut') {
+                    echo 'selected';
+                }
+                                ?>>fadeOut</option>
                         <option value="fadeOutDown" <?php
-                        if ($value == 'fadeOutDown') {
-                            echo 'selected';
-                        }
-                        ?>>fadeOutDown</option>
+                                if ($value == 'fadeOutDown') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeOutDown</option>
                         <option value="fadeOutDownBig" <?php
-                        if ($value == 'fadeOutDownBig') {
-                            echo 'selected';
-                        }
-                        ?>>fadeOutDownBig</option>
+                                if ($value == 'fadeOutDownBig') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeOutDownBig</option>
                         <option value="fadeOutLeft" <?php
-                        if ($value == 'fadeOutLeft') {
-                            echo 'selected';
-                        }
-                        ?>>fadeOutLeft</option>
+                                if ($value == 'fadeOutLeft') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeOutLeft</option>
                         <option value="fadeOutLeftBig" <?php
-                        if ($value == 'fadeOutLeftBig') {
-                            echo 'selected';
-                        }
-                        ?>>fadeOutLeftBig</option>
+                                if ($value == 'fadeOutLeftBig') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeOutLeftBig</option>
                         <option value="fadeOutRight" <?php
-                        if ($value == 'fadeOutRight') {
-                            echo 'selected';
-                        }
-                        ?>>fadeOutRight</option>
+                                if ($value == 'fadeOutRight') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeOutRight</option>
                         <option value="fadeOutRightBig" <?php
-                        if ($value == 'fadeOutRightBig') {
-                            echo 'selected';
-                        }
-                        ?>>fadeOutRightBig</option>
+                                if ($value == 'fadeOutRightBig') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeOutRightBig</option>
                         <option value="fadeOutUp" <?php
-                        if ($value == 'fadeOutUp') {
-                            echo 'selected';
-                        }
-                        ?>>fadeOutUp</option>
+                                if ($value == 'fadeOutUp') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeOutUp</option>
                         <option value="fadeOutUpBig" <?php
-                        if ($value == 'fadeOutUpBig') {
-                            echo 'selected';
-                        }
-                        ?>>fadeOutUpBig</option>
+                                if ($value == 'fadeOutUpBig') {
+                                    echo 'selected';
+                                }
+                                ?>>fadeOutUpBig</option>
                     </optgroup>
 
                     <optgroup label="Flippers">
                         <option value="flip" <?php
-                        if ($value == 'flip') {
-                            echo 'selected';
-                        }
-                        ?>>flip</option>
+                if ($value == 'flip') {
+                    echo 'selected';
+                }
+                                ?>>flip</option>
                         <option value="flipInX" <?php
-                        if ($value == 'flipInX') {
-                            echo 'selected';
-                        }
-                        ?>>flipInX</option>
+                                if ($value == 'flipInX') {
+                                    echo 'selected';
+                                }
+                                ?>>flipInX</option>
                         <option value="flipInY" <?php
-                        if ($value == 'flipInY') {
-                            echo 'selected';
-                        }
-                        ?>>flipInY</option>
+                                if ($value == 'flipInY') {
+                                    echo 'selected';
+                                }
+                                ?>>flipInY</option>
                         <option value="flipOutX" <?php
-                        if ($value == 'flipOutX') {
-                            echo 'selected';
-                        }
-                        ?>>flipOutX</option>
+                                if ($value == 'flipOutX') {
+                                    echo 'selected';
+                                }
+                                ?>>flipOutX</option>
                         <option value="flipOutY" <?php
-                        if ($value == 'flipOutY') {
-                            echo 'selected';
-                        }
-                        ?>>flipOutY</option>
+                                if ($value == 'flipOutY') {
+                                    echo 'selected';
+                                }
+                                ?>>flipOutY</option>
                     </optgroup>
 
                     <optgroup label="Lightspeed">
                         <option value="lightSpeedIn" <?php
-                        if ($value == 'lightSpeedIn') {
-                            echo 'selected';
-                        }
-                        ?>>lightSpeedIn</option>
+                if ($value == 'lightSpeedIn') {
+                    echo 'selected';
+                }
+                                ?>>lightSpeedIn</option>
                         <option value="lightSpeedOut" <?php
-                        if ($value == 'lightSpeedOut') {
-                            echo 'selected';
-                        }
-                        ?>>lightSpeedOut</option>
+                                if ($value == 'lightSpeedOut') {
+                                    echo 'selected';
+                                }
+                                ?>>lightSpeedOut</option>
                     </optgroup>
 
                     <optgroup label="Rotating Entrances">
                         <option value="rotateIn" <?php
-                        if ($value == 'rotateIn') {
-                            echo 'selected';
-                        }
-                        ?>>rotateIn</option>
+                if ($value == 'rotateIn') {
+                    echo 'selected';
+                }
+                                ?>>rotateIn</option>
                         <option value="rotateInDownLeft" <?php
-                        if ($value == 'rotateInDownLeft') {
-                            echo 'selected';
-                        }
-                        ?>>rotateInDownLeft</option>
+                                if ($value == 'rotateInDownLeft') {
+                                    echo 'selected';
+                                }
+                                ?>>rotateInDownLeft</option>
                         <option value="rotateInDownRight" <?php
-                        if ($value == 'rotateInDownRight') {
-                            echo 'selected';
-                        }
-                        ?>>rotateInDownRight</option>
+                                if ($value == 'rotateInDownRight') {
+                                    echo 'selected';
+                                }
+                                ?>>rotateInDownRight</option>
                         <option value="rotateInUpLeft" <?php
-                        if ($value == 'rotateInUpLeft') {
-                            echo 'selected';
-                        }
-                        ?>>rotateInUpLeft</option>
+                                if ($value == 'rotateInUpLeft') {
+                                    echo 'selected';
+                                }
+                                ?>>rotateInUpLeft</option>
                         <option value="rotateInUpRight" <?php
-                        if ($value == 'rotateInUpRight') {
-                            echo 'selected';
-                        }
-                        ?>>rotateInUpRight</option>
+                                if ($value == 'rotateInUpRight') {
+                                    echo 'selected';
+                                }
+                                ?>>rotateInUpRight</option>
                     </optgroup>
                     <optgroup label="Sliding Entrances">
                         <option value="slideInUp" <?php
-                        if ($value == 'slideInUp') {
-                            echo 'selected';
-                        }
-                        ?>>slideInUp</option>
+                if ($value == 'slideInUp') {
+                    echo 'selected';
+                }
+                                ?>>slideInUp</option>
                         <option value="slideInDown" <?php
-                        if ($value == 'slideInDown') {
-                            echo 'selected';
-                        }
-                        ?>>slideInDown</option>
+                                if ($value == 'slideInDown') {
+                                    echo 'selected';
+                                }
+                                ?>>slideInDown</option>
                         <option value="slideInLeft" <?php
-                        if ($value == 'slideInLeft') {
-                            echo 'selected';
-                        }
-                        ?>>slideInLeft</option>
+                                if ($value == 'slideInLeft') {
+                                    echo 'selected';
+                                }
+                                ?>>slideInLeft</option>
                         <option value="slideInRight" <?php
-                        if ($value == 'slideInRight') {
-                            echo 'selected';
-                        }
-                        ?>>slideInRight</option>
+                                if ($value == 'slideInRight') {
+                                    echo 'selected';
+                                }
+                                ?>>slideInRight</option>
                     </optgroup>
                     <optgroup label="Zoom Entrances">
                         <option value="zoomIn" <?php
-                        if ($value == 'zoomIn') {
-                            echo 'selected';
-                        }
-                        ?>>zoomIn</option>
+                if ($value == 'zoomIn') {
+                    echo 'selected';
+                }
+                                ?>>zoomIn</option>
                         <option value="zoomInDown" <?php
-                        if ($value == 'zoomInDown') {
-                            echo 'selected';
-                        }
-                        ?>>zoomInDown</option>
+                                if ($value == 'zoomInDown') {
+                                    echo 'selected';
+                                }
+                                ?>>zoomInDown</option>
                         <option value="zoomInLeft" <?php
-                        if ($value == 'zoomInLeft') {
-                            echo 'selected';
-                        }
-                        ?>>zoomInLeft</option>
+                                if ($value == 'zoomInLeft') {
+                                    echo 'selected';
+                                }
+                                ?>>zoomInLeft</option>
                         <option value="zoomInRight" <?php
-                        if ($value == 'zoomInRight') {
-                            echo 'selected';
-                        }
-                        ?>>zoomInRight</option>
+                                if ($value == 'zoomInRight') {
+                                    echo 'selected';
+                                }
+                                ?>>zoomInRight</option>
                         <option value="zoomInUp" <?php
-                        if ($value == 'zoomInUp') {
-                            echo 'selected';
-                        }
-                        ?>>zoomInUp</option>
+                                if ($value == 'zoomInUp') {
+                                    echo 'selected';
+                                }
+                                ?>>zoomInUp</option>
                     </optgroup>
                     <optgroup label="Specials">
                         <option value="hinge" <?php
-                        if ($value == 'hinge') {
-                            echo 'selected';
-                        }
-                        ?>>hinge</option>
+                if ($value == 'hinge') {
+                    echo 'selected';
+                }
+                                ?>>hinge</option>
                         <option value="jackInTheBox" <?php
-                        if ($value == 'jackInTheBox') {
-                            echo 'selected';
-                        }
-                        ?>>jackInTheBox</option>
+                                if ($value == 'jackInTheBox') {
+                                    echo 'selected';
+                                }
+                                ?>>jackInTheBox</option>
                         <option value="rollIn" <?php
-                        if ($value == 'rollIn') {
-                            echo 'selected';
-                        }
-                        ?>>rollIn</option>
+                                if ($value == 'rollIn') {
+                                    echo 'selected';
+                                }
+                                ?>>rollIn</option>
                     </optgroup>
                 </select>
             </div>
@@ -941,6 +916,31 @@ trait Sanitization {
         else:
             return wp_kses($rawdata, $allowed_tags);
         endif;
+    }
+
+    public function admin_special_charecter($data) {
+        $data = str_replace('\\\\"', '&quot;', $data);
+        $data = str_replace('\\\"', '&quot;', $data);
+        $data = str_replace('\\"', '&quot;', $data);
+        $data = str_replace('\"', '&quot;', $data);
+        $data = str_replace('"', '&quot;', $data);
+        $data = str_replace('\\\\&quot;', '&quot;', $data);
+        $data = str_replace('\\\&quot;', '&quot;', $data);
+        $data = str_replace('\\&quot;', '&quot;', $data);
+        $data = str_replace('\&quot;', '&quot;', $data);
+        $data = str_replace("\\\\'", '&apos;', $data);
+        $data = str_replace("\\\'", '&apos;', $data);
+        $data = str_replace("\\'", '&apos;', $data);
+        $data = str_replace("\'", '&apos;', $data);
+        $data = str_replace("\\\\&apos;", '&apos;', $data);
+        $data = str_replace("\\\&apos;", '&apos;', $data);
+        $data = str_replace("\\&apos;", '&apos;', $data);
+        $data = str_replace("\&apos;", '&apos;', $data);
+        $data = str_replace("'", '&apos;', $data);
+        $data = str_replace('<', '&lt;', $data);
+        $data = str_replace('>', '&gt;', $data);
+        $data = sanitize_text_field($data);
+        return $data;
     }
 
 }

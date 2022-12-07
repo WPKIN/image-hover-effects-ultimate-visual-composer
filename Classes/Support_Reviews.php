@@ -40,6 +40,7 @@ class Support_Reviews {
 
         die();
     }
+
     /**
      * Admin Notice CSS file loader
      * @return void
@@ -48,15 +49,6 @@ class Support_Reviews {
         wp_enqueue_script("jquery");
         wp_enqueue_style('oxilab_flip-admin-notice-css', OXI_FLIP_BOX_URL . '/asset/backend/css/notice.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         $this->dismiss_button_scripts();
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function dismiss_button_scripts() {
-        wp_enqueue_script('oxilab_flip-admin-notice', OXI_FLIP_BOX_URL . '/asset/backend/js/admin-notice.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_localize_script('oxilab_flip-admin-notice', 'oxilab_flip_notice_dissmiss', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxilab_flip_notice_dissmiss')));
     }
 
     /**
@@ -106,6 +98,13 @@ class Support_Reviews {
         <?php
     }
 
-    
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function dismiss_button_scripts() {
+        wp_enqueue_script('oxilab_flip-admin-notice', OXI_FLIP_BOX_URL . '/asset/backend/js/admin-notice.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_localize_script('oxilab_flip-admin-notice', 'oxilab_flip_notice_dissmiss', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxilab_flip_notice_dissmiss')));
+    }
 
 }

@@ -153,29 +153,6 @@ class Public_Render {
         echo '';
     }
 
-    public function admin_edit_panel($id) {
-        $data = '';
-        if ($this->admin == 'admin') :
-            $data = '<div class="oxilab-admin-absulote">
-                        <div class="oxilab-style-absulate-edit">
-                            <form method="post">
-                                <input type="hidden" name="item-id" value="' . esc_attr($id) . '">
-                                <button class="btn btn-primary" type="submit" value="edit" name="edit" title="Edit">Edit</button>
-                                ' . wp_nonce_field("oxiflipeditdata") . '
-                            </form>
-                        </div>
-                        <div class="oxilab-style-absulate-delete">
-                            <form method="post" class="oxilab-style-absulate-delete-confirmation">
-                                <input type="hidden" name="item-id" value="' . esc_attr($id) . '">
-                                <button class="btn btn-danger" type="submit" value="delete" name="delete" title="Delete">Delete</button>
-                                ' . wp_nonce_field("oxiflipdeletedata") . '
-                            </form>
-                        </div>
-                    </div>';
-        endif;
-        echo $data;
-    }
-
     public function font_familly($data = '') {
 
         $check = get_option('oxi_addons_google_font');
@@ -214,7 +191,7 @@ class Public_Render {
     }
 
     public function text_render($data) {
-        echo do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false);
+        echo wp_kses_post(do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false));
     }
 
     public function font_awesome_render($data) {
@@ -223,8 +200,32 @@ class Public_Render {
             wp_enqueue_style('font-awsome.min', OXI_FLIP_BOX_URL . '/asset/frontend/css/font-awsome.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         endif;
         ?>
-        <i class="<?php echo esc_attr(esc_attr($data)); ?> oxi-icons"></i>
+        <i class="<?php echo esc_attr($data); ?> oxi-icons"></i>
         <?php
+    }
+
+    public function admin_edit_panel($id) {
+
+        if ($this->admin == 'admin') :
+            ?>
+            <div class="oxilab-admin-absulote">
+                <div class="oxilab-style-absulate-edit">
+                    <form method="post">
+                        <input type="hidden" name="item-id" value="<?php echo esc_attr($id) ?>">
+                        <button class="btn btn-primary" type="submit" value="edit" name="edit" title="Edit">Edit</button>
+                        <?php echo wp_nonce_field("oxiflipeditdata") ?>
+                    </form>
+                </div>
+                <div class="oxilab-style-absulate-delete">
+                    <form method="post" class="oxilab-style-absulate-delete-confirmation">
+                        <input type="hidden" name="item-id" value="<?php echo esc_attr($id) ?>">
+                        <button class="btn btn-danger" type="submit" value="delete" name="delete" title="Delete">Delete</button>
+                        <?php echo wp_nonce_field("oxiflipdeletedata") ?>
+                    </form>
+                </div>
+            </div>
+            <?php
+        endif;
     }
 
 }
