@@ -9,7 +9,14 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  */
 class Welcome {
 
-  
+    public function __construct() {
+        $this->admin_css();
+        $this->Public_Render();
+    }
+
+    public function admin_css() {
+        wp_enqueue_style('flip-box-admin-welcome', OXI_FLIP_BOX_URL . 'asset/backend/css/admin-welcome.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+    }
 
     public function Public_Render() {
         ?>
@@ -55,14 +62,6 @@ class Welcome {
 
         </div>
         <?php
-    }
-      public function __construct() {
-        $this->admin_css();
-        $this->Public_Render();
-    }
-
-    public function admin_css() {
-        wp_enqueue_style('flip-box-admin-welcome', OXI_FLIP_BOX_URL . 'asset/backend/css/admin-welcome.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
 
 }

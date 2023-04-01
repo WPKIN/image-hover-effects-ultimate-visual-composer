@@ -13,60 +13,6 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
  */
 trait Sanitization {
 
-    public function oxilab_flip_box_flip_type_effects_type($flip_type, $effects_Type) {
-        ?>
-        <div class="form-group row form-group-sm">
-            <label for="oxilab-flip-type" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Select Flip Type to use into this Flip">Flip Type </label>
-            <div class="col-sm-6">
-                <select class="form-control" id="oxilab-flip-type" name="oxilab-flip-type">
-                    <option value="oxilab-flip-box-flip oxilab-flip-box-flip-top-to-bottom" <?php
-        if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-top-to-bottom') {
-            echo 'selected';
-        }
-        ?>>Flip top to Bottom</option>
-                    <option value="oxilab-flip-box-flip oxilab-flip-box-flip-left-to-right" <?php
-                            if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-left-to-right') {
-                                echo 'selected';
-                            }
-                            ?>>Flip Left to Right</option>
-                    <option value="oxilab-flip-box-flip oxilab-flip-box-flip-bottom-to-top" <?php
-                            if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-bottom-to-top') {
-                                echo 'selected';
-                            }
-                            ?>>Flip Bottom to Top</option>
-                    <option value="oxilab-flip-box-flip oxilab-flip-box-flip-right-to-left" <?php
-                            if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-right-to-left') {
-                                echo 'selected';
-                            }
-                            ?>>Flip Right to Left</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row form-group-sm">
-            <label for="oxilab-flip-effects" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Customize Your Fliping Effects">Flip Effects </label>
-            <div class="col-sm-6">
-                <select class="form-control" id="oxilab-flip-effects" name="oxilab-flip-effects">
-                    <option value="easing_easeInOutExpo" <?php
-            if ($effects_Type == 'easing_easeInOutExpo') {
-                echo 'selected';
-            }
-                            ?>>easing_easeInOutExpo</option>
-                    <option value="easing_easeInOutCirc" <?php
-                            if ($effects_Type == 'easing_easeInOutCirc') {
-                                echo 'selected';
-                            }
-                            ?>>easing_easeInOutCirc</option>
-                    <option value="easing_easeOutBack" <?php
-                            if ($effects_Type == 'easing_easeOutBack') {
-                                echo 'selected';
-                            }
-                            ?>>easing_easeOutBack</option>
-                </select>
-            </div>
-        </div>
-        <?php
-    }
-
     public function oxilab_flip_box_admin_input_text($id, $value, $name, $title) {
         ?>
         <div class="form-group col-sm-12">
@@ -941,6 +887,60 @@ trait Sanitization {
         $data = str_replace('>', '&gt;', $data);
         $data = sanitize_text_field($data);
         return $data;
+    }
+
+    public function oxilab_flip_box_flip_type_effects_type($flip_type, $effects_Type) {
+        ?>
+        <div class="form-group row form-group-sm">
+            <label for="oxilab-flip-type" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Select Flip Type to use into this Flip">Flip Type </label>
+            <div class="col-sm-6">
+                <select class="form-control" id="oxilab-flip-type" name="oxilab-flip-type">
+                    <option value="oxilab-flip-box-flip oxilab-flip-box-flip-top-to-bottom" <?php
+        if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-top-to-bottom') {
+            echo 'selected';
+        }
+        ?>>Flip top to Bottom</option>
+                    <option value="oxilab-flip-box-flip oxilab-flip-box-flip-left-to-right" <?php
+            if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-left-to-right') {
+                echo 'selected';
+            }
+        ?>>Flip Left to Right</option>
+                    <option value="oxilab-flip-box-flip oxilab-flip-box-flip-bottom-to-top" <?php
+            if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-bottom-to-top') {
+                echo 'selected';
+            }
+        ?>>Flip Bottom to Top</option>
+                    <option value="oxilab-flip-box-flip oxilab-flip-box-flip-right-to-left" <?php
+            if ($flip_type == 'oxilab-flip-box-flip oxilab-flip-box-flip-right-to-left') {
+                echo 'selected';
+            }
+        ?>>Flip Right to Left</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row form-group-sm">
+            <label for="oxilab-flip-effects" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="Customize Your Fliping Effects">Flip Effects </label>
+            <div class="col-sm-6">
+                <select class="form-control" id="oxilab-flip-effects" name="oxilab-flip-effects">
+                    <option value="easing_easeInOutExpo" <?php
+            if ($effects_Type == 'easing_easeInOutExpo') {
+                echo 'selected';
+            }
+        ?>>easing_easeInOutExpo</option>
+                    <option value="easing_easeInOutCirc" <?php
+            if ($effects_Type == 'easing_easeInOutCirc') {
+                echo 'selected';
+            }
+        ?>>easing_easeInOutCirc</option>
+                    <option value="easing_easeOutBack" <?php
+            if ($effects_Type == 'easing_easeOutBack') {
+                echo 'selected';
+            }
+        ?>>easing_easeOutBack</option>
+                </select>
+            </div>
+        </div>
+        <?php
     }
 
 }

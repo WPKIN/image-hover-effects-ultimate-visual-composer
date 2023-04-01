@@ -33,32 +33,6 @@ class Addons {
         return self::$instance;
     }
 
-    public function __construct() {
-        $this->CSSJS_load();
-        $this->Header();
-        $this->Render();
-    }
-
-    public function CSSJS_load() {
-        if (!current_user_can('activate_plugins')) :
-            die();
-        endif;
-        $this->admin_css_loader();
-        $this->extension();
-    }
-
-    public function Admin_header() {
-        ?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Oxilab Addons
-                </h1>
-                <p> We Develop Couple of plugins which will help you to Create Your Modern and Dynamic Websites. Just click and Install </p>
-            </div>
-        </div>
-        <?php
-    }
-
     public function Header() {
         apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
         $this->Admin_header();
@@ -84,17 +58,17 @@ class Addons {
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-row">
                 <div class="row">
-                    <?php
-                    $installed_plugins = get_plugins();
-                    $active_plugins = array_flip(get_option('active_plugins'));
+        <?php
+        $installed_plugins = get_plugins();
+        $active_plugins = array_flip(get_option('active_plugins'));
 
-                    foreach ($this->get_plugins as $key => $value) {
-                        $modulespath = $value['modules-path'];
-                        if ($modulespath != $this->current_plugins) :
-                            $file_path = $modulespath;
-                            $plugin = explode('/', $file_path)[0];
-                            $message = '';
-                            ?>
+        foreach ($this->get_plugins as $key => $value) {
+            $modulespath = $value['modules-path'];
+            if ($modulespath != $this->current_plugins) :
+                $file_path = $modulespath;
+                $plugin = explode('/', $file_path)[0];
+                $message = '';
+                ?>
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="oxi-addons-modules-elements">
                                     <img class="oxi-addons-modules-banner" src="<?php echo esc_url($value['modules-img']); ?>">
@@ -107,7 +81,7 @@ class Addons {
                                         <span class="oxi-addons-modules-installing"><?php
                 if (isset($installed_plugins[$file_path])) :
                     if (array_key_exists($file_path, $active_plugins)) :
-                                    ?>
+                        ?>
                                                     <a href="#" class="btn btn-light">Installed</a>
                                                     <?php
                                                 else :
@@ -129,10 +103,10 @@ class Addons {
                                     </div>
                                 </div>
                             </div>
-                            <?php
-                        endif;
-                    }
-                    ?>
+                <?php
+            endif;
+        }
+        ?>
                 </div>
             </div>
         </div>
@@ -152,6 +126,32 @@ class Addons {
                 }, 1000);';
 
         wp_add_inline_script('oxilab-bootstrap', $data);
+    }
+
+    public function __construct() {
+        $this->CSSJS_load();
+        $this->Header();
+        $this->Render();
+    }
+
+    public function CSSJS_load() {
+        if (!current_user_can('activate_plugins')) :
+            die();
+        endif;
+        $this->admin_css_loader();
+        $this->extension();
+    }
+
+    public function Admin_header() {
+        ?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Oxilab Addons
+                </h1>
+                <p> We Develop Couple of plugins which will help you to Create Your Modern and Dynamic Websites. Just click and Install </p>
+            </div>
+        </div>
+        <?php
     }
 
 }

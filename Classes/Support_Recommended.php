@@ -19,27 +19,6 @@ class Support_Recommended {
     public $get_plugins = [];
     public $current_plugins = 'image-hover-effects-ultimate-visual-composer/index.php';
 
-    /**
-     * Revoke this function when the object is created.
-     *
-     */
-    public function __construct() {
-        if (!current_user_can('install_plugins')):
-            return;
-        endif;
-
-        require_once(ABSPATH . 'wp-admin/includes/screen.php');
-        $screen = get_current_screen();
-        if (isset($screen->parent_file) && 'plugins.php' === $screen->parent_file && 'update' === $screen->id) {
-            return;
-        }
-        $this->extension();
-        add_action('admin_notices', array($this, 'first_install'));
-        add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
-        add_action('admin_notices', array($this, 'dismiss_button_scripts'));
-        add_action('wp_ajax_oxi_flip_admin_recommended', array($this, 'notice_dissmiss'));
-    }
-
     public function extension() {
         $response = get_transient(self::GET_LOCAL_PLUGINS);
         if (!$response || !is_array($response)) {
@@ -149,6 +128,27 @@ class Support_Recommended {
         endif;
 
         die();
+    }
+
+    /**
+     * Revoke this function when the object is created.
+     *
+     */
+    public function __construct() {
+        if (!current_user_can('install_plugins')):
+            return;
+        endif;
+
+        require_once(ABSPATH . 'wp-admin/includes/screen.php');
+        $screen = get_current_screen();
+        if (isset($screen->parent_file) && 'plugins.php' === $screen->parent_file && 'update' === $screen->id) {
+            return;
+        }
+        $this->extension();
+        add_action('admin_notices', array($this, 'first_install'));
+        add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
+        add_action('admin_notices', array($this, 'dismiss_button_scripts'));
+        add_action('wp_ajax_oxi_flip_admin_recommended', array($this, 'notice_dissmiss'));
     }
 
 }

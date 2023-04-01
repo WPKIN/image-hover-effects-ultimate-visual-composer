@@ -74,47 +74,6 @@ class Public_Render {
     public $admin;
 
     /**
-     * load constructor
-     *
-     * @since 2.0.0
-     */
-    public function __construct(array $dbdata = [], array $child = [], $admin = 'user') {
-        if (count($dbdata) > 0) :
-            $this->dbdata = $dbdata;
-            $this->child = $child;
-            $this->admin = $admin;
-            $this->loader();
-        endif;
-    }
-
-    /**
-     * Current element loader
-     *
-     * @since 2.0.0
-     */
-    public function loader() {
-        $this->oxiid = $this->dbdata['id'];
-        foreach ($this->child as $key => $value) {
-            $this->child[$key]['files'] = $value['files'] . '{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}';
-        }
-        $this->render();
-        $this->hooks();
-    }
-
-    /**
-     * front end loader css and js
-     *
-     * @since 2.0.0
-     */
-    public function public_loader() {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-animation', OXI_FLIP_BOX_URL . 'asset/frontend/css/animation.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_style('flip-box-addons-style', OXI_FLIP_BOX_URL . 'asset/frontend/css/style.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . 'asset/frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('flipbox-addons-jquery', OXI_FLIP_BOX_URL . 'asset/frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-    }
-
-    /**
      * load css and js hooks
      *
      * @since 2.0.0
@@ -213,19 +172,60 @@ class Public_Render {
                     <form method="post">
                         <input type="hidden" name="item-id" value="<?php echo esc_attr($id) ?>">
                         <button class="btn btn-primary" type="submit" value="edit" name="edit" title="Edit">Edit</button>
-                        <?php echo wp_nonce_field("oxiflipeditdata") ?>
+            <?php echo wp_nonce_field("oxiflipeditdata") ?>
                     </form>
                 </div>
                 <div class="oxilab-style-absulate-delete">
                     <form method="post" class="oxilab-style-absulate-delete-confirmation">
                         <input type="hidden" name="item-id" value="<?php echo esc_attr($id) ?>">
                         <button class="btn btn-danger" type="submit" value="delete" name="delete" title="Delete">Delete</button>
-                        <?php echo wp_nonce_field("oxiflipdeletedata") ?>
+            <?php echo wp_nonce_field("oxiflipdeletedata") ?>
                     </form>
                 </div>
             </div>
             <?php
         endif;
+    }
+
+    /**
+     * load constructor
+     *
+     * @since 2.0.0
+     */
+    public function __construct(array $dbdata = [], array $child = [], $admin = 'user') {
+        if (count($dbdata) > 0) :
+            $this->dbdata = $dbdata;
+            $this->child = $child;
+            $this->admin = $admin;
+            $this->loader();
+        endif;
+    }
+
+    /**
+     * Current element loader
+     *
+     * @since 2.0.0
+     */
+    public function loader() {
+        $this->oxiid = $this->dbdata['id'];
+        foreach ($this->child as $key => $value) {
+            $this->child[$key]['files'] = $value['files'] . '{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}';
+        }
+        $this->render();
+        $this->hooks();
+    }
+
+    /**
+     * front end loader css and js
+     *
+     * @since 2.0.0
+     */
+    public function public_loader() {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxi-animation', OXI_FLIP_BOX_URL . 'asset/frontend/css/animation.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('flip-box-addons-style', OXI_FLIP_BOX_URL . 'asset/frontend/css/style.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . 'asset/frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('flipbox-addons-jquery', OXI_FLIP_BOX_URL . 'asset/frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
 
 }

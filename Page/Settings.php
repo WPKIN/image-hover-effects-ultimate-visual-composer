@@ -24,35 +24,6 @@ class Settings {
     public $fontawesome;
     public $getfontawesome = [];
 
-    /**
-     * Constructor of Oxilab tabs Home Page
-     *
-     * @since 2.0.0
-     */
-    public function __construct() {
-        $this->admin();
-        $this->Render();
-    }
-
-    public function admin() {
-        global $wp_roles;
-        $this->roles = $wp_roles->get_names();
-        $this->saved_role = get_option('oxi_addons_user_permission');
-        $this->license = get_option('oxilab_flip_box_license_key');
-        $this->status = get_option('oxilab_flip_box_license_status');
-        $this->admin_ajax_load();
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_ajax_load() {
-        $this->admin_css_loader();
-        wp_enqueue_script('oxi-flip-settings', OXI_FLIP_BOX_URL . 'asset/backend/js/settings.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_localize_script('oxi-flip-settings', 'oxi_flip_box_settings', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
-    }
-
     public function Render() {
         ?>
         <div class="wrap">
@@ -74,8 +45,8 @@ class Settings {
                                         <select name="oxi_addons_user_permission" id="oxi_addons_user_permission">
         <?php foreach ($this->roles as $key => $role) { ?>
                                                 <option value="<?php echo esc_attr($key); ?>" <?php selected($this->saved_role, $key); ?>>
-            <?php echo esc_html($role); ?></option>
-                                            <?php } ?>
+                                                <?php echo esc_html($role); ?></option>
+                                                <?php } ?>
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_user_permission"></span>
                                         <br>
@@ -165,17 +136,17 @@ class Settings {
         ?>
                                     </span>
                                     <span class="oxi-addons-settings-connfirmation oxilab_flip_box_license_text">
-                                        <?php
-                                        if ($this->status == 'valid' && empty($this->license)) :
-                                            echo '<span class="oxi-addons-settings-massage">Pre Active</span>';
-                                        elseif ($this->status == 'valid' && !empty($this->license)) :
-                                            echo '<span class="oxi-addons-settings-massage">Active</span>';
-                                        elseif (!empty($this->license)) :
-                                            echo '<span class="oxi-addons-settings-massage">' . esc_html($this->status) . '</span>';
-                                        else :
-                                            echo '<span class="oxi-addons-settings-massage"></span>';
-                                        endif;
-                                        ?>
+        <?php
+        if ($this->status == 'valid' && empty($this->license)) :
+            echo '<span class="oxi-addons-settings-massage">Pre Active</span>';
+        elseif ($this->status == 'valid' && !empty($this->license)) :
+            echo '<span class="oxi-addons-settings-massage">Active</span>';
+        elseif (!empty($this->license)) :
+            echo '<span class="oxi-addons-settings-massage">' . esc_html($this->status) . '</span>';
+        else :
+            echo '<span class="oxi-addons-settings-massage"></span>';
+        endif;
+        ?>
                                     </span>
                                 </td>
                             </tr>
@@ -185,6 +156,35 @@ class Settings {
             </div>
         </div>
         <?php
+    }
+
+    /**
+     * Constructor of Oxilab tabs Home Page
+     *
+     * @since 2.0.0
+     */
+    public function __construct() {
+        $this->admin();
+        $this->Render();
+    }
+
+    public function admin() {
+        global $wp_roles;
+        $this->roles = $wp_roles->get_names();
+        $this->saved_role = get_option('oxi_addons_user_permission');
+        $this->license = get_option('oxilab_flip_box_license_key');
+        $this->status = get_option('oxilab_flip_box_license_status');
+        $this->admin_ajax_load();
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_ajax_load() {
+        $this->admin_css_loader();
+        wp_enqueue_script('oxi-flip-settings', OXI_FLIP_BOX_URL . 'asset/backend/js/settings.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_localize_script('oxi-flip-settings', 'oxi_flip_box_settings', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 
 }

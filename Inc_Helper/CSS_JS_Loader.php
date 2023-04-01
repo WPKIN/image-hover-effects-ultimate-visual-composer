@@ -8,30 +8,6 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
  */
 trait CSS_JS_Loader {
 
-    public function loader_font_familly_validation($data = []) {
-        foreach ($data as $value) {
-            wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
-        }
-    }
-
-    public function str_replace_first($from, $to, $content) {
-        $from = '/' . preg_quote($from, '/') . '/';
-        return preg_replace($from, $to, $content, 1);
-    }
-
-    public function admin_css() {
-        $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
-        wp_enqueue_style('oxilab-flip-box-bootstrap', OXI_FLIP_BOX_URL . 'asset/backend/css/bootstrap.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_style('font-awsome.min', OXI_FLIP_BOX_URL . 'asset/frontend/css/font-awsome.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_style('oxilab-admin-css', OXI_FLIP_BOX_URL . 'asset/backend/css/admin.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-    }
-
-    public function admin_js() {
-        wp_enqueue_script("jquery");
-        wp_enqueue_script('oxilab-popper', OXI_FLIP_BOX_URL . 'asset/backend/js/popper.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('oxilab-bootstrap', OXI_FLIP_BOX_URL . 'asset/backend/js/bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-    }
-
     /**
      * Admin Media Scripts.
      * Most of time using into Style Editing Page
@@ -80,6 +56,30 @@ trait CSS_JS_Loader {
         wp_enqueue_script('jquery.bootstrap-growl', OXI_FLIP_BOX_URL . 'asset/backend/js/jquery.bootstrap-growl.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('oxi-flip-box-addons-vendor', OXI_FLIP_BOX_URL . 'asset/backend/js/vendor.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         $this->admin_media_scripts();
+    }
+
+    public function loader_font_familly_validation($data = []) {
+        foreach ($data as $value) {
+            wp_enqueue_style('' . $value . '', 'https://fonts.googleapis.com/css?family=' . $value . '');
+        }
+    }
+
+    public function str_replace_first($from, $to, $content) {
+        $from = '/' . preg_quote($from, '/') . '/';
+        return preg_replace($from, $to, $content, 1);
+    }
+
+    public function admin_css() {
+        $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
+        wp_enqueue_style('oxilab-flip-box-bootstrap', OXI_FLIP_BOX_URL . 'asset/backend/css/bootstrap.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('font-awsome.min', OXI_FLIP_BOX_URL . 'asset/frontend/css/font-awsome.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('oxilab-admin-css', OXI_FLIP_BOX_URL . 'asset/backend/css/admin.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+    }
+
+    public function admin_js() {
+        wp_enqueue_script("jquery");
+        wp_enqueue_script('oxilab-popper', OXI_FLIP_BOX_URL . 'asset/backend/js/popper.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('oxilab-bootstrap', OXI_FLIP_BOX_URL . 'asset/backend/js/bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
 
 }

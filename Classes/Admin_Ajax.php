@@ -45,129 +45,6 @@ class Admin_Ajax {
         return self::$instance;
     }
 
-    /**
-     * Constructor of plugin class
-     *
-     * @since 3.1.0
-     */
-    public function __construct($type = '', $data = '', $styleid = '', $itemid = '') {
-        if (!empty($type) && !empty($data)) :
-
-            $user_permission = $this->check_user_permission();
-            if (!current_user_can($user_permission)) :
-                return wp_die('You do not have permission.');
-            endif;
-
-            global $wpdb;
-            $this->wpdb = $wpdb;
-            $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
-            $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
-            $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-            $this->$type($data, $styleid, $itemid);
-        endif;
-    }
-
-    public function array_replace($arr = [], $search = '', $replace = '') {
-        array_walk($arr, function (&$v) use ($search, $replace) {
-            $v = str_replace($search, $replace, $v);
-        });
-        return $arr;
-    }
-
-    public function allowed_html($rawdata) {
-        $allowed_tags = array(
-            'a' => array(
-                'class' => array(),
-                'href' => array(),
-                'rel' => array(),
-                'title' => array(),
-            ),
-            'abbr' => array(
-                'title' => array(),
-            ),
-            'b' => array(),
-            'br' => array(),
-            'blockquote' => array(
-                'cite' => array(),
-            ),
-            'cite' => array(
-                'title' => array(),
-            ),
-            'code' => array(),
-            'del' => array(
-                'datetime' => array(),
-                'title' => array(),
-            ),
-            'dd' => array(),
-            'div' => array(
-                'class' => array(),
-                'title' => array(),
-                'style' => array(),
-                'id' => array(),
-            ),
-            'table' => array(
-                'class' => array(),
-                'id' => array(),
-                'style' => array(),
-            ),
-            'button' => array(
-                'class' => array(),
-                'type' => array(),
-                'value' => array(),
-            ),
-            'thead' => array(),
-            'tbody' => array(),
-            'tr' => array(),
-            'td' => array(),
-            'dt' => array(),
-            'em' => array(),
-            'h1' => array(),
-            'h2' => array(),
-            'h3' => array(),
-            'h4' => array(),
-            'h5' => array(),
-            'h6' => array(),
-            'i' => array(
-                'class' => array(),
-            ),
-            'img' => array(
-                'alt' => array(),
-                'class' => array(),
-                'height' => array(),
-                'src' => array(),
-                'width' => array(),
-            ),
-            'li' => array(
-                'class' => array(),
-            ),
-            'ol' => array(
-                'class' => array(),
-            ),
-            'p' => array(
-                'class' => array(),
-            ),
-            'q' => array(
-                'cite' => array(),
-                'title' => array(),
-            ),
-            'span' => array(
-                'class' => array(),
-                'title' => array(),
-                'style' => array(),
-            ),
-            'strike' => array(),
-            'strong' => array(),
-            'ul' => array(
-                'class' => array(),
-            ),
-        );
-        if (is_array($rawdata)) :
-            return $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
-        else :
-            return wp_kses($rawdata, $allowed_tags);
-        endif;
-    }
-
     public function validate_post($rawdata) {
         if (is_array($rawdata)) :
             $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
@@ -595,6 +472,129 @@ class Admin_Ajax {
         $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
         $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
         $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+    }
+
+    /**
+     * Constructor of plugin class
+     *
+     * @since 3.1.0
+     */
+    public function __construct($type = '', $data = '', $styleid = '', $itemid = '') {
+        if (!empty($type) && !empty($data)) :
+
+            $user_permission = $this->check_user_permission();
+            if (!current_user_can($user_permission)) :
+                return wp_die('You do not have permission.');
+            endif;
+
+            global $wpdb;
+            $this->wpdb = $wpdb;
+            $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
+            $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
+            $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+            $this->$type($data, $styleid, $itemid);
+        endif;
+    }
+
+    public function array_replace($arr = [], $search = '', $replace = '') {
+        array_walk($arr, function (&$v) use ($search, $replace) {
+            $v = str_replace($search, $replace, $v);
+        });
+        return $arr;
+    }
+
+    public function allowed_html($rawdata) {
+        $allowed_tags = array(
+            'a' => array(
+                'class' => array(),
+                'href' => array(),
+                'rel' => array(),
+                'title' => array(),
+            ),
+            'abbr' => array(
+                'title' => array(),
+            ),
+            'b' => array(),
+            'br' => array(),
+            'blockquote' => array(
+                'cite' => array(),
+            ),
+            'cite' => array(
+                'title' => array(),
+            ),
+            'code' => array(),
+            'del' => array(
+                'datetime' => array(),
+                'title' => array(),
+            ),
+            'dd' => array(),
+            'div' => array(
+                'class' => array(),
+                'title' => array(),
+                'style' => array(),
+                'id' => array(),
+            ),
+            'table' => array(
+                'class' => array(),
+                'id' => array(),
+                'style' => array(),
+            ),
+            'button' => array(
+                'class' => array(),
+                'type' => array(),
+                'value' => array(),
+            ),
+            'thead' => array(),
+            'tbody' => array(),
+            'tr' => array(),
+            'td' => array(),
+            'dt' => array(),
+            'em' => array(),
+            'h1' => array(),
+            'h2' => array(),
+            'h3' => array(),
+            'h4' => array(),
+            'h5' => array(),
+            'h6' => array(),
+            'i' => array(
+                'class' => array(),
+            ),
+            'img' => array(
+                'alt' => array(),
+                'class' => array(),
+                'height' => array(),
+                'src' => array(),
+                'width' => array(),
+            ),
+            'li' => array(
+                'class' => array(),
+            ),
+            'ol' => array(
+                'class' => array(),
+            ),
+            'p' => array(
+                'class' => array(),
+            ),
+            'q' => array(
+                'cite' => array(),
+                'title' => array(),
+            ),
+            'span' => array(
+                'class' => array(),
+                'title' => array(),
+                'style' => array(),
+            ),
+            'strike' => array(),
+            'strong' => array(),
+            'ul' => array(
+                'class' => array(),
+            ),
+        );
+        if (is_array($rawdata)) :
+            return $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
+        else :
+            return wp_kses($rawdata, $allowed_tags);
+        endif;
     }
 
 }

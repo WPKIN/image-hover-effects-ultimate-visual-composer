@@ -4,21 +4,6 @@ namespace OXI_FLIP_BOX_PLUGINS\Modules;
 
 class Widget extends \WP_Widget {
 
-    function __construct() {
-        parent::__construct(
-                'oxi_flip_box_widget', esc_html__('Flipbox - Awesomes Flip Boxes Image Overlay', 'image-hover-effects-ultimate-visual-composer'), array('description' => esc_html__('Flipbox - Awesomes Flip Boxes Image Overlay', 'image-hover-effects-ultimate-visual-composer'),)
-        );
-    }
-
-    public function flip_register_flipwidget() {
-        register_widget($this);
-    }
-    public function update($new_instance, $old_instance) {
-        $instance = array();
-        $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
-        return $instance;
-    }
-
     public function widget($args, $instance) {
         $title = apply_filters('widget_title', $instance['title']);
         echo $args['before_widget'];
@@ -40,6 +25,20 @@ class Widget extends \WP_Widget {
         <?php
     }
 
-    
+    function __construct() {
+        parent::__construct(
+                'oxi_flip_box_widget', esc_html__('Flipbox - Awesomes Flip Boxes Image Overlay', 'image-hover-effects-ultimate-visual-composer'), array('description' => esc_html__('Flipbox - Awesomes Flip Boxes Image Overlay', 'image-hover-effects-ultimate-visual-composer'),)
+        );
+    }
+
+    public function flip_register_flipwidget() {
+        register_widget($this);
+    }
+
+    public function update($new_instance, $old_instance) {
+        $instance = array();
+        $instance['title'] = (!empty($new_instance['title']) ) ? strip_tags($new_instance['title']) : '';
+        return $instance;
+    }
 
 }

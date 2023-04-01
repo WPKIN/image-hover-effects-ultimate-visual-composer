@@ -120,8 +120,10 @@ background-size: 100% 100%;
                     <?php
                 endif;
             }
+            ?>
 
-
+        </div>
+            <?php
             $this->inline_css .= '.oxilab-flip-box-padding-' . $styleid . '{
                     padding: ' . $styledata[49] . 'px ' . $styledata[51] . 'px;
                 }
@@ -305,10 +307,6 @@ background-size: 100% 100%;
                     color:  ' . $styledata[25] . ';
                 }
                 ' . $styledata[149] . '';
-            ?>
+        }
 
-        </div>
-        <?php
     }
-
-}

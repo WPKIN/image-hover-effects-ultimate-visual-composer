@@ -41,42 +41,6 @@ class Home {
     use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
 
     /**
-     * Constructor of Oxilab tabs Home Page
-     *
-     * @since 2.0.0
-     */
-    public function __construct() {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
-        $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-        $this->CSSJS_load();
-        $this->Render();
-    }
-
-    public function database_data() {
-        return $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->parent_table WHERE type = %s ", 'flip'), ARRAY_A);
-    }
-
-    public function CSSJS_load() {
-        $this->manual_import_json();
-        $this->admin_css_loader();
-        $this->admin_home();
-        $this->admin_ajax_load();
-        apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_ajax_load() {
-        wp_enqueue_script('oxi-flip-box-home', OXI_FLIP_BOX_URL . 'asset/backend/js/home.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
-        wp_localize_script('oxi-flip-box-home', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
-    }
-
-    /**
      * Generate safe path
      * @since v1.0.0
      */
@@ -283,6 +247,42 @@ class Home {
                 endif;
             }
         }
+    }
+
+    /**
+     * Constructor of Oxilab tabs Home Page
+     *
+     * @since 2.0.0
+     */
+    public function __construct() {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
+        $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
+        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+        $this->CSSJS_load();
+        $this->Render();
+    }
+
+    public function database_data() {
+        return $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->parent_table WHERE type = %s ", 'flip'), ARRAY_A);
+    }
+
+    public function CSSJS_load() {
+        $this->manual_import_json();
+        $this->admin_css_loader();
+        $this->admin_home();
+        $this->admin_ajax_load();
+        apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_ajax_load() {
+        wp_enqueue_script('oxi-flip-box-home', OXI_FLIP_BOX_URL . 'asset/backend/js/home.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_localize_script('oxi-flip-box-home', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 
 }

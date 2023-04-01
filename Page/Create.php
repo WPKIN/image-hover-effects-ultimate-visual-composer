@@ -43,41 +43,6 @@ class Create {
     public $IMPORT = [];
     public $TEMPLATE;
 
-    /**
-     * Constructor of Oxilab tabs Home Page
-     *
-     * @since 2.0.0
-     */
-    public function __construct() {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
-        $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-        $this->CSSJS_load();
-        $this->Render();
-    }
-
-    public function CSSJS_load() {
-        $this->admin_css_loader();
-        $this->admin_ajax_load();
-        apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
-        $i = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->import_table WHERE type = %s", 'flip'), ARRAY_A);
-        foreach ($i as $value) {
-            $this->IMPORT[$value['name']] = $value;
-        }
-        $this->TEMPLATE = include OXI_FLIP_BOX_PATH . 'Page/JSON.php';
-    }
-
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_ajax_load() {
-        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . 'asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
-        wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
-    }
-
     public function Render() {
         ?>
         <div class="oxi-addons-row">
@@ -129,17 +94,17 @@ class Create {
                     <div class="oxi-addons-col-1" id="<?php echo esc_attr($key); ?>">
                         <div class="oxi-addons-style-preview">
                             <div class="oxi-addons-style-preview-top oxi-addons-center">
-                    <?php
-                    if (class_exists($C)) :
-                        foreach ($value as $k => $v) {
-                            $REND = json_decode($v, true);
-                            echo '<div class="oxilab-flip-box-col-3">';
-                            new $C($REND['style'], $REND['child']);
-                            echo '<textarea style="display:none" id="oxistyle' . esc_attr($number) . 'data-' . esc_attr($k) . '">' . htmlentities(json_encode($REND)) . '</textarea>';
-                            echo '</div>';
-                        }
-                    endif;
-                    ?>
+                <?php
+                if (class_exists($C)) :
+                    foreach ($value as $k => $v) {
+                        $REND = json_decode($v, true);
+                        echo '<div class="oxilab-flip-box-col-3">';
+                        new $C($REND['style'], $REND['child']);
+                        echo '<textarea style="display:none" id="oxistyle' . esc_attr($number) . 'data-' . esc_attr($k) . '">' . htmlentities(json_encode($REND)) . '</textarea>';
+                        echo '</div>';
+                    }
+                endif;
+                ?>
                             </div>
                             <div class="oxi-addons-style-preview-bottom">
                                 <div class="oxi-addons-style-preview-bottom-left">
@@ -160,11 +125,11 @@ class Create {
         }
         ?>
         </div>
-        <?php
-    }
+            <?php
+        }
 
-    public function create_new() {
-        ?>
+        public function create_new() {
+            ?>
         <div class="oxi-addons-row">
             <div class="oxi-addons-col-1 oxi-import">
                 <div class="oxi-addons-style-preview">
@@ -225,6 +190,41 @@ class Create {
             </form>
         </div>
         <?php
+    }
+
+    /**
+     * Constructor of Oxilab tabs Home Page
+     *
+     * @since 2.0.0
+     */
+    public function __construct() {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
+        $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
+        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+        $this->CSSJS_load();
+        $this->Render();
+    }
+
+    public function CSSJS_load() {
+        $this->admin_css_loader();
+        $this->admin_ajax_load();
+        apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
+        $i = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->import_table WHERE type = %s", 'flip'), ARRAY_A);
+        foreach ($i as $value) {
+            $this->IMPORT[$value['name']] = $value;
+        }
+        $this->TEMPLATE = include OXI_FLIP_BOX_PATH . 'Page/JSON.php';
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_ajax_load() {
+        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . 'asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 
 }
