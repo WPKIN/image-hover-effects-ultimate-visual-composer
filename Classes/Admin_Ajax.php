@@ -54,6 +54,30 @@ class Admin_Ajax {
         return $rawdata;
     }
 
+    public function addons_rearrange($data = '', $styleid = '', $itemid = '') {
+        $user_permission = $this->check_user_permission();
+        if (!current_user_can($user_permission)) :
+            return wp_die('You do not have permission.');
+        endif;
+        $list = explode(',', $data);
+        foreach ($list as $value) {
+            if (!(int) $list) :
+                return;
+            endif;
+            $data = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE id = %d ", $value), ARRAY_A);
+            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, files, css) VALUES (%d, %s, %s)", array($data['styleid'], $data['files'], $data['css'])));
+            $redirect_id = $this->wpdb->insert_id;
+            if ($redirect_id == 0) {
+                return;
+            }
+            if ($redirect_id != 0) {
+                $this->wpdb->query($this->wpdb->prepare("DELETE FROM $this->child_table WHERE id = %d", $value));
+            }
+        }
+        echo 'success';
+        return;
+    }
+
     public function create_flip($data = '', $styleid = '', $itemid = '') {
         $user_permission = $this->check_user_permission();
         if (!current_user_can($user_permission)) :
@@ -91,30 +115,6 @@ class Admin_Ajax {
                 echo admin_url("admin.php?page=oxi-flip-box-ultimate-new&styleid=$redirect_id");
             endif;
         endif;
-        return;
-    }
-
-    public function addons_rearrange($data = '', $styleid = '', $itemid = '') {
-        $user_permission = $this->check_user_permission();
-        if (!current_user_can($user_permission)) :
-            return wp_die('You do not have permission.');
-        endif;
-        $list = explode(',', $data);
-        foreach ($list as $value) {
-            if (!(int) $list) :
-                return;
-            endif;
-            $data = $this->wpdb->get_row($this->wpdb->prepare("SELECT * FROM $this->child_table WHERE id = %d ", $value), ARRAY_A);
-            $this->wpdb->query($this->wpdb->prepare("INSERT INTO {$this->child_table} (styleid, files, css) VALUES (%d, %s, %s)", array($data['styleid'], $data['files'], $data['css'])));
-            $redirect_id = $this->wpdb->insert_id;
-            if ($redirect_id == 0) {
-                return;
-            }
-            if ($redirect_id != 0) {
-                $this->wpdb->query($this->wpdb->prepare("DELETE FROM $this->child_table WHERE id = %d", $value));
-            }
-        }
-        echo 'success';
         return;
     }
 
@@ -596,5 +596,4 @@ class Admin_Ajax {
             return wp_kses($rawdata, $allowed_tags);
         endif;
     }
-
 }

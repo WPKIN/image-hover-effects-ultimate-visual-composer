@@ -4,6 +4,38 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
 
 trait Admin_helper {
 
+    public function SupportAndComments($agr) {
+
+        if (get_option('oxi_flipbox_support_massage') == 'no') :
+            return;
+        endif;
+        ?>
+        <div class="oxi-addons-admin-notifications">
+            <h3>
+                <span class="dashicons dashicons-flag"></span>
+                Trouble or Need Support?
+            </h3>
+            <p></p>
+            <div class="oxi-addons-admin-notifications-holder">
+                <div class="oxi-addons-admin-notifications-alert">
+                    <p>Unable to create your desire design or need any help? <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer#new-post">Ask any question</a> and get reply from our expert members. We will be glad to answer any question you may have about our plugin.</p>
+                    <?php
+                    if (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE) :
+                        ?>
+                        <p>By the way, did you know we also have a <a href="https://oxilabdemos.com/flipbox/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>
+                        <p>Thanks Again!</p>
+                        <?php
+                    endif;
+                    ?>
+
+                    <p></p>
+                </div>
+            </div>
+            <p></p>
+        </div>
+        <?php
+    }
+
     /**
      * Plugin Admin Top Menu
      *
@@ -40,26 +72,26 @@ trait Admin_helper {
                 </div>
                 <nav class="oxilab-sa-admin-nav">
                     <ul class="oxilab-sa-admin-menu">
-        <?php
-        $GETPage = sanitize_text_field($_GET['page']);
+                        <?php
+                        $GETPage = sanitize_text_field($_GET['page']);
 
-        foreach ($response as $key => $value) {
-            ?>
+                        foreach ($response as $key => $value) {
+                            ?>
                             <li <?php
                             if ($GETPage == $value['homepage']) :
 
                                 echo ' class="active" ';
                             endif;
                             ?>><a href="<?php echo esc_url($this->admin_url_convert($value['homepage'])); ?>"><?php echo esc_html($this->name_converter($value['name'])); ?></a></li>
-                            <?php
+                                <?php
                             }
                             ?>
 
                     </ul>
                     <ul class="oxilab-sa-admin-menu2">
-        <?php
-        if (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE) :
-            ?>
+                        <?php
+                        if (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE) :
+                            ?>
                             <li class="fazil-class"><a target="_blank" href="https://oxilabdemos.com/flipbox/pricing/">Upgrade</a></li>
                             <?php
                         endif;
@@ -71,38 +103,6 @@ trait Admin_helper {
                     </ul>
                 </nav>
             </div>
-        </div>
-        <?php
-    }
-
-    public function SupportAndComments($agr) {
-
-        if (get_option('oxi_flipbox_support_massage') == 'no') :
-            return;
-        endif;
-        ?>
-        <div class="oxi-addons-admin-notifications">
-            <h3>
-                <span class="dashicons dashicons-flag"></span>
-                Trouble or Need Support?
-            </h3>
-            <p></p>
-            <div class="oxi-addons-admin-notifications-holder">
-                <div class="oxi-addons-admin-notifications-alert">
-                    <p>Unable to create your desire design or need any help? <a href="https://wordpress.org/support/plugin/image-hover-effects-ultimate-visual-composer#new-post">Ask any question</a> and get reply from our expert members. We will be glad to answer any question you may have about our plugin.</p>
-                    <?php
-                    if (apply_filters('oxi-flip-box-plugin/pro_version', false) == FALSE) :
-                        ?>
-                        <p>By the way, did you know we also have a <a href="https://oxilabdemos.com/flipbox/pricing/">Premium Version</a>? It offers lots of options with automatic update. It also comes with 16/5 personal support.</p>
-                        <p>Thanks Again!</p>
-                        <?php
-                    endif;
-                    ?>
-
-                    <p></p>
-                </div>
-            </div>
-            <p></p>
         </div>
         <?php
     }
@@ -312,5 +312,4 @@ trait Admin_helper {
         </style>
         <?php
     }
-
 }

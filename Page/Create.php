@@ -43,31 +43,6 @@ class Create {
     public $IMPORT = [];
     public $TEMPLATE;
 
-    public function Render() {
-        ?>
-        <div class="oxi-addons-row">
-        <?php
-        $this->Admin_header();
-        $this->template();
-        $this->create_new();
-        ?>
-        </div>
-            <?php
-        }
-
-        public function Admin_header() {
-            apply_filters('oxi-flip-box-support-and-comments', TRUE);
-            ?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Flipbox › Create New
-                </h1>
-                <p> Select Flipbox layouts, Gives your Flipbox name and create new Flipbox. </p>
-            </div>
-        </div>
-        <?php
-    }
-
     public function template() {
         ?>
         <div class="oxi-addons-row">
@@ -128,8 +103,33 @@ class Create {
             <?php
         }
 
-        public function create_new() {
+        public function Render() {
             ?>
+        <div class="oxi-addons-row">
+            <?php
+            $this->Admin_header();
+            $this->template();
+            $this->create_new();
+            ?>
+        </div>
+        <?php
+    }
+
+    public function Admin_header() {
+        apply_filters('oxi-flip-box-support-and-comments', TRUE);
+        ?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Flipbox › Create New
+                </h1>
+                <p> Select Flipbox layouts, Gives your Flipbox name and create new Flipbox. </p>
+            </div>
+        </div>
+        <?php
+    }
+
+    public function create_new() {
+        ?>
         <div class="oxi-addons-row">
             <div class="oxi-addons-col-1 oxi-import">
                 <div class="oxi-addons-style-preview">
@@ -226,5 +226,4 @@ class Create {
         wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . 'asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
-
 }

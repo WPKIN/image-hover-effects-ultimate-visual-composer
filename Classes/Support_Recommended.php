@@ -19,21 +19,6 @@ class Support_Recommended {
     public $get_plugins = [];
     public $current_plugins = 'image-hover-effects-ultimate-visual-composer/index.php';
 
-    public function extension() {
-        $response = get_transient(self::GET_LOCAL_PLUGINS);
-        if (!$response || !is_array($response)) {
-            $URL = self::PLUGINS;
-            $request = wp_remote_request($URL);
-            if (!is_wp_error($request)) {
-                $response = json_decode(wp_remote_retrieve_body($request), true);
-                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
-            } else {
-                $response = $request->get_error_message();
-            }
-        }
-        $this->get_plugins = $response;
-    }
-
     /**
      * First Installation Track
      * @return void
@@ -95,6 +80,21 @@ class Support_Recommended {
         endif;
     }
 
+    public function extension() {
+        $response = get_transient(self::GET_LOCAL_PLUGINS);
+        if (!$response || !is_array($response)) {
+            $URL = self::PLUGINS;
+            $request = wp_remote_request($URL);
+            if (!is_wp_error($request)) {
+                $response = json_decode(wp_remote_retrieve_body($request), true);
+                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
+            } else {
+                $response = $request->get_error_message();
+            }
+        }
+        $this->get_plugins = $response;
+    }
+
     /**
      * Admin Notice CSS file loader
      * @return void
@@ -150,5 +150,4 @@ class Support_Recommended {
         add_action('admin_notices', array($this, 'dismiss_button_scripts'));
         add_action('wp_ajax_oxi_flip_admin_recommended', array($this, 'notice_dissmiss'));
     }
-
 }

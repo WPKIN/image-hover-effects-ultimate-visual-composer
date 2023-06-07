@@ -14,10 +14,6 @@ class Welcome {
         $this->Public_Render();
     }
 
-    public function admin_css() {
-        wp_enqueue_style('flip-box-admin-welcome', OXI_FLIP_BOX_URL . 'asset/backend/css/admin-welcome.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-    }
-
     public function Public_Render() {
         ?>
         <div class="wrap about-wrap">
@@ -64,4 +60,7 @@ class Welcome {
         <?php
     }
 
+    public function admin_css() {
+        wp_enqueue_style('flip-box-admin-welcome', OXI_FLIP_BOX_URL . 'asset/backend/css/admin-welcome.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+    }
 }

@@ -19,30 +19,6 @@ class Import {
     public $import_table;
     public $TEMPLATE;
 
-    public function CSSJS_load() {
-        $this->admin_css_loader();
-        $this->admin_ajax_load();
-        apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
-        $import = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->import_table WHERE type = %s ", 'flip'), ARRAY_A);
-        foreach ($import as $value) {
-            $this->IMPORT[$value['name']] = $value['name'];
-        }
-        $this->TEMPLATE = include OXI_FLIP_BOX_PATH . 'Page/JSON.php';
-    }
-
-    public function Admin_header() {
-        apply_filters('oxi-flip-box-support-and-comments', TRUE);
-        ?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Flipbox › Import Template
-                </h1>
-                <p> Select Flip layouts and Import For Create Shortcode. </p>
-            </div>
-        </div>
-        <?php
-    }
-
     public function template() {
         ?>
         <div class="oxi-addons-row">
@@ -101,6 +77,30 @@ class Import {
         <?php
     }
 
+    public function CSSJS_load() {
+        $this->admin_css_loader();
+        $this->admin_ajax_load();
+        apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
+        $import = $this->wpdb->get_results($this->wpdb->prepare("SELECT * FROM  $this->import_table WHERE type = %s ", 'flip'), ARRAY_A);
+        foreach ($import as $value) {
+            $this->IMPORT[$value['name']] = $value['name'];
+        }
+        $this->TEMPLATE = include OXI_FLIP_BOX_PATH . 'Page/JSON.php';
+    }
+
+    public function Admin_header() {
+        apply_filters('oxi-flip-box-support-and-comments', TRUE);
+        ?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Flipbox › Import Template
+                </h1>
+                <p> Select Flip layouts and Import For Create Shortcode. </p>
+            </div>
+        </div>
+        <?php
+    }
+
     /**
      * Constructor of Oxilab tabs Home Page
      *
@@ -135,5 +135,4 @@ class Import {
         wp_enqueue_script('oxi-flip-import', OXI_FLIP_BOX_URL . 'asset/backend/js/import.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-import', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
-
 }

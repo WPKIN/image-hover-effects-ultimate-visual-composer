@@ -48,34 +48,6 @@ class Bootstrap {
 
     const ADMINMENU = 'get_oxilab_addons_menu';
 
-    /**
-     * Shortcode loader
-     *
-     * @since 3.1.0
-     * @access public
-     */
-    protected function Shortcode_loader() {
-        add_shortcode('oxilab_flip_box', [$this, 'wp_shortcode']);
-        new \OXI_FLIP_BOX_PLUGINS\Modules\Visual_Composer();
-        $Flipbox_Widget = new \OXI_FLIP_BOX_PLUGINS\Modules\Widget();
-        add_filter('widget_text', 'do_shortcode');
-        add_action('widgets_init', array($Flipbox_Widget, 'flip_register_flipwidget'));
-    }
-
-    /**
-     * Execute Shortcode
-     *
-     * @since 3.1.0
-     * @access public
-     */
-    public function wp_shortcode($atts) {
-        extract(shortcode_atts(array('id' => ' ',), $atts));
-        $styleid = $atts['id'];
-        ob_start();
-        $this->shortcode_render($styleid, 'user');
-        return ob_get_clean();
-    }
-
     public function Public_loader() {
         global $wpdb;
         $this->wpdb = $wpdb;
@@ -107,6 +79,34 @@ class Bootstrap {
         return self::$instance;
     }
 
+    /**
+     * Shortcode loader
+     *
+     * @since 3.1.0
+     * @access public
+     */
+    protected function Shortcode_loader() {
+        add_shortcode('oxilab_flip_box', [$this, 'wp_shortcode']);
+        new \OXI_FLIP_BOX_PLUGINS\Modules\Visual_Composer();
+        $Flipbox_Widget = new \OXI_FLIP_BOX_PLUGINS\Modules\Widget();
+        add_filter('widget_text', 'do_shortcode');
+        add_action('widgets_init', array($Flipbox_Widget, 'flip_register_flipwidget'));
+    }
+
+    /**
+     * Execute Shortcode
+     *
+     * @since 3.1.0
+     * @access public
+     */
+    public function wp_shortcode($atts) {
+        extract(shortcode_atts(array('id' => ' ',), $atts));
+        $styleid = $atts['id'];
+        ob_start();
+        $this->shortcode_render($styleid, 'user');
+        return ob_get_clean();
+    }
+
     public function __construct() {
         do_action('oxi-flip-box-plugin/before_init');
         // Load translation
@@ -129,5 +129,4 @@ class Bootstrap {
     public function i18n() {
         load_plugin_textdomain('oxi-flip-box-plugin');
     }
-
 }

@@ -20,24 +20,6 @@ trait CSS_JS_Loader {
         wp_enqueue_script('oxi-flip-box_media_scripts');
     }
 
-    public function admin_css_loader() {
-        $this->admin_css();
-        $this->admin_js();
-    }
-
-    public function admin_home() {
-        wp_enqueue_script("jquery");
-        wp_enqueue_script('jquery-ui-core');
-        wp_enqueue_script('jquery-ui-widget');
-        wp_enqueue_script('jquery-ui-mouse');
-        wp_enqueue_script('jquery-ui-accordion');
-        wp_enqueue_script('jquery-ui-autocomplete');
-        wp_enqueue_script('jquery-ui-slider');
-        wp_enqueue_script('jquery-ui-draggable');
-        wp_enqueue_script('jquery.dataTables.min', OXI_FLIP_BOX_URL . 'asset/backend/js/jquery.dataTables.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('dataTables.bootstrap.min', OXI_FLIP_BOX_URL . 'asset/backend/js/dataTables.bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-    }
-
     public function admin_elements_frontend_loader() {
         $this->admin_css_loader();
         wp_enqueue_script("jquery");
@@ -69,6 +51,24 @@ trait CSS_JS_Loader {
         return preg_replace($from, $to, $content, 1);
     }
 
+    public function admin_css_loader() {
+        $this->admin_css();
+        $this->admin_js();
+    }
+
+    public function admin_home() {
+        wp_enqueue_script("jquery");
+        wp_enqueue_script('jquery-ui-core');
+        wp_enqueue_script('jquery-ui-widget');
+        wp_enqueue_script('jquery-ui-mouse');
+        wp_enqueue_script('jquery-ui-accordion');
+        wp_enqueue_script('jquery-ui-autocomplete');
+        wp_enqueue_script('jquery-ui-slider');
+        wp_enqueue_script('jquery-ui-draggable');
+        wp_enqueue_script('jquery.dataTables.min', OXI_FLIP_BOX_URL . 'asset/backend/js/jquery.dataTables.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('dataTables.bootstrap.min', OXI_FLIP_BOX_URL . 'asset/backend/js/dataTables.bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+    }
+
     public function admin_css() {
         $this->loader_font_familly_validation(['Bree+Serif', 'Source+Sans+Pro']);
         wp_enqueue_style('oxilab-flip-box-bootstrap', OXI_FLIP_BOX_URL . 'asset/backend/css/bootstrap.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
@@ -81,5 +81,4 @@ trait CSS_JS_Loader {
         wp_enqueue_script('oxilab-popper', OXI_FLIP_BOX_URL . 'asset/backend/js/popper.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('oxilab-bootstrap', OXI_FLIP_BOX_URL . 'asset/backend/js/bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
-
 }

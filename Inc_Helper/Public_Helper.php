@@ -8,30 +8,6 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
  */
 trait Public_Helper {
 
-    /**
-     * Plugin Name Convert to View
-     *
-     * @since 2.0.0
-     */
-    public function name_converter($data) {
-        $data = str_replace('_', ' ', $data);
-        $data = str_replace('-', ' ', $data);
-        $data = str_replace('+', ' ', $data);
-        return ucwords($data);
-    }
-
-    public function icon_font_selector($data) {
-        $icon = explode(' ', $data);
-        $fadata = get_option('oxi_addons_font_awesome');
-        $faversion = get_option('oxi_addons_font_awesome_version');
-        $faversion = explode('||', $faversion);
-        if ($fadata != 'no') {
-            wp_enqueue_style('font-awesome-' . $faversion[0], $faversion[1]);
-        }
-        $files = '<i class="' . $data . ' oxi-icons"></i>';
-        return $files;
-    }
-
     public function html_special_charecter($data) {
         $data = html_entity_decode($data);
         $data = str_replace("\'", "'", $data);
@@ -59,6 +35,30 @@ trait Public_Helper {
         endif;
     }
 
+    /**
+     * Plugin Name Convert to View
+     *
+     * @since 2.0.0
+     */
+    public function name_converter($data) {
+        $data = str_replace('_', ' ', $data);
+        $data = str_replace('-', ' ', $data);
+        $data = str_replace('+', ' ', $data);
+        return ucwords($data);
+    }
+
+    public function icon_font_selector($data) {
+        $icon = explode(' ', $data);
+        $fadata = get_option('oxi_addons_font_awesome');
+        $faversion = get_option('oxi_addons_font_awesome_version');
+        $faversion = explode('||', $faversion);
+        if ($fadata != 'no') {
+            wp_enqueue_style('font-awesome-' . $faversion[0], $faversion[1]);
+        }
+        $files = '<i class="' . $data . ' oxi-icons"></i>';
+        return $files;
+    }
+
     public function font_familly_charecter($data) {
 
 
@@ -84,5 +84,4 @@ trait Public_Helper {
 
         return $data;
     }
-
 }

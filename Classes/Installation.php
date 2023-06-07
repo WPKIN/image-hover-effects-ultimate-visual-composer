@@ -24,32 +24,6 @@ class Installation {
     }
 
     /**
-     * Plugin upgrade hook
-     *
-     * @since 1.0.0
-     */
-    public function plugin_upgrade_hook($upgrader_object, $options) {
-        if ($options['action'] == 'update' && $options['type'] == 'plugin') {
-            if (isset($options['plugins'][OXI_FLIP_BOX_TEXTDOMAIN])) {
-
-                $this->Flip_Datatase();
-            }
-        }
-    }
-
-    /**
-     * Plugin activation hook
-     *
-     * @since 3.1.0
-     */
-    public function plugin_activation_hook() {
-
-        $this->Flip_Datatase();
-        // Redirect to options page
-        set_transient('oxi_flip_box_activation_redirect', true, 30);
-    }
-
-    /**
      * Access plugin instance. You can create further instances by calling
      */
     public static function get_instance() {
@@ -103,4 +77,29 @@ class Installation {
         (5, 'flip')");
     }
 
+    /**
+     * Plugin upgrade hook
+     *
+     * @since 1.0.0
+     */
+    public function plugin_upgrade_hook($upgrader_object, $options) {
+        if ($options['action'] == 'update' && $options['type'] == 'plugin') {
+            if (isset($options['plugins'][OXI_FLIP_BOX_TEXTDOMAIN])) {
+
+                $this->Flip_Datatase();
+            }
+        }
+    }
+
+    /**
+     * Plugin activation hook
+     *
+     * @since 3.1.0
+     */
+    public function plugin_activation_hook() {
+
+        $this->Flip_Datatase();
+        // Redirect to options page
+        set_transient('oxi_flip_box_activation_redirect', true, 30);
+    }
 }

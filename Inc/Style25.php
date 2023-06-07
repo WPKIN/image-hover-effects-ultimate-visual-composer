@@ -126,7 +126,7 @@ class Style25 extends Admin_Render {
                 . ' flip-box-image-upload-url-02 {#}|{#}' . sanitize_url($_POST['flip-box-image-upload-url-02']) . '{#}|{#}'
                 . '  {#}|{#}{#}|{#}'
                 . ' flip-box-backend-title {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-title']) . '{#}|{#}'
-                  . ' flip-box-image-upload-url-01 {#}|{#}' . sanitize_text_field($_POST['flip-box-image-upload-url-01-alt']) . '{#}|{#}';
+                . ' flip-box-image-upload-url-01 {#}|{#}' . sanitize_text_field($_POST['flip-box-image-upload-url-01-alt']) . '{#}|{#}';
         return $data;
     }
 
@@ -137,23 +137,23 @@ class Style25 extends Admin_Render {
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         General Settings
-                    </div> 
+                    </div>
                     <?php
                     $this->oxilab_flip_box_flip_type_effects_type($this->style[1], $this->style[3]);
                     $this->oxilab_flip_box_admin_col_data('flip-col', $this->style[43], 'Item per Rows', 'How many item shows in single Rows');
                     $this->oxilab_flip_box_admin_number('flip-width', $this->style[45], '1', 'Width', 'Give your Filp Width');
                     $this->oxilab_flip_box_admin_number('flip-height', $this->style[47], '1', 'Height', 'Give your Flip Height');
                     $this->oxilab_flip_box_admin_number('flip-border-radius', $this->style[153], '1', 'Border Radius', 'Set your flip Border Radius');
-                    ?>    
-                </div> 
+                    ?>
+                </div>
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         Optional Settings
-                    </div>  
+                    </div>
                     <?php
                     $this->oxilab_flip_box_admin_number_double('margin-top', $this->style[49], 'margin-left', $this->style[51], 'Margin', 'Set your Margin top bottom and left right');
                     $this->oxilab_flip_box_admin_true_false('flip-open-tabs', $this->style[53], 'New tabs', '_blank', 'Normal', '', 'Link Open', 'Dow you want to open link at same Tabs or new Windows');
-                    ?> 
+                    ?>
                 </div>
             </div>
             <div class="oxi-addons-col-6">
@@ -164,8 +164,8 @@ class Style25 extends Admin_Render {
                     <?php
                     $this->oxilab_flip_box_admin_animation_select($this->style[55]);
                     $this->oxilab_flip_box_admin_number('animation-duration', $this->style[57], '0.1', 'Animation Duration', 'Give your Animation Duration into Second');
-                    ?> 
-                </div> 
+                    ?>
+                </div>
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         Box Shadow
@@ -174,8 +174,8 @@ class Style25 extends Admin_Render {
                     $this->oxilab_flip_box_admin_color('flip-boxshow-color', $this->style[59], 'rgba', 'Color', 'Give your Box Shadow Color', '', '');
                     $this->oxilab_flip_box_admin_number_double('flip-boxshow-horizontal', $this->style[61], 'flip-boxshow-vertical', $this->style[63], 'Shadow Length', 'Giveyour Box Shadow lenth as horizontal and vertical');
                     $this->oxilab_flip_box_admin_number_double('flip-boxshow-blur', $this->style[65], 'flip-boxshow-spread', $this->style[67], 'Shadow Radius', 'Giveyour Box Shadow Radius as Blur and Spread');
-                    ?> 
-                </div> 
+                    ?>
+                </div>
             </div>
         </div>
         <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-4">
@@ -183,15 +183,15 @@ class Style25 extends Admin_Render {
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         General Settings
-                    </div> 
+                    </div>
                     <?php
                     $this->oxilab_flip_box_admin_color('front-background-color', $this->style[5], 'rgba', 'Background Color', 'Set your Front Background Color', 'background-color', '.oxilab-flip-box-body-' . $this->oxiid . ' .oxilab-flip-box-front');
                     $this->oxilab_flip_box_admin_number('front-padding-top', $this->style[71], '', 'Inner Padding', 'Set your Front Padding.');
                     $this->oxilab_flip_box_admin_number('front-margin-top-bottom', $this->style[105], '', 'Image Padding', 'Set your Front Margin as Top Bottom and Left Right');
                     $this->oxilab_flip_box_admin_color('front-border-color', $this->style[9], '', 'Border Color', 'Set your Border Color', 'border-color', '.oxilab-flip-box-' . $this->oxiid . '');
                     $this->oxilab_flip_box_admin_border('flip-col-border-size', $this->style[159], 'flip-col-border-style', $this->style[161], 'Border Size', 'Set your front border size with different style');
-                    ?>    
-                </div> 
+                    ?>
+                </div>
             </div>
         </div>
         <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-3">
@@ -199,15 +199,15 @@ class Style25 extends Admin_Render {
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         General Settings
-                    </div> 
+                    </div>
                     <?php
                     $this->oxilab_flip_box_admin_color('backend-background-color', $this->style[15], 'rgba', 'Background Color', 'Set your Backend Background Color', 'background-color', '.oxilab-flip-box-body-' . $this->oxiid . ' .oxilab-flip-box-back');
                     $this->oxilab_flip_box_admin_number('backend-border-padding-top', $this->style[163], '', 'Padding', 'Set your backend border Padding.');
                     $this->oxilab_flip_box_admin_number_double('backend-padding-top', $this->style[101], 'backend-padding-left', $this->style[103], 'Inner Padding', 'Set your Backend Padding as Top Bottom and Left Right');
                     $this->oxilab_flip_box_admin_color('backend-border-color', $this->style[17], '', 'Border Color', 'Set your Border Color', 'border-color', '.oxilab-flip-box-back-' . $this->oxiid . '');
                     $this->oxilab_flip_box_admin_border('flip-backend-border-size', $this->style[151], 'flip-backend-border-style', $this->style[149], 'Border Size', 'Set your backend border size with different style');
-                    ?>    
-                </div> 
+                    ?>
+                </div>
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         Heading Settings
@@ -221,24 +221,24 @@ class Style25 extends Admin_Render {
                     $this->oxilab_flip_box_admin_text_align('backend-heading-text-align', $this->style[189], 'Text Align', 'Give your Heading Text Align');
                     $this->oxilab_flip_box_admin_number_double('backend-heading-padding-top', $this->style[191], 'backend-heading-padding-bottom', $this->style[193], 'Padding Top Bottom', 'Set Your backend Heading  Padding Top and Bottom');
                     $this->oxilab_flip_box_admin_number_double('backend-heading-padding-left', $this->style[195], 'backend-heading-padding-right', $this->style[197], 'Padding Left Right', 'Set Your backend Heading  Padding Left and Right');
-                    ?> 
-                </div>                                            
+                    ?>
+                </div>
             </div>
             <div class="oxi-addons-col-6">
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         Backend Title Border
-                    </div> 
+                    </div>
                     <?php
                     $this->oxilab_flip_box_admin_number('backend-title-border-width', $this->style[155], '1', 'Border Width', 'Set your Backend Title Bottom Border Width');
                     $this->oxilab_flip_box_admin_number('backend-title-border-height', $this->style[157], '1', 'Border Height', 'Set your Backend Title Bottom Border Height');
                     $this->oxilab_flip_box_admin_color('backend-title-bottom-border-color', $this->style[7], '', 'Title Bottom Color', 'Set your Backend Title Bottom Border Color', 'background-color', '.oxilab-flip-box-back-' . $this->oxiid . '-data .oxilab-heading .oxilab-span');
-                    ?>    
-                </div> 
+                    ?>
+                </div>
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         Backend Info
-                    </div>  
+                    </div>
                     <?php
                     $this->oxilab_flip_box_admin_number('backend-info-size', $this->style[107], '1', 'Font Size', 'Set your Backend Info Font Size');
                     $this->oxilab_flip_box_admin_color('backend-info-color', $this->style[19], '', 'Text Color', 'Set your Backend Info Color', 'color', '.oxilab-flip-box-back-' . $this->oxiid . '-data .oxilab-info');
@@ -248,10 +248,10 @@ class Style25 extends Admin_Render {
                     $this->oxilab_flip_box_admin_text_align('backend-info-text-align', $this->style[115], 'Text Align', 'Give your Backend Info Text Align');
                     $this->oxilab_flip_box_admin_number_double('backend-info-padding-top', $this->style[117], 'backend-info-padding-bottom', $this->style[119], 'Padding Top Bottom', 'Set Your Backend Info  Padding Top and Bottom');
                     $this->oxilab_flip_box_admin_number_double('backend-info-padding-left', $this->style[121], 'backend-info-padding-right', $this->style[123], 'Padding Left Right', 'Set Your Backend Info  Padding Left and Right');
-                    ?> 
-                </div>                                                                                                                                  
+                    ?>
+                </div>
             </div>
-        </div> 
+        </div>
         <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-2">
             <div class="col-xs-12 p-2">
                 <div class="form-group">
@@ -270,6 +270,10 @@ class Style25 extends Admin_Render {
         <?php
     }
 
+    public function Rearrange() {
+        return ['tag' => 'title', 'id' => 17];
+    }
+
     public function modal_form_data() {
         ?>
         <div class="modal-header">
@@ -281,7 +285,7 @@ class Style25 extends Admin_Render {
         <div class="modal-body row">
             <?php
             $this->image_upload('flip-box-image-upload-url-01', $this->child_editable[5], 'Front Image', 'Add or modify your front image.', $this->child_editable[19]);
-            ?>                                           
+            ?>
         </div>
         <div class="modal-header">
             <h5 class="modal-title">Backend Settings</h5>
@@ -295,13 +299,8 @@ class Style25 extends Admin_Render {
             $this->oxilab_flip_box_admin_input_text_area('flip-box-backend-desc', $this->child_editable[7], 'Backend Info:', 'Add backend Info text unless make it blank.');
             $this->oxilab_flip_box_admin_input_text('flip-box-backend-link', $this->child_editable[11], 'Link', 'Add your desire link or url unless make it blank');
             $this->image_upload('flip-box-image-upload-url-02', $this->child_editable[13], 'Backend Background Image', 'Add or Modify Your Backend Background Image. Unless make it blank.');
-            ?>                                            
+            ?>
         </div>
         <?php
     }
-
-    public function Rearrange() {
-        return ['tag' => 'title', 'id' => 17];
-    }
-
 }

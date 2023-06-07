@@ -53,18 +53,18 @@ class Home {
     public function Render() {
         ?>
         <div class="oxi-addons-row">
-        <?php
-        $this->Admin_header();
-        $this->created_shortcode();
-        $this->create_new();
-        ?>
-        </div>
             <?php
-        }
-
-        public function Admin_header() {
-            apply_filters('oxi-flip-box-support-and-comments', TRUE);
+            $this->Admin_header();
+            $this->created_shortcode();
+            $this->create_new();
             ?>
+        </div>
+        <?php
+    }
+
+    public function Admin_header() {
+        apply_filters('oxi-flip-box-support-and-comments', TRUE);
+        ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-import-layouts">
                 <h1>Flipbox › Home
@@ -73,20 +73,6 @@ class Home {
             </div>
         </div>
         <?php
-    }
-
-    private function create_export_link($rawdata = '', $shortcode_id = '', $child_id = '') {
-        return add_query_arg(
-                [
-                    'action' => 'oxi_flip_box_data',
-                    'functionname' => 'get_shortcode_export',
-                    'styleid' => $shortcode_id,
-                    'childid' => $child_id,
-                    'rawdata' => $rawdata,
-                    '_wpnonce' => wp_create_nonce('oxi-flip-box-editor'),
-                ],
-                admin_url('admin-ajax.php')
-        );
     }
 
     public function create_new() {
@@ -156,6 +142,20 @@ class Home {
         <?php
     }
 
+    private function create_export_link($rawdata = '', $shortcode_id = '', $child_id = '') {
+        return add_query_arg(
+                [
+                    'action' => 'oxi_flip_box_data',
+                    'functionname' => 'get_shortcode_export',
+                    'styleid' => $shortcode_id,
+                    'childid' => $child_id,
+                    'rawdata' => $rawdata,
+                    '_wpnonce' => wp_create_nonce('oxi-flip-box-editor'),
+                ],
+                admin_url('admin-ajax.php')
+        );
+    }
+
     public function created_shortcode() {
         ?>
         <div class="oxi-addons-row">
@@ -171,10 +171,10 @@ class Home {
                         </tr>
                     </thead>
                     <tbody>
-        <?php
-        foreach ($this->database_data() as $value) {
-            $id = $value['id'];
-            ?>
+                        <?php
+                        foreach ($this->database_data() as $value) {
+                            $id = $value['id'];
+                            ?>
                             <tr>
                                 <td><?php echo esc_html($id); ?></td>
                                 <td><?php echo esc_html($this->name_converter($value['name'])) ?></td>
@@ -192,9 +192,9 @@ class Home {
                                     <a href="<?php echo esc_url($this->create_export_link('demo', $id, '')) ?>" title="Export" class="btn btn-info" style="float:left; margin-left: 5px;">Export</a>
                                 </td>
                             </tr>
-            <?php
-        }
-        ?>
+                            <?php
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -284,5 +284,4 @@ class Home {
         wp_enqueue_script('oxi-flip-box-home', OXI_FLIP_BOX_URL . 'asset/backend/js/home.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
         wp_localize_script('oxi-flip-box-home', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
-
 }

@@ -22,53 +22,23 @@ class Addons {
 
     public $get_plugins = [];
     public $current_plugins = 'image-hover-effects-ultimate-visual-composer/index.php';
-    // instance container
-    private static $instance = null;
-
-    public static function instance() {
-        if (self::$instance == null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
-    public function Header() {
-        apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
-        $this->Admin_header();
-    }
-
-    public function extension() {
-        $response = get_transient(self::GET_LOCAL_PLUGINS);
-        if (!$response || !is_array($response)) {
-            $URL = self::PLUGINS;
-            $request = wp_remote_request($URL);
-            if (!is_wp_error($request)) {
-                $response = json_decode(wp_remote_retrieve_body($request), true);
-                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
-            } else {
-                $response = $request->get_error_message();
-            }
-        }
-        $this->get_plugins = $response;
-    }
 
     public function Render() {
         ?>
         <div class="oxi-addons-wrapper">
             <div class="oxi-addons-row">
                 <div class="row">
-        <?php
-        $installed_plugins = get_plugins();
-        $active_plugins = array_flip(get_option('active_plugins'));
+                    <?php
+                    $installed_plugins = get_plugins();
+                    $active_plugins = array_flip(get_option('active_plugins'));
 
-        foreach ($this->get_plugins as $key => $value) {
-            $modulespath = $value['modules-path'];
-            if ($modulespath != $this->current_plugins) :
-                $file_path = $modulespath;
-                $plugin = explode('/', $file_path)[0];
-                $message = '';
-                ?>
+                    foreach ($this->get_plugins as $key => $value) {
+                        $modulespath = $value['modules-path'];
+                        if ($modulespath != $this->current_plugins) :
+                            $file_path = $modulespath;
+                            $plugin = explode('/', $file_path)[0];
+                            $message = '';
+                            ?>
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="oxi-addons-modules-elements">
                                     <img class="oxi-addons-modules-banner" src="<?php echo esc_url($value['modules-img']); ?>">
@@ -81,7 +51,7 @@ class Addons {
                                         <span class="oxi-addons-modules-installing"><?php
                 if (isset($installed_plugins[$file_path])) :
                     if (array_key_exists($file_path, $active_plugins)) :
-                        ?>
+                                    ?>
                                                     <a href="#" class="btn btn-light">Installed</a>
                                                     <?php
                                                 else :
@@ -103,10 +73,10 @@ class Addons {
                                     </div>
                                 </div>
                             </div>
-                <?php
-            endif;
-        }
-        ?>
+                            <?php
+                        endif;
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -154,4 +124,34 @@ class Addons {
         <?php
     }
 
+// instance container
+    private static $instance = null;
+
+    public static function instance() {
+        if (self::$instance == null) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
+    }
+
+    public function Header() {
+        apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
+        $this->Admin_header();
+    }
+
+    public function extension() {
+        $response = get_transient(self::GET_LOCAL_PLUGINS);
+        if (!$response || !is_array($response)) {
+            $URL = self::PLUGINS;
+            $request = wp_remote_request($URL);
+            if (!is_wp_error($request)) {
+                $response = json_decode(wp_remote_retrieve_body($request), true);
+                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
+            } else {
+                $response = $request->get_error_message();
+            }
+        }
+        $this->get_plugins = $response;
+    }
 }
