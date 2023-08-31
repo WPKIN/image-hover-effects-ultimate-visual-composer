@@ -7,7 +7,8 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  *
  * @author biplo
  */
-class Public_Render {
+class Public_Render
+{
 
     /**
      * Current Elements id
@@ -78,7 +79,8 @@ class Public_Render {
      *
      * @since 2.0.0
      */
-    public function hooks() {
+    public function hooks()
+    {
         $this->public_loader();
         $inlinecss = $this->inline_css;
 
@@ -92,12 +94,29 @@ class Public_Render {
         endif;
     }
 
+
+
+    /**
+     * front end loader css and js
+     *
+     * @since 2.0.0
+     */
+    public function public_loader()
+    {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxi-animation', OXI_FLIP_BOX_URL . 'asset/frontend/css/animation.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('flip-box-addons-style', OXI_FLIP_BOX_URL . 'asset/frontend/css/style.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . 'asset/frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('flipbox-addons-jquery', OXI_FLIP_BOX_URL . 'asset/frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+    }
+
     /**
      * load current element render since 2.0.0
      *
      * @since 2.0.0
      */
-    public function render() {
+    public function render()
+    {
         echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . '  oxi-addons-flipbox-template-' . esc_attr($this->dbdata['style_name']) . '">';
         $this->default_render($this->style, $this->child, $this->admin);
         echo '</div>';
@@ -108,11 +127,13 @@ class Public_Render {
      *
      * @since 2.0.0
      */
-    public function default_render() {
+    public function default_render()
+    {
         echo '';
     }
 
-    public function font_familly($data = '') {
+    public function font_familly($data = '')
+    {
 
         $check = get_option('oxi_addons_google_font');
 
@@ -135,55 +156,60 @@ class Public_Render {
         return '"' . esc_attr($data[0]) . '"';
     }
 
-    public function admin_name_validation($data) {
+    public function admin_name_validation($data)
+    {
         $data = str_replace('_', ' ', $data);
         $data = str_replace('-', ' ', $data);
         $data = str_replace('+', ' ', $data);
         return ucwords($data);
     }
 
-    public function name_converter($data) {
+    public function name_converter($data)
+    {
         $data = str_replace('_', ' ', $data);
         $data = str_replace('-', ' ', $data);
         $data = str_replace('+', ' ', $data);
         return ucwords($data);
     }
 
-    public function text_render($data) {
+    public function text_render($data)
+    {
         echo wp_kses_post(do_shortcode(str_replace('spTac', '&nbsp;', str_replace('spBac', '<br>', html_entity_decode($data))), $ignore_html = false));
     }
 
-    public function font_awesome_render($data) {
+    public function font_awesome_render($data)
+    {
         $fadata = get_option('oxi_addons_font_awesome');
         if ($fadata != 'no') :
             wp_enqueue_style('font-awsome.min', OXI_FLIP_BOX_URL . 'asset/frontend/css/font-awsome.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         endif;
-        ?>
+?>
         <i class="<?php echo esc_attr($data); ?> oxi-icons"></i>
         <?php
     }
 
-    public function admin_edit_panel($id) {
+    public function admin_edit_panel($id)
+    {
 
         if ($this->admin == 'admin') :
-            ?>
+        ?>
             <div class="oxilab-admin-absulote">
                 <div class="oxilab-style-absulate-edit">
                     <form method="post">
                         <input type="hidden" name="item-id" value="<?php echo esc_attr($id) ?>">
                         <button class="btn btn-primary" type="submit" value="edit" name="edit" title="Edit">Edit</button>
-            <?php echo wp_nonce_field("oxiflipeditdata") ?>
+                        <?php echo wp_nonce_field("oxiflipeditdata") ?>
                     </form>
                 </div>
                 <div class="oxilab-style-absulate-delete">
                     <form method="post" class="oxilab-style-absulate-delete-confirmation">
                         <input type="hidden" name="item-id" value="<?php echo esc_attr($id) ?>">
                         <button class="btn btn-danger" type="submit" value="delete" name="delete" title="Delete">Delete</button>
-            <?php echo wp_nonce_field("oxiflipdeletedata") ?>
+                        <?php echo wp_nonce_field("oxiflipdeletedata") ?>
                     </form>
                 </div>
             </div>
-            <?php
+<?php
         endif;
     }
 
@@ -192,7 +218,8 @@ class Public_Render {
      *
      * @since 2.0.0
      */
-    public function __construct(array $dbdata = [], array $child = [], $admin = 'user') {
+    public function __construct(array $dbdata = [], array $child = [], $admin = 'user')
+    {
         if (count($dbdata) > 0) :
             $this->dbdata = $dbdata;
             $this->child = $child;
@@ -206,7 +233,8 @@ class Public_Render {
      *
      * @since 2.0.0
      */
-    public function loader() {
+    public function loader()
+    {
         $this->oxiid = $this->dbdata['id'];
         foreach ($this->child as $key => $value) {
             $this->child[$key]['files'] = $value['files'] . '{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}{#}|{#}';
@@ -214,18 +242,4 @@ class Public_Render {
         $this->render();
         $this->hooks();
     }
-
-    /**
-     * front end loader css and js
-     *
-     * @since 2.0.0
-     */
-    public function public_loader() {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-animation', OXI_FLIP_BOX_URL . 'asset/frontend/css/animation.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_style('flip-box-addons-style', OXI_FLIP_BOX_URL . 'asset/frontend/css/style.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . 'asset/frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('flipbox-addons-jquery', OXI_FLIP_BOX_URL . 'asset/frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-    }
-
 }

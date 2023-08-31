@@ -7,7 +7,8 @@ namespace OXI_FLIP_BOX_PLUGINS\Classes;
  *
  * @author biplo
  */
-class Admin_Ajax {
+class Admin_Ajax
+{
 
     /**
      * Define $wpdb
@@ -37,7 +38,8 @@ class Admin_Ajax {
      */
     public $child_table;
 
-    public static function instance() {
+    public static function instance()
+    {
         if (self::$instance == null) {
             self::$instance = new self;
         }
@@ -45,7 +47,8 @@ class Admin_Ajax {
         return self::$instance;
     }
 
-    public function validate_post($rawdata) {
+    public function validate_post($rawdata)
+    {
         if (is_array($rawdata)) :
             $rawdata = array_map(array($this, 'allowed_html'), $rawdata);
         else :
@@ -54,7 +57,8 @@ class Admin_Ajax {
         return $rawdata;
     }
 
-    public function addons_rearrange($data = '', $styleid = '', $itemid = '') {
+    public function addons_rearrange($data = '', $styleid = '', $itemid = '')
+    {
         $user_permission = $this->check_user_permission();
         if (!current_user_can($user_permission)) :
             return wp_die('You do not have permission.');
@@ -78,7 +82,8 @@ class Admin_Ajax {
         return;
     }
 
-    public function create_flip($data = '', $styleid = '', $itemid = '') {
+    public function create_flip($data = '', $styleid = '', $itemid = '')
+    {
         $user_permission = $this->check_user_permission();
         if (!current_user_can($user_permission)) :
             return wp_die('You do not have permission.');
@@ -118,7 +123,147 @@ class Admin_Ajax {
         return;
     }
 
-    public function shortcode_active($data = '', $styleid = '', $itemid = '') {
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function oxi_flipbox_support_massage($data = '', $styleid = '', $itemid = '')
+    {
+
+        if (!current_user_can('manage_options')) :
+            return wp_die('You do not have permission.');
+        endif;
+        $rawdata = json_decode(stripslashes($data), true);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_flipbox_support_massage', $value);
+        echo '<span class="oxi-confirmation-success"></span>';
+        return;
+    }
+
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function oxi_addons_pre_loader($data = '', $styleid = '', $itemid = '')
+    {
+
+        if (!current_user_can('manage_options')) :
+            return wp_die('You do not have permission.');
+        endif;
+        $rawdata = json_decode(stripslashes($data), true);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_addons_pre_loader', $value);
+        echo '<span class="oxi-confirmation-success"></span>';
+        return;
+    }
+
+    public function deactivate_license($key)
+    {
+        $api_params = array(
+            'edd_action' => 'deactivate_license',
+            'license' => $key,
+            'item_name' => urlencode('Flipbox - Image Overlay'),
+            'url' => home_url()
+        );
+        $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
+        if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
+
+            if (is_wp_error($response)) {
+                $message = $response->get_error_message();
+            } else {
+                $message = esc_html('An error occurred, please try again.');
+            }
+            return $message;
+        }
+        $license_data = json_decode(wp_remote_retrieve_body($response));
+        if ($license_data->license == 'deactivated') {
+            delete_option('oxilab_flip_box_license_status');
+            delete_option('oxilab_flip_box_license_key');
+        }
+        return 'success';
+    }
+
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function oxi_addons_user_permission($data = '', $styleid = '', $itemid = '')
+    {
+
+        if (!current_user_can('manage_options')) :
+            return wp_die('You do not have permission.');
+        endif;
+        $rawdata = json_decode(stripslashes($data), true);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_addons_user_permission', $value);
+        echo '<span class="oxi-confirmation-success"></span>';
+        return;
+    }
+
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function oxi_addons_font_awesome($data = '', $styleid = '', $itemid = '')
+    {
+
+        if (!current_user_can('manage_options')) :
+            return wp_die('You do not have permission.');
+        endif;
+        $rawdata = json_decode(stripslashes($data), true);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_addons_font_awesome', $value);
+        echo '<span class="oxi-confirmation-success"></span>';
+        return;
+    }
+
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function oxi_addons_google_font($data = '', $styleid = '', $itemid = '')
+    {
+
+        if (!current_user_can('manage_options')) :
+            return wp_die('You do not have permission.');
+        endif;
+        $rawdata = json_decode(stripslashes($data), true);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_addons_google_font', $value);
+        echo '<span class="oxi-confirmation-success"></span>';
+        return;
+    }
+
+    public function check_user_permission()
+    {
+        $user_role = get_option('oxi_addons_user_permission');
+        $role_object = get_role($user_role);
+        $first_key = '';
+        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
+            reset($role_object->capabilities);
+            $first_key = key($role_object->capabilities);
+        } else {
+            $first_key = 'manage_options';
+        }
+        return $first_key;
+    }
+
+    public function active_data()
+    {
+        $user_permission = $this->check_user_permission();
+        if (!current_user_can($user_permission)) :
+            return wp_die('You do not have permission.');
+        endif;
+
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
+        $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
+        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
+    }
+
+    public function shortcode_active($data = '', $styleid = '', $itemid = '')
+    {
         $user_permission = $this->check_user_permission();
         if (!current_user_can($user_permission)) :
             return wp_die('You do not have permission.');
@@ -135,7 +280,8 @@ class Admin_Ajax {
         return;
     }
 
-    public function shortcode_delete($data = '', $styleid = '', $itemid = '') {
+    public function shortcode_delete($data = '', $styleid = '', $itemid = '')
+    {
         $user_permission = $this->check_user_permission();
         if (!current_user_can($user_permission)) :
             return wp_die('You do not have permission.');
@@ -151,7 +297,8 @@ class Admin_Ajax {
         return;
     }
 
-    public function shortcode_deactive($data = '', $styleid = '', $itemid = '') {
+    public function shortcode_deactive($data = '', $styleid = '', $itemid = '')
+    {
         $user_permission = $this->check_user_permission();
         if (!current_user_can($user_permission)) :
             return wp_die('You do not have permission.');
@@ -167,7 +314,8 @@ class Admin_Ajax {
         return;
     }
 
-    public function get_shortcode_export($data = '', $styleid = '', $itemid = '') {
+    public function get_shortcode_export($data = '', $styleid = '', $itemid = '')
+    {
 
 
         $user_permission = $this->check_user_permission();
@@ -204,7 +352,8 @@ class Admin_Ajax {
      * @param string $file_name File name.
      * @param int    $file_size File size.
      */
-    private function send_file_headers($file_name, $file_size) {
+    private function send_file_headers($file_name, $file_size)
+    {
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=' . $file_name);
         header('Expires: 0');
@@ -213,7 +362,8 @@ class Admin_Ajax {
         header('Content-Length: ' . $file_size);
     }
 
-    public function post_json_import($params) {
+    public function post_json_import($params)
+    {
 
         if (!current_user_can('manage_options')) :
             return wp_die('You do not have permission.');
@@ -244,7 +394,8 @@ class Admin_Ajax {
      * Admin License
      * @return void
      */
-    public function oxi_license($data = '', $styleid = '', $itemid = '') {
+    public function oxi_license($data = '', $styleid = '', $itemid = '')
+    {
         $user_permission = $this->check_user_permission();
         if (!current_user_can($user_permission)) :
             return wp_die('You do not have permission.');
@@ -274,7 +425,8 @@ class Admin_Ajax {
         return;
     }
 
-    public function activate_license($key) {
+    public function activate_license($key)
+    {
         $api_params = array(
             'edd_action' => 'activate_license',
             'license' => $key,
@@ -344,142 +496,12 @@ class Admin_Ajax {
     }
 
     /**
-     * Admin Settings
-     * @return void
-     */
-    public function oxi_flipbox_support_massage($data = '', $styleid = '', $itemid = '') {
-
-        if (!current_user_can('manage_options')) :
-            return wp_die('You do not have permission.');
-        endif;
-        $rawdata = json_decode(stripslashes($data), true);
-        $value = sanitize_text_field($rawdata['value']);
-        update_option('oxi_flipbox_support_massage', $value);
-        echo '<span class="oxi-confirmation-success"></span>';
-        return;
-    }
-
-    /**
-     * Admin Settings
-     * @return void
-     */
-    public function oxi_addons_pre_loader($data = '', $styleid = '', $itemid = '') {
-
-        if (!current_user_can('manage_options')) :
-            return wp_die('You do not have permission.');
-        endif;
-        $rawdata = json_decode(stripslashes($data), true);
-        $value = sanitize_text_field($rawdata['value']);
-        update_option('oxi_addons_pre_loader', $value);
-        echo '<span class="oxi-confirmation-success"></span>';
-        return;
-    }
-
-    public function deactivate_license($key) {
-        $api_params = array(
-            'edd_action' => 'deactivate_license',
-            'license' => $key,
-            'item_name' => urlencode('Flipbox - Image Overlay'),
-            'url' => home_url()
-        );
-        $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
-        if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
-
-            if (is_wp_error($response)) {
-                $message = $response->get_error_message();
-            } else {
-                $message = esc_html('An error occurred, please try again.');
-            }
-            return $message;
-        }
-        $license_data = json_decode(wp_remote_retrieve_body($response));
-        if ($license_data->license == 'deactivated') {
-            delete_option('oxilab_flip_box_license_status');
-            delete_option('oxilab_flip_box_license_key');
-        }
-        return 'success';
-    }
-
-    /**
-     * Admin Settings
-     * @return void
-     */
-    public function oxi_addons_user_permission($data = '', $styleid = '', $itemid = '') {
-
-        if (!current_user_can('manage_options')) :
-            return wp_die('You do not have permission.');
-        endif;
-        $rawdata = json_decode(stripslashes($data), true);
-        $value = sanitize_text_field($rawdata['value']);
-        update_option('oxi_addons_user_permission', $value);
-        echo '<span class="oxi-confirmation-success"></span>';
-        return;
-    }
-
-    /**
-     * Admin Settings
-     * @return void
-     */
-    public function oxi_addons_font_awesome($data = '', $styleid = '', $itemid = '') {
-
-        if (!current_user_can('manage_options')) :
-            return wp_die('You do not have permission.');
-        endif;
-        $rawdata = json_decode(stripslashes($data), true);
-        $value = sanitize_text_field($rawdata['value']);
-        update_option('oxi_addons_font_awesome', $value);
-        echo '<span class="oxi-confirmation-success"></span>';
-        return;
-    }
-
-    /**
-     * Admin Settings
-     * @return void
-     */
-    public function oxi_addons_google_font($data = '', $styleid = '', $itemid = '') {
-
-        if (!current_user_can('manage_options')) :
-            return wp_die('You do not have permission.');
-        endif;
-        $rawdata = json_decode(stripslashes($data), true);
-        $value = sanitize_text_field($rawdata['value']);
-        update_option('oxi_addons_google_font', $value);
-        echo '<span class="oxi-confirmation-success"></span>';
-        return;
-    }
-
-    public function check_user_permission() {
-        $user_role = get_option('oxi_addons_user_permission');
-        $role_object = get_role($user_role);
-        $first_key = '';
-        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
-            reset($role_object->capabilities);
-            $first_key = key($role_object->capabilities);
-        } else {
-            $first_key = 'manage_options';
-        }
-        return $first_key;
-    }
-
-    public function active_data() {
-        $user_permission = $this->check_user_permission();
-        if (!current_user_can($user_permission)) :
-            return wp_die('You do not have permission.');
-        endif;
-
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $this->wpdb->prefix . 'oxi_div_style';
-        $this->child_table = $this->wpdb->prefix . 'oxi_div_list';
-        $this->import_table = $this->wpdb->prefix . 'oxi_div_import';
-    }
-
-    /**
      * Constructor of plugin class
      *
      * @since 3.1.0
      */
-    public function __construct($type = '', $data = '', $styleid = '', $itemid = '') {
+    public function __construct($type = '', $data = '', $styleid = '', $itemid = '')
+    {
         if (!empty($type) && !empty($data)) :
 
             $user_permission = $this->check_user_permission();
@@ -496,14 +518,16 @@ class Admin_Ajax {
         endif;
     }
 
-    public function array_replace($arr = [], $search = '', $replace = '') {
+    public function array_replace($arr = [], $search = '', $replace = '')
+    {
         array_walk($arr, function (&$v) use ($search, $replace) {
             $v = str_replace($search, $replace, $v);
         });
         return $arr;
     }
 
-    public function allowed_html($rawdata) {
+    public function allowed_html($rawdata)
+    {
         $allowed_tags = array(
             'a' => array(
                 'class' => array(),

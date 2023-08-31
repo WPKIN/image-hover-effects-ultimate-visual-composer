@@ -7,34 +7,149 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc;
  *
  * @author biplo
  */
+
 use OXI_FLIP_BOX_PLUGINS\Page\Admin_Render;
 
-class Style18 extends Admin_Render {
+class Style18 extends Admin_Render
+{
 
-    public function register_controls() {
-        ?>
+
+
+    public function Rearrange()
+    {
+        return ['tag' => 'title', 'id' => 1];
+    }
+
+    public function register_style()
+    {
+        $data = 'oxilab-flip-type |' . sanitize_text_field($_POST['oxilab-flip-type']) . '|'
+            . ' oxilab-flip-effects |' . sanitize_text_field($_POST['oxilab-flip-effects']) . '|'
+            . ' front-background-color |' . sanitize_text_field($_POST['front-background-color']) . '|'
+            . ' front-border-color|' . sanitize_hex_color($_POST['front-border-color']) . '|'
+            . ' backend-border-color|' . sanitize_hex_color($_POST['backend-border-color']) . '|'
+            . ' ||'
+            . ' front-heading-color |' . sanitize_hex_color($_POST['front-heading-color']) . '|'
+            . ' backend-background-color |' . sanitize_text_field($_POST['backend-background-color']) . '|'
+            . ' ||'
+            . ' backend-info-color |' . sanitize_hex_color($_POST['backend-info-color']) . '|'
+            . ' backend-button-color |' . sanitize_hex_color($_POST['backend-button-color']) . '|'
+            . ' backend-button-background |' . sanitize_text_field($_POST['backend-button-background']) . '|'
+            . ' backend-button-hover-color |' . sanitize_hex_color($_POST['backend-button-hover-color']) . '|'
+            . ' backend-button-hover-background |' . sanitize_text_field($_POST['backend-button-hover-background']) . '|'
+            . ' ||'
+            . ' backend-title-color |' . sanitize_hex_color($_POST['backend-title-color']) . '|'
+            . ' ||'
+            . ' ||'
+            . ' ||'
+            . ' ||'
+            . ' ||'
+            . ' flip-col |' . sanitize_text_field($_POST['flip-col']) . '|'
+            . ' flip-width |' . sanitize_text_field($_POST['flip-width']) . '|'
+            . ' flip-height |' . sanitize_text_field($_POST['flip-height']) . '|'
+            . ' margin-top |' . sanitize_text_field($_POST['margin-top']) . '|'
+            . ' margin-left |' . sanitize_text_field($_POST['margin-left']) . '|'
+            . ' flip-open-tabs |' . sanitize_text_field($_POST['flip-open-tabs']) . '|'
+            . ' oxilab-animation |' . sanitize_text_field($_POST['oxilab-animation']) . '|'
+            . ' animation-duration |' . sanitize_text_field($_POST['animation-duration']) . '|'
+            . ' flip-boxshow-color |' . sanitize_text_field($_POST['flip-boxshow-color']) . '|'
+            . ' flip-boxshow-horizontal |' . sanitize_text_field($_POST['flip-boxshow-horizontal']) . '|'
+            . ' flip-boxshow-vertical |' . sanitize_text_field($_POST['flip-boxshow-vertical']) . '|'
+            . ' flip-boxshow-blur |' . sanitize_text_field($_POST['flip-boxshow-blur']) . '|'
+            . ' flip-boxshow-spread |' . sanitize_text_field($_POST['flip-boxshow-spread']) . '|'
+            . ' front-image-height|' . sanitize_text_field($_POST['front-image-height']) . '|'
+            . ' ||'
+            . '||'
+            . ' ||'
+            . ' ||'
+            . ' ||'
+            . ' ||'
+            . ' front-heading-size |' . sanitize_text_field($_POST['front-heading-size']) . '|'
+            . ' front-heading-family |' . sanitize_text_field($_POST['front-heading-family']) . '|'
+            . ' front-heding-style |' . sanitize_text_field($_POST['front-heding-style']) . '|'
+            . ' front-heding-weight |' . sanitize_text_field($_POST['front-heding-weight']) . '|'
+            . ' front-heding-text-align |' . sanitize_text_field($_POST['front-heding-text-align']) . '|'
+            . ' front-heding-padding-top |' . sanitize_text_field($_POST['front-heding-padding-top']) . '|'
+            . ' front-heding-padding-bottom |' . sanitize_text_field($_POST['front-heding-padding-bottom']) . '|'
+            . ' front-heding-padding-left |' . sanitize_text_field($_POST['front-heding-padding-left']) . '|'
+            . ' front-heding-padding-right |' . sanitize_text_field($_POST['front-heding-padding-right']) . '|'
+            . ' backend-padding-top |' . sanitize_text_field($_POST['backend-padding-top']) . '|'
+            . ' backend-padding-left |' . sanitize_text_field($_POST['backend-padding-left']) . '|'
+            . ' ||'
+            . ' backend-info-size |' . sanitize_text_field($_POST['backend-info-size']) . '|'
+            . ' backend-info-family |' . sanitize_text_field($_POST['backend-info-family']) . '|'
+            . ' backend-info-style |' . sanitize_text_field($_POST['backend-info-style']) . '|'
+            . ' backend-info-weight |' . sanitize_text_field($_POST['backend-info-weight']) . '|'
+            . ' backend-info-text-align |' . sanitize_text_field($_POST['backend-info-text-align']) . '|'
+            . ' backend-info-padding-top |' . sanitize_text_field($_POST['backend-info-padding-top']) . '|'
+            . ' backend-info-padding-bottom |' . sanitize_text_field($_POST['backend-info-padding-bottom']) . '|'
+            . ' backend-info-padding-left |' . sanitize_text_field($_POST['backend-info-padding-left']) . '|'
+            . ' backend-info-padding-right |' . sanitize_text_field($_POST['backend-info-padding-right']) . '|'
+            . ' backend-button-size |' . sanitize_text_field($_POST['backend-button-size']) . '|'
+            . ' backend-button-family |' . sanitize_text_field($_POST['backend-button-family']) . '|'
+            . ' backend-button-style |' . sanitize_text_field($_POST['backend-button-style']) . '|'
+            . ' backend-button-weight |' . sanitize_text_field($_POST['backend-button-weight']) . '|'
+            . ' backend-button-info-padding-top|' . sanitize_text_field($_POST['backend-button-info-padding-top']) . '|'
+            . ' backend-button-info-padding-left |' . sanitize_text_field($_POST['backend-button-info-padding-left']) . '|'
+            . ' backend-button-border-radius |' . sanitize_text_field($_POST['backend-button-border-radius']) . '|'
+            . ' backend-button-text-align |' . sanitize_text_field($_POST['backend-button-text-align']) . '|'
+            . ' backend-info-margin-top |' . sanitize_text_field($_POST['backend-info-margin-top']) . '|'
+            . ' backend-info-margin-bottom |' . sanitize_text_field($_POST['backend-info-margin-bottom']) . '|'
+            . ' backend-info-margin-left |' . sanitize_text_field($_POST['backend-info-margin-left']) . '|'
+            . ' backend-info-margin-right |' . sanitize_text_field($_POST['backend-info-margin-right']) . '|'
+            . '  ||'
+            . '  ||'
+            . ' flip-border-radius |' . sanitize_text_field($_POST['flip-border-radius']) . '|'
+            . '  ||'
+            . '  ||'
+            . ' ||'
+            . ' ||'
+            . ' flip-col-border-size|' . sanitize_text_field($_POST['flip-col-border-size']) . '|'
+            . ' flip-col-border-style|' . sanitize_text_field($_POST['flip-col-border-style']) . '|'
+            . ' flip-backend-border-size |' . sanitize_text_field($_POST['flip-backend-border-size']) . '|'
+            . ' flip-backend-border-style |' . sanitize_text_field($_POST['flip-backend-border-style']) . '|'
+            . '  ||'
+            . '  ||'
+            . '  ||'
+            . '  ||'
+            . '  ||'
+            . ' backend-heading-size |' . sanitize_text_field($_POST['backend-heading-size']) . '|'
+            . ' backend-heading-family |' . sanitize_text_field($_POST['backend-heading-family']) . '|'
+            . ' backend-heading-style |' . sanitize_text_field($_POST['backend-heading-style']) . '|'
+            . ' backend-heading-weight |' . sanitize_text_field($_POST['backend-heading-weight']) . '|'
+            . ' backend-heading-text-align |' . sanitize_text_field($_POST['backend-heading-text-align']) . '|'
+            . ' backend-heading-padding-top |' . sanitize_text_field($_POST['backend-heading-padding-top']) . '|'
+            . ' backend-heading-padding-bottom |' . sanitize_text_field($_POST['backend-heading-padding-bottom']) . '|'
+            . ' backend-heading-padding-left |' . sanitize_text_field($_POST['backend-heading-padding-left']) . '|'
+            . ' backend-heading-padding-right |' . sanitize_text_field($_POST['backend-heading-padding-right']) . '|'
+            . ' custom-css |' . sanitize_text_field($_POST['custom-css']) . '|'
+            . '|';
+        return $data;
+    }
+    public function register_controls()
+    {
+?>
         <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-5">
             <div class="oxi-addons-col-6">
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         General Settings
-                    </div> 
+                    </div>
                     <?php
                     $this->oxilab_flip_box_flip_type_effects_type($this->style[1], $this->style[3]);
                     $this->oxilab_flip_box_admin_col_data('flip-col', $this->style[43], 'Item per Rows', 'How many item shows in single Rows');
                     $this->oxilab_flip_box_admin_number('flip-width', $this->style[45], '1', 'Width', 'Give your Filp Width');
                     $this->oxilab_flip_box_admin_number('flip-height', $this->style[47], '1', 'Height', 'Give your Flip Height');
                     $this->oxilab_flip_box_admin_number('flip-border-radius', $this->style[153], '1', 'Border Radius', 'Set your flip Border Radius');
-                    ?>    
-                </div> 
+                    ?>
+                </div>
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         Optional Settings
-                    </div>  
+                    </div>
                     <?php
                     $this->oxilab_flip_box_admin_number_double('margin-top', $this->style[49], 'margin-left', $this->style[51], 'Margin', 'Set your Margin top bottom and left right');
                     $this->oxilab_flip_box_admin_true_false('flip-open-tabs', $this->style[53], 'New tabs', '_blank', 'Normal', '', 'Link Open', 'Dow you want to open link at same Tabs or new Windows');
-                    ?> 
+                    ?>
                 </div>
             </div>
             <div class="oxi-addons-col-6">
@@ -45,8 +160,8 @@ class Style18 extends Admin_Render {
                     <?php
                     $this->oxilab_flip_box_admin_animation_select($this->style[55]);
                     $this->oxilab_flip_box_admin_number('animation-duration', $this->style[57], '0.1', 'Animation Duration', 'Give your Animation Duration into Second');
-                    ?> 
-                </div> 
+                    ?>
+                </div>
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         Box Shadow
@@ -55,8 +170,8 @@ class Style18 extends Admin_Render {
                     $this->oxilab_flip_box_admin_color('flip-boxshow-color', $this->style[59], 'rgba', 'Color', 'Give your Box Shadow Color', '', '');
                     $this->oxilab_flip_box_admin_number_double('flip-boxshow-horizontal', $this->style[61], 'flip-boxshow-vertical', $this->style[63], 'Shadow Length', 'Giveyour Box Shadow lenth as horizontal and vertical');
                     $this->oxilab_flip_box_admin_number_double('flip-boxshow-blur', $this->style[65], 'flip-boxshow-spread', $this->style[67], 'Shadow Radius', 'Giveyour Box Shadow Radius as Blur and Spread');
-                    ?> 
-                </div> 
+                    ?>
+                </div>
             </div>
         </div>
         <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-4">
@@ -64,14 +179,14 @@ class Style18 extends Admin_Render {
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         General Settings
-                    </div> 
+                    </div>
                     <?php
                     $this->oxilab_flip_box_admin_color('front-background-color', $this->style[5], 'rgba', 'Background Color', 'Set your Front Background Color', 'background-color', '.oxilab-flip-box-' . $this->oxiid . '');
                     $this->oxilab_flip_box_admin_number('front-image-height', $this->style[69], '1', 'Image Height', 'Set your Front Image Height, Based on Percentize with Image Width');
                     $this->oxilab_flip_box_admin_color('front-border-color', $this->style[7], '', 'Border Color', 'Set your Border Color', 'border-color', '.oxilab-flip-box-' . $this->oxiid . '');
                     $this->oxilab_flip_box_admin_border('flip-col-border-size', $this->style[163], 'flip-col-border-style', $this->style[165], 'Border Size', 'Set your front border size with different style');
-                    ?>    
-                </div>                                             
+                    ?>
+                </div>
             </div>
             <div class="oxi-addons-col-6">
                 <div class="oxi-addons-content-div">
@@ -87,8 +202,8 @@ class Style18 extends Admin_Render {
                     $this->oxilab_flip_box_admin_text_align('front-heding-text-align', $this->style[91], 'Text Align', 'Give your Heading Text Align');
                     $this->oxilab_flip_box_admin_number_double('front-heding-padding-top', $this->style[93], 'front-heding-padding-bottom', $this->style[95], 'Padding Top Bottom', 'Set Your Heading  Padding Top and Bottom');
                     $this->oxilab_flip_box_admin_number_double('front-heding-padding-left', $this->style[97], 'front-heding-padding-right', $this->style[99], 'Padding Left Right', 'Set Your Heading  Padding Left and Right');
-                    ?> 
-                </div> 
+                    ?>
+                </div>
             </div>
         </div>
         <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-3">
@@ -96,14 +211,14 @@ class Style18 extends Admin_Render {
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         General Settings
-                    </div> 
+                    </div>
                     <?php
                     $this->oxilab_flip_box_admin_color('backend-background-color', $this->style[15], 'rgba', 'Background Color', 'Set your Backend Background Color', 'background-color', '.oxilab-flip-box-back-' . $this->oxiid . '');
                     $this->oxilab_flip_box_admin_number_double('backend-padding-top', $this->style[101], 'backend-padding-left', $this->style[103], 'Padding', 'Set your Backend Padding as Top Bottom and Left Right');
                     $this->oxilab_flip_box_admin_color('backend-border-color', $this->style[9], '', 'Border Color', 'Set your Border Color', 'border-color', '.oxilab-flip-box-back-' . $this->oxiid . '');
                     $this->oxilab_flip_box_admin_border('flip-backend-border-size', $this->style[167], 'flip-backend-border-style', $this->style[169], 'Border Size', 'Set your backend border size with different style');
-                    ?>    
-                </div> 
+                    ?>
+                </div>
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         Heading Settings
@@ -117,14 +232,14 @@ class Style18 extends Admin_Render {
                     $this->oxilab_flip_box_admin_text_align('backend-heading-text-align', $this->style[189], 'Text Align', 'Give your Heading Text Align');
                     $this->oxilab_flip_box_admin_number_double('backend-heading-padding-top', $this->style[191], 'backend-heading-padding-bottom', $this->style[193], 'Padding Top Bottom', 'Set Your backend Heading  Padding Top and Bottom');
                     $this->oxilab_flip_box_admin_number_double('backend-heading-padding-left', $this->style[195], 'backend-heading-padding-right', $this->style[197], 'Padding Left Right', 'Set Your backend Heading  Padding Left and Right');
-                    ?> 
+                    ?>
                 </div>
             </div>
             <div class="oxi-addons-col-6">
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
                         Backend Info
-                    </div>  
+                    </div>
                     <?php
                     $this->oxilab_flip_box_admin_number('backend-info-size', $this->style[107], '1', 'Font Size', 'Set your Backend Info Font Size');
                     $this->oxilab_flip_box_admin_color('backend-info-color', $this->style[19], '', 'Text Color', 'Set your Backend Info Color', 'color', '.oxilab-flip-box-back-' . $this->oxiid . '-data .oxilab-info');
@@ -134,7 +249,7 @@ class Style18 extends Admin_Render {
                     $this->oxilab_flip_box_admin_text_align('backend-info-text-align', $this->style[115], 'Text Align', 'Give your Backend Info Text Align');
                     $this->oxilab_flip_box_admin_number_double('backend-info-padding-top', $this->style[117], 'backend-info-padding-bottom', $this->style[119], 'Padding Top Bottom', 'Set Your Backend Info  Padding Top and Bottom');
                     $this->oxilab_flip_box_admin_number_double('backend-info-padding-left', $this->style[121], 'backend-info-padding-right', $this->style[123], 'Padding Left Right', 'Set Your Backend Info  Padding Left and Right');
-                    ?> 
+                    ?>
                 </div>
                 <div class="oxi-addons-content-div">
                     <div class="oxi-head">
@@ -154,10 +269,10 @@ class Style18 extends Admin_Render {
                     $this->oxilab_flip_box_admin_text_align('backend-button-text-align', $this->style[139], 'Text Align', 'Give your Backend Button Text Align');
                     $this->oxilab_flip_box_admin_number_double('backend-info-margin-top', $this->style[141], 'backend-info-margin-bottom', $this->style[143], 'Margin Top Bottom', 'Set Your Backend Info Margin Top and Bottom');
                     $this->oxilab_flip_box_admin_number_double('backend-info-margin-left', $this->style[145], 'backend-info-margin-right', $this->style[147], 'Margin Left Right', 'Set Your Backend Info Margin Left and Right');
-                    ?> 
-                </div>                                                                                       
+                    ?>
+                </div>
             </div>
-        </div>          
+        </div>
         <div class="oxi-addons-tabs-content-tabs" id="oxilab-tabs-id-2">
             <div class="col-xs-12 p-2">
                 <div class="form-group">
@@ -173,11 +288,12 @@ class Style18 extends Admin_Render {
             $this->oxilab_flip_box_admin_support();
             ?>
         </div>
-        <?php
+    <?php
     }
 
-    public function modal_form_data() {
-        ?>
+    public function modal_form_data()
+    {
+    ?>
         <div class="modal-header">
             <h5 class="modal-title">Front Settings</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -188,7 +304,7 @@ class Style18 extends Admin_Render {
             <?php
             $this->oxilab_flip_box_admin_input_text('flip-box-front-title', $this->child_editable[1], 'Front Title', 'Add your flip front title.');
             $this->image_upload('flip-box-image-upload-url-01', $this->child_editable[5], 'Front Image', 'Add or modify your front image.', $this->child_editable[19]);
-            ?>                                           
+            ?>
         </div>
         <div class="modal-header">
             <h5 class="modal-title">Backend Settings</h5>
@@ -203,133 +319,23 @@ class Style18 extends Admin_Render {
             $this->oxilab_flip_box_admin_input_text('flip-box-backend-button-text', $this->child_editable[9], 'Backend Button Text', 'Add your backend button text.');
             $this->oxilab_flip_box_admin_input_text('flip-box-backend-link', $this->child_editable[11], 'Link', 'Add your desire link or url unless make it blank');
             $this->image_upload('flip-box-image-upload-url-02', $this->child_editable[13], 'Backend Background Image', 'Add or Modify Your Backend Background Image. Unless make it blank.');
-            ?>                                            
+            ?>
         </div>
-        <?php
+<?php
     }
-
-    public function Rearrange() {
-        return ['tag' => 'title', 'id' => 1];
-    }
-
-    public function register_style() {
-        $data = 'oxilab-flip-type |' . sanitize_text_field($_POST['oxilab-flip-type']) . '|'
-                . ' oxilab-flip-effects |' . sanitize_text_field($_POST['oxilab-flip-effects']) . '|'
-                . ' front-background-color |' . sanitize_text_field($_POST['front-background-color']) . '|'
-                . ' front-border-color|' . sanitize_hex_color($_POST['front-border-color']) . '|'
-                . ' backend-border-color|' . sanitize_hex_color($_POST['backend-border-color']) . '|'
-                . ' ||'
-                . ' front-heading-color |' . sanitize_hex_color($_POST['front-heading-color']) . '|'
-                . ' backend-background-color |' . sanitize_text_field($_POST['backend-background-color']) . '|'
-                . ' ||'
-                . ' backend-info-color |' . sanitize_hex_color($_POST['backend-info-color']) . '|'
-                . ' backend-button-color |' . sanitize_hex_color($_POST['backend-button-color']) . '|'
-                . ' backend-button-background |' . sanitize_text_field($_POST['backend-button-background']) . '|'
-                . ' backend-button-hover-color |' . sanitize_hex_color($_POST['backend-button-hover-color']) . '|'
-                . ' backend-button-hover-background |' . sanitize_text_field($_POST['backend-button-hover-background']) . '|'
-                . ' ||'
-                . ' backend-title-color |' . sanitize_hex_color($_POST['backend-title-color']) . '|'
-                . ' ||'
-                . ' ||'
-                . ' ||'
-                . ' ||'
-                . ' ||'
-                . ' flip-col |' . sanitize_text_field($_POST['flip-col']) . '|'
-                . ' flip-width |' . sanitize_text_field($_POST['flip-width']) . '|'
-                . ' flip-height |' . sanitize_text_field($_POST['flip-height']) . '|'
-                . ' margin-top |' . sanitize_text_field($_POST['margin-top']) . '|'
-                . ' margin-left |' . sanitize_text_field($_POST['margin-left']) . '|'
-                . ' flip-open-tabs |' . sanitize_text_field($_POST['flip-open-tabs']) . '|'
-                . ' oxilab-animation |' . sanitize_text_field($_POST['oxilab-animation']) . '|'
-                . ' animation-duration |' . sanitize_text_field($_POST['animation-duration']) . '|'
-                . ' flip-boxshow-color |' . sanitize_text_field($_POST['flip-boxshow-color']) . '|'
-                . ' flip-boxshow-horizontal |' . sanitize_text_field($_POST['flip-boxshow-horizontal']) . '|'
-                . ' flip-boxshow-vertical |' . sanitize_text_field($_POST['flip-boxshow-vertical']) . '|'
-                . ' flip-boxshow-blur |' . sanitize_text_field($_POST['flip-boxshow-blur']) . '|'
-                . ' flip-boxshow-spread |' . sanitize_text_field($_POST['flip-boxshow-spread']) . '|'
-                . ' front-image-height|' . sanitize_text_field($_POST['front-image-height']) . '|'
-                . ' ||'
-                . '||'
-                . ' ||'
-                . ' ||'
-                . ' ||'
-                . ' ||'
-                . ' front-heading-size |' . sanitize_text_field($_POST['front-heading-size']) . '|'
-                . ' front-heading-family |' . sanitize_text_field($_POST['front-heading-family']) . '|'
-                . ' front-heding-style |' . sanitize_text_field($_POST['front-heding-style']) . '|'
-                . ' front-heding-weight |' . sanitize_text_field($_POST['front-heding-weight']) . '|'
-                . ' front-heding-text-align |' . sanitize_text_field($_POST['front-heding-text-align']) . '|'
-                . ' front-heding-padding-top |' . sanitize_text_field($_POST['front-heding-padding-top']) . '|'
-                . ' front-heding-padding-bottom |' . sanitize_text_field($_POST['front-heding-padding-bottom']) . '|'
-                . ' front-heding-padding-left |' . sanitize_text_field($_POST['front-heding-padding-left']) . '|'
-                . ' front-heding-padding-right |' . sanitize_text_field($_POST['front-heding-padding-right']) . '|'
-                . ' backend-padding-top |' . sanitize_text_field($_POST['backend-padding-top']) . '|'
-                . ' backend-padding-left |' . sanitize_text_field($_POST['backend-padding-left']) . '|'
-                . ' ||'
-                . ' backend-info-size |' . sanitize_text_field($_POST['backend-info-size']) . '|'
-                . ' backend-info-family |' . sanitize_text_field($_POST['backend-info-family']) . '|'
-                . ' backend-info-style |' . sanitize_text_field($_POST['backend-info-style']) . '|'
-                . ' backend-info-weight |' . sanitize_text_field($_POST['backend-info-weight']) . '|'
-                . ' backend-info-text-align |' . sanitize_text_field($_POST['backend-info-text-align']) . '|'
-                . ' backend-info-padding-top |' . sanitize_text_field($_POST['backend-info-padding-top']) . '|'
-                . ' backend-info-padding-bottom |' . sanitize_text_field($_POST['backend-info-padding-bottom']) . '|'
-                . ' backend-info-padding-left |' . sanitize_text_field($_POST['backend-info-padding-left']) . '|'
-                . ' backend-info-padding-right |' . sanitize_text_field($_POST['backend-info-padding-right']) . '|'
-                . ' backend-button-size |' . sanitize_text_field($_POST['backend-button-size']) . '|'
-                . ' backend-button-family |' . sanitize_text_field($_POST['backend-button-family']) . '|'
-                . ' backend-button-style |' . sanitize_text_field($_POST['backend-button-style']) . '|'
-                . ' backend-button-weight |' . sanitize_text_field($_POST['backend-button-weight']) . '|'
-                . ' backend-button-info-padding-top|' . sanitize_text_field($_POST['backend-button-info-padding-top']) . '|'
-                . ' backend-button-info-padding-left |' . sanitize_text_field($_POST['backend-button-info-padding-left']) . '|'
-                . ' backend-button-border-radius |' . sanitize_text_field($_POST['backend-button-border-radius']) . '|'
-                . ' backend-button-text-align |' . sanitize_text_field($_POST['backend-button-text-align']) . '|'
-                . ' backend-info-margin-top |' . sanitize_text_field($_POST['backend-info-margin-top']) . '|'
-                . ' backend-info-margin-bottom |' . sanitize_text_field($_POST['backend-info-margin-bottom']) . '|'
-                . ' backend-info-margin-left |' . sanitize_text_field($_POST['backend-info-margin-left']) . '|'
-                . ' backend-info-margin-right |' . sanitize_text_field($_POST['backend-info-margin-right']) . '|'
-                . '  ||'
-                . '  ||'
-                . ' flip-border-radius |' . sanitize_text_field($_POST['flip-border-radius']) . '|'
-                . '  ||'
-                . '  ||'
-                . ' ||'
-                . ' ||'
-                . ' flip-col-border-size|' . sanitize_text_field($_POST['flip-col-border-size']) . '|'
-                . ' flip-col-border-style|' . sanitize_text_field($_POST['flip-col-border-style']) . '|'
-                . ' flip-backend-border-size |' . sanitize_text_field($_POST['flip-backend-border-size']) . '|'
-                . ' flip-backend-border-style |' . sanitize_text_field($_POST['flip-backend-border-style']) . '|'
-                . '  ||'
-                . '  ||'
-                . '  ||'
-                . '  ||'
-                . '  ||'
-                . ' backend-heading-size |' . sanitize_text_field($_POST['backend-heading-size']) . '|'
-                . ' backend-heading-family |' . sanitize_text_field($_POST['backend-heading-family']) . '|'
-                . ' backend-heading-style |' . sanitize_text_field($_POST['backend-heading-style']) . '|'
-                . ' backend-heading-weight |' . sanitize_text_field($_POST['backend-heading-weight']) . '|'
-                . ' backend-heading-text-align |' . sanitize_text_field($_POST['backend-heading-text-align']) . '|'
-                . ' backend-heading-padding-top |' . sanitize_text_field($_POST['backend-heading-padding-top']) . '|'
-                . ' backend-heading-padding-bottom |' . sanitize_text_field($_POST['backend-heading-padding-bottom']) . '|'
-                . ' backend-heading-padding-left |' . sanitize_text_field($_POST['backend-heading-padding-left']) . '|'
-                . ' backend-heading-padding-right |' . sanitize_text_field($_POST['backend-heading-padding-right']) . '|'
-                . ' custom-css |' . sanitize_text_field($_POST['custom-css']) . '|'
-                . '|';
-        return $data;
-    }
-
-    public function register_child() {
+    public function register_child()
+    {
         $data = ' flip-box-front-title {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-front-title']) . '{#}|{#}'
-                . ' {#}|{#}{#}|{#}'
-                . ' flip-box-image-upload-url-01 {#}|{#}' . sanitize_url($_POST['flip-box-image-upload-url-01']) . '{#}|{#}'
-                . ' flip-box-backend-desc {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-desc']) . '{#}|{#}'
-                . ' flip-box-backend-button-text {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-button-text']) . '{#}|{#}'
-                . ' flip-box-backend-link {#}|{#}' . sanitize_url($_POST['flip-box-backend-link']) . '{#}|{#}'
-                . ' flip-box-image-upload-url-02 {#}|{#}' . sanitize_url($_POST['flip-box-image-upload-url-02']) . '{#}|{#}'
-                . ' {#}|{#}{#}|{#}'
-                . ' flip-box-backend-title {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-title']) . '{#}|{#}'
-                . ' flip-box-image-upload-url-01-alt {#}|{#}' . sanitize_text_field($_POST['flip-box-image-upload-url-01-alt']) . '{#}|{#}';
+            . ' {#}|{#}{#}|{#}'
+            . ' flip-box-image-upload-url-01 {#}|{#}' . sanitize_url($_POST['flip-box-image-upload-url-01']) . '{#}|{#}'
+            . ' flip-box-backend-desc {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-desc']) . '{#}|{#}'
+            . ' flip-box-backend-button-text {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-button-text']) . '{#}|{#}'
+            . ' flip-box-backend-link {#}|{#}' . sanitize_url($_POST['flip-box-backend-link']) . '{#}|{#}'
+            . ' flip-box-image-upload-url-02 {#}|{#}' . sanitize_url($_POST['flip-box-image-upload-url-02']) . '{#}|{#}'
+            . ' {#}|{#}{#}|{#}'
+            . ' flip-box-backend-title {#}|{#}' . $this->admin_special_charecter($_POST['flip-box-backend-title']) . '{#}|{#}'
+            . ' flip-box-image-upload-url-01-alt {#}|{#}' . sanitize_text_field($_POST['flip-box-image-upload-url-01-alt']) . '{#}|{#}';
 
         return $data;
     }
-
 }

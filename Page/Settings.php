@@ -12,7 +12,8 @@ namespace OXI_FLIP_BOX_PLUGINS\Page;
  *
  * @author biplo
  */
-class Settings {
+class Settings
+{
 
     use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
 
@@ -29,32 +30,17 @@ class Settings {
      *
      * @since 2.0.0
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->admin();
         $this->Render();
     }
 
-    public function admin() {
-        global $wp_roles;
-        $this->roles = $wp_roles->get_names();
-        $this->saved_role = get_option('oxi_addons_user_permission');
-        $this->license = get_option('oxilab_flip_box_license_key');
-        $this->status = get_option('oxilab_flip_box_license_status');
-        $this->admin_ajax_load();
-    }
 
-    /**
-     * Admin Notice JS file loader
-     * @return void
-     */
-    public function admin_ajax_load() {
-        $this->admin_css_loader();
-        wp_enqueue_script('oxi-flip-settings', OXI_FLIP_BOX_URL . 'asset/backend/js/settings.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_localize_script('oxi-flip-settings', 'oxi_flip_box_settings', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
-    }
 
-    public function Render() {
-        ?>
+    public function Render()
+    {
+?>
         <div class="wrap">
             <?php
             apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
@@ -75,7 +61,7 @@ class Settings {
                                             <?php foreach ($this->roles as $key => $role) { ?>
                                                 <option value="<?php echo esc_attr($key); ?>" <?php selected($this->saved_role, $key); ?>>
                                                     <?php echo esc_html($role); ?></option>
-                                                <?php } ?>
+                                            <?php } ?>
                                         </select>
                                         <span class="oxi-addons-settings-connfirmation oxi_addons_user_permission"></span>
                                         <br>
@@ -184,6 +170,27 @@ class Settings {
                 </form>
             </div>
         </div>
-        <?php
+<?php
+    }
+
+    public function admin()
+    {
+        global $wp_roles;
+        $this->roles = $wp_roles->get_names();
+        $this->saved_role = get_option('oxi_addons_user_permission');
+        $this->license = get_option('oxilab_flip_box_license_key');
+        $this->status = get_option('oxilab_flip_box_license_status');
+        $this->admin_ajax_load();
+    }
+
+    /**
+     * Admin Notice JS file loader
+     * @return void
+     */
+    public function admin_ajax_load()
+    {
+        $this->admin_css_loader();
+        wp_enqueue_script('oxi-flip-settings', OXI_FLIP_BOX_URL . 'asset/backend/js/settings.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_localize_script('oxi-flip-settings', 'oxi_flip_box_settings', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 }
