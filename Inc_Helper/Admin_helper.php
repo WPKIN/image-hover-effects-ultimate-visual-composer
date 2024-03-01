@@ -7,30 +7,7 @@ trait Admin_helper
 
 
 
-    public function Admin_Menu()
-    {
-        $user_role = get_option('oxi_addons_user_permission');
-        $role_object = get_role($user_role);
-        $first_key = '';
-        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
-            reset($role_object->capabilities);
-            $first_key = key($role_object->capabilities);
-        } else {
-            $first_key = 'manage_options';
-        }
-        add_menu_page('Flip Box', 'Flip Box', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Flip Box', 'Flip Box', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Create New', 'Create New', $first_key, 'oxi-flip-box-ultimate-new', [$this, 'Flip_Create']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Import Templates', 'Import Templates', $first_key, 'oxi-flip-box-ultimate-import', [$this, 'Flip_Import']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Oxilab Addons', 'Oxilab Addons', $first_key, 'oxi-flip-box-ultimate-addons', [$this, 'Flip_Addons']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Settings', 'Settings', $first_key, 'oxi-flip-box-ultimate-settings', [$this, 'Flip_Settings']);
-        add_dashboard_page('Welcome To Flipbox - Awesomes Flip Boxes Image Overlay', 'Welcome To Flipbox - Awesomes Flip Boxes Image Overlay', 'read', 'oxi-flip-box-activation', [$this, 'oxi_flip_box_activation']);
-    }
-
-    public function Flip_Home()
-    {
-        new \OXI_FLIP_BOX_PLUGINS\Page\Home();
-    }
+   
 
     public function Flip_Create()
     {
@@ -82,6 +59,31 @@ trait Admin_helper
         return !empty($METHOD['_wpnonce']) && wp_verify_nonce($METHOD['_wpnonce'], 'oxi-flip-box-editor');
     }
 
+    public function Admin_Menu()
+    {
+        $user_role = get_option('oxi_addons_user_permission');
+        $role_object = get_role($user_role);
+        $first_key = '';
+        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
+            reset($role_object->capabilities);
+            $first_key = key($role_object->capabilities);
+        } else {
+            $first_key = 'manage_options';
+        }
+        add_menu_page('Flip Box', 'Flip Box', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
+        add_submenu_page('oxi-flip-box-ultimate', 'Flip Box', 'Flip Box', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
+        add_submenu_page('oxi-flip-box-ultimate', 'Create New', 'Create New', $first_key, 'oxi-flip-box-ultimate-new', [$this, 'Flip_Create']);
+        add_submenu_page('oxi-flip-box-ultimate', 'Import Templates', 'Import Templates', $first_key, 'oxi-flip-box-ultimate-import', [$this, 'Flip_Import']);
+        add_submenu_page('oxi-flip-box-ultimate', 'Oxilab Addons', 'Oxilab Addons', $first_key, 'oxi-flip-box-ultimate-addons', [$this, 'Flip_Addons']);
+        add_submenu_page('oxi-flip-box-ultimate', 'Settings', 'Settings', $first_key, 'oxi-flip-box-ultimate-settings', [$this, 'Flip_Settings']);
+        add_dashboard_page('Welcome To Flipbox - Awesomes Flip Boxes Image Overlay', 'Welcome To Flipbox - Awesomes Flip Boxes Image Overlay', 'read', 'oxi-flip-box-activation', [$this, 'oxi_flip_box_activation']);
+    }
+
+    public function Flip_Home()
+    {
+        new \OXI_FLIP_BOX_PLUGINS\Page\Home();
+    }
+
     public function data_process()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -126,38 +128,7 @@ trait Admin_helper
         $this->admin_notice();
     }
 
-    /**
-     * Admin Notice Check
-     *
-     * @since 2.0.0
-     */
-    public function admin_recommended_status()
-    {
-        $data = get_option('oxilab_flip_box_recommended');
-        return $data;
-    }
-
-    public function admin_recommended()
-    {
-        if (!empty($this->admin_recommended_status())) :
-            return;
-        endif;
-        if (strtotime('-1 day') < $this->installation_date()) :
-            return;
-        endif;
-        new \OXI_FLIP_BOX_PLUGINS\Classes\Support_Recommended();
-    }
-
-    /**
-     * Admin Notice Check
-     *
-     * @since 2.0.0
-     */
-    public function admin_notice_status()
-    {
-        $data = get_option('oxilab_flip_box_nobug');
-        return $data;
-    }
+    
 
     /**
      * Admin Install date Check
@@ -216,7 +187,38 @@ trait Admin_helper
         </div>
     <?php
     }
+/**
+     * Admin Notice Check
+     *
+     * @since 2.0.0
+     */
+    public function admin_recommended_status()
+    {
+        $data = get_option('oxilab_flip_box_recommended');
+        return $data;
+    }
 
+    public function admin_recommended()
+    {
+        if (!empty($this->admin_recommended_status())) :
+            return;
+        endif;
+        if (strtotime('-1 day') < $this->installation_date()) :
+            return;
+        endif;
+        new \OXI_FLIP_BOX_PLUGINS\Classes\Support_Recommended();
+    }
+
+    /**
+     * Admin Notice Check
+     *
+     * @since 2.0.0
+     */
+    public function admin_notice_status()
+    {
+        $data = get_option('oxilab_flip_box_nobug');
+        return $data;
+    }
     /**
      * Plugin Admin Top Menu
      *

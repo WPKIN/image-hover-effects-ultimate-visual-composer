@@ -26,31 +26,7 @@ class Addons
 
 
 
-    public function Admin_header()
-    {
-?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Oxilab Addons
-                </h1>
-                <p> We Develop Couple of plugins which will help you to Create Your Modern and Dynamic Websites. Just click and Install </p>
-            </div>
-        </div>
-    <?php
-    }
-
-    // instance container
-    private static $instance = null;
-
-    public static function instance()
-    {
-        if (self::$instance == null) {
-            self::$instance = new self;
-        }
-
-        return self::$instance;
-    }
-
+   
     public function Header()
     {
         apply_filters('oxi-flip-box-plugin/admin_menu', TRUE);
@@ -146,6 +122,30 @@ class Addons
                 }, 1000);';
 
         wp_add_inline_script('oxilab-bootstrap', $data);
+    }
+    public function Admin_header()
+    {
+?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Oxilab Addons
+                </h1>
+                <p> We Develop Couple of plugins which will help you to Create Your Modern and Dynamic Websites. Just click and Install </p>
+            </div>
+        </div>
+    <?php
+    }
+
+    // instance container
+    private static $instance = null;
+
+    public static function instance()
+    {
+        if (self::$instance == null) {
+            self::$instance = new self;
+        }
+
+        return self::$instance;
     }
 
     public function __construct()

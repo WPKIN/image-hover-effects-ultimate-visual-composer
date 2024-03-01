@@ -57,6 +57,67 @@ class Admin_Ajax
         return $rawdata;
     }
 
+
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function oxi_flipbox_support_massage($data = '', $styleid = '', $itemid = '')
+    {
+
+        if (!current_user_can('manage_options')) :
+            return wp_die('You do not have permission.');
+        endif;
+        $rawdata = json_decode(stripslashes($data), true);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_flipbox_support_massage', $value);
+        echo '<span class="oxi-confirmation-success"></span>';
+        return;
+    }
+
+    /**
+     * Admin Settings
+     * @return void
+     */
+    public function oxi_addons_pre_loader($data = '', $styleid = '', $itemid = '')
+    {
+
+        if (!current_user_can('manage_options')) :
+            return wp_die('You do not have permission.');
+        endif;
+        $rawdata = json_decode(stripslashes($data), true);
+        $value = sanitize_text_field($rawdata['value']);
+        update_option('oxi_addons_pre_loader', $value);
+        echo '<span class="oxi-confirmation-success"></span>';
+        return;
+    }
+
+    public function deactivate_license($key)
+    {
+        $api_params = array(
+            'edd_action' => 'deactivate_license',
+            'license' => $key,
+            'item_name' => urlencode('Flipbox - Image Overlay'),
+            'url' => home_url()
+        );
+        $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
+        if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
+
+            if (is_wp_error($response)) {
+                $message = $response->get_error_message();
+            } else {
+                $message = esc_html('An error occurred, please try again.');
+            }
+            return $message;
+        }
+        $license_data = json_decode(wp_remote_retrieve_body($response));
+        if ($license_data->license == 'deactivated') {
+            delete_option('oxilab_flip_box_license_status');
+            delete_option('oxilab_flip_box_license_key');
+        }
+        return 'success';
+    }
+
     public function addons_rearrange($data = '', $styleid = '', $itemid = '')
     {
         $user_permission = $this->check_user_permission();
@@ -122,67 +183,6 @@ class Admin_Ajax
         endif;
         return;
     }
-
-    /**
-     * Admin Settings
-     * @return void
-     */
-    public function oxi_flipbox_support_massage($data = '', $styleid = '', $itemid = '')
-    {
-
-        if (!current_user_can('manage_options')) :
-            return wp_die('You do not have permission.');
-        endif;
-        $rawdata = json_decode(stripslashes($data), true);
-        $value = sanitize_text_field($rawdata['value']);
-        update_option('oxi_flipbox_support_massage', $value);
-        echo '<span class="oxi-confirmation-success"></span>';
-        return;
-    }
-
-    /**
-     * Admin Settings
-     * @return void
-     */
-    public function oxi_addons_pre_loader($data = '', $styleid = '', $itemid = '')
-    {
-
-        if (!current_user_can('manage_options')) :
-            return wp_die('You do not have permission.');
-        endif;
-        $rawdata = json_decode(stripslashes($data), true);
-        $value = sanitize_text_field($rawdata['value']);
-        update_option('oxi_addons_pre_loader', $value);
-        echo '<span class="oxi-confirmation-success"></span>';
-        return;
-    }
-
-    public function deactivate_license($key)
-    {
-        $api_params = array(
-            'edd_action' => 'deactivate_license',
-            'license' => $key,
-            'item_name' => urlencode('Flipbox - Image Overlay'),
-            'url' => home_url()
-        );
-        $response = wp_remote_post('https://www.oxilab.org', array('timeout' => 15, 'sslverify' => false, 'body' => $api_params));
-        if (is_wp_error($response) || 200 !== wp_remote_retrieve_response_code($response)) {
-
-            if (is_wp_error($response)) {
-                $message = $response->get_error_message();
-            } else {
-                $message = esc_html('An error occurred, please try again.');
-            }
-            return $message;
-        }
-        $license_data = json_decode(wp_remote_retrieve_body($response));
-        if ($license_data->license == 'deactivated') {
-            delete_option('oxilab_flip_box_license_status');
-            delete_option('oxilab_flip_box_license_key');
-        }
-        return 'success';
-    }
-
     /**
      * Admin Settings
      * @return void

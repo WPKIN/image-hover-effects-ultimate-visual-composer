@@ -108,33 +108,7 @@ class Admin_Render
         return '';
     }
 
-    public function register_controls()
-    {
-        return '';
-    }
-
-    public function modal_form_data()
-    {
-        return '';
-    }
-
-    public function style_data()
-    {
-
-        if (!empty($_POST['oxi-addons-flip-templates-submit']) && $_POST['oxi-addons-flip-templates-submit'] == 'Submit') {
-            if (!wp_verify_nonce($this->nonce, 'oxiflipstylecss')) {
-                die('You do not have sufficient permissions to access this page.');
-            } else {
-                $data = $this->register_style();
-                $this->wpdb->query($this->wpdb->prepare("UPDATE $this->parent_table SET css = %s WHERE id = %d", $data, $this->oxiid));
-            }
-        }
-    }
-
-    public function clild()
-    {
-        return ['title' => '', 'files' => ''];
-    }
+   
 
     public function child_save()
     {
@@ -166,6 +140,33 @@ class Admin_Render
                 $this->wpdb->query($this->wpdb->prepare("UPDATE $this->parent_table SET name = %s WHERE id = %d", $name, $this->oxiid));
             }
         }
+    }
+    public function register_controls()
+    {
+        return '';
+    }
+
+    public function modal_form_data()
+    {
+        return '';
+    }
+
+    public function style_data()
+    {
+
+        if (!empty($_POST['oxi-addons-flip-templates-submit']) && $_POST['oxi-addons-flip-templates-submit'] == 'Submit') {
+            if (!wp_verify_nonce($this->nonce, 'oxiflipstylecss')) {
+                die('You do not have sufficient permissions to access this page.');
+            } else {
+                $data = $this->register_style();
+                $this->wpdb->query($this->wpdb->prepare("UPDATE $this->parent_table SET css = %s WHERE id = %d", $data, $this->oxiid));
+            }
+        }
+    }
+
+    public function clild()
+    {
+        return ['title' => '', 'files' => ''];
     }
 
     /**

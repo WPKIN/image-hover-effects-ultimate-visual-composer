@@ -20,32 +20,7 @@ class Support_Recommended
     public $get_plugins = [];
     public $current_plugins = 'image-hover-effects-ultimate-visual-composer/index.php';
 
-    public function extension()
-    {
-        $response = get_transient(self::GET_LOCAL_PLUGINS);
-        if (!$response || !is_array($response)) {
-            $URL = self::PLUGINS;
-            $request = wp_remote_request($URL);
-            if (!is_wp_error($request)) {
-                $response = json_decode(wp_remote_retrieve_body($request), true);
-                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
-            } else {
-                $response = $request->get_error_message();
-            }
-        }
-        $this->get_plugins = $response;
-    }
-
-    /**
-     * Admin Notice CSS file loader
-     * @return void
-     */
-    public function admin_enqueue_scripts()
-    {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxilab_flip-admin-notice-css', OXI_FLIP_BOX_URL . 'asset/backend/css/notice.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        $this->dismiss_button_scripts();
-    }
+  
 
     /**
      * Admin Notice JS file loader
@@ -96,7 +71,32 @@ class Support_Recommended
         add_action('wp_ajax_oxi_flip_admin_recommended', array($this, 'notice_dissmiss'));
     }
 
+    public function extension()
+    {
+        $response = get_transient(self::GET_LOCAL_PLUGINS);
+        if (!$response || !is_array($response)) {
+            $URL = self::PLUGINS;
+            $request = wp_remote_request($URL);
+            if (!is_wp_error($request)) {
+                $response = json_decode(wp_remote_retrieve_body($request), true);
+                set_transient(self::GET_LOCAL_PLUGINS, $response, 10 * DAY_IN_SECONDS);
+            } else {
+                $response = $request->get_error_message();
+            }
+        }
+        $this->get_plugins = $response;
+    }
 
+    /**
+     * Admin Notice CSS file loader
+     * @return void
+     */
+    public function admin_enqueue_scripts()
+    {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxilab_flip-admin-notice-css', OXI_FLIP_BOX_URL . 'asset/backend/css/notice.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        $this->dismiss_button_scripts();
+    }
     /**
      * First Installation Track
      * @return void

@@ -24,33 +24,7 @@ trait Public_Helper
         return $files;
     }
 
-    public function font_familly_charecter($data)
-    {
-
-
-        $check = get_option('oxi_addons_google_font');
-        $custom = [
-            'Arial' => '',
-            'Helvetica+Neue' => '',
-            'Courier+New' => '',
-            'Times+New+Roman' => '',
-            'Comic+Sans+MS' => '',
-            'Verdana' => '',
-            'Impact' => '',
-            'cursive' => '',
-            'inherit' => ''
-        ];
-        if ($check != 'no' && !array_key_exists($data, $custom)) :
-            wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
-        endif;
-        $data = str_replace('+', ' ', $data);
-        $data = explode(':', $data);
-        $data = $data[0];
-        $data = '"' . $data . '"';
-
-        return $data;
-    }
-
+    
     public function html_special_charecter($data)
     {
         $data = html_entity_decode($data);
@@ -79,6 +53,32 @@ trait Public_Helper
                 new $C($style, $child, $user);
             endif;
         endif;
+    }
+    public function font_familly_charecter($data)
+    {
+
+
+        $check = get_option('oxi_addons_google_font');
+        $custom = [
+            'Arial' => '',
+            'Helvetica+Neue' => '',
+            'Courier+New' => '',
+            'Times+New+Roman' => '',
+            'Comic+Sans+MS' => '',
+            'Verdana' => '',
+            'Impact' => '',
+            'cursive' => '',
+            'inherit' => ''
+        ];
+        if ($check != 'no' && !array_key_exists($data, $custom)) :
+            wp_enqueue_style('' . $data . '', 'https://fonts.googleapis.com/css?family=' . $data . '');
+        endif;
+        $data = str_replace('+', ' ', $data);
+        $data = explode(':', $data);
+        $data = $data[0];
+        $data = '"' . $data . '"';
+
+        return $data;
     }
 
     /**

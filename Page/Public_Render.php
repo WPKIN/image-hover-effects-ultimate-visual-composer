@@ -74,53 +74,7 @@ class Public_Render
      */
     public $admin;
 
-    /**
-     * load css and js hooks
-     *
-     * @since 2.0.0
-     */
-    public function hooks()
-    {
-        $this->public_loader();
-        $inlinecss = $this->inline_css;
-
-        if ($this->inline_js != '') :
-            $jquery = '(function ($) {' . $this->inline_js . '})(jQuery);';
-            wp_add_inline_script($this->JSHANDLE, $jquery);
-        endif;
-
-        if ($this->inline_css != '') :
-            wp_add_inline_style('flip-box-addons-style', wp_kses_decode_entities(stripslashes($inlinecss)));
-        endif;
-    }
-
-
-
-    /**
-     * front end loader css and js
-     *
-     * @since 2.0.0
-     */
-    public function public_loader()
-    {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxi-animation', OXI_FLIP_BOX_URL . 'asset/frontend/css/animation.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_style('flip-box-addons-style', OXI_FLIP_BOX_URL . 'asset/frontend/css/style.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . 'asset/frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('flipbox-addons-jquery', OXI_FLIP_BOX_URL . 'asset/frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-    }
-
-    /**
-     * load current element render since 2.0.0
-     *
-     * @since 2.0.0
-     */
-    public function render()
-    {
-        echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . '  oxi-addons-flipbox-template-' . esc_attr($this->dbdata['style_name']) . '">';
-        $this->default_render($this->style, $this->child, $this->admin);
-        echo '</div>';
-    }
+    
 
     /**
      * old empty old render
@@ -186,6 +140,53 @@ class Public_Render
 ?>
         <i class="<?php echo esc_attr($data); ?> oxi-icons"></i>
         <?php
+    }
+    /**
+     * load css and js hooks
+     *
+     * @since 2.0.0
+     */
+    public function hooks()
+    {
+        $this->public_loader();
+        $inlinecss = $this->inline_css;
+
+        if ($this->inline_js != '') :
+            $jquery = '(function ($) {' . $this->inline_js . '})(jQuery);';
+            wp_add_inline_script($this->JSHANDLE, $jquery);
+        endif;
+
+        if ($this->inline_css != '') :
+            wp_add_inline_style('flip-box-addons-style', wp_kses_decode_entities(stripslashes($inlinecss)));
+        endif;
+    }
+
+
+
+    /**
+     * front end loader css and js
+     *
+     * @since 2.0.0
+     */
+    public function public_loader()
+    {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxi-animation', OXI_FLIP_BOX_URL . 'asset/frontend/css/animation.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_style('flip-box-addons-style', OXI_FLIP_BOX_URL . 'asset/frontend/css/style.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('waypoints.min', OXI_FLIP_BOX_URL . 'asset/frontend/js/waypoints.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('flipbox-addons-jquery', OXI_FLIP_BOX_URL . 'asset/frontend/js/jquery.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+    }
+
+    /**
+     * load current element render since 2.0.0
+     *
+     * @since 2.0.0
+     */
+    public function render()
+    {
+        echo '<div class="oxi-addons-container ' . esc_attr($this->WRAPPER) . '  oxi-addons-flipbox-template-' . esc_attr($this->dbdata['style_name']) . '">';
+        $this->default_render($this->style, $this->child, $this->admin);
+        echo '</div>';
     }
 
     public function admin_edit_panel($id)

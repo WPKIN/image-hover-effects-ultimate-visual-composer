@@ -21,28 +21,7 @@ class Support_Reviews
         wp_localize_script('oxilab_flip-admin-notice', 'oxilab_flip_notice_dissmiss', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxilab_flip_notice_dissmiss')));
     }
 
-    /**
-     * Revoke this function when the object is created.
-     *
-     */
-    public function __construct()
-    {
-        add_action('admin_notices', array($this, 'first_install'));
-        add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
-        add_action('wp_ajax_oxilab_flip_notice_dissmiss', array($this, 'notice_dissmiss'));
-        add_action('admin_notices', array($this, 'dismiss_button_scripts'));
-    }
-
-    /**
-     * Admin Notice CSS file loader
-     * @return void
-     */
-    public function admin_enqueue_scripts()
-    {
-        wp_enqueue_script("jquery");
-        wp_enqueue_style('oxilab_flip-admin-notice-css', OXI_FLIP_BOX_URL . 'asset/backend/css/notice.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        $this->dismiss_button_scripts();
-    }
+   
 
     /**
      * Admin Notice Ajax  loader
@@ -113,5 +92,27 @@ class Support_Reviews
             </div>
         </div>
 <?php
+    }
+     /**
+     * Revoke this function when the object is created.
+     *
+     */
+    public function __construct()
+    {
+        add_action('admin_notices', array($this, 'first_install'));
+        add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
+        add_action('wp_ajax_oxilab_flip_notice_dissmiss', array($this, 'notice_dissmiss'));
+        add_action('admin_notices', array($this, 'dismiss_button_scripts'));
+    }
+
+    /**
+     * Admin Notice CSS file loader
+     * @return void
+     */
+    public function admin_enqueue_scripts()
+    {
+        wp_enqueue_script("jquery");
+        wp_enqueue_style('oxilab_flip-admin-notice-css', OXI_FLIP_BOX_URL . 'asset/backend/css/notice.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        $this->dismiss_button_scripts();
     }
 }

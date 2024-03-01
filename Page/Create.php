@@ -46,84 +46,6 @@ class Create
 
 
 
-    public function Admin_header()
-    {
-        apply_filters('oxi-flip-box-support-and-comments', TRUE);
-?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Flipbox › Create New
-                </h1>
-                <p> Select Flipbox layouts, Gives your Flipbox name and create new Flipbox. </p>
-            </div>
-        </div>
-    <?php
-    }
-
-    public function create_new()
-    {
-    ?>
-        <div class="oxi-addons-row">
-            <div class="oxi-addons-col-1 oxi-import">
-                <div class="oxi-addons-style-preview">
-                    <div class="oxilab-admin-style-preview-top">
-                        <a href="<?php echo esc_url(admin_url("admin.php?page=oxi-flip-box-ultimate-import")); ?>">
-                            <div class="oxilab-admin-add-new-item">
-                                <span>
-                                    <i class="fas fa-plus-circle oxi-icons"></i>
-                                    Import Templates
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="oxi-addons-style-create-modal">
-            <form method="post" id="oxi-addons-style-modal-form">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">New Flipbox</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <div class=" form-group row">
-                                <label for="addons-style-name" class="col-sm-6 col-form-label" oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
-                                <div class="col-sm-6 addons-dtm-laptop-lock">
-                                    <input class="form-control" type="text" value="" id="addons-style-name" name="addons-style-name">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="oxi-tabs-link" class="col-sm-5 col-form-label" title="Select Layouts">Layouts</label>
-                                <div class="col-sm-7">
-                                    <div class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-secondary active">
-                                            <input type="radio" name="flip-box-layouts" value="1" checked="">1st
-                                        </label>
-                                        <label class="btn btn-secondary">
-                                            <input type="radio" name="flip-box-layouts" value="2">2nd
-                                        </label>
-                                        <label class="btn btn-secondary">
-                                            <input type="radio" name="flip-box-layouts" value="3">3rd
-                                        </label>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <input type="hidden" id="oxistyledata" name="oxistyledata" value="">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-success" name="addonsdatasubmit" id="addonsdatasubmit" value="Save">
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    <?php
-    }
     public function template()
     {
     ?>
@@ -213,6 +135,84 @@ class Create
         $this->Render();
     }
 
+    public function Admin_header()
+    {
+        apply_filters('oxi-flip-box-support-and-comments', TRUE);
+?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Flipbox › Create New
+                </h1>
+                <p> Select Flipbox layouts, Gives your Flipbox name and create new Flipbox. </p>
+            </div>
+        </div>
+    <?php
+    }
+
+    public function create_new()
+    {
+    ?>
+        <div class="oxi-addons-row">
+            <div class="oxi-addons-col-1 oxi-import">
+                <div class="oxi-addons-style-preview">
+                    <div class="oxilab-admin-style-preview-top">
+                        <a href="<?php echo esc_url(admin_url("admin.php?page=oxi-flip-box-ultimate-import")); ?>">
+                            <div class="oxilab-admin-add-new-item">
+                                <span>
+                                    <i class="fas fa-plus-circle oxi-icons"></i>
+                                    Import Templates
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="oxi-addons-style-create-modal">
+            <form method="post" id="oxi-addons-style-modal-form">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">New Flipbox</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class=" form-group row">
+                                <label for="addons-style-name" class="col-sm-6 col-form-label" oxi-addons-tooltip="Give your Shortcode Name Here">Name</label>
+                                <div class="col-sm-6 addons-dtm-laptop-lock">
+                                    <input class="form-control" type="text" value="" id="addons-style-name" name="addons-style-name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="oxi-tabs-link" class="col-sm-5 col-form-label" title="Select Layouts">Layouts</label>
+                                <div class="col-sm-7">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-secondary active">
+                                            <input type="radio" name="flip-box-layouts" value="1" checked="">1st
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="flip-box-layouts" value="2">2nd
+                                        </label>
+                                        <label class="btn btn-secondary">
+                                            <input type="radio" name="flip-box-layouts" value="3">3rd
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" id="oxistyledata" name="oxistyledata" value="">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-success" name="addonsdatasubmit" id="addonsdatasubmit" value="Save">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    <?php
+    }
     public function CSSJS_load()
     {
         $this->admin_css_loader();

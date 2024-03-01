@@ -3,8 +3,8 @@ Contributors: Biplob018
 Donate link: https://www.oxilab.org
 Tags: flip box, flip image, flip, wordpress flipbox plugins, flipboxes, flipbox
 Requires at least: 4.4
-Tested up to: 6.3.0
-Stable tag: 2.9.3
+Tested up to: 6.4.3
+Stable tag: 2.9.5
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -248,6 +248,11 @@ If You acquired the Flipbox - Awesomes Flip Boxes Image Overlay and have not rec
 
 
 == Changelog ==
+
+= 2.9.5 = 
+*Compatible with 6.4.3
+*Fixed Ajax Bugs
+
 = 2.9.3 = 
 *Compatible with 6.3.0
 *Fixed Ajax Bugs
@@ -353,6 +358,10 @@ If You acquired the Flipbox - Awesomes Flip Boxes Image Overlay and have not rec
 * Added 23+ responsive layout
 
 == Upgrade Notice ==
+= 2.9.5 = 
+Compatible with 6.4.3
+Fixed Ajax Bugs
+
 = 2.9.3 = 
 Compatible with 6.3.0
 Fixed Ajax Bugs

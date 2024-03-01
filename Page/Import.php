@@ -21,47 +21,7 @@ class Import
     public $TEMPLATE;
 
 
-    public function Admin_header()
-    {
-        apply_filters('oxi-flip-box-support-and-comments', TRUE);
-?>
-        <div class="oxi-addons-wrapper">
-            <div class="oxi-addons-import-layouts">
-                <h1>Flipbox › Import Template
-                </h1>
-                <p> Select Flip layouts and Import For Create Shortcode. </p>
-            </div>
-        </div>
-    <?php
-    }
-
-    /**
-     * Constructor of Oxilab tabs Home Page
-     *
-     * @since 2.0.0
-     */
-    public function __construct()
-    {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $wpdb->prefix . 'oxi_div_style';
-        $this->child_table = $wpdb->prefix . 'oxi_div_list';
-        $this->import_table = $wpdb->prefix . 'oxi_div_import';
-        $this->CSSJS_load();
-        $this->Render();
-    }
-
-    public function Render()
-    {
-    ?>
-        <div class="oxi-addons-row">
-            <?php
-            $this->Admin_header();
-            $this->template();
-            ?>
-        </div>
-    <?php
-    }
+  
 
     /**
      * Admin Notice JS file loader
@@ -129,6 +89,48 @@ class Import
             ?>
         </div>
 <?php
+    }
+
+    public function Admin_header()
+    {
+        apply_filters('oxi-flip-box-support-and-comments', TRUE);
+?>
+        <div class="oxi-addons-wrapper">
+            <div class="oxi-addons-import-layouts">
+                <h1>Flipbox › Import Template
+                </h1>
+                <p> Select Flip layouts and Import For Create Shortcode. </p>
+            </div>
+        </div>
+    <?php
+    }
+
+    /**
+     * Constructor of Oxilab tabs Home Page
+     *
+     * @since 2.0.0
+     */
+    public function __construct()
+    {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $wpdb->prefix . 'oxi_div_style';
+        $this->child_table = $wpdb->prefix . 'oxi_div_list';
+        $this->import_table = $wpdb->prefix . 'oxi_div_import';
+        $this->CSSJS_load();
+        $this->Render();
+    }
+
+    public function Render()
+    {
+    ?>
+        <div class="oxi-addons-row">
+            <?php
+            $this->Admin_header();
+            $this->template();
+            ?>
+        </div>
+    <?php
     }
 
     public function CSSJS_load()

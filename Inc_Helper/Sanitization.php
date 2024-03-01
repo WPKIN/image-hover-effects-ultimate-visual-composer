@@ -16,36 +16,7 @@ trait Sanitization
 
 
 
-    public function oxilab_flip_box_admin_true_false($id, $value, $fristname, $fristvalue, $Secondname, $Secondvalue, $name, $title)
-    {
-?>
-        <div class="form-group row">
-            <label class="col-sm-6 control-label" data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>"><?php echo esc_html($name); ?></label>
-            <div class="col-sm-6">
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-primary <?php
-                                                    if ($fristvalue == $value) {
-                                                        echo 'active';
-                                                    }
-                                                    ?>"> <input type="radio" <?php
-                                                                                if ($fristvalue == $value) {
-                                                                                    echo 'checked';
-                                                                                }
-                                                                                ?> name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>-yes" autocomplete="off" value="<?php echo esc_attr($fristvalue); ?>"><?php echo esc_html($fristname); ?></label>
-                    <label class="btn btn-primary <?php
-                                                    if ($Secondvalue == $value) {
-                                                        echo 'active';
-                                                    }
-                                                    ?>"> <input type="radio" <?php
-                                                                                if ($Secondvalue == $value) {
-                                                                                    echo 'checked';
-                                                                                }
-                                                                                ?> name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>-no" autocomplete="off" value="<?php echo esc_attr($Secondvalue); ?>"><?php echo esc_html($Secondname); ?> </label>
-                </div>
-            </div>
-        </div>
-    <?php
-    }
+    
 
     public function oxilab_flip_box_admin_font_weight($id, $value, $name, $title)
     {
@@ -162,7 +133,36 @@ trait Sanitization
         </div>
     <?php
     }
-
+    public function oxilab_flip_box_admin_true_false($id, $value, $fristname, $fristvalue, $Secondname, $Secondvalue, $name, $title)
+    {
+?>
+        <div class="form-group row">
+            <label class="col-sm-6 control-label" data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>"><?php echo esc_html($name); ?></label>
+            <div class="col-sm-6">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-primary <?php
+                                                    if ($fristvalue == $value) {
+                                                        echo 'active';
+                                                    }
+                                                    ?>"> <input type="radio" <?php
+                                                                                if ($fristvalue == $value) {
+                                                                                    echo 'checked';
+                                                                                }
+                                                                                ?> name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>-yes" autocomplete="off" value="<?php echo esc_attr($fristvalue); ?>"><?php echo esc_html($fristname); ?></label>
+                    <label class="btn btn-primary <?php
+                                                    if ($Secondvalue == $value) {
+                                                        echo 'active';
+                                                    }
+                                                    ?>"> <input type="radio" <?php
+                                                                                if ($Secondvalue == $value) {
+                                                                                    echo 'checked';
+                                                                                }
+                                                                                ?> name="<?php echo esc_attr($id); ?>" id="<?php echo esc_attr($id); ?>-no" autocomplete="off" value="<?php echo esc_attr($Secondvalue); ?>"><?php echo esc_html($Secondname); ?> </label>
+                </div>
+            </div>
+        </div>
+    <?php
+    }
     public function oxilab_flip_box_admin_text_align($id, $value, $name, $title)
     {
     ?>
@@ -191,78 +191,7 @@ trait Sanitization
     <?php
     }
 
-    public function oxilab_flip_box_admin_border($border_size, $border_size_value, $border_type, $border_type_value, $name, $title)
-    {
-    ?>
-        <div class="form-group row form-group-sm">
-            <label for="<?php echo esc_attr($border_size); ?>" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>"><?php echo esc_html($name); ?> </label>
-            <div class="col-sm-3">
-                <input class="form-control" type="number" min="0" value="<?php echo esc_attr($border_size_value); ?>" id="<?php echo esc_attr($border_size); ?>" name="<?php echo esc_attr($border_size); ?>">
-            </div>
-
-            <div class="col-sm-3">
-                <select class="form-control" id="<?php echo esc_attr($border_type); ?>" name="<?php echo esc_attr($border_type); ?>">
-                    <option value="dotted" <?php
-                                            if ($border_type_value == 'dotted') {
-                                                echo 'selected';
-                                            }
-                                            ?>>Dotted</option>
-                    <option value="dashed" <?php
-                                            if ($border_type_value == 'dashed') {
-                                                echo 'selected';
-                                            }
-                                            ?>>Dashed</option>
-                    <option value="solid" <?php
-                                            if ($border_type_value == 'solid') {
-                                                echo 'selected';
-                                            }
-                                            ?>>Solid</option>
-                    <option value="double" <?php
-                                            if ($border_type_value == 'double') {
-                                                echo 'selected';
-                                            }
-                                            ?>>Double</option>
-                    <option value="groove" <?php
-                                            if ($border_type_value == 'groove') {
-                                                echo 'selected';
-                                            }
-                                            ?>>Groove</option>
-                    <option value="ridge" <?php
-                                            if ($border_type_value == 'ridge') {
-                                                echo 'selected';
-                                            }
-                                            ?>>Ridge</option>
-                    <option value="inset" <?php
-                                            if ($border_type_value == 'inset') {
-                                                echo 'selected';
-                                            }
-                                            ?>>Inset</option>
-                    <option value="outset" <?php
-                                            if ($border_type_value == 'outset') {
-                                                echo 'selected';
-                                            }
-                                            ?>>Outset</option>
-                    <option value="dotted solid" <?php
-                                                    if ($border_type_value == 'dotted solid') {
-                                                        echo 'selected';
-                                                    }
-                                                    ?>>Custom 1</option>
-                    <option value="dotted solid dashed" <?php
-                                                        if ($border_type_value == 'dotted solid dashed') {
-                                                            echo 'selected';
-                                                        }
-                                                        ?>>Custom 2</option>
-                    <option value="dotted solid dashed double" <?php
-                                                                if ($border_type_value == 'dotted solid dashed double') {
-                                                                    echo 'selected';
-                                                                }
-                                                                ?>>Custom 3</option>
-                </select>
-            </div>
-
-        </div>
-    <?php
-    }
+ 
 
     public function oxilab_flip_box_admin_col_data($id, $value, $name, $title)
     {
@@ -631,7 +560,78 @@ trait Sanitization
         </div>
     <?php
     }
+    public function oxilab_flip_box_admin_border($border_size, $border_size_value, $border_type, $border_type_value, $name, $title)
+    {
+    ?>
+        <div class="form-group row form-group-sm">
+            <label for="<?php echo esc_attr($border_size); ?>" class="col-sm-6 col-form-label" data-toggle="tooltip" data-placement="top" title="<?php echo esc_html($title); ?>"><?php echo esc_html($name); ?> </label>
+            <div class="col-sm-3">
+                <input class="form-control" type="number" min="0" value="<?php echo esc_attr($border_size_value); ?>" id="<?php echo esc_attr($border_size); ?>" name="<?php echo esc_attr($border_size); ?>">
+            </div>
 
+            <div class="col-sm-3">
+                <select class="form-control" id="<?php echo esc_attr($border_type); ?>" name="<?php echo esc_attr($border_type); ?>">
+                    <option value="dotted" <?php
+                                            if ($border_type_value == 'dotted') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Dotted</option>
+                    <option value="dashed" <?php
+                                            if ($border_type_value == 'dashed') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Dashed</option>
+                    <option value="solid" <?php
+                                            if ($border_type_value == 'solid') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Solid</option>
+                    <option value="double" <?php
+                                            if ($border_type_value == 'double') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Double</option>
+                    <option value="groove" <?php
+                                            if ($border_type_value == 'groove') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Groove</option>
+                    <option value="ridge" <?php
+                                            if ($border_type_value == 'ridge') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Ridge</option>
+                    <option value="inset" <?php
+                                            if ($border_type_value == 'inset') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Inset</option>
+                    <option value="outset" <?php
+                                            if ($border_type_value == 'outset') {
+                                                echo 'selected';
+                                            }
+                                            ?>>Outset</option>
+                    <option value="dotted solid" <?php
+                                                    if ($border_type_value == 'dotted solid') {
+                                                        echo 'selected';
+                                                    }
+                                                    ?>>Custom 1</option>
+                    <option value="dotted solid dashed" <?php
+                                                        if ($border_type_value == 'dotted solid dashed') {
+                                                            echo 'selected';
+                                                        }
+                                                        ?>>Custom 2</option>
+                    <option value="dotted solid dashed double" <?php
+                                                                if ($border_type_value == 'dotted solid dashed double') {
+                                                                    echo 'selected';
+                                                                }
+                                                                ?>>Custom 3</option>
+                </select>
+            </div>
+
+        </div>
+    <?php
+    }
     public function oxilab_flip_box_admin_support()
     {
     ?>

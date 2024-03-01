@@ -18,17 +18,7 @@ trait CSS_JS_Loader
         }
     }
 
-    public function str_replace_first($from, $to, $content)
-    {
-        $from = '/' . preg_quote($from, '/') . '/';
-        return preg_replace($from, $to, $content, 1);
-    }
-
-    public function admin_css_loader()
-    {
-        $this->admin_css();
-        $this->admin_js();
-    }
+   
 
     public function admin_home()
     {
@@ -43,6 +33,17 @@ trait CSS_JS_Loader
         wp_enqueue_script('jquery.dataTables.min', OXI_FLIP_BOX_URL . 'asset/backend/js/jquery.dataTables.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('dataTables.bootstrap.min', OXI_FLIP_BOX_URL . 'asset/backend/js/dataTables.bootstrap.min.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
+    public function str_replace_first($from, $to, $content)
+    {
+        $from = '/' . preg_quote($from, '/') . '/';
+        return preg_replace($from, $to, $content, 1);
+    }
+
+    public function admin_css_loader()
+    {
+        $this->admin_css();
+        $this->admin_js();
+    }
 
     public function admin_css()
     {
@@ -51,18 +52,7 @@ trait CSS_JS_Loader
         wp_enqueue_style('font-awsome.min', OXI_FLIP_BOX_URL . 'asset/frontend/css/font-awsome.min.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_style('oxilab-admin-css', OXI_FLIP_BOX_URL . 'asset/backend/css/admin.css', false, OXI_FLIP_BOX_PLUGIN_VERSION);
     }
-    /**
-     * Admin Media Scripts.
-     * Most of time using into Style Editing Page
-     *
-     * @since 2.0.0
-     */
-    public function admin_media_scripts()
-    {
-        wp_enqueue_media();
-        wp_register_script('oxi-flip-box_media_scripts', OXI_FLIP_BOX_URL . 'asset/backend/js/media-uploader.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
-        wp_enqueue_script('oxi-flip-box_media_scripts');
-    }
+   
 
     public function admin_elements_frontend_loader()
     {
@@ -83,6 +73,18 @@ trait CSS_JS_Loader
         wp_enqueue_script('jquery.bootstrap-growl', OXI_FLIP_BOX_URL . 'asset/backend/js/jquery.bootstrap-growl.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_enqueue_script('oxi-flip-box-addons-vendor', OXI_FLIP_BOX_URL . 'asset/backend/js/vendor.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         $this->admin_media_scripts();
+    }
+     /**
+     * Admin Media Scripts.
+     * Most of time using into Style Editing Page
+     *
+     * @since 2.0.0
+     */
+    public function admin_media_scripts()
+    {
+        wp_enqueue_media();
+        wp_register_script('oxi-flip-box_media_scripts', OXI_FLIP_BOX_URL . 'asset/backend/js/media-uploader.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
+        wp_enqueue_script('oxi-flip-box_media_scripts');
     }
     public function admin_js()
     {
