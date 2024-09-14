@@ -63,20 +63,6 @@ class Bootstrap
         add_action('widgets_init', array($Flipbox_Widget, 'flip_register_flipwidget'));
     }
 
-    /**
-     * Execute Shortcode
-     *
-     * @since 3.1.0
-     * @access public
-     */
-    public function wp_shortcode($atts)
-    {
-        extract(shortcode_atts(array('id' => ' ',), $atts));
-        $styleid = $atts['id'];
-        ob_start();
-        $this->shortcode_render($styleid, 'user');
-        return ob_get_clean();
-    }
 
     public function __construct()
     {
@@ -90,6 +76,21 @@ class Bootstrap
             $this->User_Admin();
             $this->User_Reviews();
         }
+    }
+
+	/**
+     * Execute Shortcode
+     *
+     * @since 3.1.0
+     * @access public
+     */
+    public function wp_shortcode($atts)
+    {
+        extract(shortcode_atts(array('id' => ' ',), $atts));
+        $styleid = $atts['id'];
+        ob_start();
+        $this->shortcode_render($styleid, 'user');
+        return ob_get_clean();
     }
 
     /**

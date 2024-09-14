@@ -1,15 +1,15 @@
 ﻿=== Flipbox - Awesomes Flip Boxes Image Overlay ===
-Contributors: Biplob018
+Contributors: Biplob018, richardmallick
 Donate link: https://www.oxilab.org
-Tags: flip box, flip image, flip, wordpress flipbox plugins, flipboxes, flipbox
+Tags: flip box, flip image, wordpress flipbox plugins, flipboxes, flipbox
 Requires at least: 4.4
-Tested up to: 6.4.3
-Stable tag: 2.9.5
+Stable tag: 2.9.6
+Tested up to: 6.6.2
 Requires PHP: 5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Flipbox - Awesomes Flip Boxes Image Overlay is the best way to Display your team members staff employees or any type of list.Display you Team page with clean, responsive and professional way.
+Showcase team members or any list with Flipbox - Awesome Flip Boxes Image Overlay. A clean, responsive, and professional way to display your team.
 
 == Description ==
 <strong>Flipbox - Awesomes Flip Boxes Image Overlay</strong>  is a responsive WordPress plugin that lets you add a box to the screen that will flip through the items within the box.
@@ -248,6 +248,10 @@ If You acquired the Flipbox - Awesomes Flip Boxes Image Overlay and have not rec
 
 
 == Changelog ==
+
+= 2.9.6 = 
+*Compatible with 6.6.2
+*Fixed Ajax Bugs
 
 = 2.9.5 = 
 *Compatible with 6.4.3

@@ -6,7 +6,7 @@
   Description: Flipbox - Awesomes Flip Boxes Image Overlay is the most easiest Flip builder Plugin. Create multiple Flip or  Flipboxes  with this.
   Author: Biplob Adhikari
   Author URI: http://www.oxilab.org/
-  Version: 2.9.5
+  Version: 2.9.6
  */
 if (!defined('ABSPATH'))
     exit;

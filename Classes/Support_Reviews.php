@@ -7,9 +7,7 @@ namespace OXI_FLIP_BOX_PLUGINS\Classes;
  *
  * @author biplo
  */
-class Support_Reviews
-{
-
+class Support_Reviews {
 
     /**
      * Admin Notice JS file loader

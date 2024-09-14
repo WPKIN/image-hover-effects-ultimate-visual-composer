@@ -32,7 +32,20 @@ class Installation {
 
         return self::$lfe_instance;
     }
- /**
+
+    /**
+     * Plugin activation hook
+     *
+     * @since 3.1.0
+     */
+    public function plugin_activation_hook() {
+
+        $this->Flip_Datatase();
+        // Redirect to options page
+        set_transient('oxi_flip_box_activation_redirect', true, 30);
+    }
+
+	/**
      * Plugin upgrade hook
      *
      * @since 1.0.0
@@ -46,17 +59,6 @@ class Installation {
         }
     }
 
-    /**
-     * Plugin activation hook
-     *
-     * @since 3.1.0
-     */
-    public function plugin_activation_hook() {
-
-        $this->Flip_Datatase();
-        // Redirect to options page
-        set_transient('oxi_flip_box_activation_redirect', true, 30);
-    }
     public function Flip_Datatase() {
         global $wpdb;
         $table_name = $wpdb->prefix . 'oxi_div_style';
