@@ -175,7 +175,7 @@ If You acquired the Flipbox - Awesomes Flip Boxes Image Overlay and have not rec
 
 = 2.9.8 = 
 *Compatible with 6.8
-*Fixed Data table search issue
+*Fixed Shortcode list issue
 
 = 2.9.7 = 
 *Compatible with 6.7
