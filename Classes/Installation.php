@@ -52,8 +52,7 @@ class Installation {
      */
     public function plugin_upgrade_hook($upgrader_object, $options) {
         if ($options['action'] == 'update' && $options['type'] == 'plugin') {
-            if (isset($options['plugins'][OXI_FLIP_BOX_TEXTDOMAIN])) {
-
+            if (isset($options['plugins']['oxi-flip-box-plugin'])) {
                 $this->Flip_Datatase();
             }
         }
@@ -102,6 +101,4 @@ class Installation {
         (4, 'flip'),
         (5, 'flip')");
     }
-
-   
 }

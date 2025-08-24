@@ -31,6 +31,9 @@ class Admin_Ajax
      */
     public $import_table;
 
+	// instance container
+	private static $instance = null;
+
     /**
      * Database Import Table
      *

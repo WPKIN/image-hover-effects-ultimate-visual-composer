@@ -231,7 +231,7 @@ class Create
      */
     public function admin_ajax_load()
     {
-        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . 'asset/backend/js/create.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_enqueue_script('oxi-flip-create', OXI_FLIP_BOX_URL . 'asset/backend/js/create.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_localize_script('oxi-flip-create', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
 }

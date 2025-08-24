@@ -20,8 +20,21 @@ class Import
     public $import_table;
     public $TEMPLATE;
 
-
-  
+	/**
+     * Constructor of Oxilab tabs Home Page
+     *
+     * @since 2.0.0
+     */
+    public function __construct()
+    {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->parent_table = $wpdb->prefix . 'oxi_div_style';
+        $this->child_table = $wpdb->prefix . 'oxi_div_list';
+        $this->import_table = $wpdb->prefix . 'oxi_div_import';
+        $this->CSSJS_load();
+        $this->Render();
+    }
 
     /**
      * Admin Notice JS file loader
@@ -29,7 +42,7 @@ class Import
      */
     public function admin_ajax_load()
     {
-        wp_enqueue_script('oxi-flip-import', OXI_FLIP_BOX_URL . 'asset/backend/js/import.js', false, OXI_FLIP_BOX_TEXTDOMAIN);
+        wp_enqueue_script('oxi-flip-import', OXI_FLIP_BOX_URL . 'asset/backend/js/import.js', false, OXI_FLIP_BOX_PLUGIN_VERSION);
         wp_localize_script('oxi-flip-import', 'oxi_flip_box_editor', array('ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('oxi-flip-box-editor')));
     }
     public function template()
@@ -103,22 +116,6 @@ class Import
             </div>
         </div>
     <?php
-    }
-
-    /**
-     * Constructor of Oxilab tabs Home Page
-     *
-     * @since 2.0.0
-     */
-    public function __construct()
-    {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->parent_table = $wpdb->prefix . 'oxi_div_style';
-        $this->child_table = $wpdb->prefix . 'oxi_div_list';
-        $this->import_table = $wpdb->prefix . 'oxi_div_import';
-        $this->CSSJS_load();
-        $this->Render();
     }
 
     public function Render()
