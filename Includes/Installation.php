@@ -1,6 +1,6 @@
 <?php
 
-namespace OXI_FLIP_BOX_PLUGINS\Classes;
+namespace OXI_FLIP_BOX_PLUGINS\Includes;
 
 if (!defined('ABSPATH'))
     exit;

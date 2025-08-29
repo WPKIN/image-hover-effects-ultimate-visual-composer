@@ -1,14 +1,13 @@
 <?php
 
-namespace OXI_FLIP_BOX_PLUGINS\Page;
+namespace OXI_FLIP_BOX_PLUGINS\Includes\Admin\Pages;
 
 /**
  * Description of Create
  *
  * @author biplo
  */
-class Create
-{
+class Create {
 
     /**
      * Database Parent Table

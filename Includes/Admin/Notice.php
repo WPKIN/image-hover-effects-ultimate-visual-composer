@@ -10,6 +10,6 @@ namespace OXI_FLIP_BOX_PLUGINS\Includes\Admin;
 class Notice{
 
 	public function __construct() {
-		echo "I am from Notice";
+		
 	}
 }

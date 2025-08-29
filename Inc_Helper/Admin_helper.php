@@ -5,45 +5,7 @@ namespace OXI_FLIP_BOX_PLUGINS\Inc_Helper;
 trait Admin_helper
 {
 
-    public function Flip_Import()
-    {
-        new \OXI_FLIP_BOX_PLUGINS\Page\Import();
-    }
 
-	public function Flip_Create()
-    {
-        $styleid = (!empty($_GET['styleid']) ? (int) $_GET['styleid'] : '');
-        if (!empty($styleid) && $styleid > 0) :
-            $style = $this->wpdb->get_row($this->wpdb->prepare('SELECT style_name FROM ' . $this->parent_table . ' WHERE id = %d ', $styleid), ARRAY_A);
-            $style = ucfirst($style['style_name']);
-            $cls = '\OXI_FLIP_BOX_PLUGINS\Inc\\' . $style;
-            if (class_exists($cls)) :
-                new $cls();
-            endif;
-        else :
-            new \OXI_FLIP_BOX_PLUGINS\Page\Create();
-        endif;
-    }
-
-    public function Flip_Addons()
-    {
-        new \OXI_FLIP_BOX_PLUGINS\Page\Addons();
-    }
-
-	public function Flip_Home()
-    {
-        new \OXI_FLIP_BOX_PLUGINS\Page\Home();
-    }
-
-    public function Flip_Settings()
-    {
-        new \OXI_FLIP_BOX_PLUGINS\Page\Settings();
-    }
-
-    public function wpkin_flipbox_getting_started()
-    {
-        new \OXI_FLIP_BOX_PLUGINS\Page\Welcome();
-    }
 
     private function handle_direct_action_error($message)
     {
@@ -58,26 +20,6 @@ trait Admin_helper
             $METHOD = $_GET;
         }
         return !empty($METHOD['_wpnonce']) && wp_verify_nonce($METHOD['_wpnonce'], 'oxi-flip-box-editor');
-    }
-
-    public function Admin_Menu()
-    {
-        $user_role = get_option('oxi_addons_user_permission');
-        $role_object = get_role($user_role);
-        $first_key = '';
-        if (isset($role_object->capabilities) && is_array($role_object->capabilities)) {
-            reset($role_object->capabilities);
-            $first_key = key($role_object->capabilities);
-        } else {
-            $first_key = 'manage_options';
-        }
-        add_menu_page('Flip Box', 'Flip Box', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Flip Box', 'Flip Box', $first_key, 'oxi-flip-box-ultimate', [$this, 'Flip_Home']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Create New', 'Create New', $first_key, 'oxi-flip-box-ultimate-new', [$this, 'Flip_Create']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Import Templates', 'Import Templates', $first_key, 'oxi-flip-box-ultimate-import', [$this, 'Flip_Import']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Getting Started', 'Getting Started', $first_key, 'flipbox-getting-started', [$this, 'wpkin_flipbox_getting_started']);
-        add_submenu_page('oxi-flip-box-ultimate', 'Settings', 'Settings', $first_key, 'oxi-flip-box-ultimate-settings', [$this, 'Flip_Settings']);
-        // add_submenu_page('oxi-flip-box-ultimate', 'Oxilab Addons', 'Oxilab Addons', $first_key, 'oxi-flip-box-ultimate-addons', [$this, 'Flip_Addons']);
     }
 
     public function data_process()
@@ -100,17 +42,6 @@ trait Admin_helper
         endif;
 
         die();
-    }
-
-    public function redirect_on_activation()
-    {
-        if (get_transient('wpkin_flipbox_getting_started_redirect')) :
-            delete_transient('wpkin_flipbox_getting_started_redirect');
-            if (is_network_admin() || isset($_GET['activate-multi'])) :
-                return;
-            endif;
-            wp_safe_redirect(admin_url("admin.php?page=oxi-flip-box-activation"));
-        endif;
     }
 
     public function welcome_remove_menus()

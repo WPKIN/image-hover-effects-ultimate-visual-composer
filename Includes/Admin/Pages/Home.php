@@ -1,6 +1,6 @@
 <?php
 
-namespace OXI_FLIP_BOX_PLUGINS\Page;
+namespace OXI_FLIP_BOX_PLUGINS\Includes\Admin\Pages;
 
 /**
  * Description of Home

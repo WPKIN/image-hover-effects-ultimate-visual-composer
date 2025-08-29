@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-namespace OXI_FLIP_BOX_PLUGINS\Page;
+namespace OXI_FLIP_BOX_PLUGINS\Includes\Admin\Pages;
 
 /**
  * Description of Addons

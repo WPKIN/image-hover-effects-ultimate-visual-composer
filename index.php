@@ -38,11 +38,11 @@ if ( ! function_exists( 'wpkin_fb_v' ) ) {
                 'has_addons'          => false,
                 'has_paid_plans'      => true,
                 'menu'                => array(
-                    'slug'           => 'oxi-flip-box-ultimate',
-                    'first-path'     => 'admin.php?page=flipbox-getting-started',
+                    'slug'       => 'oxi-flip-box-ultimate',
+    				'first-path' => 'admin.php?page=flipbox-getting-started',
                     'contact'        => false,
                     'support'        => false,
-                    'pricing'        => false,
+					'pricing'        => false,
                 ),
             ) );
         }
@@ -127,13 +127,8 @@ if ( ! class_exists( 'WPKin_Flipbox' ) ) {
 			do_action('oxi-flip-box-plugin/before_init');
 			// Load translation
 			add_action('init', array($this, 'i18n'));
-			$this->Shortcode_loader();
-			$this->Public_loader();
-			if (is_admin()) {
-				$this->Admin_Filters();
-				$this->User_Admin();
-				$this->User_Reviews();
-			}
+			add_action('admin_init', array($this, 'wpkin_fs_optin'));
+			add_action( 'plugins_loaded', [ $this, 'init_plugin' ] );
 			add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scriptss' ] );
 		}
 
@@ -151,6 +146,15 @@ if ( ! class_exists( 'WPKin_Flipbox' ) ) {
 			}
 
 			return $instance;
+		}
+
+		public function wpkin_fs_optin() {
+			// if ( isset($_GET['page']) && $_GET['page'] === 'flipbox-getting-started' ) {
+			// 	$fs = wpkin_fb_v();
+			// 	if ( ! $fs->is_tracking_allowed() && ! $fs->is_registered() ) {
+			// 		$fs->opt_in( true ); // Show modal immediately
+			// 	}
+			// }
 		}
 
 		/**
@@ -196,7 +200,7 @@ if ( ! class_exists( 'WPKin_Flipbox' ) ) {
 		 * @access public
 		 */
 		public function activate() {
-			$Installation = new \OXI_FLIP_BOX_PLUGINS\Classes\Installation();
+			$Installation = new \OXI_FLIP_BOX_PLUGINS\Includes\Installation();
 			$Installation->plugin_activation_hook();
 		}
 
@@ -216,12 +220,29 @@ if ( ! class_exists( 'WPKin_Flipbox' ) ) {
 		}
 
 		/**
+		 * Plugins Loaded
+		 *
+		 * @return void
+		 */
+		public function init_plugin() {
+			new OXI_FLIP_BOX_PLUGINS\Includes\Assets();
+			$this->Shortcode_loader();
+			$this->Public_loader();
+			if (is_admin()) {
+				new OXI_FLIP_BOX_PLUGINS\Includes\Admin();
+				$this->Admin_Filters();
+				$this->User_Admin();
+				$this->User_Reviews();
+			}
+		}
+
+		/**
 		 * Upgrade hook
 		 *
 		 * @since 2.3.0
 		 */
 		public function wpkin_upgrader_process_complete( $upgrader_object, $options ) {
-			$Installation = new \OXI_FLIP_BOX_PLUGINS\Classes\Installation();
+			$Installation = new \OXI_FLIP_BOX_PLUGINS\Includes\Installation();
 			$Installation->plugin_upgrade_hook($upgrader_object, $options);
 		}
 
@@ -272,11 +293,8 @@ if ( ! class_exists( 'WPKin_Flipbox' ) ) {
 		}
 
 		public function User_Admin() {
-
-			add_action('admin_menu', [$this, 'Admin_Menu']);
 			add_action('admin_head', [$this, 'Admin_Icon']);
 			add_action('wp_ajax_oxi_flip_box_data', array($this, 'data_process'));
-			add_action('admin_init', array($this, 'redirect_on_activation'));
 			add_action('admin_head', [$this, 'welcome_remove_menus']);
 		}
 	}

@@ -1,14 +1,13 @@
 <?php
 
-namespace OXI_FLIP_BOX_PLUGINS\Page;
+namespace OXI_FLIP_BOX_PLUGINS\Includes\Admin\Pages;
 
 /**
  * Description of Import
  *
  * @author biplo
  */
-class Import
-{
+class Import {
 
     use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\Public_Helper;
     use \OXI_FLIP_BOX_PLUGINS\Inc_Helper\CSS_JS_Loader;
